@@ -499,31 +499,13 @@ const createWindow = ({ showOnReady = true }: { showOnReady?: boolean } = {}): v
 
   // Harden every <webview> guest (embedded browser loads untrusted web pages):
   // no preload bridge, no node integration, context isolation stays on.
-  // backgroundThrottling off: the embedded browser must stay responsive when
-  // the app window loses focus (timers/rAF in guests would otherwise throttle).
+  // NOTE: keep this handler minimal — extra webPreferences mutations here
+  // (backgroundThrottling etc.) and main-process guest focus calls were tried
+  // and correlated with breaking real mouse input on Windows.
   mainWindow.webContents.on('will-attach-webview', (_event, webPreferences) => {
     delete webPreferences.preload;
     webPreferences.nodeIntegration = false;
     webPreferences.contextIsolation = true;
-    webPreferences.backgroundThrottling = false;
-  });
-
-  // Webview guests on Windows lose real (OS-level) input routing after
-  // navigation — renderer-side webview.focus() is not always enough to
-  // re-register it. Main-process WebContents::focus() activates the guest
-  // widget directly, so do it on every guest document and navigation.
-  app.on('web-contents-created', (_event, contents) => {
-    if (contents.getType() !== 'webview') return;
-    const refocusGuest = () => {
-      try {
-        if (!contents.isDestroyed()) contents.focus();
-      } catch {
-        // Guest tearing down; ignore.
-      }
-    };
-    contents.on('dom-ready', refocusGuest);
-    contents.on('did-navigate', refocusGuest);
-    contents.on('did-navigate-in-page', refocusGuest);
   });
 
   scheduleStartupLogReport(mainWindow);

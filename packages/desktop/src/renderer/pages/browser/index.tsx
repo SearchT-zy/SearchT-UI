@@ -42,14 +42,18 @@ const BrowserPage: React.FC = () => {
   useEffect(() => {
     const webview = webviewRef.current;
     if (!webview) return;
-    // Electron webviews on Windows: real OS-level mouse input into the guest
-    // dies after navigation unless the embed layer is re-attached (the
-    // display-toggle reflow). Synthetic CDP clicks keep working, so testing
-    // must use real input. The reflow is required on EVERY dom-ready —
-    // "once per attach" and visibility-probing both left later documents
-    // dead. To keep heavy pages fast, run it deferred (after first paint
-    // settles) instead of synchronously at dom-ready.
-    const applyInputFix = () => {
+    // KNOWN-GOOD input handling — restored verbatim from the build where real
+    // mouse clicks verifiably worked (user-confirmed). The reflow must run
+    // synchronously on every dom-ready; deferred/once-only/probed variants all
+    // left real OS input dead on later documents. Perf tuning is NOT worth
+    // breaking input here.
+    const onDomReady = () => {
+      setLoading(false);
+      setCanGoBack(webview.canGoBack());
+      setCanGoForward(webview.canGoForward());
+      // Electron webviews on Windows can end up with visibilityState=hidden
+      // in the guest, which silently swallows input events. Force a reflow
+      // (display toggle) and re-focus to re-attach the compositor layer.
       try {
         webview.style.display = 'none';
         // Force layout recalc between the two display values.
@@ -59,19 +63,6 @@ const BrowserPage: React.FC = () => {
       } catch {
         // Guest not yet attached; safe to ignore.
       }
-    };
-    const scheduleInputFix = () => {
-      requestAnimationFrame(() =>
-        requestAnimationFrame(() => {
-          setTimeout(applyInputFix, 200);
-        })
-      );
-    };
-    const onDomReady = () => {
-      setLoading(false);
-      setCanGoBack(webview.canGoBack());
-      setCanGoForward(webview.canGoForward());
-      scheduleInputFix();
     };
     const onTitle = (event: CustomEvent<string>) => {
       setPageTitle(event.detail ?? '');
