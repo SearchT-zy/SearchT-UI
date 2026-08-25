@@ -61,9 +61,32 @@ const resolveAgentTipBody = (
   });
 };
 
+// The backend stamps a CLI_VERSION_NEWER tip into EVERY conversation opened
+// with a CLI newer than the verified list (the list lives in the external
+// backend and cannot be updated from this repo). Showing it once per CLI
+// version is enough — repeated identical banners read as persistent errors.
+const VERSION_TIP_SEEN_PREFIX = 'agent-tip-seen:CLI_VERSION_NEWER';
+
+const isVersionTipAlreadyShown = (params: IMessageTips['content']['params']): boolean => {
+  try {
+    const cli = typeof params?.cli === 'string' ? params.cli : '';
+    const reported = typeof params?.reported === 'string' ? params.reported : '';
+    if (!cli || !reported) return false;
+    const key = `${VERSION_TIP_SEEN_PREFIX}:${cli}:${reported}`;
+    if (localStorage.getItem(key) === '1') return true;
+    localStorage.setItem(key, '1');
+    return false;
+  } catch {
+    return false;
+  }
+};
+
 const MessageTips: React.FC<{ message: IMessageTips }> = ({ message }) => {
   const { t } = useTranslation();
   const { content, type, code, params } = message.content;
+  if (code === 'CLI_VERSION_NEWER' && isVersionTipAlreadyShown(params)) {
+    return null;
+  }
   const structuredError = type === 'error' ? message.content.error : undefined;
   const localizedTipBody = resolveAgentTipBody(content, code, params, t);
   const { json, data } = useFormatContent(localizedTipBody);
