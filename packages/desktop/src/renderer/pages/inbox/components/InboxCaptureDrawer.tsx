@@ -48,14 +48,14 @@ const InboxCaptureDrawer: React.FC<Props> = ({ visible, saving, labels, onClose,
         <Tabs.TabPane key='files' title={labels.files} />
       </Tabs>
       {mode !== 'files' ? (
-        <label className='mt-16px block text-12px text-t-secondary'>
+        <div className='mt-16px block text-12px text-t-secondary'>
           {labels.optionalTitle}
           <Input className='mt-6px' value={title} onChange={setTitle} />
-        </label>
+        </div>
       ) : null}
       {mode === 'text' ? (
         <>
-          <label className='mt-14px block text-12px text-t-secondary'>
+          <div className='mt-14px block text-12px text-t-secondary'>
             {labels.content}
             <Input.TextArea
               className='mt-6px'
@@ -64,7 +64,7 @@ const InboxCaptureDrawer: React.FC<Props> = ({ visible, saving, labels, onClose,
               value={content}
               onChange={setContent}
             />
-          </label>
+          </div>
           <Button
             className='mt-18px w-full'
             type='primary'
@@ -78,10 +78,10 @@ const InboxCaptureDrawer: React.FC<Props> = ({ visible, saving, labels, onClose,
       ) : null}
       {mode === 'link' ? (
         <>
-          <label className='mt-14px block text-12px text-t-secondary'>
+          <div className='mt-14px block text-12px text-t-secondary'>
             {labels.url}
             <Input className='mt-6px' aria-label={labels.url} value={url} onChange={setUrl} />
-          </label>
+          </div>
           <Button
             className='mt-18px w-full'
             type='primary'

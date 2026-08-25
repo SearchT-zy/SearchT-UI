@@ -78,12 +78,14 @@ const CalendarEditorDrawer: React.FC<Props> = ({ visible, date, event, saving, o
       cancelText={t('common.cancel')}
     >
       <div className='flex flex-col gap-14px'>
-        <label className='flex flex-col gap-6px text-12px text-t-secondary'>
-          {t('personal.calendar.fields.title')}
+        {/* Caption blocks use <div>+<span>, not <label>: label activation
+            forwarding breaks popup controls (Select dropdowns) inside. */}
+        <div className='flex flex-col gap-6px text-12px text-t-secondary'>
+          <span>{t('personal.calendar.fields.title')}</span>
           <Input value={title} onChange={setTitle} autoFocus />
-        </label>
-        <label className='flex flex-col gap-6px text-12px text-t-secondary'>
-          {t('personal.tasks.recurrence.label')}
+        </div>
+        <div className='flex flex-col gap-6px text-12px text-t-secondary'>
+          <span>{t('personal.tasks.recurrence.label')}</span>
           <Select value={repeat} onChange={(value) => setRepeat(value as typeof repeat)}>
             <Select.Option value='none'>{t('personal.tasks.priorities.none')}</Select.Option>
             <Select.Option value='daily'>{t('personal.tasks.recurrence.daily')}</Select.Option>
@@ -91,10 +93,10 @@ const CalendarEditorDrawer: React.FC<Props> = ({ visible, date, event, saving, o
             <Select.Option value='weekly'>{t('personal.tasks.recurrence.weekly')}</Select.Option>
             <Select.Option value='monthly'>{t('personal.tasks.recurrence.monthly')}</Select.Option>
           </Select>
-        </label>
+        </div>
         {repeat !== 'none' && repeat !== 'weekdays' ? (
-          <label className='flex flex-col gap-6px text-12px text-t-secondary'>
-            {t('personal.tasks.recurrence.interval')}
+          <div className='flex flex-col gap-6px text-12px text-t-secondary'>
+            <span>{t('personal.tasks.recurrence.interval')}</span>
             <Input
               type='number'
               min={1}
@@ -102,12 +104,12 @@ const CalendarEditorDrawer: React.FC<Props> = ({ visible, date, event, saving, o
               value={String(interval)}
               onChange={(value) => setIntervalValue(Math.max(1, Number(value) || 1))}
             />
-          </label>
+          </div>
         ) : null}
-        <label className='flex items-center justify-between text-12px text-t-secondary'>
-          {t('personal.calendar.fields.allDay')}
+        <div className='flex items-center justify-between text-12px text-t-secondary'>
+          <span>{t('personal.calendar.fields.allDay')}</span>
           <Switch checked={allDay} onChange={setAllDay} />
-        </label>
+        </div>
         <div className='grid grid-cols-2 gap-10px'>
           <Input type='date' value={startDate} onChange={setStartDate} />
           <Input type='date' value={endDate} onChange={setEndDate} />
@@ -118,16 +120,16 @@ const CalendarEditorDrawer: React.FC<Props> = ({ visible, date, event, saving, o
             </>
           ) : null}
         </div>
-        <label className='flex flex-col gap-6px text-12px text-t-secondary'>
-          {t('personal.calendar.fields.location')}
+        <div className='flex flex-col gap-6px text-12px text-t-secondary'>
+          <span>{t('personal.calendar.fields.location')}</span>
           <Input value={location} onChange={setLocation} />
-        </label>
-        <label className='flex flex-col gap-6px text-12px text-t-secondary'>
-          {t('personal.calendar.fields.description')}
+        </div>
+        <div className='flex flex-col gap-6px text-12px text-t-secondary'>
+          <span>{t('personal.calendar.fields.description')}</span>
           <Input.TextArea value={description} onChange={setDescription} autoSize={{ minRows: 3, maxRows: 6 }} />
-        </label>
-        <label className='flex flex-col gap-6px text-12px text-t-secondary'>
-          {t('personal.calendar.fields.reminder')}
+        </div>
+        <div className='flex flex-col gap-6px text-12px text-t-secondary'>
+          <span>{t('personal.calendar.fields.reminder')}</span>
           <Select
             value={reminder ?? 'none'}
             onChange={(value) => setReminder(value === 'none' ? null : (Number(value) as ReminderOffsetMinutes))}
@@ -139,7 +141,7 @@ const CalendarEditorDrawer: React.FC<Props> = ({ visible, date, event, saving, o
               </Select.Option>
             ))}
           </Select>
-        </label>
+        </div>
       </div>
     </Drawer>
   );

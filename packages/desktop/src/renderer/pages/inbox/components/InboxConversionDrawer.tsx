@@ -30,12 +30,12 @@ const InboxConversionDrawer: React.FC<Props> = ({ item, mode, saving, labels, on
       <Tabs activeTab={mode ?? 'task'}>
         <Tabs.TabPane key={mode ?? 'task'} title={mode === 'calendar-event' ? labels.event : labels.task} />
       </Tabs>
-      <label className='mt-16px block text-12px text-t-secondary'>
+      <div className='mt-16px block text-12px text-t-secondary'>
         {labels.targetTitle}
         <Input className='mt-6px' value={title} onChange={setTitle} />
-      </label>
+      </div>
       {mode === 'calendar-event' ? (
-        <label className='mt-14px block text-12px text-t-secondary'>
+        <div className='mt-14px block text-12px text-t-secondary'>
           {labels.date}
           <input
             className='mt-6px box-border h-32px w-full border border-border-3 bg-bg-2 px-10px text-t-primary'
@@ -43,7 +43,7 @@ const InboxConversionDrawer: React.FC<Props> = ({ item, mode, saving, labels, on
             value={startDate}
             onChange={(event) => setStartDate(event.target.value)}
           />
-        </label>
+        </div>
       ) : null}
       <Button
         className='mt-18px w-full'

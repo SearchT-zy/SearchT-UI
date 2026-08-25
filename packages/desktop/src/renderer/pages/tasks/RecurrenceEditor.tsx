@@ -41,8 +41,8 @@ const RecurrenceEditor: React.FC<Props> = ({ value, onChange }) => {
       </Checkbox>
       {value ? (
         <div className='mt-12px grid grid-cols-1 gap-12px sm:grid-cols-2'>
-          <label className='flex flex-col gap-6px text-12px text-t-secondary'>
-            {t('personal.tasks.recurrence.frequency')}
+          <div className='flex flex-col gap-6px text-12px text-t-secondary'>
+            <span>{t('personal.tasks.recurrence.frequency')}</span>
             <Select
               aria-label={t('personal.tasks.recurrence.frequency')}
               value={frequency}
@@ -58,10 +58,10 @@ const RecurrenceEditor: React.FC<Props> = ({ value, onChange }) => {
               <Select.Option value='weekly'>{t('personal.tasks.recurrence.weekly')}</Select.Option>
               <Select.Option value='monthly'>{t('personal.tasks.recurrence.monthly')}</Select.Option>
             </Select>
-          </label>
+          </div>
           {frequency !== 'weekdays' ? (
-            <label className='flex flex-col gap-6px text-12px text-t-secondary'>
-              {t('personal.tasks.recurrence.interval')}
+            <div className='flex flex-col gap-6px text-12px text-t-secondary'>
+              <span>{t('personal.tasks.recurrence.interval')}</span>
               <InputNumber
                 aria-label={t('personal.tasks.recurrence.interval')}
                 min={1}
@@ -71,7 +71,7 @@ const RecurrenceEditor: React.FC<Props> = ({ value, onChange }) => {
                   updateRule({ ...value.rule, interval: Number(interval) || 1 } as TaskRecurrenceRule)
                 }
               />
-            </label>
+            </div>
           ) : null}
           {value.rule.frequency === 'weekly' ? (
             <div className='sm:col-span-2'>
@@ -90,8 +90,8 @@ const RecurrenceEditor: React.FC<Props> = ({ value, onChange }) => {
             </div>
           ) : null}
           {value.rule.frequency === 'monthly' ? (
-            <label className='flex flex-col gap-6px text-12px text-t-secondary'>
-              {t('personal.tasks.recurrence.dayOfMonth')}
+            <div className='flex flex-col gap-6px text-12px text-t-secondary'>
+              <span>{t('personal.tasks.recurrence.dayOfMonth')}</span>
               <InputNumber
                 aria-label={t('personal.tasks.recurrence.dayOfMonth')}
                 min={1}
@@ -105,10 +105,10 @@ const RecurrenceEditor: React.FC<Props> = ({ value, onChange }) => {
                   })
                 }
               />
-            </label>
+            </div>
           ) : null}
-          <label className='flex flex-col gap-6px text-12px text-t-secondary'>
-            {t('personal.tasks.recurrence.end')}
+          <div className='flex flex-col gap-6px text-12px text-t-secondary'>
+            <span>{t('personal.tasks.recurrence.end')}</span>
             <Select
               aria-label={t('personal.tasks.recurrence.end')}
               value={value.end?.kind ?? 'never'}
@@ -122,21 +122,21 @@ const RecurrenceEditor: React.FC<Props> = ({ value, onChange }) => {
               <Select.Option value='until'>{t('personal.tasks.recurrence.until')}</Select.Option>
               <Select.Option value='count'>{t('personal.tasks.recurrence.count')}</Select.Option>
             </Select>
-          </label>
+          </div>
           {value.end?.kind === 'until' ? (
-            <label className='flex flex-col gap-6px text-12px text-t-secondary'>
-              {t('personal.tasks.recurrence.endDate')}
+            <div className='flex flex-col gap-6px text-12px text-t-secondary'>
+              <span>{t('personal.tasks.recurrence.endDate')}</span>
               <Input
                 aria-label={t('personal.tasks.recurrence.endDate')}
                 type='date'
                 value={value.end.date}
                 onChange={(date) => updateEnd({ kind: 'until', date })}
               />
-            </label>
+            </div>
           ) : null}
           {value.end?.kind === 'count' ? (
-            <label className='flex flex-col gap-6px text-12px text-t-secondary'>
-              {t('personal.tasks.recurrence.occurrences')}
+            <div className='flex flex-col gap-6px text-12px text-t-secondary'>
+              <span>{t('personal.tasks.recurrence.occurrences')}</span>
               <InputNumber
                 aria-label={t('personal.tasks.recurrence.occurrences')}
                 min={1}
@@ -144,7 +144,7 @@ const RecurrenceEditor: React.FC<Props> = ({ value, onChange }) => {
                 value={value.end.occurrences}
                 onChange={(count) => updateEnd({ kind: 'count', occurrences: Number(count) || 1 })}
               />
-            </label>
+            </div>
           ) : null}
         </div>
       ) : null}

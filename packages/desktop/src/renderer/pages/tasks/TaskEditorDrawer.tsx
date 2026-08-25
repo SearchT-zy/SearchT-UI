@@ -57,8 +57,12 @@ const TaskEditorDrawer: React.FC<Props> = ({ visible, task, saving, onClose, onS
       cancelText={t('common.cancel')}
     >
       <div className='flex flex-col gap-16px'>
-        <label className='flex flex-col gap-6px text-12px text-t-secondary'>
-          {t('personal.tasks.fields.title')}
+        {/* Caption blocks use <div>+<span>, not <label>: wrapping Select and
+            other popup controls in <label> makes the browser's label-activation
+            forward extra clicks into the control, instantly closing popups
+            (priority dropdown was unopenable for real clicks). */}
+        <div className='flex flex-col gap-6px text-12px text-t-secondary'>
+          <span>{t('personal.tasks.fields.title')}</span>
           <Input
             aria-label={t('personal.tasks.fields.title')}
             autoFocus
@@ -67,9 +71,9 @@ const TaskEditorDrawer: React.FC<Props> = ({ visible, task, saving, onClose, onS
             onChange={setTitle}
             placeholder={t('personal.tasks.fields.titlePlaceholder')}
           />
-        </label>
-        <label className='flex flex-col gap-6px text-12px text-t-secondary'>
-          {t('personal.tasks.fields.notes')}
+        </div>
+        <div className='flex flex-col gap-6px text-12px text-t-secondary'>
+          <span>{t('personal.tasks.fields.notes')}</span>
           <Input.TextArea
             aria-label={t('personal.tasks.fields.notes')}
             maxLength={10000}
@@ -78,19 +82,19 @@ const TaskEditorDrawer: React.FC<Props> = ({ visible, task, saving, onClose, onS
             onChange={setNotes}
             placeholder={t('personal.tasks.fields.notesPlaceholder')}
           />
-        </label>
+        </div>
         <div className='grid grid-cols-1 gap-12px sm:grid-cols-2'>
-          <label className='flex flex-col gap-6px text-12px text-t-secondary'>
-            {t('personal.tasks.fields.dueDate')}
+          <div className='flex flex-col gap-6px text-12px text-t-secondary'>
+            <span>{t('personal.tasks.fields.dueDate')}</span>
             <Input
               aria-label={t('personal.tasks.fields.dueDate')}
               type='date'
               value={dueLocalDate}
               onChange={setDueLocalDate}
             />
-          </label>
-          <label className='flex flex-col gap-6px text-12px text-t-secondary'>
-            {t('personal.tasks.fields.priority')}
+          </div>
+          <div className='flex flex-col gap-6px text-12px text-t-secondary'>
+            <span>{t('personal.tasks.fields.priority')}</span>
             <Select
               aria-label={t('personal.tasks.fields.priority')}
               value={priority}
@@ -101,10 +105,10 @@ const TaskEditorDrawer: React.FC<Props> = ({ visible, task, saving, onClose, onS
               <Select.Option value='medium'>{t('personal.tasks.priorities.medium')}</Select.Option>
               <Select.Option value='high'>{t('personal.tasks.priorities.high')}</Select.Option>
             </Select>
-          </label>
+          </div>
         </div>
-        <label className='flex flex-col gap-6px text-12px text-t-secondary'>
-          {t('personal.tasks.fields.estimatedMinutes')}
+        <div className='flex flex-col gap-6px text-12px text-t-secondary'>
+          <span>{t('personal.tasks.fields.estimatedMinutes')}</span>
           <InputNumber
             aria-label={t('personal.tasks.fields.estimatedMinutes')}
             min={1}
@@ -113,7 +117,7 @@ const TaskEditorDrawer: React.FC<Props> = ({ visible, task, saving, onClose, onS
             onChange={(value) => setEstimatedMinutes(value == null ? undefined : Number(value))}
             placeholder={t('personal.tasks.fields.optional')}
           />
-        </label>
+        </div>
         <RecurrenceEditor value={recurrence ?? null} onChange={setRecurrence} />
       </div>
     </Drawer>

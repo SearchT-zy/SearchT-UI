@@ -47,8 +47,8 @@ const ScheduleBlockDrawer: React.FC<Props> = ({ visible, date, saving, onClose, 
       cancelText={t('common.cancel')}
     >
       <div className='flex flex-col gap-14px'>
-        <label className='flex flex-col gap-6px text-12px text-t-secondary'>
-          {t('personal.tasks.title')}
+        <div className='flex flex-col gap-6px text-12px text-t-secondary'>
+          <span>{t('personal.tasks.title')}</span>
           <Select
             value={taskId || undefined}
             onChange={setTaskId}
@@ -60,7 +60,7 @@ const ScheduleBlockDrawer: React.FC<Props> = ({ visible, date, saving, onClose, 
               </Select.Option>
             ))}
           </Select>
-        </label>
+        </div>
         <div className='grid grid-cols-2 gap-10px'>
           <Input type='time' value={start} onChange={setStart} />
           <Input type='time' value={end} onChange={setEnd} />
