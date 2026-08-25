@@ -1,35 +1,47 @@
+/**
+ * @license
+ * Copyright 2026 SearchT-UI Contributors (Apache-2.0)
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Button, Input, Message, Spin, Tag } from '@arco-design/web-react';
 import { ArrowLeft, ArrowRight, Copy, Earth, Home, Inbox, LoadingOne, Refresh } from '@icon-park/react';
-import { useTranslation } from 'react-i18next';
 import { ipcBridge } from '@/common';
+import type { BrowserViewState } from '@/common/types/searcht/browserView';
+import { isElectronDesktop } from '@/renderer/utils/platform';
 import {
   BROWSER_HOME_URL,
   buildActionScript,
   buildExtractionScript,
-  isAllowedNavigateUrl,
   resolveAddressInput,
   type ActionResult,
   type PageSnapshot,
 } from './browserUtils';
-import { isElectronDesktop } from '@renderer/utils/platform';
-
-type WebviewElement = Electron.WebviewTag;
 
 /**
- * Embedded browser: an in-app <webview> with an address bar that accepts
- * URLs or free-text searches, one-click content recognition feeding Inbox,
- * and structured programmatic operation (click / set / scroll) executed in
- * the sandboxed guest page.
+ * Embedded browser page on the WebContentsView architecture.
+ *
+ * The page renders a placeholder viewport; the actual web content lives in a
+ * main-process WebContentsView positioned exactly over the placeholder (bounds
+ * synced via ResizeObserver + IPC). Input goes to the native view directly —
+ * the <webview> tag's Windows input-routing bug (real mouse clicks silently
+ * dropped) does not apply to native views.
  */
 const BrowserPage: React.FC = () => {
   const { t } = useTranslation();
-  const webviewRef = useRef<WebviewElement | null>(null);
+  const desktop = isElectronDesktop();
+  const viewportRef = useRef<HTMLDivElement | null>(null);
+
   const [address, setAddress] = useState(BROWSER_HOME_URL);
-  const [pageTitle, setPageTitle] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [canGoBack, setCanGoBack] = useState(false);
-  const [canGoForward, setCanGoForward] = useState(false);
+  const [viewState, setViewState] = useState<BrowserViewState>({
+    url: BROWSER_HOME_URL,
+    title: '',
+    loading: false,
+    canGoBack: false,
+    canGoForward: false,
+  });
   const [snapshot, setSnapshot] = useState<PageSnapshot | null>(null);
   const [reading, setReading] = useState(false);
   const [savedToInbox, setSavedToInbox] = useState(false);
@@ -37,62 +49,54 @@ const BrowserPage: React.FC = () => {
   const [actionValue, setActionValue] = useState('');
   const [lastAction, setLastAction] = useState<ActionResult | null>(null);
   const [actionBusy, setActionBusy] = useState(false);
-  const desktop = isElectronDesktop();
 
+  // Create/show the native view on mount, hide on unmount.
   useEffect(() => {
-    const webview = webviewRef.current;
-    if (!webview) return;
-    // KNOWN-GOOD input handling — restored verbatim from the build where real
-    // mouse clicks verifiably worked (user-confirmed). The reflow must run
-    // synchronously on every dom-ready; deferred/once-only/probed variants all
-    // left real OS input dead on later documents. Perf tuning is NOT worth
-    // breaking input here.
-    const onDomReady = () => {
-      setLoading(false);
-      setCanGoBack(webview.canGoBack());
-      setCanGoForward(webview.canGoForward());
-      // Electron webviews on Windows can end up with visibilityState=hidden
-      // in the guest, which silently swallows input events. Force a reflow
-      // (display toggle) and re-focus to re-attach the compositor layer.
-      try {
-        webview.style.display = 'none';
-        // Force layout recalc between the two display values.
-        void webview.offsetHeight;
-        webview.style.display = '';
-        webview.focus();
-      } catch {
-        // Guest not yet attached; safe to ignore.
+    if (!desktop) return;
+    let cancelled = false;
+      void ipcBridge.browserView.ensure
+        .invoke({ url: BROWSER_HOME_URL })
+        .then((state: BrowserViewState | null) => {
+          if (!cancelled && state) setViewState(state);
+        })
+        .catch((): undefined => undefined);
+    const removeStateListener = ipcBridge.browserView.state.on((state: BrowserViewState) => {
+      if (state) {
+        setViewState(state);
+        if (state.url && state.url !== 'about:blank') setAddress(state.url);
+        setSavedToInbox(false);
       }
-    };
-    const onTitle = (event: CustomEvent<string>) => {
-      setPageTitle(event.detail ?? '');
-    };
-    const onNavigate = (event: CustomEvent<string>) => {
-      setAddress(event.detail ?? webview.getURL());
-      setSavedToInbox(false);
-    };
-    const onStart = () => setLoading(true);
-    // Route target=_blank / window.open into the same webview instead of
-    // silently blocking them (the default when allowpopups is absent).
-    const onNewWindow = (event: Event & { url?: string; preventDefault(): void }) => {
-      event.preventDefault();
-      if (event.url && isAllowedNavigateUrl(event.url)) {
-        void webview.loadURL(event.url);
-      }
-    };
-    webview.addEventListener('dom-ready', onDomReady);
-    webview.addEventListener('page-title-updated', onTitle as EventListener);
-    webview.addEventListener('did-navigate', onNavigate as EventListener);
-    webview.addEventListener('did-navigate-in-page', onNavigate as EventListener);
-    webview.addEventListener('did-start-loading', onStart);
-    webview.addEventListener('new-window', onNewWindow as EventListener);
+    });
     return () => {
-      webview.removeEventListener('dom-ready', onDomReady);
-      webview.removeEventListener('page-title-updated', onTitle as EventListener);
-      webview.removeEventListener('did-navigate', onNavigate as EventListener);
-      webview.removeEventListener('did-navigate-in-page', onNavigate as EventListener);
-      webview.removeEventListener('did-start-loading', onStart);
-      webview.removeEventListener('new-window', onNewWindow as EventListener);
+      cancelled = true;
+      removeStateListener?.();
+      void ipcBridge.browserView.hide.invoke().catch((): undefined => undefined);
+    };
+  }, [desktop]);
+
+  // Keep the native view positioned over the placeholder viewport.
+  useEffect(() => {
+    if (!desktop) return;
+    const el = viewportRef.current;
+    if (!el) return;
+    const report = (): void => {
+      const rect = el.getBoundingClientRect();
+      void ipcBridge.browserView.setBounds
+        .invoke({
+          x: Math.round(rect.left),
+          y: Math.round(rect.top),
+          width: Math.max(0, Math.round(rect.width)),
+          height: Math.max(0, Math.round(rect.height)),
+        })
+        .catch((): undefined => undefined);
+    };
+    report();
+    const observer = new ResizeObserver(report);
+    observer.observe(el);
+    window.addEventListener('resize', report);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('resize', report);
     };
   }, [desktop]);
 
@@ -100,22 +104,20 @@ const BrowserPage: React.FC = () => {
     (rawInput: string) => {
       const resolution = resolveAddressInput(rawInput);
       if (resolution.kind === 'invalid') return;
-      const webview = webviewRef.current;
-      if (!webview) return;
       setSnapshot(null);
       setSavedToInbox(false);
-      void webview.loadURL(resolution.url).catch(() => {
+      void ipcBridge.browserView.navigate.invoke({ url: resolution.url }).catch((): undefined => {
         Message.error(t('personal.browser.loadFailed', { defaultValue: '页面加载失败' }));
+        return undefined;
       });
     },
     [t]
   );
 
   const runInPage = async <T,>(script: string): Promise<T | null> => {
-    const webview = webviewRef.current;
-    if (!webview) return null;
     try {
-      return (await webview.executeJavaScript(script)) as T;
+      const result = (await ipcBridge.browserView.execute.invoke({ script })) as T | null | undefined;
+      return result ?? null;
     } catch (error) {
       Message.error(error instanceof Error ? error.message : String(error));
       return null;
@@ -163,24 +165,20 @@ const BrowserPage: React.FC = () => {
     <Button type='text' size='small' icon={icon} aria-label={label} disabled={disabled} onClick={onClick} />
   );
 
+  const pageTitle = viewState.title;
+
   return (
     <div className='flex h-full max-w-full flex-col overflow-hidden bg-bg-1' data-testid='browser-page'>
       <div className='flex shrink-0 flex-wrap items-center gap-8px border-b border-solid border-b-base px-12px py-8px'>
-        {toolbarButton(
-          t('personal.browser.back', { defaultValue: '后退' }),
-          <ArrowLeft size='16' />,
-          () => webviewRef.current?.goBack(),
-          !canGoBack
-        )}
-        {toolbarButton(
-          t('personal.browser.forward', { defaultValue: '前进' }),
-          <ArrowRight size='16' />,
-          () => webviewRef.current?.goForward(),
-          !canGoForward
-        )}
-        {toolbarButton(t('personal.browser.reload', { defaultValue: '刷新' }), <Refresh size='16' />, () =>
-          webviewRef.current?.reload()
-        )}
+        {toolbarButton(t('personal.browser.back', { defaultValue: '后退' }), <ArrowLeft size='16' />, (): void => {
+          void ipcBridge.browserView.back.invoke().catch((): undefined => undefined);
+        }, !viewState.canGoBack)}
+        {toolbarButton(t('personal.browser.forward', { defaultValue: '前进' }), <ArrowRight size='16' />, (): void => {
+          void ipcBridge.browserView.forward.invoke().catch((): undefined => undefined);
+        }, !viewState.canGoForward)}
+        {toolbarButton(t('personal.browser.reload', { defaultValue: '刷新' }), <Refresh size='16' />, (): void => {
+          void ipcBridge.browserView.reload.invoke().catch((): undefined => undefined);
+        })}
         {toolbarButton(t('personal.browser.home', { defaultValue: '首页' }), <Home size='16' />, () =>
           navigate(BROWSER_HOME_URL)
         )}
@@ -190,7 +188,7 @@ const BrowserPage: React.FC = () => {
           data-testid='browser-address'
           defaultValue={BROWSER_HOME_URL}
           key={address}
-          loading={loading}
+          loading={viewState.loading}
           prefix={<Earth size='14' />}
           placeholder={t('personal.browser.placeholder', { defaultValue: '输入网址或搜索关键词，回车打开' })}
           searchButton
@@ -206,37 +204,22 @@ const BrowserPage: React.FC = () => {
       </div>
 
       <div className='grid min-h-0 flex-1 grid-cols-1 lg:grid-cols-[minmax(0,1fr)_340px]'>
-        <section
-          className='relative min-h-0 min-w-0 border-r border-solid border-b-base'
-          onMouseDown={() => {
-            // Forward focus to the webview guest when the container is
-            // clicked, ensuring input events reach the embedded page.
-            try {
-              webviewRef.current?.focus();
-            } catch {
-              // guest not yet attached
-            }
-          }}
-        >
+        <section className='relative min-h-0 min-w-0 border-r border-solid border-b-base'>
           {desktop ? (
-            // Hardened by the main process `will-attach-webview` handler: no
-            // preload, no node integration inside the guest page.
-            // Inline styles + autosize ensure the guest gets a real compositor
-            // layer (CSS class-only sizing can leave visibilityState=hidden on
-            // Windows, which silently swallows all input events).
-            <webview
-              ref={webviewRef}
+            // Placeholder: the main-process WebContentsView renders exactly over
+            // this box (bounds synced above). Native view = native input routing.
+            <div
+              ref={viewportRef}
               data-testid='browser-webview'
-              partition='searcht-browser'
-              src={BROWSER_HOME_URL}
-              style={{ width: '100%', height: '100%', display: 'inline-flex' }}
+              className='size-full bg-white'
+              style={{ minHeight: 120 }}
             />
           ) : (
             <div className='flex h-full items-center justify-center p-24px text-center text-13px text-t-secondary'>
               {t('personal.browser.desktopOnly', { defaultValue: '内置浏览器仅在SearchT-UI桌面版中可用。' })}
             </div>
           )}
-          {loading ? (
+          {viewState.loading ? (
             <div className='pointer-events-none absolute inset-x-0 top-0 flex justify-center pt-8px'>
               <Spin size={20} />
             </div>

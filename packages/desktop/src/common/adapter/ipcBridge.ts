@@ -1681,7 +1681,36 @@ export const calendar = {
   getToday: bridge.buildProvider<TodaySchedule, { localDate: string }>('searcht.calendar.today'),
   getNotificationCapability: bridge.buildProvider<NotificationCapability, void>(
     'searcht.calendar.notification-capability'
+  )
+};
+
+/**
+ * Embedded browser on WebContentsView (main-process native view).
+ * Replaces the <webview> tag, whose Windows guest input routing drops real
+ * OS-level mouse events.
+ */
+export const browserView = {
+  ensure: bridge.buildProvider<import('@/common/types/searcht/browserView').BrowserViewState, { url?: string }>(
+    'searcht.browser-view.ensure'
   ),
+  setBounds: bridge.buildProvider<boolean, { x: number; y: number; width: number; height: number }>(
+    'searcht.browser-view.set-bounds'
+  ),
+  navigate: bridge.buildProvider<import('@/common/types/searcht/browserView').BrowserViewState, { url: string }>(
+    'searcht.browser-view.navigate'
+  ),
+  back: bridge.buildProvider<import('@/common/types/searcht/browserView').BrowserViewState, void>(
+    'searcht.browser-view.back'
+  ),
+  forward: bridge.buildProvider<import('@/common/types/searcht/browserView').BrowserViewState, void>(
+    'searcht.browser-view.forward'
+  ),
+  reload: bridge.buildProvider<import('@/common/types/searcht/browserView').BrowserViewState, void>(
+    'searcht.browser-view.reload'
+  ),
+  execute: bridge.buildProvider<unknown, { script: string }>('searcht.browser-view.execute'),
+  hide: bridge.buildProvider<boolean, void>('searcht.browser-view.hide'),
+  state: bridge.buildEmitter<import('@/common/types/searcht/browserView').BrowserViewState>('browser-view.state'),
 };
 
 export const inbox = {

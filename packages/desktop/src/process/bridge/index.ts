@@ -23,6 +23,7 @@ import { initSkillLifecycleBridge } from './skillLifecycleBridge';
 import { initWorkflowBridge } from './workflowBridge';
 import { initConnectorBridge } from './connectorBridge';
 import { initCloudSyncBridge } from './cloudSyncBridge';
+import { initBrowserViewBridge } from './browserViewBridge';
 
 export type BridgeDependencies = Record<string, never>;
 
@@ -47,6 +48,7 @@ export function initAllBridges(_deps: BridgeDependencies = {}): void {
   initWorkflowBridge();
   initConnectorBridge();
   initCloudSyncBridge();
+  initBrowserViewBridge();
 }
 
 export {
