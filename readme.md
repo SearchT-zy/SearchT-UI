@@ -46,7 +46,7 @@
 # 依赖要求：Node.js >= 22
 bun install           # 或 npm install
 npm run dev           # 启动桌面开发版
-npm test              # 全量单元测试（2200+ 用例）
+npm test              # 全量单元测试（4600+ 用例）
 npm run dist:win      # 构建 Windows 安装包（dist:mac / dist:linux 同理）
 ```
 
