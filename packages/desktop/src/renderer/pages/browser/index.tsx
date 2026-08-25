@@ -42,28 +42,14 @@ const BrowserPage: React.FC = () => {
   useEffect(() => {
     const webview = webviewRef.current;
     if (!webview) return;
-    // The Windows input-forwarding fix (display toggle + focus) must run ONCE
-    // per guest attach. Re-running it on every dom-ready tears down and
-    // rebuilds the compositor layer on each navigation — heavy sites (multi-
-    // redirect portals) become extremely slow and janky.
-    let inputFixApplied = false;
-    const onDomReady = () => {
-      setLoading(false);
-      setCanGoBack(webview.canGoBack());
-      setCanGoForward(webview.canGoForward());
-      if (inputFixApplied) {
-        // Subsequent documents: a plain focus re-attach is enough.
-        try {
-          webview.focus();
-        } catch {
-          // Guest not attached; ignore.
-        }
-        return;
-      }
-      inputFixApplied = true;
-      // Electron webviews on Windows can end up with visibilityState=hidden
-      // in the guest, which silently swallows input events. Force a reflow
-      // (display toggle) and re-focus to re-attach the compositor layer.
+    // Electron webviews on Windows can end up with visibilityState=hidden in
+    // the guest, which silently swallows ALL input events (clicks do nothing).
+    // The display-toggle reflow re-attaches the compositor layer and restores
+    // input — but running it unconditionally on every dom-ready tears down the
+    // layer per navigation and makes heavy sites extremely slow. So probe the
+    // guest's real visibilityState first and only pay for the reflow when the
+    // input path is actually broken.
+    const applyInputFix = () => {
       try {
         webview.style.display = 'none';
         // Force layout recalc between the two display values.
@@ -73,6 +59,35 @@ const BrowserPage: React.FC = () => {
       } catch {
         // Guest not yet attached; safe to ignore.
       }
+    };
+    const onDomReady = () => {
+      setLoading(false);
+      setCanGoBack(webview.canGoBack());
+      setCanGoForward(webview.canGoForward());
+      // Probe the guest's visibility on every document: 'hidden' means the
+      // input path is broken (the Windows webview bug) and needs the reflow;
+      // 'visible' means clicks work and we only refocus — no layer teardown.
+      void webview
+        .executeJavaScript('document.visibilityState')
+        .then((state: unknown) => {
+          if (state === 'hidden') {
+            applyInputFix();
+          } else {
+            try {
+              webview.focus();
+            } catch {
+              // ignore
+            }
+          }
+        })
+        .catch(() => {
+          // executeJavaScript unavailable during teardown; refocus as fallback.
+          try {
+            webview.focus();
+          } catch {
+            // ignore
+          }
+        });
     };
     const onTitle = (event: CustomEvent<string>) => {
       setPageTitle(event.detail ?? '');
