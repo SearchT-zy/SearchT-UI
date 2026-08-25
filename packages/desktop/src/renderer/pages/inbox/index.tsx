@@ -328,6 +328,21 @@ const InboxPage: React.FC<{ client?: InboxDataClient }> = ({ client = inboxClien
                 }
               />
             )}
+            {!loading && items.length === 0 && view !== 'trash' ? (
+              <div className='px-16px py-12px text-12px leading-18px text-t-secondary'>
+                {t('personal.inbox.connectEmailHint', {
+                  defaultValue:
+                    '想把 QQ/163 邮箱的邮件收进来？到「设置 → 连接」添加邮箱账户（QQ 邮箱需使用邮箱设置里生成的授权码，不是登录密码）。',
+                })}{' '}
+                <a
+                  href='#/settings/connections'
+                  className='cursor-pointer no-underline'
+                  style={{ color: 'var(--color-text-1)' }}
+                >
+                  {t('personal.inbox.connectEmailLink', { defaultValue: '去连接邮箱 →' })}
+                </a>
+              </div>
+            ) : null}
           </section>
           {!isMobile ? (
             <section className={styles.detailPane} aria-label={t('personal.inbox.detail.label')}>

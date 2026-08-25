@@ -112,12 +112,12 @@ const AboutModalContent: React.FC = () => {
   const linkItems: LinkItem[] = [
     {
       title: t('settings.helpDocumentation'),
-      url: 'https://github.com/searcht-ui/SearchT-UI/wiki',
+      url: 'https://github.com/searcht-ui/SearchT-UI/tree/main/docs/guides',
       icon: <Right theme='outline' size='16' />,
     },
     {
       title: t('settings.updateLog'),
-      url: 'https://github.com/searcht-ui/SearchT-UI/releases',
+      url: 'https://github.com/searcht-ui/SearchT-UI/commits/main',
       icon: <Right theme='outline' size='16' />,
     },
     {
@@ -127,7 +127,7 @@ const AboutModalContent: React.FC = () => {
     },
     {
       title: t('settings.contactMe'),
-      url: 'https://x.com/WailiVery',
+      url: 'https://github.com/searcht-ui/SearchT-UI/issues',
       icon: <Right theme='outline' size='16' />,
     },
     {

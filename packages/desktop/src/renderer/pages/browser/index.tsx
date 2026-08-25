@@ -42,10 +42,25 @@ const BrowserPage: React.FC = () => {
   useEffect(() => {
     const webview = webviewRef.current;
     if (!webview) return;
+    // The Windows input-forwarding fix (display toggle + focus) must run ONCE
+    // per guest attach. Re-running it on every dom-ready tears down and
+    // rebuilds the compositor layer on each navigation — heavy sites (multi-
+    // redirect portals) become extremely slow and janky.
+    let inputFixApplied = false;
     const onDomReady = () => {
       setLoading(false);
       setCanGoBack(webview.canGoBack());
       setCanGoForward(webview.canGoForward());
+      if (inputFixApplied) {
+        // Subsequent documents: a plain focus re-attach is enough.
+        try {
+          webview.focus();
+        } catch {
+          // Guest not attached; ignore.
+        }
+        return;
+      }
+      inputFixApplied = true;
       // Electron webviews on Windows can end up with visibilityState=hidden
       // in the guest, which silently swallows input events. Force a reflow
       // (display toggle) and re-focus to re-attach the compositor layer.

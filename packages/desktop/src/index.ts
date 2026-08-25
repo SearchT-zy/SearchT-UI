@@ -499,10 +499,13 @@ const createWindow = ({ showOnReady = true }: { showOnReady?: boolean } = {}): v
 
   // Harden every <webview> guest (embedded browser loads untrusted web pages):
   // no preload bridge, no node integration, context isolation stays on.
+  // backgroundThrottling off: the embedded browser must stay responsive when
+  // the app window loses focus (timers/rAF in guests would otherwise throttle).
   mainWindow.webContents.on('will-attach-webview', (_event, webPreferences) => {
     delete webPreferences.preload;
     webPreferences.nodeIntegration = false;
     webPreferences.contextIsolation = true;
+    webPreferences.backgroundThrottling = false;
   });
 
   scheduleStartupLogReport(mainWindow);
