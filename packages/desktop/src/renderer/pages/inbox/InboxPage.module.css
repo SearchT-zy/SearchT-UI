@@ -1,0 +1,108 @@
+.dropSurface {
+  position: relative;
+  min-height: 0;
+}
+
+.dropOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed rgb(var(--primary-6));
+  background: var(--color-bg-2);
+  color: var(--color-text-2);
+  font-size: 13px;
+  pointer-events: none;
+}
+
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.9fr) minmax(360px, 1.1fr);
+  min-height: 430px;
+  height: min(650px, calc(100vh - 250px));
+  border: 1px solid var(--color-border-2);
+  background: var(--color-bg-2);
+}
+
+.listPane {
+  min-width: 0;
+  overflow-y: auto;
+  border-right: 1px solid var(--color-border-2);
+}
+
+.detailPane {
+  min-width: 0;
+  display: flex;
+  overflow: hidden;
+  background: var(--color-bg-1);
+}
+
+.listRow {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 62px;
+  padding: 0 10px 0 12px;
+  background: var(--color-bg-2);
+}
+
+.listRow:hover,
+.listRowSelected {
+  background: var(--color-fill-2);
+}
+
+.statusRail {
+  position: absolute;
+  inset: 10px auto 10px 0;
+  width: 3px;
+  background: rgb(var(--primary-6));
+}
+
+.statusRail[data-kind='link'] {
+  background: rgb(var(--orange-6));
+}
+
+.statusRail[data-kind='file'] {
+  background: rgb(var(--green-6));
+}
+
+.listButton {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 0;
+  border: 0;
+  color: inherit;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+
+.kindMark {
+  display: grid;
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+  place-items: center;
+  border: 1px solid var(--color-border-3);
+  color: var(--color-text-3);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+@media (max-width: 760px) {
+  .workspace {
+    grid-template-columns: minmax(0, 1fr);
+    height: auto;
+    min-height: 360px;
+  }
+
+  .listPane {
+    border-right: 0;
+  }
+}

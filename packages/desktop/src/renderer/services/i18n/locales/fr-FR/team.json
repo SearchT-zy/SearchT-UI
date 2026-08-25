@@ -1,0 +1,182 @@
+{
+  "sider": {
+    "title": "Groupes d’agents",
+    "createTeam": "Nouveau groupe d’agents",
+    "pin": "Épingler",
+    "unpin": "Désépingler",
+    "rename": "Renommer",
+    "delete": "Supprimer",
+    "renameTitle": "Renommer l'équipe",
+    "renamePlaceholder": "Nom de l'équipe",
+    "deleteConfirm": "Supprimer cette équipe ?",
+    "deleteConfirmContent": "Cette action est irréversible.",
+    "deleteOk": "Supprimer",
+    "deleteCancel": "Annuler",
+    "renameOk": "Enregistrer",
+    "renameCancel": "Annuler",
+    "renameSuccess": "Équipe renommée",
+    "deleteSuccess": "Équipe supprimée"
+  },
+  "newAgent": "Nouvel agent",
+  "noMessages": "Aucun message pour l'instant.",
+  "agentNotConfigured": "Agent non configuré.",
+  "stopAgentFailed": "Échec de l'arrêt de cet assistant. Veuillez réessayer.",
+  "work": {
+    "processingWithQueued": "Traitement en cours… {{count}} en attente",
+    "queued": "{{count}} en attente",
+    "runtimeStarting": "En attente du démarrage de cet assistant…",
+    "runtimeFailed": "Cet assistant n'a pas pu démarrer.",
+    "removing": "Suppression de cet assistant…",
+    "sessionStopped": "La session d'équipe est arrêtée.",
+    "retryStart": "Réessayer le démarrage"
+  },
+  "sendBox": {
+    "placeholder": "Envoyer un message à l'agent coordinateur..."
+  },
+  "create": {
+    "title": "Nouveau groupe d’agents",
+    "namePlaceholder": "Nom du groupe",
+    "dispatchAgentPlaceholder": "Coordinateur",
+    "subAgentsPlaceholder": "Membres",
+    "confirm": "Créer l'équipe",
+    "noSupportedAgents": "Aucun agent compatible installé",
+    "supportedAgentsHint": "Supporte actuellement Claude et Codex. D'autres agents bientôt disponibles.",
+    "leaderDesc": "Comprend votre objectif, répartit le travail et coordonne le groupe",
+    "searchPlaceholder": "Assistants de recherche...",
+    "noSearchResults": "Aucun résultat trouvé",
+    "step": {
+      "dispatch": "Coordinateur",
+      "subAgents": "Membres",
+      "workspace": "Espace de travail"
+    },
+    "nameRequired": "Veuillez entrer un nom d'équipe",
+    "leaderRequired": "Veuillez sélectionner un chef d'équipe",
+    "selectFolder": "Sélectionner un dossier",
+    "recentLabel": "Récents",
+    "chooseDifferentFolder": "Choisir un autre dossier",
+    "error": "Échec de la création de l'équipe",
+    "nameLabel": "Nom du groupe",
+    "teamLeader": "Coordinateur",
+    "currentLeader": "Coordinateur",
+    "setAsLeader": "Coordinateur",
+    "selectOneLeader": "Coordinateur",
+    "subtitle": "Réunissez les assistants IA locaux dans un groupe ; le Coordinateur distribue le travail et rassemble les résultats."
+  },
+  "removeAgent": {
+    "confirmTitle": "Retirer un membre de l'équipe",
+    "confirmContent": "Ce membre est actuellement actif. Forcer la suppression ?"
+  },
+  "emptyState": {
+    "subtitle": "Décrivez votre objectif et je mettrai l'équipe au travail",
+    "suggestions": {
+      "debate": "Organiser un débat avec des agents prenant des positions différentes",
+      "interview": "Planifier une interview approfondie entre agents",
+      "expert_review": "Faire analyser le même problème par plusieurs experts"
+    }
+  },
+  "reorderMember": "Faites glisser pour réorganiser le membre",
+  "view": {
+    "board": "Tableau",
+    "group": "Groupe"
+  },
+  "activity": {
+    "control": {
+      "sortNewest": "Récent",
+      "sortOldest": "Ancien",
+      "filterAll": "Tout",
+      "filterMessages": "Messages",
+      "filterTasks": "Tâches",
+      "allMembers": "Tous les membres",
+      "showSystem": "Messages système",
+      "showTerminal": "Tâches terminées"
+    },
+    "fallbackLane": "Non attribué / externe",
+    "empty": "Aucune activité",
+    "userIdentity": "Utilisateur / externe",
+    "broadcast": "Diffusion à tous",
+    "read": "Lu",
+    "unread": "Non lu",
+    "attachments": "{{count}} fichiers",
+    "expand": "Développer",
+    "collapse": "Réduire",
+    "blockedBy": "bloqué par #{{id}}",
+    "blockedByNamed": "bloqué par {{name}}",
+    "blockerUnknown": "Tâche indisponible",
+    "status": {
+      "pending": "En attente",
+      "in_progress": "En cours",
+      "completed": "Terminé",
+      "deleted": "Supprimé"
+    },
+    "msgType": {
+      "message": "Message",
+      "idle_notification": "Notif. d’inactivité",
+      "shutdown_request": "Demande d’arrêt"
+    }
+  },
+  "group": {
+    "view": "Groupe",
+    "mode": {
+      "coordinator": "Coordonner",
+      "direct": "Attribuer directement"
+    },
+    "composer": {
+      "placeholder": "Décrivez l’objectif ou saisissez @ pour choisir un membre"
+    },
+    "mention": {
+      "all": "Tous les membres ({{count}})",
+      "members": "membres"
+    },
+    "member": {
+      "coordinator": "Coordinateur",
+      "member": "Membres",
+      "permissions": "{{count}} autorisations nécessitent votre attention",
+      "unavailable": "Indisponible"
+    },
+    "delivery": {
+      "pending": "En attente d’envoi",
+      "accepted": "Accepté",
+      "running": "En cours",
+      "completed": "Terminé",
+      "failed": "Échec",
+      "cancelled": "Annulé",
+      "unknown": "État de livraison inconnu"
+    },
+    "runtime": {
+      "ready": "Prêt",
+      "dormant": "Non démarré",
+      "pending": "Démarrage",
+      "failed": "Indisponible"
+    },
+    "sender": {
+      "you": "Vous"
+    },
+    "empty": "Décrivez un objectif pour lancer la collaboration locale",
+    "activity": {
+      "title": "Tâches et transmissions",
+      "drawer": "Tâches et transmissions",
+      "completedCount": "{{count}} terminées",
+      "empty": "Aucune tâche ni transmission"
+    },
+    "action": {
+      "inspect": "Examiner la conversation",
+      "openBoard": "Ouvrir le tableau",
+      "fullConversation": "Ouvrir la conversation complète",
+      "retry": "Réessayer explicitement"
+    },
+    "error": {
+      "noAvailableTarget": "Aucun membre sélectionné n’est disponible",
+      "someUnavailable": "{{count}} membres indisponibles n’ont pas été affectés",
+      "sendFailed": "Impossible d’envoyer l’instruction"
+    },
+    "kind": {
+      "instruction": "Instruction",
+      "progress": "Progression",
+      "handoff": "Transmission",
+      "result": "Résultat",
+      "approval": "Approbation",
+      "error": "Erreur",
+      "task": "Tâche"
+    }
+  }
+}

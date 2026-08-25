@@ -1,0 +1,830 @@
+{
+  "today": {
+    "title": "今日",
+    "summary": "把今天需要处理的事情放在一个视图里。",
+    "focus": "当前重点",
+    "upcoming": "接下来"
+  },
+  "inbox": {
+    "title": "收件箱",
+    "description": "先把信息收进来，再整理成明确的行动。",
+    "empty": "没有等待整理的内容",
+    "search": "搜索收件箱",
+    "listLabel": "收件箱内容",
+    "selectNamed": "选择此内容",
+    "views": {
+      "pending": "待整理",
+      "organized": "已整理",
+      "archived": "已归档",
+      "trash": "回收站"
+    },
+    "kinds": {
+      "all": "全部类型",
+      "text": "文字",
+      "link": "链接",
+      "file": "文件"
+    },
+    "fields": {
+      "title": "标题",
+      "content": "内容",
+      "url": "网址",
+      "date": "日期",
+      "optionalTitle": "标题（可选）"
+    },
+    "capture": {
+      "open": "收进来",
+      "title": "添加到收件箱",
+      "saveText": "保存文字",
+      "saveLink": "保存链接",
+      "addFiles": "选择一个或多个文件"
+    },
+    "actions": {
+      "editTitle": "编辑标题",
+      "archive": "归档",
+      "archiveSelected": "归档所选",
+      "remove": "移到回收站",
+      "restore": "恢复",
+      "restoreSelected": "恢复所选",
+      "destroy": "永久删除",
+      "emptyTrash": "清空回收站",
+      "toTask": "转为待办",
+      "toEvent": "转为日程",
+      "toNote": "转为笔记",
+      "toKnowledge": "加入知识库"
+    },
+    "detail": {
+      "label": "内容详情",
+      "selectPrompt": "选择一条内容查看详情",
+      "originalName": "原文件名",
+      "originalPath": "原路径",
+      "browserImport": "浏览器导入",
+      "organizedCount": "已关联 {{count}} 个结果"
+    },
+    "preview": {
+      "label": "文件预览",
+      "truncated": "仅显示部分内容",
+      "document": "文档文件",
+      "unsupported": "暂不支持预览此文件类型",
+      "missing": "托管文件缺失或已损坏",
+      "reveal": "在文件夹中显示",
+      "download": "下载"
+    },
+    "drop": {
+      "prompt": "松开即可收进来",
+      "directoryRejected": "暂不支持导入文件夹"
+    },
+    "convert": {
+      "title": "整理为行动",
+      "createTask": "创建待办",
+      "createEvent": "创建日程"
+    },
+    "errors": {
+      "load": "无法加载收件箱",
+      "detail": "无法加载内容详情",
+      "save": "操作未完成，请重试",
+      "someFiles": "部分文件未能导入"
+    }
+  },
+  "calendar": {
+    "title": "日程",
+    "description": "安排有明确时间的事项，并把待办放进今天的时间里。",
+    "empty": "这一天还没有日程",
+    "today": "今天",
+    "previousMonth": "上个月",
+    "nextMonth": "下个月",
+    "createBlock": "安排待办",
+    "editor": {
+      "createTitle": "新建日程",
+      "editTitle": "编辑日程"
+    },
+    "fields": {
+      "title": "标题",
+      "allDay": "全天",
+      "location": "地点",
+      "description": "说明",
+      "reminder": "提醒"
+    },
+    "reminders": {
+      "none": "不提醒",
+      "m0": "准时",
+      "m5": "提前 5 分钟",
+      "m15": "提前 15 分钟",
+      "m30": "提前 30 分钟",
+      "m60": "提前 1 小时",
+      "m1440": "提前 1 天"
+    },
+    "weekdays": {
+      "monday": "一",
+      "tuesday": "二",
+      "wednesday": "三",
+      "thursday": "四",
+      "friday": "五",
+      "saturday": "六",
+      "sunday": "日"
+    },
+    "errors": {
+      "load": "无法加载日程",
+      "save": "无法保存日程",
+      "remove": "无法删除日程"
+    }
+  },
+  "tasks": {
+    "title": "待办",
+    "empty": "暂无待办",
+    "completeError": "无法完成待办",
+    "viewAll": "查看全部",
+    "loadError": "待办暂时无法加载",
+    "todayEmpty": "今天没有待办",
+    "overdue": "逾期",
+    "description": "把要做的事放在这里，按计划逐项完成。",
+    "noDate": "无日期",
+    "minutes": "{{count}} 分钟",
+    "views": {
+      "all": "全部",
+      "today": "今天",
+      "scheduled": "计划中",
+      "completed": "已完成",
+      "trash": "回收站"
+    },
+    "editor": {
+      "createTitle": "新建待办",
+      "editTitle": "编辑待办",
+      "createAction": "创建待办",
+      "saveChanges": "保存修改"
+    },
+    "fields": {
+      "title": "标题",
+      "titlePlaceholder": "要完成什么？",
+      "notes": "备注",
+      "notesPlaceholder": "补充上下文或结果要求",
+      "dueDate": "截止日期",
+      "priority": "优先级",
+      "estimatedMinutes": "预计时长（分钟）",
+      "optional": "可选"
+    },
+    "priorities": {
+      "none": "无",
+      "low": "低",
+      "medium": "中",
+      "high": "高"
+    },
+    "actions": {
+      "restore": "恢复",
+      "destroy": "永久删除",
+      "moveToTrash": "移到回收站",
+      "restoreNamed": "恢复 {{title}}",
+      "destroyNamed": "永久删除 {{title}}",
+      "editNamed": "编辑 {{title}}",
+      "removeNamed": "删除 {{title}}",
+      "reopenNamed": "重新打开 {{title}}",
+      "completeNamed": "完成 {{title}}"
+    },
+    "trash": {
+      "empty": "回收站为空",
+      "emptyAction": "清空回收站",
+      "emptyTitle": "清空回收站",
+      "confirmEmpty": "确认清空",
+      "emptyDescription": "回收站中的待办将被永久删除，且无法恢复。",
+      "destroyConfirm": "永久删除此待办？"
+    },
+    "recurrence": {
+      "label": "重复",
+      "frequency": "频率",
+      "daily": "每天",
+      "weekdays": "工作日",
+      "weekly": "每周",
+      "monthly": "每月",
+      "interval": "间隔",
+      "weekday": "星期",
+      "dayOfMonth": "每月日期",
+      "end": "结束",
+      "never": "永不",
+      "until": "指定日期",
+      "count": "指定次数",
+      "endDate": "结束日期",
+      "occurrences": "总次数",
+      "editTitle": "修改重复待办",
+      "removeTitle": "删除重复待办",
+      "scopeDescription": "选择此次操作影响的范围。已完成的历史记录不会改变。",
+      "single": "仅本次",
+      "thisAndFuture": "本次及以后",
+      "weekdaysShort": {
+        "monday": "一",
+        "tuesday": "二",
+        "wednesday": "三",
+        "thursday": "四",
+        "friday": "五",
+        "saturday": "六",
+        "sunday": "日"
+      }
+    },
+    "errors": {
+      "load": "无法加载待办",
+      "save": "无法保存待办",
+      "create": "无法创建待办",
+      "update": "无法更新待办",
+      "remove": "无法删除待办",
+      "restore": "无法恢复待办",
+      "destroy": "无法永久删除待办",
+      "emptyTrash": "无法清空回收站"
+    }
+  },
+  "notes": {
+    "title": "笔记",
+    "description": "记录想法、决定和有用的上下文，修改历史保存在本地。",
+    "empty": "当前分类中还没有笔记",
+    "search": "搜索笔记",
+    "listLabel": "笔记列表",
+    "openNamed": "打开 {{title}}",
+    "untitled": "未命名笔记",
+    "views": {
+      "active": "笔记",
+      "archived": "已归档",
+      "trash": "回收站"
+    },
+    "fields": {
+      "title": "标题",
+      "body": "笔记内容"
+    },
+    "editor": {
+      "label": "笔记编辑器",
+      "selectPrompt": "选择一篇笔记，或新建笔记"
+    },
+    "actions": {
+      "create": "新建笔记",
+      "save": "保存",
+      "history": "修改历史",
+      "archive": "归档",
+      "unarchive": "取消归档",
+      "remove": "移到回收站",
+      "restore": "恢复",
+      "destroy": "永久删除",
+      "emptyTrash": "清空回收站"
+    },
+    "autosave": {
+      "saved": "已保存到本地",
+      "saving": "正在保存..."
+    },
+    "provenance": {
+      "inbox": "来自收件箱"
+    },
+    "trash": {
+      "emptyTitle": "清空笔记回收站？",
+      "emptyDescription": "回收站中的全部笔记及其修改历史将被永久删除，且无法恢复。",
+      "confirmEmpty": "确认清空",
+      "destroyTitle": "永久删除这篇笔记？",
+      "destroyDescription": "删除后，笔记及其修改历史将无法恢复。"
+    },
+    "revisions": {
+      "title": "修改历史",
+      "empty": "还没有更早的版本",
+      "restore": "恢复此版本",
+      "version": "版本 {{number}}"
+    },
+    "errors": {
+      "load": "无法加载笔记",
+      "detail": "无法加载这篇笔记",
+      "create": "无法新建笔记",
+      "save": "无法保存笔记",
+      "lifecycle": "笔记操作未完成",
+      "revisions": "无法加载修改历史",
+      "restoreRevision": "无法恢复此版本"
+    }
+  },
+  "knowledge": {
+    "title": "知识库",
+    "description": "在本地搜索笔记和主动加入的收件箱内容。",
+    "empty": "还没有已索引的内容",
+    "search": {
+      "placeholder": "搜索你的知识库",
+      "noResults": "没有找到匹配内容"
+    },
+    "filters": {
+      "all": "全部",
+      "notes": "笔记",
+      "inbox": "收件箱"
+    },
+    "status": {
+      "total": "已索引",
+      "notes": "笔记",
+      "inbox": "收件箱来源"
+    },
+    "sourceTypes": {
+      "note": "笔记",
+      "inbox": "收件箱"
+    },
+    "actions": {
+      "rebuild": "重建索引",
+      "openNamed": "打开 {{title}}",
+      "removeNamed": "从知识库移除 {{title}}"
+    },
+    "remove": {
+      "title": "移除知识来源？",
+      "description": "“{{title}}”将不再出现在知识库搜索中，原收件箱内容仍会保留。",
+      "confirmAction": "移除来源",
+      "success": "已从知识库移除来源"
+    },
+    "rebuild": {
+      "success": "已索引 {{count}} 条内容",
+      "partial": "索引已重建，跳过 {{count}} 条内容"
+    },
+    "errors": {
+      "load": "无法加载知识库",
+      "rebuild": "无法重建本地索引",
+      "remove": "无法移除知识来源"
+    }
+  },
+  "chat": {
+    "title": "聊天"
+  },
+  "memory": {
+    "title": "长期记忆",
+    "description": "查看和管理SearchT-UI为你记住的内容。",
+    "add": "添加记忆",
+    "retry": "重试",
+    "loadFailed": "无法加载记忆",
+    "saveFailed": "操作未完成，请重试。",
+    "tabs": {
+      "candidates": "待确认",
+      "active": "有效记忆",
+      "expired": "已过期"
+    },
+    "status": {
+      "label": "记忆状态",
+      "pending": "待确认",
+      "active": "有效",
+      "expired": "已过期",
+      "sensitive": "敏感"
+    },
+    "searchPlaceholder": "搜索记忆",
+    "allTypes": "全部类型",
+    "actions": {
+      "review": "审核",
+      "reject": "不保留",
+      "edit": "编辑",
+      "forget": "永久遗忘",
+      "reactivate": "重新启用",
+      "confirmReject": "确认不保留",
+      "confirmForget": "确认永久遗忘",
+      "confirmMemory": "确认保留",
+      "createMemory": "添加记忆",
+      "saveMemory": "保存修改",
+      "cancel": "取消"
+    },
+    "empty": {
+      "candidates": "没有待确认的记忆",
+      "active": "还没有有效记忆",
+      "expired": "没有已过期的记忆"
+    },
+    "editor": {
+      "reviewTitle": "审核候选记忆",
+      "createTitle": "添加记忆",
+      "editTitle": "编辑记忆",
+      "content": "内容",
+      "type": "类型",
+      "scope": "使用范围",
+      "scopeId": "范围名称",
+      "sensitivity": "敏感级别",
+      "confidence": "可信度",
+      "reason": "记住原因",
+      "expiresAt": "有效期",
+      "reviewAt": "复查时间"
+    },
+    "types": {
+      "preference": "偏好",
+      "personal-fact": "个人信息",
+      "relationship": "关系",
+      "project-context": "项目背景",
+      "operating-rule": "工作规则",
+      "temporary-context": "临时背景"
+    },
+    "scopes": {
+      "global": "所有对话",
+      "workspace": "工作区",
+      "project": "项目",
+      "assistant": "助手"
+    },
+    "sensitivity": {
+      "normal": "普通",
+      "sensitive": "敏感"
+    },
+    "sources": {
+      "conversation-message": "对话消息",
+      "note": "笔记",
+      "inbox-item": "收件箱",
+      "workflow-run": "工作流",
+      "manual": "手动添加"
+    },
+    "confirm": {
+      "rejectTitle": "不保留这条候选记忆？",
+      "forgetTitle": "永久遗忘这条记忆？",
+      "forgetDescription": "内容会立即删除，并且无法恢复。"
+    }
+  },
+  "skillConsolidation": {
+    "tabReview": "待审核",
+    "loadFailed": "无法加载待审核技能",
+    "loadFailedHint": "请检查本地工作台服务后重试。",
+    "empty": "没有待审核的技能。",
+    "errorCount": "{{count}} 个错误",
+    "warningCount": "{{count}} 个警告",
+    "ready": "可以审核",
+    "sources": "来源",
+    "tools": "工具",
+    "permissions": "权限",
+    "review": "审核",
+    "reject": "暂不采用",
+    "rejectTitle": "暂不采用这个候选技能？",
+    "rejectConfirm": "暂不采用",
+    "rejectDescription": "草稿内容将被删除，但会保留一条不含内容的审计记录。",
+    "initialVersion": "审核后发布",
+    "backToSkills": "全部技能",
+    "publish": "发布",
+    "reviewTitle": "审核技能",
+    "reviewDescription": "检查此技能可访问的内容，编辑执行说明，确认无误后再发布。",
+    "notFound": "这个候选技能已不存在。",
+    "skillName": "技能名称",
+    "skillDescription": "技能说明",
+    "validationTitle": "检查结果",
+    "validationDescription": "错误会阻止发布，警告需要再次确认。",
+    "validationPassed": "可以发布",
+    "warningConfirmTitle": "仍要发布？",
+    "warningConfirmDescription": "发布前请再次检查这些警告。",
+    "publishAnyway": "仍然发布",
+    "versionHistory": "版本记录",
+    "stateActive": "已启用",
+    "stateDisabled": "已停用",
+    "disable": "停用",
+    "enable": "启用",
+    "noVersions": "暂无版本记录。",
+    "versionNumber": "版本 {{number}}",
+    "currentVersion": "当前版本",
+    "rollback": "回滚",
+    "preview": "预览",
+    "previewVersion": "版本 {{number}} 的内容",
+    "rollbackSummary": "回滚到版本 {{number}}",
+    "disableTitle": "停用这个技能？",
+    "disableDescription": "停用后，新对话将无法使用这个技能，版本记录会完整保留。",
+    "enableTitle": "启用这个技能？",
+    "enableDescription": "当前版本会重新安装，并恢复为可用状态。",
+    "rollbackTitle": "回滚到版本 {{number}}？",
+    "rollbackDescription": "系统会创建一个新版本，已有版本记录不会被修改。",
+    "queuedSuccess": "已放入待审核",
+    "queuedFailed": "无法将这个技能放入待审核",
+    "addToReview": "放入待审核",
+    "errors": {
+      "SKILL_CANDIDATE_LOAD_FAILED": "无法加载这个候选技能",
+      "SKILL_CANDIDATE_SAVE_FAILED": "无法保存这个候选技能",
+      "SKILL_CANDIDATE_PUBLISH_FAILED": "发布失败，草稿仍然保留。",
+      "SKILL_CANDIDATE_REJECT_FAILED": "无法移除这个候选技能",
+      "SKILL_VERSIONS_LOAD_FAILED": "无法加载版本记录",
+      "SKILL_DISABLE_FAILED": "无法停用技能，系统已尽可能恢复原活动版本。",
+      "SKILL_ENABLE_FAILED": "无法启用技能",
+      "SKILL_ROLLBACK_FAILED": "回滚失败，原活动版本已恢复。"
+    },
+    "validation": {
+      "SKILL_NAME_REQUIRED": "请输入技能名称。",
+      "SKILL_NAME_INVALID": "技能名称只能使用小写字母、数字和连字符。",
+      "SKILL_NAME_TOO_LONG": "技能名称过长。",
+      "SKILL_DESCRIPTION_REQUIRED": "请添加简短说明。",
+      "SKILL_DESCRIPTION_TOO_LONG": "技能说明过长。",
+      "SKILL_CONTENT_REQUIRED": "请填写 SKILL.md 执行说明。",
+      "SKILL_CONTENT_TOO_LARGE": "SKILL.md 文件过大。",
+      "SKILL_FRONTMATTER_INVALID": "YAML 文件头格式不正确。",
+      "SKILL_FRONTMATTER_NAME_REQUIRED": "请在 YAML 文件头中添加名称。",
+      "SKILL_FRONTMATTER_DESCRIPTION_REQUIRED": "请在 YAML 文件头中添加说明。",
+      "SKILL_FRONTMATTER_NAME_MISMATCH": "YAML 中的名称必须与技能名称一致。",
+      "SKILL_TEMPLATE_PLACEHOLDER": "请替换尚未填写的模板占位内容。",
+      "SKILL_SECRET_DETECTED": "发布前请移除密码、令牌或其他凭证。",
+      "SKILL_ABSOLUTE_PATH_DETECTED": "此技能包含本机绝对路径，请确认它适合重复使用。"
+    }
+  },
+  "settings": {
+    "title": "个人工作台",
+    "description": "决定SearchT-UI显示什么，以及打开应用时先去哪里。",
+    "modules": "显示模块",
+    "startPage": "打开应用时",
+    "scenePack": "工作方式",
+    "localData": "本地数据",
+    "health": "数据状态",
+    "backup": "创建备份",
+    "backupDone": "备份已创建",
+    "backupFailed": "无法创建备份",
+    "import": "SearchT-UI 数据",
+    "saveFailed": "保存失败，已恢复原设置"
+  },
+  "scene": {
+    "general": "通用",
+    "creator": "创作者",
+    "manager": "管理者",
+    "researcher": "研究者"
+  },
+  "status": {
+    "healthy": "正常",
+    "unavailable": "不可用",
+    "importAvailable": "发现可导入的数据",
+    "importUnavailable": "未发现旧数据"
+  },
+  "connectors": {
+    "title": "连接",
+    "description": "让SearchT-UI自动接收指定文件夹中新建或更新的文件。",
+    "desktopOnly": "本地文件夹连接仅在SearchT-UI桌面版中可用。",
+    "addFolder": "添加文件夹",
+    "includeSubfolders": "包含子文件夹",
+    "includeSubfoldersHint": "添加时也接收子文件夹中的文件",
+    "emptyTitle": "还没有连接文件夹",
+    "emptyDescription": "添加后，新文件和有变化的文件会自动进入收件箱。",
+    "status": {
+      "active": "正常",
+      "paused": "已暂停",
+      "error": "需处理"
+    },
+    "lastSync": "最近同步",
+    "neverSynced": "尚未同步",
+    "syncResult": "已扫描 {{scanned}}，导入 {{imported}}，跳过 {{skipped}}",
+    "actions": {
+      "sync": "立即同步",
+      "pause": "暂停",
+      "resume": "恢复",
+      "disconnect": "断开连接"
+    },
+    "disconnectTitle": "断开这个文件夹？",
+    "disconnectDescription": "已进入收件箱的文件会保留。",
+    "disconnectConfirm": "断开",
+    "loadFailed": "无法读取连接",
+    "actionFailed": "操作没有完成",
+    "folderUnavailable": "找不到这个文件夹，请确认它仍然可用。",
+    "desktopOnlyAll": "连接功能仅在SearchT-UI桌面版中可用。",
+    "emptyAllTitle": "还没有连接",
+    "emptyAllDescription": "连接邮箱或本地文件夹，新内容会自动进入收件箱。",
+    "addEmail": "连接邮箱",
+    "folder": {
+      "sectionTitle": "本地文件夹",
+      "sectionDescription": "监控这台电脑上选定的文件夹。"
+    },
+    "email": {
+      "sectionTitle": "邮箱",
+      "sectionDescription": "将新邮件和附件导入收件箱，不会修改邮箱服务器上的内容。",
+      "dialogTitle": "连接邮箱",
+      "providerLabel": "邮箱服务商",
+      "provider": {
+        "qqMail": "QQ 邮箱",
+        "netease163": "163 邮箱"
+      },
+      "addressLabel": "邮箱地址",
+      "authorizationCodeLabel": "授权码",
+      "authorizationCodeHint": "请使用邮箱设置中生成的授权码，不要使用网页登录密码。",
+      "initialSyncLabel": "首次同步",
+      "initialSync": {
+        "fromNow": "仅同步新邮件",
+        "last7Days": "最近 7 天"
+      },
+      "test": "测试连接",
+      "connect": "连接",
+      "testSuccess": "连接成功",
+      "connectionFailed": "无法连接，请检查邮箱地址和授权码。",
+      "mailboxReset": "邮箱标识已改变，请重新连接后再同步。",
+      "credentialMissing": "授权信息缺失，请重新连接此账户。",
+      "disconnectTitle": "断开此邮箱账户？",
+      "disconnectDescription": "已导入的邮件和附件会保留在收件箱中，服务器上的邮件不会受到影响。"
+    },
+    "addWebDav": "连接网盘",
+    "webdav": {
+      "sectionTitle": "网盘",
+      "sectionDescription": "只读接收坚果云或 HTTPS WebDAV 指定目录中的文件，不会修改远程内容。",
+      "dialogTitle": "连接网盘",
+      "providerLabel": "网盘服务",
+      "provider": {
+        "jianguoyun": "坚果云",
+        "custom": "自定义 WebDAV"
+      },
+      "serverUrlLabel": "HTTPS 服务器地址",
+      "usernameLabel": "账号或用户名",
+      "passwordLabel": "应用密码",
+      "passwordHint": "请使用网盘服务生成的应用密码，不要填写网页登录密码。",
+      "rootPathLabel": "目录路径",
+      "rootPathHint": "使用 / 接收整个网盘中的文件。",
+      "displayNameLabel": "连接名称（可选）",
+      "initialSyncLabel": "首次同步",
+      "initialSync": {
+        "fromNow": "仅同步新文件和有变化的文件",
+        "importExisting": "导入当前已有文件"
+      },
+      "test": "测试连接",
+      "connect": "连接",
+      "testSuccess": "连接成功",
+      "connectionFailed": "无法连接，请检查服务器地址和凭据。",
+      "credentialMissing": "连接凭据缺失，请重新连接此网盘。",
+      "disconnectTitle": "断开此网盘？",
+      "disconnectDescription": "已导入的文件会保留在收件箱中，远程文件不会受到影响。"
+    },
+    "addS3": "连接对象存储",
+    "addCalendarIcs": "连接日历",
+    "s3": {
+      "sectionTitle": "S3 兼容存储",
+      "sectionDescription": "只读接收 S3 兼容对象存储指定前缀下的文件，不会修改远程内容。",
+      "dialogTitle": "连接对象存储",
+      "providerLabel": "存储服务",
+      "provider.custom": "自定义 S3",
+      "provider.aws": "Amazon S3",
+      "provider.r2": "Cloudflare R2",
+      "endpointLabel": "HTTPS Endpoint",
+      "regionLabel": "Region",
+      "bucketLabel": "Bucket",
+      "accessKeyIdLabel": "Access Key ID",
+      "secretAccessKeyLabel": "Secret Access Key",
+      "prefixLabel": "对象前缀（可选）",
+      "prefixHint": "只接收以该前缀开头的对象，留空接收整个 Bucket。",
+      "pathStyleLabel": "使用路径风格寻址（Path-Style）",
+      "displayNameLabel": "连接名称（可选）",
+      "initialSyncLabel": "首次同步",
+      "initialSync.fromNow": "仅同步新对象和有变化的对象",
+      "initialSync.importExisting": "导入当前已有对象",
+      "test": "测试连接",
+      "connect": "连接",
+      "testSuccess": "连接成功",
+      "connectionFailed": "无法连接，请检查 Endpoint、Region 和密钥。",
+      "credentialMissing": "连接凭据缺失，请重新连接此存储。",
+      "disconnectTitle": "断开此对象存储？",
+      "disconnectDescription": "已导入的文件会保留在收件箱中，远程对象不会受到影响。"
+    },
+    "ics": {
+      "sectionTitle": "日历订阅",
+      "sectionDescription": "只读同步飞书、Outlook、钉钉或企业微信的日历订阅链接，事件进入日程。",
+      "dialogTitle": "连接日历订阅",
+      "providerLabel": "日历服务",
+      "provider.feishu": "飞书",
+      "provider.outlook": "Outlook",
+      "provider.dingtalk": "钉钉",
+      "provider.wecom": "企业微信",
+      "provider.custom": "自定义",
+      "urlLabel": "iCal 订阅链接",
+      "urlHint": "在日历应用的“订阅/分享”设置中获取 HTTPS 订阅链接。",
+      "displayNameLabel": "连接名称（可选）",
+      "test": "测试连接",
+      "connect": "连接",
+      "testSuccess": "连接成功",
+      "connectionFailed": "无法获取日历，请检查订阅链接是否有效。",
+      "credentialMissing": "订阅链接缺失，请重新连接此日历。",
+      "disconnectTitle": "断开此日历订阅？",
+      "disconnectDescription": "已导入的日程会移入回收站，可随时恢复。"
+    }
+  },
+  "workflows": {
+    "title": "工作流",
+    "description": "把重复工作变成可靠的个人自动化。",
+    "untitled": "工作流",
+    "tabs": {
+      "catalog": "模板",
+      "mine": "我的工作流",
+      "history": "运行记录"
+    },
+    "views": {
+      "active": "使用中",
+      "trash": "回收站"
+    },
+    "actions": {
+      "useTemplate": "使用模板",
+      "runNow": "立即运行",
+      "enabled": "工作流已启用",
+      "repair": "修复",
+      "edit": "编辑",
+      "restore": "恢复"
+    },
+    "empty": {
+      "mine": "还没有工作流",
+      "history": "还没有运行记录",
+      "trash": "回收站为空"
+    },
+    "errors": {
+      "load": "无法加载工作流",
+      "run": "无法启动这个工作流",
+      "state": "无法更新这个工作流",
+      "repair": "无法修复这个工作流",
+      "version": "无法保存新版本",
+      "remove": "无法移入回收站",
+      "restore": "无法恢复工作流",
+      "revokeGrant": "无法撤销授权"
+    },
+    "messages": {
+      "approvalRequired": "继续前请确认本次外部操作",
+      "runStarted": "工作流已开始运行"
+    },
+    "version": {
+      "editTitle": "创建新版本",
+      "name": "工作流名称",
+      "description": "说明",
+      "userUpdate": "用户更新"
+    },
+    "remove": {
+      "title": "移入回收站",
+      "confirm": "移入",
+      "description": "将“{{name}}”移入回收站吗？运行记录会保留。"
+    },
+    "runStates": {
+      "pending": "等待运行",
+      "waiting-approval": "等待确认",
+      "running": "运行中",
+      "succeeded": "已完成",
+      "failed": "失败",
+      "skipped": "已跳过",
+      "missed": "已错过"
+    },
+    "grants": {
+      "title": "确认外部操作",
+      "description": "“{{name}}”需要执行以下操作。",
+      "allow": "允许并继续",
+      "reject": "拒绝",
+      "once": "仅允许本次",
+      "remember": "记住这项授权",
+      "expiry": "授权期限",
+      "days": "{{count}} 天",
+      "settingsTitle": "工作流授权",
+      "settingsDescription": "查看并撤销已保存的外部操作权限。",
+      "empty": "没有已保存的工作流授权",
+      "noExpiry": "长期有效",
+      "revoke": "撤销",
+      "revoked": "授权已撤销",
+      "unknownWorkflow": "未知工作流",
+      "constraints": "适用范围",
+      "expires": "有效期",
+      "lastUsed": "最近使用",
+      "neverUsed": "尚未使用",
+      "workflowId": "工作流 ID"
+    },
+    "templates": {
+      "dailyPlanning": {
+        "name": "每日规划",
+        "description": "查看今天的日程、待办和收件箱，形成有顺序的行动计划。"
+      },
+      "inboxTriage": {
+        "name": "收件箱整理",
+        "description": "分类收件箱内容并起草合适的后续动作。"
+      },
+      "weeklyReview": {
+        "name": "每周复盘",
+        "description": "汇总本周进展、延期事项和下周重点。"
+      },
+      "meetingFollowUp": {
+        "name": "会议跟进",
+        "description": "提取决策、负责人、截止时间和跟进草稿。"
+      }
+    }
+  },
+  "sync": {
+    "title": "云同步（端到端加密）",
+    "description": "把待办、日程和笔记以端到端加密方式同步到你的 WebDAV 或 S3。服务器只保存密文。",
+    "state.idle": "已开启",
+    "state.syncing": "同步中",
+    "state.error": "出错",
+    "state.disabled": "未开启",
+    "state.unknown": "…",
+    "lastSync": "最近同步",
+    "pending": "待重试",
+    "now": "立即同步",
+    "off": "关闭",
+    "disableConfirm": "关闭后本机数据保留，仅停止同步。",
+    "report": "推送 {{pushed}} · 拉取 {{pulled}} · 冲突 {{conflicts}}",
+    "mode": "同步目标",
+    "modeS3": "S3 兼容存储",
+    "serverUrl": "HTTPS 服务器地址",
+    "username": "用户名",
+    "password": "应用密码",
+    "rootPath": "同步目录",
+    "passphrase": "同步口令（至少 8 位）",
+    "enable": "开启云同步",
+    "passphraseHint": "口令只保存在本机安全存储；忘记口令将无法解密云端数据，请妥善保管。",
+    "configured": "云同步已开启",
+    "done": "同步完成",
+    "disabled": "云同步已关闭"
+  },
+  "browser": {
+    "title": "浏览器",
+    "address": "地址或搜索",
+    "placeholder": "输入网址或搜索关键词，回车打开",
+    "back": "后退",
+    "forward": "前进",
+    "reload": "刷新",
+    "home": "首页",
+    "loadFailed": "页面加载失败",
+    "desktopOnly": "内置浏览器仅在SearchT-UI桌面版中可用。",
+    "recognize": "识别页面内容",
+    "recognizeHint": "提取当前页面的标题、正文与链接数量，可一键存入收件箱。",
+    "read": "读取页面内容",
+    "save": "存入收件箱",
+    "saved": "已存入收件箱",
+    "copy": "复制正文",
+    "copied": "已复制正文",
+    "links": "链接",
+    "chars": "字符",
+    "operate": "操作浏览器",
+    "operateHint": "通过 CSS 选择器点击元素、填写输入框或滚动页面。",
+    "selector": "CSS 选择器",
+    "value": "填写的文本",
+    "valuePlaceholder": "填写输入框时使用的文本（可留空）",
+    "click": "点击元素",
+    "set": "填写文本",
+    "scrollDown": "下滚 600px",
+    "scrollUp": "上滚 600px"
+  }
+}

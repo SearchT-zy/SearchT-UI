@@ -1,0 +1,6 @@
+<svg class="w-5.5 h-5.5 absolute inset-0 m-auto" viewBox="0 0 80 80" fill="none">
+  <!-- SearchT-UI: dark rounded square, white circle with centered T -->
+  <rect x="4" y="4" width="72" height="72" rx="16" fill="#191928"/>
+  <circle cx="40" cy="40" r="22" stroke="#ffffff" stroke-width="4.5" fill="none"/>
+  <path d="M30 33 h20 M40 33 v15" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

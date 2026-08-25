@@ -1,0 +1,23 @@
+.searcht-webdav-dialog {
+  max-height: calc(100vh - 32px);
+  overflow: hidden;
+}
+
+.searcht-webdav-dialog > div[data-focus-lock-disabled] {
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 32px);
+  min-height: 0;
+}
+
+.searcht-webdav-dialog .arco-modal-content {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.searcht-webdav-dialog .arco-modal-header,
+.searcht-webdav-dialog .arco-modal-footer {
+  flex-shrink: 0;
+}

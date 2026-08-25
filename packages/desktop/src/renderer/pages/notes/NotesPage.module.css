@@ -1,0 +1,50 @@
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(250px, 0.72fr) minmax(420px, 1.28fr);
+  min-height: 460px;
+  height: min(680px, calc(100vh - 238px));
+  border: 1px solid var(--color-border-2);
+  background: var(--color-bg-2);
+}
+
+.listPane {
+  min-width: 0;
+  overflow-y: auto;
+  border-right: 1px solid var(--color-border-2);
+}
+
+.editorPane {
+  min-width: 0;
+  display: flex;
+  overflow: hidden;
+  background: var(--color-bg-1);
+}
+
+.listRow,
+.listRowSelected {
+  min-height: 62px;
+  background: var(--color-bg-2);
+}
+
+.listRow:hover,
+.listRowSelected {
+  background: var(--color-fill-2);
+}
+
+.listButton {
+  min-height: 62px;
+  padding: 8px 12px;
+  color: inherit;
+}
+
+@media (max-width: 760px) {
+  .workspace {
+    grid-template-columns: minmax(0, 1fr);
+    height: auto;
+    min-height: 380px;
+  }
+
+  .listPane {
+    border-right: 0;
+  }
+}

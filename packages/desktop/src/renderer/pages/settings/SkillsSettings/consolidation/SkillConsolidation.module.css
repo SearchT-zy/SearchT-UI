@@ -1,0 +1,160 @@
+.candidateList {
+  border-top: 1px solid var(--color-border-2);
+  border-bottom: 1px solid var(--color-border-2);
+}
+
+.candidateRow {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  padding: 18px 4px;
+}
+
+.candidateRow + .candidateRow {
+  border-top: 1px solid var(--color-border-2);
+}
+
+.candidateMain {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.candidateActions {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 6px;
+}
+
+.inspectionGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 3px;
+}
+
+.reviewGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 264px;
+  gap: 20px;
+  align-items: start;
+}
+
+.identityFields {
+  display: grid;
+  grid-template-columns: minmax(180px, 0.7fr) minmax(240px, 1.3fr);
+  gap: 12px;
+}
+
+.editorSurface {
+  height: min(54vh, 520px);
+  min-height: 340px;
+  overflow: hidden;
+  border: 1px solid var(--color-border-2);
+  border-radius: 6px;
+  background: var(--color-bg-2);
+}
+
+.editorSurface > div {
+  height: 100%;
+}
+
+.reviewAside {
+  position: sticky;
+  top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-left: 18px;
+  border-left: 1px solid var(--color-border-2);
+}
+
+.versionList {
+  border-top: 1px solid var(--color-border-2);
+  border-bottom: 1px solid var(--color-border-2);
+}
+
+.versionRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 2px;
+}
+
+.versionRow + .versionRow {
+  border-top: 1px solid var(--color-border-2);
+}
+
+.versionMain {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.versionActions {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 4px;
+}
+
+.versionPreview {
+  max-height: min(62vh, 560px);
+  margin: 0;
+  overflow: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  border: 1px solid var(--color-border-2);
+  border-radius: 6px;
+  background: var(--color-fill-1);
+  padding: 14px;
+  color: var(--color-text-1);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+@media (max-width: 800px) {
+  .candidateRow {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .candidateActions {
+    justify-content: flex-end;
+  }
+
+  .versionRow {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .versionActions {
+    justify-content: flex-end;
+  }
+
+  .inspectionGrid,
+  .identityFields,
+  .reviewGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .reviewAside {
+    position: static;
+    padding-top: 16px;
+    padding-left: 0;
+    border-top: 1px solid var(--color-border-2);
+    border-left: 0;
+  }
+
+  .editorSurface {
+    height: 440px;
+    min-height: 300px;
+  }
+}

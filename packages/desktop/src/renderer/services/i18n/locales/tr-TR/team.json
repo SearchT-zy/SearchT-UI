@@ -1,0 +1,222 @@
+{
+  "sider": {
+    "title": "Ajan grupları",
+    "createTeam": "Yeni ajan grubu",
+    "pin": "Sabitle",
+    "unpin": "Sabitlemeyi Kaldır",
+    "rename": "Yeniden Adlandır",
+    "delete": "Sil",
+    "renameTitle": "Takımı Yeniden Adlandır",
+    "renamePlaceholder": "Takım adı",
+    "deleteConfirm": "Bu takımı silmek istiyor musunuz?",
+    "deleteConfirmContent": "Bu işlem geri alınamaz.",
+    "deleteOk": "Sil",
+    "deleteCancel": "İptal",
+    "renameOk": "Kaydet",
+    "renameCancel": "İptal",
+    "renameSuccess": "Takım yeniden adlandırıldı",
+    "deleteSuccess": "Takım silindi"
+  },
+  "newAgent": "Yeni Asistan",
+  "noMessages": "No messages yet.",
+  "agentNotConfigured": "Asistan henüz yapılandırılmadı.",
+  "stopAgentFailed": "Bu asistan durdurulamadı. Lütfen tekrar deneyin.",
+  "work": {
+    "processingWithQueued": "İşleniyor… {{count}} sırada",
+    "queued": "{{count}} sırada",
+    "runtimeStarting": "Bu üyenin başlaması bekleniyor…",
+    "runtimeFailed": "Bu üye başlatılamadı.",
+    "removing": "Bu üye kaldırılıyor…",
+    "sessionStopped": "Takım oturumu durdu.",
+    "retryStart": "Başlatmayı yeniden dene"
+  },
+  "sendBox": {
+    "placeholder": "Takım lideri asistana mesaj gönder..."
+  },
+  "create": {
+    "title": "Yeni ajan grubu",
+    "namePlaceholder": "Grup adı",
+    "dispatchAgentPlaceholder": "Koordinatör",
+    "subAgentsPlaceholder": "Üyeler",
+    "confirm": "Confirm Create",
+    "noSupportedAgents": "Desteklenen uygun asistan bulunamadı",
+    "supportedAgentsHint": "Şu anda Claude ve Aion CLI asistanları desteklenmektedir. Daha fazla asistan yakında eklenecek.",
+    "leaderDesc": "Hedefinizi anlar, işi böler ve grubu koordine eder",
+    "searchPlaceholder": "Search",
+    "noSearchResults": "Sonuç bulunamadı",
+    "step": {
+      "dispatch": "Koordinatör",
+      "subAgents": "Üyeler",
+      "workspace": "Proje"
+    },
+    "nameRequired": "Takım adı girin",
+    "leaderRequired": "Takım lideri seçin",
+    "selectFolder": "Select folder",
+    "recentLabel": "Son kullanılan",
+    "chooseDifferentFolder": "Farklı klasör seç",
+    "error": "Takım oluşturulamadı",
+    "selectedMembers": "Selected members",
+    "teamLeader": "Koordinatör",
+    "currentLeader": "Koordinatör",
+    "setAsLeader": "Koordinatör",
+    "teammate": "Teammate",
+    "selectAtLeastOneMember": "Select at least one assistant as the Team Leader.",
+    "selectOneLeader": "Koordinatör",
+    "subtitle": "Yerel AI asistanlarını tek grupta toplayın; Koordinatör işi dağıtır ve sonuçları birleştirir.",
+    "nameLabel": "Grup adı",
+    "workspaceLabel": "Workspace",
+    "allAssistantsWithCount": "All assistants ({{count}})",
+    "selectedMembersWithCount": "Selected members {{count}} · ⚑ = Leader",
+    "selectedMembersTitleWithCount": "Selected members {{count}}",
+    "leaderLegend": "= Leader",
+    "membersHelper": "Choose team members and assign one Leader. The same assistant can be selected multiple times.",
+    "memberHint": "No suitable assistant as a member? After creation, let the Leader create temporary team members in chat."
+  },
+  "removeAgent": {
+    "confirmTitle": "Takım Üyesini Kaldır",
+    "confirmContent": "Remove this member from the team?",
+    "confirmContentActive": "This member is working. Remove it anyway? Its current work will be interrupted."
+  },
+  "emptyState": {
+    "subtitle": "Hedefini söyle, ekibi koordine ederek tamamlayayım",
+    "suggestions": {
+      "debate": "Farklı tarafları savunan asistanlarla bir tartışma düzenle",
+      "interview": "Asistanlar arasında derinlemesine bir röportaj planla",
+      "expert_review": "Aynı problemi birden fazla uzmanın analiz etmesini sağla",
+      "add_member": "Help me add a member good at ___ to the team"
+    },
+    "leaderGreeting": "Hi, I'm the Leader. I understand your goal and coordinate the team — describe what you want and I'll arrange it.",
+    "memberGreeting": "Hi, I'm a team member. I take direction from the Leader and you."
+  },
+  "addMember": {
+    "title": "Add member",
+    "subtitle": "The same assistant can be added repeatedly",
+    "searchAssistants": "Search assistants...",
+    "addFailed": "Failed to add member",
+    "noSearchResults": "No results found",
+    "tellLeaderHint": "Not a good fit? You can also ask the Leader to arrange it.",
+    "tellLeaderCta": "Tell the Leader →",
+    "tellLeaderPrefill": "Help me add a member good at ___ to the team"
+  },
+  "view": {
+    "label": "View",
+    "parallel": "Parallel",
+    "single": "Single",
+    "board": "Pano",
+    "group": "Grup"
+  },
+  "warmup": {
+    "title": "Waking up the team…",
+    "subtitle": "Üyeler hazırlanıyor",
+    "memberFailedTitle": "Member {{name}} failed to start",
+    "leaderFailedTitle": "Lead {{name}} failed to start",
+    "genericFailedTitle": "The team could not start",
+    "multiFailedTitle": "{{count}} members failed to start",
+    "leaderSuffix": " (Lead)",
+    "unknownError": "failed to start",
+    "memberFailedHint": "Switch its model above, or remove it from the bar on top, then retry.",
+    "leaderFailedHint": "Switch its model above, then retry.",
+    "retry": "Retry"
+  },
+  "reorderMember": "Üye sırasını değiştirmek için sürükleyin",
+  "activity": {
+    "control": {
+      "sortNewest": "En yeni",
+      "sortOldest": "En eski",
+      "filterAll": "Tümü",
+      "filterMessages": "Mesajlar",
+      "filterTasks": "Görevler",
+      "allMembers": "Tüm üyeler",
+      "showSystem": "Sistem mesajları",
+      "showTerminal": "Tamamlanan görevler"
+    },
+    "fallbackLane": "Atanmamış / harici",
+    "empty": "Henüz etkinlik yok",
+    "userIdentity": "Kullanıcı / harici",
+    "broadcast": "Herkese yayınla",
+    "read": "Okundu",
+    "unread": "Okunmadı",
+    "attachments": "{{count}} dosya",
+    "expand": "Genişlet",
+    "collapse": "Daralt",
+    "blockedBy": "#{{id}} tarafından engellendi",
+    "blockedByNamed": "{{name}} tarafından engellendi",
+    "blockerUnknown": "Görev kullanılamıyor",
+    "status": {
+      "pending": "Beklemede",
+      "in_progress": "Devam ediyor",
+      "completed": "Tamamlandı",
+      "deleted": "Silindi"
+    },
+    "msgType": {
+      "message": "Mesaj",
+      "idle_notification": "Boşta bildirimi",
+      "shutdown_request": "Kapatma isteği"
+    }
+  },
+  "group": {
+    "view": "Grup",
+    "mode": {
+      "coordinator": "Koordine et",
+      "direct": "Doğrudan ata"
+    },
+    "composer": {
+      "placeholder": "Hedefi açıklayın veya üye seçmek için @ yazın"
+    },
+    "mention": {
+      "all": "Tüm üyeler ({{count}})",
+      "members": "üye"
+    },
+    "member": {
+      "coordinator": "Koordinatör",
+      "member": "Üyeler",
+      "permissions": "{{count}} izin bekliyor",
+      "unavailable": "Kullanılamıyor"
+    },
+    "delivery": {
+      "pending": "Gönderilmeyi bekliyor",
+      "accepted": "Kabul edildi",
+      "running": "Çalışıyor",
+      "completed": "Tamamlandı",
+      "failed": "Başarısız",
+      "cancelled": "İptal edildi",
+      "unknown": "Teslim durumu bilinmiyor"
+    },
+    "runtime": {
+      "ready": "Hazır",
+      "dormant": "Başlatılmadı",
+      "pending": "Başlatılıyor",
+      "failed": "Kullanılamıyor"
+    },
+    "sender": {
+      "you": "Siz"
+    },
+    "empty": "Yerel iş birliğini başlatmak için bir hedef açıklayın",
+    "activity": {
+      "title": "Görevler ve devirler",
+      "drawer": "Görevler ve devirler",
+      "completedCount": "{{count}} tamamlandı",
+      "empty": "Henüz görev veya devir yok"
+    },
+    "action": {
+      "inspect": "Konuşmayı incele",
+      "openBoard": "Panoyu aç",
+      "fullConversation": "Tam konuşmayı aç",
+      "retry": "Açıkça yeniden dene"
+    },
+    "error": {
+      "noAvailableTarget": "Seçilen hiçbir üye kullanılamıyor",
+      "someUnavailable": "Kullanılamayan {{count}} üye atanmadı",
+      "sendFailed": "Talimat gönderilemedi"
+    },
+    "kind": {
+      "instruction": "Talimat",
+      "progress": "İlerleme",
+      "handoff": "Devir",
+      "result": "Sonuç",
+      "approval": "Onay",
+      "error": "Hata",
+      "task": "Görev"
+    }
+  }
+}

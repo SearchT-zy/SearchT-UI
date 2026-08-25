@@ -1,0 +1,222 @@
+{
+  "sider": {
+    "title": "Agentengruppen",
+    "createTeam": "Neue Agentengruppe",
+    "pin": "Anheften",
+    "unpin": "Loslösen",
+    "rename": "Umbenennen",
+    "delete": "Löschen",
+    "renameTitle": "Team umbenennen",
+    "renamePlaceholder": "Teamname",
+    "deleteConfirm": "Dieses Team löschen?",
+    "deleteConfirmContent": "Diese Aktion kann nicht rückgängig gemacht werden.",
+    "deleteOk": "Löschen",
+    "deleteCancel": "Abbrechen",
+    "renameOk": "Speichern",
+    "renameCancel": "Abbrechen",
+    "renameSuccess": "Team umbenannt",
+    "deleteSuccess": "Team gelöscht"
+  },
+  "newAgent": "Neuer Agent",
+  "noMessages": "Noch keine Nachrichten.",
+  "agentNotConfigured": "Agent noch nicht konfiguriert.",
+  "stopAgentFailed": "Konnte diesen Agenten nicht stoppen. Bitte versuche es erneut.",
+  "work": {
+    "processingWithQueued": "Wird verarbeitet… {{count}} in der Warteschlange",
+    "queued": "{{count}} in der Warteschlange",
+    "runtimeStarting": "Warten auf den Start dieses Mitglieds…",
+    "runtimeFailed": "Dieses Mitglied konnte nicht gestartet werden.",
+    "removing": "Dieses Mitglied wird entfernt…",
+    "sessionStopped": "Die Teamsitzung wurde beendet.",
+    "retryStart": "Neustart versuchen"
+  },
+  "sendBox": {
+    "placeholder": "Nachricht an Dispatch-Agenten..."
+  },
+  "create": {
+    "title": "Neue Agentengruppe",
+    "namePlaceholder": "Gruppenname",
+    "dispatchAgentPlaceholder": "Koordinator",
+    "subAgentsPlaceholder": "Mitglieder",
+    "confirm": "Confirm Create",
+    "noSupportedAgents": "Keine unterstützten Agenten installiert",
+    "supportedAgentsHint": "Unterstützt derzeit Claude und Codex. Weitere Agenten folgen bald.",
+    "leaderDesc": "Versteht Ihr Ziel, teilt die Arbeit auf und koordiniert die Gruppe",
+    "step": {
+      "dispatch": "Koordinator",
+      "subAgents": "Mitglieder",
+      "workspace": "Arbeitsbereich"
+    },
+    "nameRequired": "Bitte einen Teamnamen eingeben",
+    "leaderRequired": "Bitte einen Teamleiter auswählen",
+    "selectFolder": "Select folder",
+    "recentLabel": "Zuletzt",
+    "chooseDifferentFolder": "Anderen Ordner wählen",
+    "error": "Team erstellen fehlgeschlagen",
+    "searchPlaceholder": "Search",
+    "noSearchResults": "No results found",
+    "selectedMembers": "Selected members",
+    "teamLeader": "Koordinator",
+    "currentLeader": "Koordinator",
+    "setAsLeader": "Koordinator",
+    "teammate": "Teammate",
+    "selectAtLeastOneMember": "Select at least one assistant as the Team Leader.",
+    "selectOneLeader": "Koordinator",
+    "subtitle": "Bringen Sie lokale KI-Assistenten in einer Gruppe zusammen; der Koordinator verteilt die Arbeit und bündelt die Ergebnisse.",
+    "nameLabel": "Gruppenname",
+    "workspaceLabel": "Workspace",
+    "allAssistantsWithCount": "All assistants ({{count}})",
+    "selectedMembersWithCount": "Selected members {{count}} · ⚑ = Leader",
+    "selectedMembersTitleWithCount": "Selected members {{count}}",
+    "leaderLegend": "= Leader",
+    "membersHelper": "Choose team members and assign one Leader. The same assistant can be selected multiple times.",
+    "memberHint": "No suitable assistant as a member? After creation, let the Leader create temporary team members in chat."
+  },
+  "removeAgent": {
+    "confirmTitle": "Teammitglied entfernen",
+    "confirmContent": "Remove this member from the team?",
+    "confirmContentActive": "This member is working. Remove it anyway? Its current work will be interrupted."
+  },
+  "emptyState": {
+    "subtitle": "Beschreibe dein Ziel und ich bringe das Team an die Arbeit",
+    "suggestions": {
+      "debate": "Eine Debatte mit Agenten auf verschiedenen Seiten organisieren",
+      "interview": "Ein eingehendes Interview zwischen Agenten planen",
+      "expert_review": "Mehrere Experten das gleiche Problem analysieren lassen",
+      "add_member": "Help me add a member good at ___ to the team"
+    },
+    "leaderGreeting": "Hi, I'm the Leader. I understand your goal and coordinate the team — describe what you want and I'll arrange it.",
+    "memberGreeting": "Hi, I'm a team member. I take direction from the Leader and you."
+  },
+  "addMember": {
+    "title": "Add member",
+    "subtitle": "The same assistant can be added repeatedly",
+    "searchAssistants": "Search assistants...",
+    "addFailed": "Failed to add member",
+    "noSearchResults": "No results found",
+    "tellLeaderHint": "Not a good fit? You can also ask the Leader to arrange it.",
+    "tellLeaderCta": "Tell the Leader →",
+    "tellLeaderPrefill": "Help me add a member good at ___ to the team"
+  },
+  "view": {
+    "label": "View",
+    "parallel": "Parallel",
+    "single": "Single",
+    "board": "Board",
+    "group": "Gruppe"
+  },
+  "warmup": {
+    "title": "Waking up the team…",
+    "subtitle": "Mitglieder werden vorbereitet",
+    "memberFailedTitle": "Member {{name}} failed to start",
+    "leaderFailedTitle": "Lead {{name}} failed to start",
+    "genericFailedTitle": "The team could not start",
+    "multiFailedTitle": "{{count}} members failed to start",
+    "leaderSuffix": " (Lead)",
+    "unknownError": "failed to start",
+    "memberFailedHint": "Switch its model above, or remove it from the bar on top, then retry.",
+    "leaderFailedHint": "Switch its model above, then retry.",
+    "retry": "Retry"
+  },
+  "reorderMember": "Ziehen, um Mitglied neu anzuordnen",
+  "activity": {
+    "control": {
+      "sortNewest": "Neueste",
+      "sortOldest": "Älteste",
+      "filterAll": "Alle",
+      "filterMessages": "Nachrichten",
+      "filterTasks": "Aufgaben",
+      "allMembers": "Alle Mitglieder",
+      "showSystem": "Systemnachrichten",
+      "showTerminal": "Erledigte Aufgaben"
+    },
+    "fallbackLane": "Nicht zugewiesen / extern",
+    "empty": "Noch keine Aktivität",
+    "userIdentity": "Benutzer / extern",
+    "broadcast": "An alle senden",
+    "read": "Gelesen",
+    "unread": "Ungelesen",
+    "attachments": "{{count}} Dateien",
+    "expand": "Aufklappen",
+    "collapse": "Einklappen",
+    "blockedBy": "blockiert von #{{id}}",
+    "blockedByNamed": "blockiert von {{name}}",
+    "blockerUnknown": "Aufgabe nicht verfügbar",
+    "status": {
+      "pending": "Ausstehend",
+      "in_progress": "In Bearbeitung",
+      "completed": "Abgeschlossen",
+      "deleted": "Gelöscht"
+    },
+    "msgType": {
+      "message": "Nachricht",
+      "idle_notification": "Leerlaufhinweis",
+      "shutdown_request": "Stopp-Anfrage"
+    }
+  },
+  "group": {
+    "view": "Gruppe",
+    "mode": {
+      "coordinator": "Koordinieren",
+      "direct": "Direkt zuweisen"
+    },
+    "composer": {
+      "placeholder": "Ziel beschreiben oder @ eingeben, um ein Mitglied auszuwählen"
+    },
+    "mention": {
+      "all": "Alle Mitglieder ({{count}})",
+      "members": "Mitglieder"
+    },
+    "member": {
+      "coordinator": "Koordinator",
+      "member": "Mitglieder",
+      "permissions": "{{count}} Berechtigungen erfordern Aufmerksamkeit",
+      "unavailable": "Nicht verfügbar"
+    },
+    "delivery": {
+      "pending": "Wartet auf Versand",
+      "accepted": "Angenommen",
+      "running": "In Arbeit",
+      "completed": "Abgeschlossen",
+      "failed": "Fehlgeschlagen",
+      "cancelled": "Abgebrochen",
+      "unknown": "Zustellstatus unbekannt"
+    },
+    "runtime": {
+      "ready": "Bereit",
+      "dormant": "Nicht gestartet",
+      "pending": "Wird gestartet",
+      "failed": "Nicht verfügbar"
+    },
+    "sender": {
+      "you": "Sie"
+    },
+    "empty": "Beschreiben Sie ein Ziel, um die lokale Zusammenarbeit zu starten",
+    "activity": {
+      "title": "Aufgaben und Übergaben",
+      "drawer": "Aufgaben und Übergaben",
+      "completedCount": "{{count}} abgeschlossen",
+      "empty": "Noch keine Aufgaben oder Übergaben"
+    },
+    "action": {
+      "inspect": "Unterhaltung prüfen",
+      "openBoard": "Board öffnen",
+      "fullConversation": "Vollständige Unterhaltung öffnen",
+      "retry": "Explizit erneut versuchen"
+    },
+    "error": {
+      "noAvailableTarget": "Kein ausgewähltes Mitglied ist verfügbar",
+      "someUnavailable": "{{count}} nicht verfügbare Mitglieder wurden nicht zugewiesen",
+      "sendFailed": "Die Anweisung konnte nicht gesendet werden"
+    },
+    "kind": {
+      "instruction": "Anweisung",
+      "progress": "Fortschritt",
+      "handoff": "Übergabe",
+      "result": "Ergebnis",
+      "approval": "Genehmigung",
+      "error": "Fehler",
+      "task": "Aufgabe"
+    }
+  }
+}

@@ -1,0 +1,830 @@
+{
+  "today": {
+    "title": "今日",
+    "summary": "把今天需要處理的事情集中在同一個畫面。",
+    "focus": "目前重點",
+    "upcoming": "接下來"
+  },
+  "inbox": {
+    "title": "收件匣",
+    "description": "先把資訊收進來，再整理成明確的行動。",
+    "empty": "沒有等待整理的內容",
+    "search": "搜尋收件匣",
+    "listLabel": "收件匣內容",
+    "selectNamed": "選取此內容",
+    "views": {
+      "pending": "待整理",
+      "organized": "已整理",
+      "archived": "已封存",
+      "trash": "回收桶"
+    },
+    "kinds": {
+      "all": "所有類型",
+      "text": "文字",
+      "link": "連結",
+      "file": "檔案"
+    },
+    "fields": {
+      "title": "標題",
+      "content": "內容",
+      "url": "網址",
+      "date": "日期",
+      "optionalTitle": "標題（選填）"
+    },
+    "capture": {
+      "open": "收進來",
+      "title": "加入收件匣",
+      "saveText": "儲存文字",
+      "saveLink": "儲存連結",
+      "addFiles": "選擇一個或多個檔案"
+    },
+    "actions": {
+      "editTitle": "編輯標題",
+      "archive": "封存",
+      "archiveSelected": "封存所選項目",
+      "remove": "移到回收桶",
+      "restore": "還原",
+      "restoreSelected": "還原所選項目",
+      "destroy": "永久刪除",
+      "emptyTrash": "清空回收桶",
+      "toTask": "轉為待辦",
+      "toEvent": "轉為行程",
+      "toNote": "轉為筆記",
+      "toKnowledge": "加入知識庫"
+    },
+    "detail": {
+      "label": "內容詳情",
+      "selectPrompt": "選取一筆內容以查看詳情",
+      "originalName": "原始檔名",
+      "originalPath": "原始路徑",
+      "browserImport": "瀏覽器匯入",
+      "organizedCount": "已連結 {{count}} 個結果"
+    },
+    "preview": {
+      "label": "檔案預覽",
+      "truncated": "僅顯示部分內容",
+      "document": "文件檔案",
+      "unsupported": "暫不支援預覽此檔案類型",
+      "missing": "託管檔案遺失或已損壞",
+      "reveal": "在資料夾中顯示",
+      "download": "下載"
+    },
+    "drop": {
+      "prompt": "放開即可收進來",
+      "directoryRejected": "暫不支援匯入資料夾"
+    },
+    "convert": {
+      "title": "整理為行動",
+      "createTask": "建立待辦",
+      "createEvent": "建立行程"
+    },
+    "errors": {
+      "load": "無法載入收件匣",
+      "detail": "無法載入內容詳情",
+      "save": "操作未完成，請再試一次。",
+      "someFiles": "部分檔案無法匯入"
+    }
+  },
+  "calendar": {
+    "title": "行事曆",
+    "description": "安排有明確時間的事項，並把待辦放進今天的時間裡。",
+    "empty": "這一天還沒有行程",
+    "today": "今天",
+    "previousMonth": "上個月",
+    "nextMonth": "下個月",
+    "createBlock": "安排待辦",
+    "editor": {
+      "createTitle": "新增行程",
+      "editTitle": "編輯行程"
+    },
+    "fields": {
+      "title": "標題",
+      "allDay": "全天",
+      "location": "地點",
+      "description": "說明",
+      "reminder": "提醒"
+    },
+    "reminders": {
+      "none": "不提醒",
+      "m0": "準時",
+      "m5": "提前 5 分鐘",
+      "m15": "提前 15 分鐘",
+      "m30": "提前 30 分鐘",
+      "m60": "提前 1 小時",
+      "m1440": "提前 1 天"
+    },
+    "weekdays": {
+      "monday": "一",
+      "tuesday": "二",
+      "wednesday": "三",
+      "thursday": "四",
+      "friday": "五",
+      "saturday": "六",
+      "sunday": "日"
+    },
+    "errors": {
+      "load": "無法載入行程",
+      "save": "無法儲存行程",
+      "remove": "無法刪除行程"
+    }
+  },
+  "tasks": {
+    "title": "待辦",
+    "empty": "暫無待辦",
+    "completeError": "無法完成待辦",
+    "viewAll": "查看全部",
+    "loadError": "待辦暫時無法載入",
+    "todayEmpty": "今天沒有待辦",
+    "overdue": "逾期",
+    "description": "把要做的事放在這裡，按計畫逐項完成。",
+    "noDate": "無日期",
+    "minutes": "{{count}} 分鐘",
+    "views": {
+      "all": "全部",
+      "today": "今天",
+      "scheduled": "計畫中",
+      "completed": "已完成",
+      "trash": "回收桶"
+    },
+    "editor": {
+      "createTitle": "新增待辦",
+      "editTitle": "編輯待辦",
+      "createAction": "建立待辦",
+      "saveChanges": "儲存變更"
+    },
+    "fields": {
+      "title": "標題",
+      "titlePlaceholder": "要完成什麼？",
+      "notes": "備註",
+      "notesPlaceholder": "補充情境或結果要求",
+      "dueDate": "截止日期",
+      "priority": "優先順序",
+      "estimatedMinutes": "預計時間（分鐘）",
+      "optional": "選填"
+    },
+    "priorities": {
+      "none": "無",
+      "low": "低",
+      "medium": "中",
+      "high": "高"
+    },
+    "actions": {
+      "restore": "還原",
+      "destroy": "永久刪除",
+      "moveToTrash": "移到回收桶",
+      "restoreNamed": "還原 {{title}}",
+      "destroyNamed": "永久刪除 {{title}}",
+      "editNamed": "編輯 {{title}}",
+      "removeNamed": "刪除 {{title}}",
+      "reopenNamed": "重新開啟 {{title}}",
+      "completeNamed": "完成 {{title}}"
+    },
+    "trash": {
+      "empty": "回收桶是空的",
+      "emptyAction": "清空回收桶",
+      "emptyTitle": "清空回收桶",
+      "confirmEmpty": "確認清空",
+      "emptyDescription": "回收桶中的待辦將被永久刪除，且無法還原。",
+      "destroyConfirm": "永久刪除此待辦？"
+    },
+    "recurrence": {
+      "label": "重複",
+      "frequency": "頻率",
+      "daily": "每天",
+      "weekdays": "工作日",
+      "weekly": "每週",
+      "monthly": "每月",
+      "interval": "間隔",
+      "weekday": "星期",
+      "dayOfMonth": "每月日期",
+      "end": "結束",
+      "never": "永不",
+      "until": "指定日期",
+      "count": "指定次數",
+      "endDate": "結束日期",
+      "occurrences": "總次數",
+      "editTitle": "修改重複待辦",
+      "removeTitle": "刪除重複待辦",
+      "scopeDescription": "選擇此次操作影響的範圍。已完成的歷史記錄不會改變。",
+      "single": "僅本次",
+      "thisAndFuture": "本次及以後",
+      "weekdaysShort": {
+        "monday": "一",
+        "tuesday": "二",
+        "wednesday": "三",
+        "thursday": "四",
+        "friday": "五",
+        "saturday": "六",
+        "sunday": "日"
+      }
+    },
+    "errors": {
+      "load": "無法載入待辦",
+      "save": "無法儲存待辦",
+      "create": "無法建立待辦",
+      "update": "無法更新待辦",
+      "remove": "無法刪除待辦",
+      "restore": "無法還原待辦",
+      "destroy": "無法永久刪除待辦",
+      "emptyTrash": "無法清空回收桶"
+    }
+  },
+  "notes": {
+    "title": "筆記",
+    "description": "記錄想法、決定與實用脈絡，修改歷史保存在本機。",
+    "empty": "目前分類中還沒有筆記",
+    "search": "搜尋筆記",
+    "listLabel": "筆記列表",
+    "openNamed": "開啟 {{title}}",
+    "untitled": "未命名筆記",
+    "views": {
+      "active": "筆記",
+      "archived": "已封存",
+      "trash": "回收筒"
+    },
+    "fields": {
+      "title": "標題",
+      "body": "筆記內容"
+    },
+    "editor": {
+      "label": "筆記編輯器",
+      "selectPrompt": "選擇一篇筆記，或建立新筆記"
+    },
+    "actions": {
+      "create": "新增筆記",
+      "save": "儲存",
+      "history": "修改歷史",
+      "archive": "封存",
+      "unarchive": "取消封存",
+      "remove": "移到回收筒",
+      "restore": "還原",
+      "destroy": "永久刪除",
+      "emptyTrash": "清空回收筒"
+    },
+    "autosave": {
+      "saved": "已儲存到本機",
+      "saving": "正在儲存..."
+    },
+    "provenance": {
+      "inbox": "來自收件匣"
+    },
+    "trash": {
+      "emptyTitle": "清空筆記垃圾桶？",
+      "emptyDescription": "垃圾桶中的全部筆記及其修改歷史將被永久刪除，且無法還原。",
+      "confirmEmpty": "確認清空",
+      "destroyTitle": "永久刪除這篇筆記？",
+      "destroyDescription": "刪除後，筆記及其修改歷史將無法還原。"
+    },
+    "revisions": {
+      "title": "修改歷史",
+      "empty": "還沒有較早的版本",
+      "restore": "還原此版本",
+      "version": "版本 {{number}}"
+    },
+    "errors": {
+      "load": "無法載入筆記",
+      "detail": "無法載入這篇筆記",
+      "create": "無法新增筆記",
+      "save": "無法儲存筆記",
+      "lifecycle": "筆記操作未完成",
+      "revisions": "無法載入修改歷史",
+      "restoreRevision": "無法還原此版本"
+    }
+  },
+  "knowledge": {
+    "title": "知識庫",
+    "description": "在本機搜尋筆記與主動加入的收件匣內容。",
+    "empty": "還沒有已建立索引的內容",
+    "search": {
+      "placeholder": "搜尋你的知識庫",
+      "noResults": "找不到相符內容"
+    },
+    "filters": {
+      "all": "全部",
+      "notes": "筆記",
+      "inbox": "收件匣"
+    },
+    "status": {
+      "total": "已建立索引",
+      "notes": "筆記",
+      "inbox": "收件匣來源"
+    },
+    "sourceTypes": {
+      "note": "筆記",
+      "inbox": "收件匣"
+    },
+    "actions": {
+      "rebuild": "重建索引",
+      "openNamed": "開啟 {{title}}",
+      "removeNamed": "從知識庫移除 {{title}}"
+    },
+    "remove": {
+      "title": "移除知識來源？",
+      "description": "「{{title}}」將不再出現在知識庫搜尋中，原收件匣內容仍會保留。",
+      "confirmAction": "移除來源",
+      "success": "已從知識庫移除來源"
+    },
+    "rebuild": {
+      "success": "已建立 {{count}} 筆索引",
+      "partial": "索引已重建，略過 {{count}} 筆內容"
+    },
+    "errors": {
+      "load": "無法載入知識庫",
+      "rebuild": "無法重建本機索引",
+      "remove": "無法移除知識來源"
+    }
+  },
+  "chat": {
+    "title": "聊天"
+  },
+  "memory": {
+    "title": "長期記憶",
+    "description": "查看和管理SearchT-UI為你記住的內容。",
+    "add": "新增記憶",
+    "retry": "重試",
+    "loadFailed": "無法載入記憶",
+    "saveFailed": "操作未完成，請重試。",
+    "tabs": {
+      "candidates": "待確認",
+      "active": "有效記憶",
+      "expired": "已過期"
+    },
+    "status": {
+      "label": "記憶狀態",
+      "pending": "待確認",
+      "active": "有效",
+      "expired": "已過期",
+      "sensitive": "敏感"
+    },
+    "searchPlaceholder": "搜尋記憶",
+    "allTypes": "全部類型",
+    "actions": {
+      "review": "審核",
+      "reject": "不保留",
+      "edit": "編輯",
+      "forget": "永久遺忘",
+      "reactivate": "重新啟用",
+      "confirmReject": "確認不保留",
+      "confirmForget": "確認永久遺忘",
+      "confirmMemory": "確認保留",
+      "createMemory": "新增記憶",
+      "saveMemory": "儲存修改",
+      "cancel": "取消"
+    },
+    "empty": {
+      "candidates": "沒有待確認的記憶",
+      "active": "還沒有有效記憶",
+      "expired": "沒有已過期的記憶"
+    },
+    "editor": {
+      "reviewTitle": "審核候選記憶",
+      "createTitle": "新增記憶",
+      "editTitle": "編輯記憶",
+      "content": "內容",
+      "type": "類型",
+      "scope": "使用範圍",
+      "scopeId": "範圍名稱",
+      "sensitivity": "敏感級別",
+      "confidence": "可信度",
+      "reason": "記住原因",
+      "expiresAt": "有效期",
+      "reviewAt": "複查時間"
+    },
+    "types": {
+      "preference": "偏好",
+      "personal-fact": "個人資訊",
+      "relationship": "關係",
+      "project-context": "專案背景",
+      "operating-rule": "工作規則",
+      "temporary-context": "臨時背景"
+    },
+    "scopes": {
+      "global": "所有對話",
+      "workspace": "工作區",
+      "project": "專案",
+      "assistant": "助理"
+    },
+    "sensitivity": {
+      "normal": "一般",
+      "sensitive": "敏感"
+    },
+    "sources": {
+      "conversation-message": "對話訊息",
+      "note": "筆記",
+      "inbox-item": "收件匣",
+      "workflow-run": "工作流程",
+      "manual": "手動新增"
+    },
+    "confirm": {
+      "rejectTitle": "不保留這條候選記憶？",
+      "forgetTitle": "永久遺忘這條記憶？",
+      "forgetDescription": "內容會立即刪除，並且無法還原。"
+    }
+  },
+  "skillConsolidation": {
+    "tabReview": "待審核",
+    "loadFailed": "無法載入待審核技能",
+    "loadFailedHint": "請檢查本機工作台服務後再試一次。",
+    "empty": "沒有待審核的技能。",
+    "errorCount": "{{count}} 個錯誤",
+    "warningCount": "{{count}} 個警告",
+    "ready": "可以審核",
+    "sources": "來源",
+    "tools": "工具",
+    "permissions": "權限",
+    "review": "審核",
+    "reject": "暫不採用",
+    "rejectTitle": "暫不採用這個候選技能？",
+    "rejectConfirm": "暫不採用",
+    "rejectDescription": "草稿內容將被刪除，但會保留一筆不含內容的稽核記錄。",
+    "initialVersion": "審核後發佈",
+    "backToSkills": "全部技能",
+    "publish": "發佈",
+    "reviewTitle": "審核技能",
+    "reviewDescription": "檢查此技能可存取的內容，編輯執行說明，確認無誤後再發佈。",
+    "notFound": "這個候選技能已不存在。",
+    "skillName": "技能名稱",
+    "skillDescription": "技能說明",
+    "validationTitle": "檢查結果",
+    "validationDescription": "錯誤會阻止發佈，警告需要再次確認。",
+    "validationPassed": "可以發佈",
+    "warningConfirmTitle": "仍要發佈？",
+    "warningConfirmDescription": "發佈前請再次檢查這些警告。",
+    "publishAnyway": "仍然發佈",
+    "versionHistory": "版本記錄",
+    "stateActive": "已啟用",
+    "stateDisabled": "已停用",
+    "disable": "停用",
+    "enable": "啟用",
+    "noVersions": "暫無版本記錄。",
+    "versionNumber": "版本 {{number}}",
+    "currentVersion": "目前版本",
+    "rollback": "回復版本",
+    "preview": "預覽",
+    "previewVersion": "版本 {{number}} 的內容",
+    "rollbackSummary": "回復到版本 {{number}}",
+    "disableTitle": "停用這個技能？",
+    "disableDescription": "停用後，新對話將無法使用這個技能，版本記錄會完整保留。",
+    "enableTitle": "啟用這個技能？",
+    "enableDescription": "目前版本會重新安裝，並恢復為可用狀態。",
+    "rollbackTitle": "回復到版本 {{number}}？",
+    "rollbackDescription": "系統會建立一個新版本，既有版本記錄不會被修改。",
+    "queuedSuccess": "已放入待審核",
+    "queuedFailed": "無法將這個技能放入待審核",
+    "addToReview": "放入待審核",
+    "errors": {
+      "SKILL_CANDIDATE_LOAD_FAILED": "無法載入這個候選技能",
+      "SKILL_CANDIDATE_SAVE_FAILED": "無法儲存這個候選技能",
+      "SKILL_CANDIDATE_PUBLISH_FAILED": "發佈失敗，草稿仍然保留。",
+      "SKILL_CANDIDATE_REJECT_FAILED": "無法移除這個候選技能",
+      "SKILL_VERSIONS_LOAD_FAILED": "無法載入版本記錄",
+      "SKILL_DISABLE_FAILED": "無法停用技能，系統已盡可能恢復原活動版本。",
+      "SKILL_ENABLE_FAILED": "無法啟用技能",
+      "SKILL_ROLLBACK_FAILED": "回復版本失敗，原活動版本已恢復。"
+    },
+    "validation": {
+      "SKILL_NAME_REQUIRED": "請輸入技能名稱。",
+      "SKILL_NAME_INVALID": "技能名稱只能使用小寫字母、數字和連字號。",
+      "SKILL_NAME_TOO_LONG": "技能名稱過長。",
+      "SKILL_DESCRIPTION_REQUIRED": "請加入簡短說明。",
+      "SKILL_DESCRIPTION_TOO_LONG": "技能說明過長。",
+      "SKILL_CONTENT_REQUIRED": "請填寫 SKILL.md 執行說明。",
+      "SKILL_CONTENT_TOO_LARGE": "SKILL.md 檔案過大。",
+      "SKILL_FRONTMATTER_INVALID": "YAML 檔頭格式不正確。",
+      "SKILL_FRONTMATTER_NAME_REQUIRED": "請在 YAML 檔頭中加入名稱。",
+      "SKILL_FRONTMATTER_DESCRIPTION_REQUIRED": "請在 YAML 檔頭中加入說明。",
+      "SKILL_FRONTMATTER_NAME_MISMATCH": "YAML 中的名稱必須與技能名稱一致。",
+      "SKILL_TEMPLATE_PLACEHOLDER": "請替換尚未填寫的範本預留內容。",
+      "SKILL_SECRET_DETECTED": "發佈前請移除密碼、權杖或其他憑證。",
+      "SKILL_ABSOLUTE_PATH_DETECTED": "此技能包含本機絕對路徑，請確認它適合重複使用。"
+    }
+  },
+  "settings": {
+    "title": "個人工作台",
+    "description": "決定SearchT-UI顯示什麼，以及開啟應用程式時先去哪裡。",
+    "modules": "顯示模組",
+    "startPage": "開啟應用程式時",
+    "scenePack": "工作方式",
+    "localData": "本機資料",
+    "health": "資料狀態",
+    "backup": "建立備份",
+    "backupDone": "備份已建立",
+    "backupFailed": "無法建立備份",
+    "import": "SearchT-UI 資料",
+    "saveFailed": "儲存失敗，已還原原設定"
+  },
+  "scene": {
+    "general": "通用",
+    "creator": "創作者",
+    "manager": "管理者",
+    "researcher": "研究者"
+  },
+  "status": {
+    "healthy": "正常",
+    "unavailable": "無法使用",
+    "importAvailable": "找到可匯入的資料",
+    "importUnavailable": "找不到舊資料"
+  },
+  "connectors": {
+    "title": "連接",
+    "description": "讓SearchT-UI自動接收指定資料夾中新建或更新的檔案。",
+    "desktopOnly": "本機資料夾連接僅在SearchT-UI桌面版中可用。",
+    "addFolder": "加入資料夾",
+    "includeSubfolders": "包含子資料夾",
+    "includeSubfoldersHint": "加入時也接收子資料夾中的檔案",
+    "emptyTitle": "還沒有連接資料夾",
+    "emptyDescription": "加入後，新檔案和有變更的檔案會自動進入收件匣。",
+    "status": {
+      "active": "正常",
+      "paused": "已暫停",
+      "error": "需處理"
+    },
+    "lastSync": "最近同步",
+    "neverSynced": "尚未同步",
+    "syncResult": "已掃描 {{scanned}}，匯入 {{imported}}，略過 {{skipped}}",
+    "actions": {
+      "sync": "立即同步",
+      "pause": "暫停",
+      "resume": "恢復",
+      "disconnect": "中斷連接"
+    },
+    "disconnectTitle": "中斷這個資料夾？",
+    "disconnectDescription": "已進入收件匣的檔案會保留。",
+    "disconnectConfirm": "中斷",
+    "loadFailed": "無法讀取連接",
+    "actionFailed": "操作未完成",
+    "folderUnavailable": "找不到這個資料夾，請確認它仍然可用。",
+    "desktopOnlyAll": "連接功能僅在SearchT-UI桌面版中可用。",
+    "emptyAllTitle": "尚未建立連接",
+    "emptyAllDescription": "連接信箱或本機資料夾，新內容會自動進入收件箱。",
+    "addEmail": "連接信箱",
+    "folder": {
+      "sectionTitle": "本機資料夾",
+      "sectionDescription": "監控這台電腦上選定的資料夾。"
+    },
+    "email": {
+      "sectionTitle": "信箱",
+      "sectionDescription": "將新郵件和附件匯入收件箱，不會修改郵件伺服器上的內容。",
+      "dialogTitle": "連接信箱",
+      "providerLabel": "郵件服務商",
+      "provider": {
+        "qqMail": "QQ 信箱",
+        "netease163": "163 信箱"
+      },
+      "addressLabel": "信箱地址",
+      "authorizationCodeLabel": "授權碼",
+      "authorizationCodeHint": "請使用郵件設定中產生的授權碼，不要使用網頁登入密碼。",
+      "initialSyncLabel": "首次同步",
+      "initialSync": {
+        "fromNow": "僅同步新郵件",
+        "last7Days": "最近 7 天"
+      },
+      "test": "測試連接",
+      "connect": "連接",
+      "testSuccess": "連接成功",
+      "connectionFailed": "無法連接，請檢查信箱地址和授權碼。",
+      "mailboxReset": "信箱識別已改變，請重新連接後再同步。",
+      "credentialMissing": "授權資訊缺失，請重新連接此帳戶。",
+      "disconnectTitle": "中斷此信箱帳戶的連接？",
+      "disconnectDescription": "已匯入的郵件和附件會保留在收件箱中，伺服器上的郵件不會受到影響。"
+    },
+    "addWebDav": "連接網路硬碟",
+    "webdav": {
+      "sectionTitle": "網路硬碟",
+      "sectionDescription": "只讀接收堅果雲或 HTTPS WebDAV 指定目錄中的檔案，不會修改遠端內容。",
+      "dialogTitle": "連接網路硬碟",
+      "providerLabel": "網路硬碟服務",
+      "provider": {
+        "jianguoyun": "堅果雲",
+        "custom": "自訂 WebDAV"
+      },
+      "serverUrlLabel": "HTTPS 伺服器位址",
+      "usernameLabel": "帳號或使用者名稱",
+      "passwordLabel": "應用程式密碼",
+      "passwordHint": "請使用網路硬碟服務產生的應用程式密碼，不要填寫網頁登入密碼。",
+      "rootPathLabel": "目錄路徑",
+      "rootPathHint": "使用 / 接收整個網路硬碟中的檔案。",
+      "displayNameLabel": "連接名稱（選填）",
+      "initialSyncLabel": "首次同步",
+      "initialSync": {
+        "fromNow": "僅同步新檔案與已變更的檔案",
+        "importExisting": "匯入目前已有檔案"
+      },
+      "test": "測試連接",
+      "connect": "連接",
+      "testSuccess": "連接成功",
+      "connectionFailed": "無法連接，請檢查伺服器位址與憑證。",
+      "credentialMissing": "連接憑證缺少，請重新連接此網路硬碟。",
+      "disconnectTitle": "斷開此網路硬碟？",
+      "disconnectDescription": "已匯入的檔案會保留在收件箱中，遠端檔案不會受到影響。"
+    },
+    "addS3": "Connect object storage",
+    "addCalendarIcs": "Connect calendar",
+    "s3": {
+      "sectionTitle": "S3 compatible storage",
+      "sectionDescription": "Read-only ingest of objects under a prefix from S3 compatible storage; remote content is never modified.",
+      "dialogTitle": "Connect object storage",
+      "providerLabel": "Storage service",
+      "provider.custom": "Custom S3",
+      "provider.aws": "Amazon S3",
+      "provider.r2": "Cloudflare R2",
+      "endpointLabel": "HTTPS endpoint",
+      "regionLabel": "Region",
+      "bucketLabel": "Bucket",
+      "accessKeyIdLabel": "Access Key ID",
+      "secretAccessKeyLabel": "Secret Access Key",
+      "prefixLabel": "Object prefix (optional)",
+      "prefixHint": "Only receive objects starting with this prefix; leave empty for the whole bucket.",
+      "pathStyleLabel": "Use path-style addressing",
+      "displayNameLabel": "Display name (optional)",
+      "initialSyncLabel": "Initial sync",
+      "initialSync.fromNow": "Only new and changed objects",
+      "initialSync.importExisting": "Import existing objects",
+      "test": "Test connection",
+      "connect": "Connect",
+      "testSuccess": "Connection successful",
+      "connectionFailed": "Could not connect; check the endpoint, region, and keys.",
+      "credentialMissing": "Stored credentials are missing; reconnect this storage.",
+      "disconnectTitle": "Disconnect this storage?",
+      "disconnectDescription": "Imported files stay in the inbox; remote objects are not affected."
+    },
+    "ics": {
+      "sectionTitle": "Calendar subscriptions",
+      "sectionDescription": "Read-only sync of Feishu, Outlook, DingTalk, or WeCom calendar subscription links into your schedule.",
+      "dialogTitle": "Connect a calendar subscription",
+      "providerLabel": "Calendar service",
+      "provider.feishu": "Feishu",
+      "provider.outlook": "Outlook",
+      "provider.dingtalk": "DingTalk",
+      "provider.wecom": "WeCom",
+      "provider.custom": "Custom",
+      "urlLabel": "iCal subscription URL",
+      "urlHint": "Copy the HTTPS subscription link from your calendar app share settings.",
+      "displayNameLabel": "Display name (optional)",
+      "test": "Test connection",
+      "connect": "Connect",
+      "testSuccess": "Connection successful",
+      "connectionFailed": "Could not fetch the calendar; check the subscription URL.",
+      "credentialMissing": "The subscription URL is missing; reconnect this calendar.",
+      "disconnectTitle": "Disconnect this calendar?",
+      "disconnectDescription": "Imported events move to the trash and can be restored later."
+    }
+  },
+  "workflows": {
+    "title": "工作流",
+    "description": "把重複工作變成可靠的個人自動化。",
+    "untitled": "工作流",
+    "tabs": {
+      "catalog": "範本",
+      "mine": "我的工作流程",
+      "history": "執行記錄"
+    },
+    "views": {
+      "active": "使用中",
+      "trash": "資源回收筒"
+    },
+    "actions": {
+      "useTemplate": "使用範本",
+      "runNow": "立即執行",
+      "enabled": "工作流程已啟用",
+      "repair": "修復",
+      "edit": "編輯",
+      "restore": "還原"
+    },
+    "empty": {
+      "mine": "還沒有工作流程",
+      "history": "還沒有執行記錄",
+      "trash": "資源回收筒是空的"
+    },
+    "errors": {
+      "load": "无法加载工作流",
+      "run": "无法启动这个工作流",
+      "state": "无法更新这个工作流",
+      "repair": "无法修复这个工作流",
+      "version": "无法保存新版本",
+      "remove": "无法移入回收站",
+      "restore": "无法恢复工作流",
+      "revokeGrant": "无法撤销授权"
+    },
+    "messages": {
+      "approvalRequired": "继续前请确认本次外部操作",
+      "runStarted": "工作流已开始运行"
+    },
+    "version": {
+      "editTitle": "创建新版本",
+      "name": "工作流名称",
+      "description": "说明",
+      "userUpdate": "用户更新"
+    },
+    "remove": {
+      "title": "移入回收站",
+      "confirm": "移入",
+      "description": "将“{{name}}”移入回收站吗？运行记录会保留。"
+    },
+    "runStates": {
+      "pending": "等待运行",
+      "waiting-approval": "等待确认",
+      "running": "运行中",
+      "succeeded": "已完成",
+      "failed": "失败",
+      "skipped": "已跳过",
+      "missed": "已错过"
+    },
+    "grants": {
+      "title": "确认外部操作",
+      "description": "“{{name}}”需要执行以下操作。",
+      "allow": "允许并继续",
+      "reject": "拒绝",
+      "once": "仅允许本次",
+      "remember": "记住这项授权",
+      "expiry": "授权期限",
+      "days": "{{count}} 天",
+      "settingsTitle": "工作流授权",
+      "settingsDescription": "查看并撤销已保存的外部操作权限。",
+      "empty": "没有已保存的工作流授权",
+      "noExpiry": "长期有效",
+      "revoke": "撤销",
+      "revoked": "授權已撤銷",
+      "unknownWorkflow": "未知工作流程",
+      "constraints": "適用範圍",
+      "expires": "有效期",
+      "lastUsed": "最近使用",
+      "neverUsed": "尚未使用",
+      "workflowId": "工作流程 ID"
+    },
+    "templates": {
+      "dailyPlanning": {
+        "name": "每日规划",
+        "description": "查看今天的日程、待办和收件箱，形成有顺序的行动计划。"
+      },
+      "inboxTriage": {
+        "name": "收件箱整理",
+        "description": "分类收件箱内容并起草合适的后续动作。"
+      },
+      "weeklyReview": {
+        "name": "每周复盘",
+        "description": "汇总本周进展、延期事项和下周重点。"
+      },
+      "meetingFollowUp": {
+        "name": "会议跟进",
+        "description": "提取决策、负责人、截止时间和跟进草稿。"
+      }
+    }
+  },
+  "sync": {
+    "title": "云同步（端到端加密）",
+    "description": "把待办、日程和笔记以端到端加密方式同步到你的 WebDAV 或 S3。服务器只保存密文。",
+    "state.idle": "已开启",
+    "state.syncing": "同步中",
+    "state.error": "出错",
+    "state.disabled": "未开启",
+    "state.unknown": "…",
+    "lastSync": "最近同步",
+    "pending": "待重试",
+    "now": "立即同步",
+    "off": "关闭",
+    "disableConfirm": "关闭后本机数据保留，仅停止同步。",
+    "report": "推送 {{pushed}} · 拉取 {{pulled}} · 冲突 {{conflicts}}",
+    "mode": "同步目标",
+    "modeS3": "S3 兼容存储",
+    "serverUrl": "HTTPS 服务器地址",
+    "username": "用户名",
+    "password": "应用密码",
+    "rootPath": "同步目录",
+    "passphrase": "同步口令（至少 8 位）",
+    "enable": "开启云同步",
+    "passphraseHint": "口令只保存在本机安全存储；忘记口令将无法解密云端数据，请妥善保管。",
+    "configured": "云同步已开启",
+    "done": "同步完成",
+    "disabled": "云同步已关闭"
+  },
+  "browser": {
+    "title": "浏览器",
+    "address": "地址或搜索",
+    "placeholder": "输入网址或搜索关键词，回车打开",
+    "back": "后退",
+    "forward": "前进",
+    "reload": "刷新",
+    "home": "首页",
+    "loadFailed": "页面加载失败",
+    "desktopOnly": "内置浏览器仅在SearchT-UI桌面版中可用。",
+    "recognize": "识别页面内容",
+    "recognizeHint": "提取当前页面的标题、正文与链接数量，可一键存入收件箱。",
+    "read": "读取页面内容",
+    "save": "存入收件箱",
+    "saved": "已存入收件箱",
+    "copy": "复制正文",
+    "copied": "已复制正文",
+    "links": "链接",
+    "chars": "字符",
+    "operate": "操作浏览器",
+    "operateHint": "通过 CSS 选择器点击元素、填写输入框或滚动页面。",
+    "selector": "CSS 选择器",
+    "value": "填写的文本",
+    "valuePlaceholder": "填写输入框时使用的文本（可留空）",
+    "click": "点击元素",
+    "set": "填写文本",
+    "scrollDown": "下滚 600px",
+    "scrollUp": "上滚 600px"
+  }
+}

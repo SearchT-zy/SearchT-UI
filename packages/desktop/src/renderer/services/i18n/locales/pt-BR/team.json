@@ -1,0 +1,222 @@
+{
+  "sider": {
+    "title": "Grupos de agentes",
+    "createTeam": "Novo grupo de agentes",
+    "pin": "Fixar",
+    "unpin": "Desafixar",
+    "rename": "Renomear",
+    "delete": "Excluir",
+    "renameTitle": "Renomear Equipe",
+    "renamePlaceholder": "Nome da equipe",
+    "deleteConfirm": "Excluir esta equipe?",
+    "deleteConfirmContent": "Esta ação não pode ser desfeita.",
+    "deleteOk": "Excluir",
+    "deleteCancel": "Cancelar",
+    "renameOk": "Salvar",
+    "renameCancel": "Cancelar",
+    "renameSuccess": "Equipe renomeada",
+    "deleteSuccess": "Equipe excluída"
+  },
+  "newAgent": "Novo Assistente",
+  "noMessages": "Nenhuma mensagem ainda.",
+  "agentNotConfigured": "Assistente ainda não configurado.",
+  "stopAgentFailed": "Falha ao parar este assistente. Tente novamente.",
+  "work": {
+    "processingWithQueued": "Processando… {{count}} na fila",
+    "queued": "{{count}} na fila",
+    "runtimeStarting": "Aguardando este membro iniciar…",
+    "runtimeFailed": "Não foi possível iniciar este membro.",
+    "removing": "Removendo este membro…",
+    "sessionStopped": "A sessão da equipe foi encerrada.",
+    "retryStart": "Tentar iniciar novamente"
+  },
+  "sendBox": {
+    "placeholder": "Enviar mensagem ao assistente líder da equipe..."
+  },
+  "create": {
+    "title": "Novo grupo de agentes",
+    "namePlaceholder": "Nome do grupo",
+    "dispatchAgentPlaceholder": "Coordenador",
+    "subAgentsPlaceholder": "Membros",
+    "confirm": "Confirm Create",
+    "noSupportedAgents": "Nenhum assistente compatível disponível",
+    "supportedAgentsHint": "Atualmente oferece suporte a assistentes Claude e Aion CLI. Mais assistentes em breve.",
+    "leaderDesc": "Entende seu objetivo, divide o trabalho e coordena o grupo",
+    "searchPlaceholder": "Search",
+    "noSearchResults": "Nenhum resultado encontrado",
+    "step": {
+      "dispatch": "Coordenador",
+      "subAgents": "Membros",
+      "workspace": "Projeto"
+    },
+    "nameRequired": "Por favor, insira o nome da equipe",
+    "leaderRequired": "Por favor, selecione um líder para a equipe",
+    "selectFolder": "Select folder",
+    "recentLabel": "Recente",
+    "chooseDifferentFolder": "Escolher uma pasta diferente",
+    "error": "Falha ao criar equipe",
+    "selectedMembers": "Selected members",
+    "teamLeader": "Coordenador",
+    "currentLeader": "Coordenador",
+    "setAsLeader": "Coordenador",
+    "teammate": "Teammate",
+    "selectAtLeastOneMember": "Select at least one assistant as the Team Leader.",
+    "selectOneLeader": "Coordenador",
+    "subtitle": "Reúna assistentes de IA locais em um grupo; o Coordenador distribui o trabalho e reúne os resultados.",
+    "nameLabel": "Nome do grupo",
+    "workspaceLabel": "Workspace",
+    "allAssistantsWithCount": "All assistants ({{count}})",
+    "selectedMembersWithCount": "Selected members {{count}} · ⚑ = Leader",
+    "selectedMembersTitleWithCount": "Selected members {{count}}",
+    "leaderLegend": "= Leader",
+    "membersHelper": "Choose team members and assign one Leader. The same assistant can be selected multiple times.",
+    "memberHint": "No suitable assistant as a member? After creation, let the Leader create temporary team members in chat."
+  },
+  "removeAgent": {
+    "confirmTitle": "Remover Membro da Equipe",
+    "confirmContent": "Remove this member from the team?",
+    "confirmContentActive": "This member is working. Remove it anyway? Its current work will be interrupted."
+  },
+  "emptyState": {
+    "subtitle": "Descreva seu objetivo e farei a equipe trabalhar nisso",
+    "suggestions": {
+      "debate": "Organizar um debate com assistentes defendendo lados diferentes",
+      "interview": "Planejar uma entrevista aprofundada entre assistentes",
+      "expert_review": "Ter vários especialistas analisando o mesmo problema",
+      "add_member": "Help me add a member good at ___ to the team"
+    },
+    "leaderGreeting": "Hi, I'm the Leader. I understand your goal and coordinate the team — describe what you want and I'll arrange it.",
+    "memberGreeting": "Hi, I'm a team member. I take direction from the Leader and you."
+  },
+  "addMember": {
+    "title": "Add member",
+    "subtitle": "The same assistant can be added repeatedly",
+    "searchAssistants": "Search assistants...",
+    "addFailed": "Failed to add member",
+    "noSearchResults": "No results found",
+    "tellLeaderHint": "Not a good fit? You can also ask the Leader to arrange it.",
+    "tellLeaderCta": "Tell the Leader →",
+    "tellLeaderPrefill": "Help me add a member good at ___ to the team"
+  },
+  "view": {
+    "label": "View",
+    "parallel": "Parallel",
+    "single": "Single",
+    "board": "Quadro",
+    "group": "Grupo"
+  },
+  "warmup": {
+    "title": "Waking up the team…",
+    "subtitle": "Preparando os membros",
+    "memberFailedTitle": "Member {{name}} failed to start",
+    "leaderFailedTitle": "Lead {{name}} failed to start",
+    "genericFailedTitle": "The team could not start",
+    "multiFailedTitle": "{{count}} members failed to start",
+    "leaderSuffix": " (Lead)",
+    "unknownError": "failed to start",
+    "memberFailedHint": "Switch its model above, or remove it from the bar on top, then retry.",
+    "leaderFailedHint": "Switch its model above, then retry.",
+    "retry": "Retry"
+  },
+  "reorderMember": "Arraste para reordenar o membro",
+  "activity": {
+    "control": {
+      "sortNewest": "Mais recente",
+      "sortOldest": "Mais antigo",
+      "filterAll": "Tudo",
+      "filterMessages": "Mensagens",
+      "filterTasks": "Tarefas",
+      "allMembers": "Todos os membros",
+      "showSystem": "Mensagens do sistema",
+      "showTerminal": "Tarefas concluídas"
+    },
+    "fallbackLane": "Não atribuído / externo",
+    "empty": "Sem atividade",
+    "userIdentity": "Usuário / externo",
+    "broadcast": "Transmitir a todos",
+    "read": "Lido",
+    "unread": "Não lido",
+    "attachments": "{{count}} arquivos",
+    "expand": "Expandir",
+    "collapse": "Recolher",
+    "blockedBy": "bloqueado por #{{id}}",
+    "blockedByNamed": "bloqueado por {{name}}",
+    "blockerUnknown": "Tarefa indisponível",
+    "status": {
+      "pending": "Pendente",
+      "in_progress": "Em andamento",
+      "completed": "Concluído",
+      "deleted": "Excluído"
+    },
+    "msgType": {
+      "message": "Mensagem",
+      "idle_notification": "Aviso de inatividade",
+      "shutdown_request": "Pedido de encerramento"
+    }
+  },
+  "group": {
+    "view": "Grupo",
+    "mode": {
+      "coordinator": "Coordenar",
+      "direct": "Atribuir diretamente"
+    },
+    "composer": {
+      "placeholder": "Descreva o objetivo ou digite @ para escolher um membro"
+    },
+    "mention": {
+      "all": "Todos os membros ({{count}})",
+      "members": "membros"
+    },
+    "member": {
+      "coordinator": "Coordenador",
+      "member": "Membros",
+      "permissions": "{{count}} permissões precisam de atenção",
+      "unavailable": "Indisponível"
+    },
+    "delivery": {
+      "pending": "Aguardando envio",
+      "accepted": "Aceito",
+      "running": "Trabalhando",
+      "completed": "Concluído",
+      "failed": "Falhou",
+      "cancelled": "Cancelado",
+      "unknown": "Status de entrega desconhecido"
+    },
+    "runtime": {
+      "ready": "Pronto",
+      "dormant": "Não iniciado",
+      "pending": "Iniciando",
+      "failed": "Indisponível"
+    },
+    "sender": {
+      "you": "Você"
+    },
+    "empty": "Descreva um objetivo para iniciar a colaboração local",
+    "activity": {
+      "title": "Tarefas e repasses",
+      "drawer": "Tarefas e repasses",
+      "completedCount": "{{count}} concluídas",
+      "empty": "Ainda não há tarefas ou repasses"
+    },
+    "action": {
+      "inspect": "Inspecionar conversa",
+      "openBoard": "Abrir quadro",
+      "fullConversation": "Abrir conversa completa",
+      "retry": "Tentar novamente explicitamente"
+    },
+    "error": {
+      "noAvailableTarget": "Nenhum membro selecionado está disponível",
+      "someUnavailable": "{{count}} membros indisponíveis não foram atribuídos",
+      "sendFailed": "Não foi possível enviar a instrução"
+    },
+    "kind": {
+      "instruction": "Instrução",
+      "progress": "Progresso",
+      "handoff": "Repasse",
+      "result": "Resultado",
+      "approval": "Aprovação",
+      "error": "Erro",
+      "task": "Tarefa"
+    }
+  }
+}

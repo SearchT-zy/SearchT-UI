@@ -1,0 +1,830 @@
+{
+  "today": {
+    "title": "Today",
+    "summary": "See what needs your attention today in one place.",
+    "focus": "Focus",
+    "upcoming": "Upcoming"
+  },
+  "inbox": {
+    "title": "Inbox",
+    "description": "Capture information first, then turn it into clear action.",
+    "empty": "Nothing waiting to be organized",
+    "search": "Search inbox",
+    "listLabel": "Inbox items",
+    "selectNamed": "Select this item",
+    "views": {
+      "pending": "Inbox",
+      "organized": "Organized",
+      "archived": "Archived",
+      "trash": "Trash"
+    },
+    "kinds": {
+      "all": "All types",
+      "text": "Text",
+      "link": "Link",
+      "file": "File"
+    },
+    "fields": {
+      "title": "Title",
+      "content": "Content",
+      "url": "URL",
+      "date": "Date",
+      "optionalTitle": "Title (optional)"
+    },
+    "capture": {
+      "open": "Capture",
+      "title": "Add to inbox",
+      "saveText": "Save text",
+      "saveLink": "Save link",
+      "addFiles": "Choose one or more files"
+    },
+    "actions": {
+      "editTitle": "Edit title",
+      "archive": "Archive",
+      "archiveSelected": "Archive selected",
+      "remove": "Move to trash",
+      "restore": "Restore",
+      "restoreSelected": "Restore selected",
+      "destroy": "Delete permanently",
+      "emptyTrash": "Empty trash",
+      "toTask": "Convert to task",
+      "toEvent": "Convert to event",
+      "toNote": "Convert to note",
+      "toKnowledge": "Add to knowledge"
+    },
+    "detail": {
+      "label": "Item details",
+      "selectPrompt": "Select an item to see its details",
+      "originalName": "Original name",
+      "originalPath": "Original path",
+      "browserImport": "Browser import",
+      "organizedCount": "Linked to {{count}} result(s)"
+    },
+    "preview": {
+      "label": "File preview",
+      "truncated": "Preview truncated",
+      "document": "Document preview",
+      "unsupported": "Preview unavailable for this file type",
+      "missing": "The managed file is missing or damaged",
+      "reveal": "Show in folder",
+      "download": "Download"
+    },
+    "drop": {
+      "prompt": "Drop files to capture",
+      "directoryRejected": "Folders cannot be imported"
+    },
+    "convert": {
+      "title": "Organize as action",
+      "createTask": "Create task",
+      "createEvent": "Create event"
+    },
+    "errors": {
+      "load": "Unable to load inbox",
+      "detail": "Unable to load item details",
+      "save": "The action did not complete. Try again.",
+      "someFiles": "Some files could not be imported"
+    }
+  },
+  "calendar": {
+    "title": "Calendar",
+    "createBlock": "Schedule task",
+    "description": "Plan time-bound commitments and place tasks into your day.",
+    "empty": "Nothing scheduled for this day",
+    "today": "Today",
+    "previousMonth": "Previous month",
+    "nextMonth": "Next month",
+    "editor": {
+      "createTitle": "New event",
+      "editTitle": "Edit event"
+    },
+    "fields": {
+      "title": "Title",
+      "allDay": "All day",
+      "location": "Location",
+      "description": "Description",
+      "reminder": "Reminder"
+    },
+    "reminders": {
+      "none": "No reminder",
+      "m0": "At start time",
+      "m5": "5 minutes before",
+      "m15": "15 minutes before",
+      "m30": "30 minutes before",
+      "m60": "1 hour before",
+      "m1440": "1 day before"
+    },
+    "weekdays": {
+      "monday": "Mon",
+      "tuesday": "Tue",
+      "wednesday": "Wed",
+      "thursday": "Thu",
+      "friday": "Fri",
+      "saturday": "Sat",
+      "sunday": "Sun"
+    },
+    "errors": {
+      "load": "Could not load calendar",
+      "save": "Could not save event",
+      "remove": "Could not delete event"
+    }
+  },
+  "tasks": {
+    "title": "Tasks",
+    "empty": "No open tasks",
+    "completeError": "Не удалось завершить задачу",
+    "viewAll": "Показать все",
+    "loadError": "Задачи временно недоступны",
+    "todayEmpty": "На сегодня задач нет",
+    "overdue": "Просрочено",
+    "description": "Keep what you need to do here and work through it step by step.",
+    "noDate": "No date",
+    "minutes": "{{count}} min",
+    "views": {
+      "all": "All",
+      "today": "Today",
+      "scheduled": "Scheduled",
+      "completed": "Completed",
+      "trash": "Trash"
+    },
+    "editor": {
+      "createTitle": "New task",
+      "editTitle": "Edit task",
+      "createAction": "Create task",
+      "saveChanges": "Save changes"
+    },
+    "fields": {
+      "title": "Title",
+      "titlePlaceholder": "What needs to be done?",
+      "notes": "Notes",
+      "notesPlaceholder": "Add context or describe the expected result",
+      "dueDate": "Due date",
+      "priority": "Priority",
+      "estimatedMinutes": "Estimated time (minutes)",
+      "optional": "Optional"
+    },
+    "priorities": {
+      "none": "None",
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High"
+    },
+    "actions": {
+      "restore": "Restore",
+      "destroy": "Delete permanently",
+      "moveToTrash": "Move to trash",
+      "restoreNamed": "Restore {{title}}",
+      "destroyNamed": "Delete {{title}} permanently",
+      "editNamed": "Edit {{title}}",
+      "removeNamed": "Delete {{title}}",
+      "reopenNamed": "Reopen {{title}}",
+      "completeNamed": "Complete {{title}}"
+    },
+    "trash": {
+      "empty": "Trash is empty",
+      "emptyAction": "Empty trash",
+      "emptyTitle": "Empty trash",
+      "confirmEmpty": "Empty trash",
+      "emptyDescription": "Tasks in the trash will be permanently deleted and cannot be restored.",
+      "destroyConfirm": "Delete this task permanently?"
+    },
+    "recurrence": {
+      "label": "Repeat",
+      "frequency": "Frequency",
+      "daily": "Daily",
+      "weekdays": "Weekdays",
+      "weekly": "Weekly",
+      "monthly": "Monthly",
+      "interval": "Interval",
+      "weekday": "Days of week",
+      "dayOfMonth": "Day of month",
+      "end": "Ends",
+      "never": "Never",
+      "until": "On date",
+      "count": "After occurrences",
+      "endDate": "End date",
+      "occurrences": "Total occurrences",
+      "editTitle": "Edit recurring task",
+      "removeTitle": "Delete recurring task",
+      "scopeDescription": "Choose which occurrences this action affects. Completed history will not change.",
+      "single": "Only this one",
+      "thisAndFuture": "This and future",
+      "weekdaysShort": {
+        "monday": "Mon",
+        "tuesday": "Tue",
+        "wednesday": "Wed",
+        "thursday": "Thu",
+        "friday": "Fri",
+        "saturday": "Sat",
+        "sunday": "Sun"
+      }
+    },
+    "errors": {
+      "load": "Unable to load tasks",
+      "save": "Unable to save task",
+      "create": "Unable to create task",
+      "update": "Unable to update task",
+      "remove": "Unable to delete task",
+      "restore": "Unable to restore task",
+      "destroy": "Unable to permanently delete task",
+      "emptyTrash": "Unable to empty trash"
+    }
+  },
+  "notes": {
+    "title": "Notes",
+    "description": "Capture ideas, decisions, and useful context with local revision history.",
+    "empty": "No notes yet",
+    "search": "Search notes",
+    "listLabel": "Notes",
+    "openNamed": "Open {{title}}",
+    "untitled": "Untitled note",
+    "views": {
+      "active": "Notes",
+      "archived": "Archived",
+      "trash": "Trash"
+    },
+    "fields": {
+      "title": "Title",
+      "body": "Note content"
+    },
+    "editor": {
+      "label": "Note editor",
+      "selectPrompt": "Select a note or create a new one"
+    },
+    "actions": {
+      "create": "New note",
+      "save": "Save",
+      "history": "Revision history",
+      "archive": "Archive",
+      "unarchive": "Unarchive",
+      "remove": "Move to trash",
+      "restore": "Restore",
+      "destroy": "Delete permanently",
+      "emptyTrash": "Empty trash"
+    },
+    "autosave": {
+      "saved": "Saved locally",
+      "saving": "Saving..."
+    },
+    "provenance": {
+      "inbox": "Created from Inbox"
+    },
+    "trash": {
+      "emptyTitle": "Empty note trash?",
+      "emptyDescription": "All notes and revision history in the trash will be permanently deleted.",
+      "confirmEmpty": "Empty trash",
+      "destroyTitle": "Delete this note permanently?",
+      "destroyDescription": "This note and its revision history cannot be restored."
+    },
+    "revisions": {
+      "title": "Revision history",
+      "empty": "No earlier revisions",
+      "restore": "Restore this revision",
+      "version": "Version {{number}}"
+    },
+    "errors": {
+      "load": "Unable to load notes",
+      "detail": "Unable to load this note",
+      "create": "Unable to create note",
+      "save": "Unable to save note",
+      "lifecycle": "The note action did not complete",
+      "revisions": "Unable to load revision history",
+      "restoreRevision": "Unable to restore this revision"
+    }
+  },
+  "knowledge": {
+    "title": "Knowledge",
+    "description": "Search locally indexed notes and selected Inbox sources.",
+    "empty": "No indexed knowledge yet",
+    "search": {
+      "placeholder": "Search your knowledge",
+      "noResults": "No matching sources"
+    },
+    "filters": {
+      "all": "All",
+      "notes": "Notes",
+      "inbox": "Inbox"
+    },
+    "status": {
+      "total": "Indexed",
+      "notes": "Notes",
+      "inbox": "Inbox sources"
+    },
+    "sourceTypes": {
+      "note": "Note",
+      "inbox": "Inbox"
+    },
+    "actions": {
+      "rebuild": "Rebuild index",
+      "openNamed": "Open {{title}}",
+      "removeNamed": "Remove {{title}} from Knowledge"
+    },
+    "remove": {
+      "title": "Remove knowledge source?",
+      "description": "“{{title}}” will no longer appear in Knowledge search. The original Inbox item will remain available.",
+      "confirmAction": "Remove source",
+      "success": "Source removed from Knowledge"
+    },
+    "rebuild": {
+      "success": "Indexed {{count}} sources",
+      "partial": "Index rebuilt with {{count}} source(s) skipped"
+    },
+    "errors": {
+      "load": "Unable to load Knowledge",
+      "rebuild": "Unable to rebuild the local index",
+      "remove": "Unable to remove the knowledge source"
+    }
+  },
+  "chat": {
+    "title": "Chat"
+  },
+  "memory": {
+    "title": "Memory",
+    "description": "Review and manage what SearchT-UI remembers for you.",
+    "add": "Add memory",
+    "retry": "Retry",
+    "loadFailed": "Unable to load memory",
+    "saveFailed": "The memory action did not complete. Try again.",
+    "tabs": {
+      "candidates": "To review",
+      "active": "Active",
+      "expired": "Expired"
+    },
+    "status": {
+      "label": "Memory status",
+      "pending": "To review",
+      "active": "Active",
+      "expired": "Expired",
+      "sensitive": "Sensitive"
+    },
+    "searchPlaceholder": "Search memory",
+    "allTypes": "All types",
+    "actions": {
+      "review": "Review",
+      "reject": "Do not keep",
+      "edit": "Edit",
+      "forget": "Forget permanently",
+      "reactivate": "Reactivate",
+      "confirmReject": "Do not keep",
+      "confirmForget": "Forget permanently",
+      "confirmMemory": "Keep memory",
+      "createMemory": "Add memory",
+      "saveMemory": "Save changes",
+      "cancel": "Cancel"
+    },
+    "empty": {
+      "candidates": "No memories need review",
+      "active": "No active memories yet",
+      "expired": "No expired memories"
+    },
+    "editor": {
+      "reviewTitle": "Review memory",
+      "createTitle": "Add memory",
+      "editTitle": "Edit memory",
+      "content": "Content",
+      "type": "Type",
+      "scope": "Used in",
+      "scopeId": "Scope name",
+      "sensitivity": "Sensitivity",
+      "confidence": "Confidence",
+      "reason": "Reason to remember",
+      "expiresAt": "Expires",
+      "reviewAt": "Review date"
+    },
+    "types": {
+      "preference": "Preference",
+      "personal-fact": "Personal fact",
+      "relationship": "Relationship",
+      "project-context": "Project context",
+      "operating-rule": "Working rule",
+      "temporary-context": "Temporary context"
+    },
+    "scopes": {
+      "global": "All conversations",
+      "workspace": "Workspace",
+      "project": "Project",
+      "assistant": "Assistant"
+    },
+    "sensitivity": {
+      "normal": "Normal",
+      "sensitive": "Sensitive"
+    },
+    "sources": {
+      "conversation-message": "Conversation message",
+      "note": "Note",
+      "inbox-item": "Inbox",
+      "workflow-run": "Workflow",
+      "manual": "Added manually"
+    },
+    "confirm": {
+      "rejectTitle": "Do not keep this suggested memory?",
+      "forgetTitle": "Forget this memory permanently?",
+      "forgetDescription": "This removes the content immediately and cannot be undone."
+    }
+  },
+  "skillConsolidation": {
+    "tabReview": "Pending review",
+    "loadFailed": "Candidates could not be loaded",
+    "loadFailedHint": "Check the local workspace service, then try again.",
+    "empty": "No skills are waiting for review.",
+    "errorCount": "{{count}} errors",
+    "warningCount": "{{count}} warnings",
+    "ready": "Ready to review",
+    "sources": "Sources",
+    "tools": "Tools",
+    "permissions": "Permissions",
+    "review": "Review",
+    "reject": "Do not use",
+    "rejectTitle": "Do not use this candidate?",
+    "rejectConfirm": "Do not use",
+    "rejectDescription": "The draft content will be deleted. A content-free audit record will be kept.",
+    "initialVersion": "Published after review",
+    "backToSkills": "All skills",
+    "publish": "Publish",
+    "reviewTitle": "Review skill",
+    "reviewDescription": "Check what this skill can access, edit its instructions, then publish it when ready.",
+    "notFound": "This candidate is no longer available.",
+    "skillName": "Skill name",
+    "skillDescription": "Skill description",
+    "validationTitle": "Checks",
+    "validationDescription": "Errors block publishing. Warnings require confirmation.",
+    "validationPassed": "Ready to publish",
+    "warningConfirmTitle": "Publish with warnings?",
+    "warningConfirmDescription": "Review the warnings before publishing this skill.",
+    "publishAnyway": "Publish anyway",
+    "versionHistory": "Version history",
+    "stateActive": "Active",
+    "stateDisabled": "Disabled",
+    "disable": "Disable",
+    "enable": "Enable",
+    "noVersions": "No versions yet.",
+    "versionNumber": "Version {{number}}",
+    "currentVersion": "Active",
+    "rollback": "Roll back",
+    "preview": "Preview",
+    "previewVersion": "Version {{number}} content",
+    "rollbackSummary": "Rolled back to version {{number}}",
+    "disableTitle": "Disable this skill?",
+    "disableDescription": "The skill will stop being available to new conversations. Its version history stays intact.",
+    "enableTitle": "Enable this skill?",
+    "enableDescription": "The active version will be installed and made available again.",
+    "rollbackTitle": "Roll back to version {{number}}?",
+    "rollbackDescription": "A new version will be created. Existing history will not be changed.",
+    "queuedSuccess": "Added to pending review",
+    "queuedFailed": "Could not add this skill for review",
+    "addToReview": "Add to pending review",
+    "errors": {
+      "SKILL_CANDIDATE_LOAD_FAILED": "Could not load this skill candidate",
+      "SKILL_CANDIDATE_SAVE_FAILED": "Could not save this skill candidate",
+      "SKILL_CANDIDATE_PUBLISH_FAILED": "Publishing failed. Your draft is still available.",
+      "SKILL_CANDIDATE_REJECT_FAILED": "Could not remove this skill candidate",
+      "SKILL_VERSIONS_LOAD_FAILED": "Could not load version history",
+      "SKILL_DISABLE_FAILED": "The skill could not be disabled. The active version was restored when possible.",
+      "SKILL_ENABLE_FAILED": "The skill could not be enabled",
+      "SKILL_ROLLBACK_FAILED": "Rollback failed. The previous active version was restored."
+    },
+    "validation": {
+      "SKILL_NAME_REQUIRED": "Enter a skill name.",
+      "SKILL_NAME_INVALID": "Use lowercase letters, numbers, and hyphens for the skill name.",
+      "SKILL_NAME_TOO_LONG": "The skill name is too long.",
+      "SKILL_DESCRIPTION_REQUIRED": "Add a short description.",
+      "SKILL_DESCRIPTION_TOO_LONG": "The skill description is too long.",
+      "SKILL_CONTENT_REQUIRED": "Add the SKILL.md instructions.",
+      "SKILL_CONTENT_TOO_LARGE": "The SKILL.md file is too large.",
+      "SKILL_FRONTMATTER_INVALID": "The YAML header is not valid.",
+      "SKILL_FRONTMATTER_NAME_REQUIRED": "Add a name to the YAML header.",
+      "SKILL_FRONTMATTER_DESCRIPTION_REQUIRED": "Add a description to the YAML header.",
+      "SKILL_FRONTMATTER_NAME_MISMATCH": "The YAML name must match the skill name.",
+      "SKILL_TEMPLATE_PLACEHOLDER": "Replace the remaining template placeholder.",
+      "SKILL_SECRET_DETECTED": "Remove passwords, tokens, or other credentials before publishing.",
+      "SKILL_ABSOLUTE_PATH_DETECTED": "This skill contains a local absolute path. Confirm that it should be reusable."
+    }
+  },
+  "settings": {
+    "title": "Personal workspace",
+    "description": "Choose what SearchT-UI shows and where it opens.",
+    "modules": "Visible modules",
+    "startPage": "Open the app to",
+    "scenePack": "Working style",
+    "localData": "Local data",
+    "health": "Data status",
+    "backup": "Create backup",
+    "backupDone": "Backup created",
+    "backupFailed": "Could not create backup",
+    "import": "SearchT-UI data",
+    "saveFailed": "Could not save; the previous setting was restored"
+  },
+  "scene": {
+    "general": "General",
+    "creator": "Creator",
+    "manager": "Manager",
+    "researcher": "Researcher"
+  },
+  "status": {
+    "healthy": "Healthy",
+    "unavailable": "Unavailable",
+    "importAvailable": "Importable data found",
+    "importUnavailable": "No previous data found"
+  },
+  "connectors": {
+    "title": "Подключения",
+    "description": "SearchT-UI автоматически получает новые и изменённые файлы из выбранных папок.",
+    "desktopOnly": "Подключение локальных папок доступно только в настольном приложении SearchT-UI.",
+    "addFolder": "Добавить папку",
+    "includeSubfolders": "Включить подпапки",
+    "includeSubfoldersHint": "При добавлении получать также файлы из подпапок",
+    "emptyTitle": "Нет подключённых папок",
+    "emptyDescription": "После добавления новые и изменённые файлы будут автоматически поступать во Входящие.",
+    "status": {
+      "active": "Активно",
+      "paused": "Приостановлено",
+      "error": "Требует внимания"
+    },
+    "lastSync": "Последняя синхронизация",
+    "neverSynced": "Ещё не синхронизировано",
+    "syncResult": "Проверено {{scanned}}, импортировано {{imported}}, пропущено {{skipped}}",
+    "actions": {
+      "sync": "Синхронизировать",
+      "pause": "Приостановить",
+      "resume": "Продолжить",
+      "disconnect": "Отключить"
+    },
+    "disconnectTitle": "Отключить эту папку?",
+    "disconnectDescription": "Файлы, уже находящиеся во Входящих, сохранятся.",
+    "disconnectConfirm": "Отключить",
+    "loadFailed": "Не удалось загрузить подключения",
+    "actionFailed": "Не удалось выполнить действие",
+    "folderUnavailable": "Эта папка не найдена. Убедитесь, что она по-прежнему доступна.",
+    "desktopOnlyAll": "Connections are managed in the SearchT-UI desktop app.",
+    "emptyAllTitle": "No connections yet",
+    "emptyAllDescription": "Connect email or a local folder to automatically bring new material into Inbox.",
+    "addEmail": "Connect email",
+    "folder": {
+      "sectionTitle": "Local folders",
+      "sectionDescription": "Watch selected folders on this computer."
+    },
+    "email": {
+      "sectionTitle": "Email",
+      "sectionDescription": "Import new email and attachments into Inbox without changing anything on the mail server.",
+      "dialogTitle": "Connect email",
+      "providerLabel": "Mail provider",
+      "provider": {
+        "qqMail": "QQ Mail",
+        "netease163": "163 Mail"
+      },
+      "addressLabel": "Email address",
+      "authorizationCodeLabel": "Authorization code",
+      "authorizationCodeHint": "Use the authorization code created in your mail settings, not your web password.",
+      "initialSyncLabel": "First sync",
+      "initialSync": {
+        "fromNow": "Only new email",
+        "last7Days": "Last 7 days"
+      },
+      "test": "Test connection",
+      "connect": "Connect",
+      "testSuccess": "Connection succeeded",
+      "connectionFailed": "Could not connect. Check the address and authorization code.",
+      "mailboxReset": "The mailbox identity changed. Reconnect this account before syncing again.",
+      "credentialMissing": "Authorization is missing. Reconnect this account.",
+      "disconnectTitle": "Disconnect this email account?",
+      "disconnectDescription": "Imported email and attachments will stay in Inbox. Mail on the server will not be changed."
+    },
+    "addWebDav": "Connect cloud drive",
+    "webdav": {
+      "sectionTitle": "Cloud drives",
+      "sectionDescription": "Read files from Jianguoyun or an HTTPS WebDAV folder without changing remote content.",
+      "dialogTitle": "Connect cloud drive",
+      "providerLabel": "Cloud service",
+      "provider": {
+        "jianguoyun": "Jianguoyun",
+        "custom": "Custom WebDAV"
+      },
+      "serverUrlLabel": "HTTPS server address",
+      "usernameLabel": "Account or username",
+      "passwordLabel": "App password",
+      "passwordHint": "Use an app password instead of your sign-in password.",
+      "rootPathLabel": "Folder path",
+      "rootPathHint": "Use / to receive files from the whole drive.",
+      "displayNameLabel": "Connection name (optional)",
+      "initialSyncLabel": "First sync",
+      "initialSync": {
+        "fromNow": "Only new and changed files",
+        "importExisting": "Import existing files"
+      },
+      "test": "Test connection",
+      "connect": "Connect",
+      "testSuccess": "Connection succeeded",
+      "connectionFailed": "Could not connect. Check the address and credentials.",
+      "credentialMissing": "Credentials are missing. Reconnect this drive.",
+      "disconnectTitle": "Disconnect this cloud drive?",
+      "disconnectDescription": "Imported files stay in Inbox. Remote files are not changed."
+    },
+    "addS3": "Connect object storage",
+    "addCalendarIcs": "Connect calendar",
+    "s3": {
+      "sectionTitle": "S3 compatible storage",
+      "sectionDescription": "Read-only ingest of objects under a prefix from S3 compatible storage; remote content is never modified.",
+      "dialogTitle": "Connect object storage",
+      "providerLabel": "Storage service",
+      "provider.custom": "Custom S3",
+      "provider.aws": "Amazon S3",
+      "provider.r2": "Cloudflare R2",
+      "endpointLabel": "HTTPS endpoint",
+      "regionLabel": "Region",
+      "bucketLabel": "Bucket",
+      "accessKeyIdLabel": "Access Key ID",
+      "secretAccessKeyLabel": "Secret Access Key",
+      "prefixLabel": "Object prefix (optional)",
+      "prefixHint": "Only receive objects starting with this prefix; leave empty for the whole bucket.",
+      "pathStyleLabel": "Use path-style addressing",
+      "displayNameLabel": "Display name (optional)",
+      "initialSyncLabel": "Initial sync",
+      "initialSync.fromNow": "Only new and changed objects",
+      "initialSync.importExisting": "Import existing objects",
+      "test": "Test connection",
+      "connect": "Connect",
+      "testSuccess": "Connection successful",
+      "connectionFailed": "Could not connect; check the endpoint, region, and keys.",
+      "credentialMissing": "Stored credentials are missing; reconnect this storage.",
+      "disconnectTitle": "Disconnect this storage?",
+      "disconnectDescription": "Imported files stay in the inbox; remote objects are not affected."
+    },
+    "ics": {
+      "sectionTitle": "Calendar subscriptions",
+      "sectionDescription": "Read-only sync of Feishu, Outlook, DingTalk, or WeCom calendar subscription links into your schedule.",
+      "dialogTitle": "Connect a calendar subscription",
+      "providerLabel": "Calendar service",
+      "provider.feishu": "Feishu",
+      "provider.outlook": "Outlook",
+      "provider.dingtalk": "DingTalk",
+      "provider.wecom": "WeCom",
+      "provider.custom": "Custom",
+      "urlLabel": "iCal subscription URL",
+      "urlHint": "Copy the HTTPS subscription link from your calendar app share settings.",
+      "displayNameLabel": "Display name (optional)",
+      "test": "Test connection",
+      "connect": "Connect",
+      "testSuccess": "Connection successful",
+      "connectionFailed": "Could not fetch the calendar; check the subscription URL.",
+      "credentialMissing": "The subscription URL is missing; reconnect this calendar.",
+      "disconnectTitle": "Disconnect this calendar?",
+      "disconnectDescription": "Imported events move to the trash and can be restored later."
+    }
+  },
+  "workflows": {
+    "title": "Workflows",
+    "description": "Turn repeatable work into reliable personal automations.",
+    "untitled": "Workflow",
+    "tabs": {
+      "catalog": "Templates",
+      "mine": "My workflows",
+      "history": "Run history"
+    },
+    "views": {
+      "active": "Active",
+      "trash": "Recycle bin"
+    },
+    "actions": {
+      "useTemplate": "Use template",
+      "runNow": "Run now",
+      "enabled": "Workflow enabled",
+      "repair": "Repair",
+      "edit": "Edit",
+      "restore": "Restore"
+    },
+    "empty": {
+      "mine": "No workflows yet",
+      "history": "No runs yet",
+      "trash": "Recycle bin is empty"
+    },
+    "errors": {
+      "load": "Could not load workflows",
+      "run": "Could not start this workflow",
+      "state": "Could not update this workflow",
+      "repair": "Could not repair this workflow",
+      "version": "Could not save a new version",
+      "remove": "Could not move this workflow to the recycle bin",
+      "restore": "Could not restore this workflow",
+      "revokeGrant": "Could not revoke this authorization"
+    },
+    "messages": {
+      "approvalRequired": "Review the requested action before this workflow continues",
+      "runStarted": "Workflow started"
+    },
+    "version": {
+      "editTitle": "Create a new version",
+      "name": "Workflow name",
+      "description": "Description",
+      "userUpdate": "User update"
+    },
+    "remove": {
+      "title": "Move to recycle bin",
+      "confirm": "Move",
+      "description": "Move “{{name}}” to the recycle bin? Its history will be kept."
+    },
+    "runStates": {
+      "pending": "Pending",
+      "waiting-approval": "Waiting for approval",
+      "running": "Running",
+      "succeeded": "Succeeded",
+      "failed": "Failed",
+      "skipped": "Skipped",
+      "missed": "Missed"
+    },
+    "grants": {
+      "title": "Confirm external action",
+      "description": "“{{name}}” needs permission to perform the actions below.",
+      "allow": "Allow and continue",
+      "reject": "Reject",
+      "once": "Allow only this time",
+      "remember": "Remember this authorization",
+      "expiry": "Authorization period",
+      "days": "{{count}} days",
+      "settingsTitle": "Workflow authorizations",
+      "settingsDescription": "Review and revoke saved external-action permissions.",
+      "empty": "No saved workflow authorizations",
+      "noExpiry": "No expiry",
+      "revoke": "Revoke",
+      "revoked": "Authorization revoked",
+      "unknownWorkflow": "Unknown workflow",
+      "constraints": "Limits",
+      "expires": "Expires",
+      "lastUsed": "Last used",
+      "neverUsed": "Not used yet",
+      "workflowId": "Workflow ID"
+    },
+    "templates": {
+      "dailyPlanning": {
+        "name": "Daily planning",
+        "description": "Review today’s schedule, tasks, and Inbox and produce an ordered action plan."
+      },
+      "inboxTriage": {
+        "name": "Inbox triage",
+        "description": "Classify Inbox items and draft the right next actions."
+      },
+      "weeklyReview": {
+        "name": "Weekly review",
+        "description": "Summarize progress, delays, and next-week priorities."
+      },
+      "meetingFollowUp": {
+        "name": "Meeting follow-up",
+        "description": "Extract decisions, owners, due dates, and follow-up drafts."
+      }
+    }
+  },
+  "sync": {
+    "title": "Cloud sync (end-to-end encrypted)",
+    "description": "Sync tasks, calendar, and notes end-to-end encrypted to your WebDAV or S3. The server only stores ciphertext.",
+    "state.idle": "Enabled",
+    "state.syncing": "Syncing",
+    "state.error": "Error",
+    "state.disabled": "Off",
+    "state.unknown": "…",
+    "lastSync": "Last sync",
+    "pending": "pending retries",
+    "now": "Sync now",
+    "off": "Turn off",
+    "disableConfirm": "Local data stays; only syncing stops.",
+    "report": "Pushed {{pushed}} · pulled {{pulled}} · conflicts {{conflicts}}",
+    "mode": "Sync target",
+    "modeS3": "S3 compatible storage",
+    "serverUrl": "HTTPS server address",
+    "username": "Username",
+    "password": "App password",
+    "rootPath": "Sync folder",
+    "passphrase": "Sync passphrase (min 8 chars)",
+    "enable": "Enable cloud sync",
+    "passphraseHint": "The passphrase is kept in local secure storage; losing it means the cloud data cannot be decrypted.",
+    "configured": "Cloud sync enabled",
+    "done": "Sync finished",
+    "disabled": "Cloud sync disabled"
+  },
+  "browser": {
+    "title": "Browser",
+    "address": "Address or search",
+    "placeholder": "Type a URL or search terms and press Enter",
+    "back": "Back",
+    "forward": "Forward",
+    "reload": "Reload",
+    "home": "Home",
+    "loadFailed": "Failed to load the page.",
+    "desktopOnly": "The embedded browser is only available in the SearchT-UI desktop app.",
+    "recognize": "Recognize page content",
+    "recognizeHint": "Extract the title, body text, and link count of the current page; save it to Inbox in one click.",
+    "read": "Read page content",
+    "save": "Save to Inbox",
+    "saved": "Saved to Inbox",
+    "copy": "Copy text",
+    "copied": "Text copied",
+    "links": "links",
+    "chars": "chars",
+    "operate": "Operate the browser",
+    "operateHint": "Click elements, fill inputs, or scroll via CSS selectors.",
+    "selector": "CSS selector",
+    "value": "Text to fill",
+    "valuePlaceholder": "Text used when filling inputs (optional)",
+    "click": "Click element",
+    "set": "Fill text",
+    "scrollDown": "Scroll down 600px",
+    "scrollUp": "Scroll up 600px"
+  }
+}

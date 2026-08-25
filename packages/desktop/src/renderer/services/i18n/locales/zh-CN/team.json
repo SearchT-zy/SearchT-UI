@@ -1,0 +1,222 @@
+{
+  "sider": {
+    "title": "智能体群组",
+    "createTeam": "新建智能体群组",
+    "pin": "置顶",
+    "unpin": "取消置顶",
+    "rename": "重命名",
+    "delete": "删除",
+    "renameTitle": "重命名团队",
+    "renamePlaceholder": "团队名称",
+    "deleteConfirm": "删除此团队？",
+    "deleteConfirmContent": "此操作不可撤销。",
+    "deleteOk": "删除",
+    "deleteCancel": "取消",
+    "renameOk": "保存",
+    "renameCancel": "取消",
+    "renameSuccess": "团队已重命名",
+    "deleteSuccess": "团队已删除"
+  },
+  "newAgent": "新助手",
+  "noMessages": "暂无消息。",
+  "agentNotConfigured": "助手尚未配置。",
+  "stopAgentFailed": "停止该成员失败，请稍后重试",
+  "work": {
+    "processingWithQueued": "正在处理中……已排队 {{count}} 条",
+    "queued": "已排队 {{count}} 条",
+    "runtimeStarting": "正在等待该成员启动……",
+    "runtimeFailed": "该成员启动失败。",
+    "removing": "正在移除该成员……",
+    "sessionStopped": "团队会话已停止。",
+    "retryStart": "重试启动"
+  },
+  "sendBox": {
+    "placeholder": "向团队 Leader 助手发消息..."
+  },
+  "create": {
+    "title": "新建智能体群组",
+    "namePlaceholder": "群组名称",
+    "dispatchAgentPlaceholder": "协调员",
+    "subAgentsPlaceholder": "成员",
+    "confirm": "确认创建",
+    "noSupportedAgents": "未检测到可用的助手",
+    "supportedAgentsHint": "目前支持 Claude 和 Aion CLI 助手，更多助手适配中",
+    "leaderDesc": "理解你的目标，拆解工作并协调群组成员",
+    "searchPlaceholder": "搜索",
+    "noSearchResults": "未找到结果",
+    "step": {
+      "dispatch": "协调员",
+      "subAgents": "成员",
+      "workspace": "项目"
+    },
+    "nameRequired": "请输入团队名称",
+    "leaderRequired": "请选择团队 Leader",
+    "selectFolder": "选择文件夹",
+    "recentLabel": "最近使用",
+    "chooseDifferentFolder": "选择其他目录",
+    "error": "创建团队失败",
+    "selectedMembers": "已选成员",
+    "teamLeader": "协调员",
+    "currentLeader": "协调员",
+    "setAsLeader": "协调员",
+    "teammate": "队员",
+    "selectAtLeastOneMember": "请至少选择一个助手当团队 Leader。",
+    "selectOneLeader": "协调员",
+    "subtitle": "把本机已有的 AI 助手加入同一个群组，由协调员分派工作并汇总结果。",
+    "nameLabel": "群组名称",
+    "workspaceLabel": "工作空间",
+    "allAssistantsWithCount": "所有助手 ({{count}})",
+    "selectedMembersWithCount": "已选成员 {{count}} · ⚑ = Leader",
+    "selectedMembersTitleWithCount": "已选成员 {{count}}",
+    "leaderLegend": "= Leader",
+    "membersHelper": "选择团队成员并指定一个 Leader。同一个助手可被多次选择。",
+    "memberHint": "没有合适的助手当队员？创建后可让 Leader 在对话中创建临时队员。"
+  },
+  "removeAgent": {
+    "confirmTitle": "移除团队成员",
+    "confirmContent": "确定将该成员移出团队吗？",
+    "confirmContentActive": "该成员正在工作中，确定要强制移除吗？其当前工作会被中断。"
+  },
+  "emptyState": {
+    "subtitle": "描述你的目标，我来协调团队搞定它",
+    "suggestions": {
+      "debate": "组织一场辩论赛，让不同助手各持立场",
+      "interview": "策划一场深度访谈",
+      "expert_review": "多位专家会诊同一个问题",
+      "add_member": "帮我在团队里加一个擅长 ___ 的成员"
+    },
+    "leaderGreeting": "你好，我是 Leader，负责理解你的目标并协调团队。描述你想做的事，我来安排。",
+    "memberGreeting": "你好，我是团队成员，我听 Leader 和你的指挥。"
+  },
+  "addMember": {
+    "title": "添加成员",
+    "subtitle": "同一助手可被反复添加",
+    "searchAssistants": "搜索助手...",
+    "addFailed": "添加成员失败",
+    "noSearchResults": "未找到结果",
+    "tellLeaderHint": "没有合适的？也可以直接让 Leader 帮你安排。",
+    "tellLeaderCta": "告诉 Leader →",
+    "tellLeaderPrefill": "帮我在团队里加一个擅长 ___ 的成员"
+  },
+  "view": {
+    "label": "视图",
+    "parallel": "并行",
+    "single": "单聊",
+    "board": "看板",
+    "group": "群聊"
+  },
+  "warmup": {
+    "title": "正在唤醒团队…",
+    "subtitle": "正在准备成员",
+    "memberFailedTitle": "成员「{{name}}」未能启动",
+    "leaderFailedTitle": "Leader「{{name}}」未能启动",
+    "genericFailedTitle": "团队未能启动",
+    "multiFailedTitle": "{{count}} 个成员未能启动",
+    "leaderSuffix": "（Leader）",
+    "unknownError": "启动失败",
+    "memberFailedHint": "可在上方切换其模型，或从顶部移除后重试。",
+    "leaderFailedHint": "可在上方切换其模型后重试。",
+    "retry": "重试"
+  },
+  "reorderMember": "拖动以调整成员顺序",
+  "activity": {
+    "control": {
+      "sortNewest": "最新",
+      "sortOldest": "最早",
+      "filterAll": "全部",
+      "filterMessages": "仅消息",
+      "filterTasks": "仅任务",
+      "allMembers": "全部成员",
+      "showSystem": "系统消息",
+      "showTerminal": "已完成任务"
+    },
+    "fallbackLane": "未分配 / 外部",
+    "empty": "暂无动态",
+    "userIdentity": "用户 / 外部",
+    "broadcast": "广播@全体",
+    "read": "已读",
+    "unread": "未读",
+    "attachments": "{{count}} 个附件",
+    "expand": "展开",
+    "collapse": "收起",
+    "blockedBy": "被 #{{id}} 阻塞",
+    "blockedByNamed": "被《{{name}}》阻塞",
+    "blockerUnknown": "任务不可用",
+    "status": {
+      "pending": "待处理",
+      "in_progress": "进行中",
+      "completed": "已完成",
+      "deleted": "已删除"
+    },
+    "msgType": {
+      "message": "消息",
+      "idle_notification": "空闲通知",
+      "shutdown_request": "关闭请求"
+    }
+  },
+  "group": {
+    "view": "群聊",
+    "mode": {
+      "coordinator": "协调处理",
+      "direct": "直接分派"
+    },
+    "composer": {
+      "placeholder": "描述目标，或输入 @ 选择成员"
+    },
+    "mention": {
+      "all": "全体成员（{{count}}）",
+      "members": "位成员"
+    },
+    "member": {
+      "coordinator": "协调员",
+      "member": "成员",
+      "permissions": "{{count}} 项权限待处理",
+      "unavailable": "暂不可用"
+    },
+    "delivery": {
+      "pending": "等待发送",
+      "accepted": "已接收",
+      "running": "工作中",
+      "completed": "已完成",
+      "failed": "失败",
+      "cancelled": "已取消",
+      "unknown": "送达状态未知"
+    },
+    "runtime": {
+      "ready": "已就绪",
+      "dormant": "尚未启动",
+      "pending": "正在启动",
+      "failed": "暂不可用"
+    },
+    "sender": {
+      "you": "你"
+    },
+    "empty": "描述一个目标，开始本机协作",
+    "activity": {
+      "title": "任务与交接",
+      "drawer": "任务与交接",
+      "completedCount": "{{count}} 项已完成",
+      "empty": "暂无任务或交接"
+    },
+    "action": {
+      "inspect": "查看成员会话",
+      "openBoard": "打开看板",
+      "fullConversation": "打开完整会话",
+      "retry": "明确重试"
+    },
+    "error": {
+      "noAvailableTarget": "所选成员当前都不可用",
+      "someUnavailable": "{{count}} 位不可用成员未被分派",
+      "sendFailed": "指令发送失败"
+    },
+    "kind": {
+      "instruction": "指令",
+      "progress": "进展",
+      "handoff": "交接",
+      "result": "结果",
+      "approval": "审批",
+      "error": "错误",
+      "task": "任务"
+    }
+  }
+}
