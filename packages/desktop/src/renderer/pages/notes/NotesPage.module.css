@@ -32,9 +32,23 @@
 }
 
 .listButton {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  width: 100%;
   min-height: 62px;
   padding: 8px 12px;
+  border: none;
+  background: transparent;
   color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.listButton:focus-visible {
+  outline: 2px solid rgb(var(--primary-6));
+  outline-offset: -2px;
 }
 
 @media (max-width: 760px) {
