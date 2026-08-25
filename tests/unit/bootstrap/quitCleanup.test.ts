@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 AionUi (aionui.com)
+ * Copyright 2025 SearchT-UI Contributors (Apache-2.0)
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -12,7 +12,7 @@ type BeforeQuitEvent = {
 };
 
 const flushMicrotasks = async () => {
-  for (let i = 0; i < 6; i += 1) {
+  for (let i = 0; i < 12; i += 1) {
     await Promise.resolve();
   }
 };
@@ -41,6 +41,11 @@ describe('installQuitCleanup', () => {
       markExplicitQuit: () => calls.push('mark-explicit-quit'),
       destroyTray: () => calls.push('destroy-tray'),
       disposeCronResumeListener: () => calls.push('dispose-cron'),
+      stopLocalFolderConnectorScheduler: () => calls.push('stop-local-folder-connector'),
+      stopEmailConnectorScheduler: () => calls.push('stop-email-connector'),
+      stopWebDavConnectorScheduler: () => calls.push('stop-webdav-connector'),
+      stopReminderScheduler: () => calls.push('stop-reminder'),
+      closePersonalCore: () => calls.push('close-personal-core'),
       stopBackend,
       destroyPetWindow: () => calls.push('destroy-pet'),
       logInfo: vi.fn(),
@@ -59,6 +64,11 @@ describe('installQuitCleanup', () => {
       'mark-explicit-quit',
       'destroy-tray',
       'dispose-cron',
+      'stop-local-folder-connector',
+      'stop-email-connector',
+      'stop-webdav-connector',
+      'stop-reminder',
+      'close-personal-core',
       'stop-backend-start',
     ]);
 
@@ -71,6 +81,11 @@ describe('installQuitCleanup', () => {
       'mark-explicit-quit',
       'destroy-tray',
       'dispose-cron',
+      'stop-local-folder-connector',
+      'stop-email-connector',
+      'stop-webdav-connector',
+      'stop-reminder',
+      'close-personal-core',
       'stop-backend-start',
       'destroy-pet',
       'quit-app',
@@ -89,6 +104,11 @@ describe('installQuitCleanup', () => {
       markExplicitQuit: vi.fn(),
       destroyTray: vi.fn(),
       disposeCronResumeListener: vi.fn(),
+      stopLocalFolderConnectorScheduler: vi.fn(),
+      stopEmailConnectorScheduler: vi.fn(),
+      stopWebDavConnectorScheduler: vi.fn(),
+      stopReminderScheduler: vi.fn(),
+      closePersonalCore: vi.fn(),
       stopBackend: async () => {},
       destroyPetWindow: vi.fn(),
       logInfo: vi.fn(),

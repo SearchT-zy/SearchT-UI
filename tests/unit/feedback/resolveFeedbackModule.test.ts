@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 AionUi (aionui.com)
+ * Copyright 2025 SearchT-UI Contributors (Apache-2.0)
  * SPDX-License-Identifier: Apache-2.0
  *
  * Route → feedback-module mapping used by the titlebar report button. Every
@@ -58,7 +58,24 @@ describe('resolveFeedbackModule', () => {
     );
     // Pages where preselecting a module makes no sense (multi-purpose or
     // pre-auth surfaces where the user picks the module themselves).
-    const moduleLess = new Set(['/guid', '/login', '/test/components']);
+    // The personal-workspace pages (today/inbox/calendar/tasks/notes/knowledge/
+    // workflows/onboarding) and the embedded browser page were added by the
+    // SearchT-UI fork without a dedicated feedback module, so the user picks
+    // the module themselves when reporting from there.
+    const moduleLess = new Set([
+      '/guid',
+      '/login',
+      '/test/components',
+      '/onboarding',
+      '/today',
+      '/inbox',
+      '/calendar',
+      '/tasks',
+      '/notes',
+      '/knowledge',
+      '/workflows',
+      '/browser',
+    ]);
     const paths = [...routerSrc.matchAll(/path='([^*'][^']*)'/g)].map((m) => m[1]);
     expect(paths.length).toBeGreaterThan(10);
     for (const routePath of paths) {

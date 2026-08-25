@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2026 AionUi (aionui.com)
+ * Copyright 2026 SearchT-UI Contributors (Apache-2.0)
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -111,8 +111,11 @@ describe('local bridge', () => {
     bridge.buildProvider<string, void>('test.failure').provider(() => Promise.reject(error));
 
     getIncoming()?.emit('subscribe-test.failure', { id: 'request-1', data: undefined });
-    await Promise.resolve();
-    await Promise.resolve();
+    // The provider rejection travels through handler -> then -> catch, which
+    // settles across several microtask generations.
+    for (let i = 0; i < 8; i += 1) {
+      await Promise.resolve();
+    }
 
     expect(console.error).toHaveBeenCalledWith('[bridge] Provider "test.failure" failed:', error);
     expect(outbound.some(({ name }) => name === 'subscribe.callback-test.failurerequest-1')).toBe(false);

@@ -445,9 +445,9 @@ export type I18nKey =
   | 'conversation.agentError.errorCode'
   | 'conversation.agentError.fallbackTitle'
   | 'conversation.agentError.notRetryable'
-  // 'ownership.aionui' is a backend wire value (structured error ownership),
+  // 'ownership.searcht' is a backend wire value (structured error ownership),
   // rendered as "App" — the key must match the backend contract verbatim.
-  | 'conversation.agentError.ownership.aionui'
+  | 'conversation.agentError.ownership.searcht'
   | 'conversation.agentError.ownership.unknown_upstream'
   | 'conversation.agentError.ownership.user_agent'
   | 'conversation.agentError.ownership.user_llm_provider'

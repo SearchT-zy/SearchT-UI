@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 AionUi (aionui.com)
+ * Copyright 2025 SearchT-UI Contributors (Apache-2.0)
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -129,7 +129,7 @@ describe('UpdateModal manual install fallback', () => {
     render(<UpdateModal />);
 
     act(() => {
-      window.dispatchEvent(new Event('aionui-open-update-modal'));
+      window.dispatchEvent(new Event('searcht-open-update-modal'));
     });
 
     const downloadAndInstall = await screen.findByText('update.downloadButton');

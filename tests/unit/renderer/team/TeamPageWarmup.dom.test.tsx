@@ -77,19 +77,28 @@ vi.mock('@/common', () => ({
       childTurnCancelled: makeTeamEventChannel('childTurnCancelled'),
       slotWorkChanged: makeTeamEventChannel('slotWorkChanged'),
       listChanged: makeTeamEventChannel('listChanged'),
+      // Fork-added team activity feed (useTeamActivityFeed) subscriptions.
+      listActivity: { invoke: vi.fn(async () => ({ items: [], next_cursor: undefined, has_more: false })) },
+      mailboxChanged: makeTeamEventChannel('mailboxChanged'),
     },
     cron: { removeJob: { invoke: vi.fn() } },
     assistant: { list: { invoke: vi.fn(async () => []) } },
+    // Fork-renamed plural namespace used by useConversationAssistants et al.
+    assistants: { list: { invoke: vi.fn(async () => []) } },
     conversation: {
       update: { invoke: vi.fn(async () => undefined) },
       // TeamPage subscribes to conversation.listChanged on mount to refetch the
       // leader's dispatch conversation; stub it so the passive effect can run.
       listChanged: makeTeamEventChannel('conversationListChanged'),
+      turnCompleted: makeTeamEventChannel('conversationTurnCompleted'),
       confirmation: {
         list: { invoke: vi.fn(async () => []) },
         add: makeTeamEventChannel('confirmationAdd'),
         remove: makeTeamEventChannel('confirmationRemove'),
       },
+    },
+    database: {
+      getConversationMessages: { invoke: vi.fn(async () => ({ items: [] })) },
     },
     realtime: { reconnected: makeTeamEventChannel('reconnected') },
   },
@@ -157,6 +166,9 @@ describe('TeamPage teammate warmup wiring', () => {
     for (const key of Object.keys(teamEventHandlers)) delete teamEventHandlers[key];
     getConversationOrNullMock.mockImplementation(async (id: string) => conversation({ id, name: id }));
     localStorage.clear();
+    // The fork made the chat-style 'group' view the default; these tests
+    // exercise the per-member parallel columns, so opt into that view mode.
+    localStorage.setItem('team-view-mode-team-1', 'parallel');
   });
 
   it('withholds the trigger while the team is warming (isWarmingUp)', async () => {

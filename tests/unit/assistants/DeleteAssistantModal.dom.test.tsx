@@ -1,7 +1,7 @@
 import React from 'react';
 /**
  * @license
- * Copyright 2025 AionUi (aionui.com)
+ * Copyright 2025 SearchT-UI Contributors (Apache-2.0)
  * SPDX-License-Identifier: Apache-2.0
  *
  * Unit tests for DeleteAssistantModal component (A8 in N4a).

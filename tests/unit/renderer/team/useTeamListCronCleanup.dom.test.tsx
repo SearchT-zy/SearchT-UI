@@ -28,6 +28,10 @@ vi.mock('@/common', () => ({
       removed: eventChannel,
       renamed: eventChannel,
     },
+    // Fork-added collaboration bridge used by groupClient.removeTeam.
+    collaboration: {
+      removeTeam: { invoke: vi.fn(async () => undefined) },
+    },
   },
 }));
 

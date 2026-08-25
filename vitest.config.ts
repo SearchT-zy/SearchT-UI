@@ -23,7 +23,12 @@ export default defineConfig({
     globals: true,
     // CI runners (especially windows-2022) can be slow enough that dom tests
     // rendering heavy components occasionally exceed the local 10s budget.
-    testTimeout: process.env.CI ? 30000 : 10000,
+    // The full suite runs ~585 files in parallel; local runs need the same headroom.
+    testTimeout: process.env.CI ? 30000 : 30000,
+    // Cap parallel workers: with ~585 test files the machine gets saturated and
+    // heavy dom tests randomly starve past their timeout (moving flake). Trading
+    // wall-clock for determinism.
+    maxWorkers: '50%',
     // Use projects to run different environments (Vitest 4+)
     projects: [
       // Node environment tests (existing tests)

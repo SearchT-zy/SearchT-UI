@@ -129,7 +129,7 @@
       "send_feedback": "Envoyez des commentaires avec des journaux afin que l'équipe puisse enquêter."
     },
     "ownership": {
-      "aionui": "Application",
+      "searcht": "Application",
       "user_agent": "Agent",
       "user_llm_provider": "Fournisseur de modèles",
       "unknown_upstream": "En amont"

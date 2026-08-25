@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 AionUi (aionui.com)
+ * Copyright 2025 SearchT-UI Contributors (Apache-2.0)
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -29,7 +29,7 @@ afterEach(() => {
 // suite the first cold import's transform/resolve can exceed the default 10s
 // timeout (flaky), even though it resolves in a few seconds in isolation. Give
 // these import-bound assertions extra headroom so they don't flake.
-const IMPORT_TIMEOUT_MS = 30000;
+const IMPORT_TIMEOUT_MS = 60000;
 
 describe('PreviewPanel', () => {
   it(

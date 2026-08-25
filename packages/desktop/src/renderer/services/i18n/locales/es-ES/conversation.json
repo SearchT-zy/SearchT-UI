@@ -129,7 +129,7 @@
       "send_feedback": "Envía comentarios con registros para que el equipo pueda investigar."
     },
     "ownership": {
-      "aionui": "Aplicación",
+      "searcht": "Aplicación",
       "user_agent": "Agente",
       "user_llm_provider": "Proveedor de modelos",
       "unknown_upstream": "Upstream"

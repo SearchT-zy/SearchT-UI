@@ -129,7 +129,7 @@
       "send_feedback": "チームが調査できるよう、ログを添えてフィードバックを送信してください。"
     },
     "ownership": {
-      "aionui": "アプリ",
+      "searcht": "アプリ",
       "user_agent": "エージェント",
       "user_llm_provider": "モデルプロバイダー",
       "unknown_upstream": "上流"

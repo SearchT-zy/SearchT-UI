@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 AionUi (aionui.com)
+ * Copyright 2025 SearchT-UI Contributors (Apache-2.0)
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -141,7 +141,7 @@ describe('TeamCreateModal', () => {
     expect(screen.queryByText('Agent internal error (code -32603)')).not.toBeInTheDocument();
 
     const createButton = screen.getByRole('button', { name: 'Confirm Create' });
-    fireEvent.change(screen.getByPlaceholderText('Team name'), {
+    fireEvent.change(screen.getByPlaceholderText('Group name'), {
       target: { value: 'My Team' },
     });
     fireEvent.click(screen.getByTestId('team-create-agent-option-blocked-reviewer'));
@@ -187,11 +187,11 @@ describe('TeamCreateModal', () => {
 
     const subtitle =
       'Let multiple AI assistants team up and collaborate. We suggest one team focuses on a single goal — create separate teams for different tasks.';
-    expect(screen.getByRole('heading', { name: 'New Team' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'New Agent group' })).toBeInTheDocument();
     expect(screen.getByText(subtitle)).toBeInTheDocument();
     expect(screen.getByTestId('team-create-modal')).toHaveAttribute('data-width', '900');
     expect(screen.getByTestId('team-create-modal')).toHaveAttribute('data-max-width', 'calc(100vw - 72px)');
-    expect(screen.getByRole('heading', { name: 'New Team' })).toHaveClass('text-18px');
+    expect(screen.getByRole('heading', { name: 'New Agent group' })).toHaveClass('text-18px');
     expect(screen.getByText(subtitle)).toHaveClass('text-13px', 'leading-20px');
 
     const assistantPane = screen.getByTestId('team-create-assistant-pane');
@@ -221,7 +221,7 @@ describe('TeamCreateModal', () => {
   it('passes assistant identity through when creating a team with an assistant leader', async () => {
     render(<TeamCreateModal visible onClose={vi.fn()} onCreated={vi.fn()} />);
 
-    fireEvent.change(screen.getByPlaceholderText('Team name'), {
+    fireEvent.change(screen.getByPlaceholderText('Group name'), {
       target: { value: 'Docs Team' },
     });
     fireEvent.click(screen.getByTestId('team-create-agent-option-bare-aionrs'));
@@ -252,7 +252,7 @@ describe('TeamCreateModal', () => {
   it('selectedMembers_allows_duplicate_assistant_instances', async () => {
     render(<TeamCreateModal visible onClose={vi.fn()} onCreated={vi.fn()} />);
 
-    fireEvent.change(screen.getByPlaceholderText('Team name'), {
+    fireEvent.change(screen.getByPlaceholderText('Group name'), {
       target: { value: 'Duplicate Team' },
     });
     fireEvent.click(screen.getByTestId('team-create-agent-option-bare-aionrs'));
@@ -273,7 +273,7 @@ describe('TeamCreateModal', () => {
   it('first_selected_member_becomes_leader', async () => {
     render(<TeamCreateModal visible onClose={vi.fn()} onCreated={vi.fn()} />);
 
-    fireEvent.change(screen.getByPlaceholderText('Team name'), {
+    fireEvent.change(screen.getByPlaceholderText('Group name'), {
       target: { value: 'Manual Team' },
     });
     fireEvent.click(screen.getByTestId('team-create-agent-option-bare-aionrs'));
@@ -289,7 +289,7 @@ describe('TeamCreateModal', () => {
   it('switching_leader_serializes_exactly_one_leader', async () => {
     render(<TeamCreateModal visible onClose={vi.fn()} onCreated={vi.fn()} />);
 
-    fireEvent.change(screen.getByPlaceholderText('Team name'), {
+    fireEvent.change(screen.getByPlaceholderText('Group name'), {
       target: { value: 'Switch Leader Team' },
     });
     fireEvent.click(screen.getByTestId('team-create-agent-option-bare-aionrs'));
@@ -329,7 +329,7 @@ describe('TeamCreateModal', () => {
   it('removing_leader_promotes_first_remaining_member', async () => {
     render(<TeamCreateModal visible onClose={vi.fn()} onCreated={vi.fn()} />);
 
-    fireEvent.change(screen.getByPlaceholderText('Team name'), {
+    fireEvent.change(screen.getByPlaceholderText('Group name'), {
       target: { value: 'Promote Leader Team' },
     });
     fireEvent.click(screen.getByTestId('team-create-agent-option-bare-aionrs'));
@@ -357,7 +357,7 @@ describe('TeamCreateModal', () => {
     });
     render(<TeamCreateModal visible onClose={vi.fn()} onCreated={vi.fn()} />);
 
-    fireEvent.change(screen.getByPlaceholderText('Team name'), {
+    fireEvent.change(screen.getByPlaceholderText('Group name'), {
       target: { value: 'Model Failure Team' },
     });
     fireEvent.click(screen.getByTestId('team-create-agent-option-bare-aionrs'));
@@ -388,7 +388,7 @@ describe('TeamCreateModal · mobile (narrow screen)', () => {
     expect(screen.queryByTestId('team-create-layout')).not.toBeInTheDocument();
 
     // Header/footer copy stays aligned with desktop (same i18n keys).
-    expect(screen.getByRole('heading', { name: 'New Team' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'New Agent group' })).toBeInTheDocument();
     expect(screen.getByText('Selected members 0')).toBeInTheDocument();
     expect(screen.getByTestId('team-create-name-input')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Confirm Create' })).toBeDisabled();

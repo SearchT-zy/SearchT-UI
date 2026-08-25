@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 AionUi (aionui.com)
+ * Copyright 2025 SearchT-UI Contributors (Apache-2.0)
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -247,9 +247,9 @@ describe('MarkdownViewer', () => {
 
   it('suppresses Streamdown wheel-zoom over an inline mermaid diagram without blocking page scroll', () => {
     const { container } = render(<MarkdownViewer content='# doc' />);
-    // The scroll container (parent of .aionui-markdown) owns the capture-phase
+    // The scroll container (parent of .searcht-markdown) owns the capture-phase
     // wheel interceptor installed by MarkdownViewer.
-    const scroll = container.querySelector('.aionui-markdown')?.parentElement as HTMLElement;
+    const scroll = container.querySelector('.searcht-markdown')?.parentElement as HTMLElement;
     expect(scroll).toBeTruthy();
 
     // Simulate Streamdown's mermaid pan layer: a mermaid-block with a nested
@@ -273,7 +273,7 @@ describe('MarkdownViewer', () => {
 
   it('leaves wheel events outside a mermaid diagram untouched', () => {
     const { container } = render(<MarkdownViewer content='# doc' />);
-    const scroll = container.querySelector('.aionui-markdown')?.parentElement as HTMLElement;
+    const scroll = container.querySelector('.searcht-markdown')?.parentElement as HTMLElement;
     const plain = document.createElement('div');
     scroll.appendChild(plain);
     const spy = vi.fn();
