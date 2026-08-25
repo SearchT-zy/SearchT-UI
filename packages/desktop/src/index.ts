@@ -508,6 +508,24 @@ const createWindow = ({ showOnReady = true }: { showOnReady?: boolean } = {}): v
     webPreferences.backgroundThrottling = false;
   });
 
+  // Webview guests on Windows lose real (OS-level) input routing after
+  // navigation — renderer-side webview.focus() is not always enough to
+  // re-register it. Main-process WebContents::focus() activates the guest
+  // widget directly, so do it on every guest document and navigation.
+  app.on('web-contents-created', (_event, contents) => {
+    if (contents.getType() !== 'webview') return;
+    const refocusGuest = () => {
+      try {
+        if (!contents.isDestroyed()) contents.focus();
+      } catch {
+        // Guest tearing down; ignore.
+      }
+    };
+    contents.on('dom-ready', refocusGuest);
+    contents.on('did-navigate', refocusGuest);
+    contents.on('did-navigate-in-page', refocusGuest);
+  });
+
   scheduleStartupLogReport(mainWindow);
 
   // Show window after content is ready to prevent FOUC (Flash of Unstyled Content)

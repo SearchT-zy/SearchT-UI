@@ -42,13 +42,13 @@ const BrowserPage: React.FC = () => {
   useEffect(() => {
     const webview = webviewRef.current;
     if (!webview) return;
-    // Electron webviews on Windows can end up with visibilityState=hidden in
-    // the guest, which silently swallows ALL input events (clicks do nothing).
-    // The display-toggle reflow re-attaches the compositor layer and restores
-    // input — but running it unconditionally on every dom-ready tears down the
-    // layer per navigation and makes heavy sites extremely slow. So probe the
-    // guest's real visibilityState first and only pay for the reflow when the
-    // input path is actually broken.
+    // Electron webviews on Windows: real OS-level mouse input into the guest
+    // dies after navigation unless the embed layer is re-attached (the
+    // display-toggle reflow). Synthetic CDP clicks keep working, so testing
+    // must use real input. The reflow is required on EVERY dom-ready —
+    // "once per attach" and visibility-probing both left later documents
+    // dead. To keep heavy pages fast, run it deferred (after first paint
+    // settles) instead of synchronously at dom-ready.
     const applyInputFix = () => {
       try {
         webview.style.display = 'none';
@@ -60,34 +60,18 @@ const BrowserPage: React.FC = () => {
         // Guest not yet attached; safe to ignore.
       }
     };
+    const scheduleInputFix = () => {
+      requestAnimationFrame(() =>
+        requestAnimationFrame(() => {
+          setTimeout(applyInputFix, 200);
+        })
+      );
+    };
     const onDomReady = () => {
       setLoading(false);
       setCanGoBack(webview.canGoBack());
       setCanGoForward(webview.canGoForward());
-      // Probe the guest's visibility on every document: 'hidden' means the
-      // input path is broken (the Windows webview bug) and needs the reflow;
-      // 'visible' means clicks work and we only refocus — no layer teardown.
-      void webview
-        .executeJavaScript('document.visibilityState')
-        .then((state: unknown) => {
-          if (state === 'hidden') {
-            applyInputFix();
-          } else {
-            try {
-              webview.focus();
-            } catch {
-              // ignore
-            }
-          }
-        })
-        .catch(() => {
-          // executeJavaScript unavailable during teardown; refocus as fallback.
-          try {
-            webview.focus();
-          } catch {
-            // ignore
-          }
-        });
+      scheduleInputFix();
     };
     const onTitle = (event: CustomEvent<string>) => {
       setPageTitle(event.detail ?? '');
