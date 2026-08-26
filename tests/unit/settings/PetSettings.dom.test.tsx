@@ -22,6 +22,8 @@ vi.mock('@/common/adapter/ipcBridge', () => ({
   systemSettings: {
     getPetEnabled: { invoke: getPetEnabledMock },
     setPetEnabled: { invoke: setPetEnabledMock },
+    getPetCharacter: { invoke: vi.fn(() => Promise.resolve('classic')) },
+    setPetCharacter: { invoke: vi.fn(() => Promise.resolve()) },
     setPetSize: { invoke: vi.fn(() => Promise.resolve()) },
     setPetDnd: { invoke: vi.fn(() => Promise.resolve()) },
     setPetConfirmEnabled: { invoke: vi.fn(() => Promise.resolve()) },

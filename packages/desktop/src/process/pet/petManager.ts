@@ -18,6 +18,8 @@ import {
   unhookPetConfirm,
 } from './petConfirmManager';
 import type { PetSize, PetState } from './petTypes';
+import { resolvePetCharacter } from './petTypes';
+import { ProcessConfig } from '@process/utils/initStorage';
 
 /**
  * Check whether the current environment can support desktop pet windows.
@@ -341,20 +343,37 @@ function loadContent(): void {
   if (!petWindow || !petHitWindow) return;
   const rendererUrl = process.env['ELECTRON_RENDERER_URL'];
 
+  // Push the selected character once the pet renderer is ready to receive it
+  // (before any state swap) so the very first cross-fade already uses it.
+  petWindow.webContents.once('did-finish-load', () => {
+    void ProcessConfig.get('pet.character').then((characterId) => {
+      if (petWindow && !petWindow.isDestroyed()) {
+        petWindow.webContents.send('pet:character-changed', resolvePetCharacter(characterId).id);
+      }
+    });
+  });
+
   if (!app.isPackaged && rendererUrl) {
     petWindow.loadURL(`${rendererUrl}/pet/pet.html`).catch((error) => {
       console.error('[Pet] loadURL failed for pet window:', error);
     });
     petHitWindow.loadURL(`${rendererUrl}/pet/pet-hit.html`).catch((error) => {
-      console.error('[Pet] loadURL failed for pet-hit window:', error);
+      console.error('[Pet] loadURL failed for hit window:', error);
     });
   } else {
     petWindow.loadFile(path.join(RENDERER_DIR, 'pet.html')).catch((error) => {
       console.error('[Pet] loadFile failed for pet window:', error);
     });
     petHitWindow.loadFile(path.join(RENDERER_DIR, 'pet-hit.html')).catch((error) => {
-      console.error('[Pet] loadFile failed for pet-hit window:', error);
+      console.error('[Pet] loadFile failed for hit window:', error);
     });
+  }
+}
+
+/** Re-skin the live pet window to another character (no restart needed). */
+export function setPetCharacter(characterId: string): void {
+  if (petWindow && !petWindow.isDestroyed()) {
+    petWindow.webContents.send('pet:character-changed', resolvePetCharacter(characterId).id);
   }
 }
 

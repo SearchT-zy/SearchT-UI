@@ -10,6 +10,9 @@ contextBridge.exposeInMainWorld('petAPI', {
   onStateChange: (cb: (state: string) => void) => {
     ipcRenderer.on('pet:state-changed', (_e, state: string) => cb(state));
   },
+  onCharacterChanged: (cb: (characterId: string) => void) => {
+    ipcRenderer.on('pet:character-changed', (_e, characterId: string) => cb(characterId));
+  },
   onEyeMove: (cb: (data: { eyeDx: number; eyeDy: number; bodyDx: number; bodyRotate: number }) => void) => {
     ipcRenderer.on('pet:eye-move', (_e, data) => cb(data));
   },

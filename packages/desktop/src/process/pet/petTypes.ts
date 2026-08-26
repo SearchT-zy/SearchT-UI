@@ -108,3 +108,64 @@ export const AUTO_RETURN: Partial<Record<PetState, AutoReturnConfig>> = {
   'random-read': { target: 'idle', delayMs: 8000 },
   yawning: { target: 'dozing', delayMs: 3500 },
 };
+
+/**
+ * Pet characters — palette re-skins over the shared state SVG geometry.
+ * The base SVGs draw the classic blue-and-orange buddy; a character maps the
+ * base hex fills onto its own palette, applied at load time in the pet window
+ * (all 22 states recolor consistently).
+ */
+export type PetCharacterId =
+  | 'classic'
+  | 'stone-guardian'
+  | 'shadow-assassin'
+  | 'frost-mage'
+  | 'magma-core'
+  | 'void-sprite';
+
+export type PetCharacter = {
+  id: PetCharacterId;
+  /** Display name (zh) shown in the picker. */
+  name: string;
+  /** Preview swatches: [body, accent] */
+  swatch: [string, string];
+  /** Base-hex → character-hex replacements applied to every state SVG. */
+  palette: Record<string, string>;
+};
+
+const character = (
+  id: PetCharacterId,
+  name: string,
+  swatch: [string, string],
+  body: [string, string, string],
+  accent: [string, string, string]
+): PetCharacter => ({
+  id,
+  name,
+  swatch,
+  palette: {
+    // Body blues (dark → light) keep relative ordering in each palette.
+    '#8891b8': body[0],
+    '#9098b8': body[0],
+    '#97A0C5': body[1],
+    '#94BDFF': body[2],
+    // Orange accents (main → deep).
+    '#e8714a': accent[0],
+    '#FF6B35': accent[1],
+    '#FF5B24': accent[2],
+  },
+});
+
+export const PET_CHARACTERS: PetCharacter[] = [
+  { id: 'classic', name: '经典蓝宝', swatch: ['#8891b8', '#e8714a'], palette: {} },
+  character('stone-guardian', '磐石卫士', ['#8a8f98', '#7ba05b'], ['#8a8f98', '#a5abb5', '#c4c9d1'], ['#7ba05b', '#95c37a', '#5f8a47']),
+  character('shadow-assassin', '暗影刺客', ['#3d3a52', '#a78bfa'], ['#3d3a52', '#4a4663', '#5d5980'], ['#a78bfa', '#c4b5fd', '#8b5cf6']),
+  character('frost-mage', '寒冰法师', ['#a8d8ea', '#38bdf8'], ['#a8d8ea', '#c4e8f5', '#dff2fa'], ['#38bdf8', '#7dd3fc', '#0ea5e9']),
+  character('magma-core', '熔岩核芯', ['#4a3c39', '#f59e0b'], ['#4a3c39', '#5d4c48', '#72605b'], ['#f59e0b', '#fbbf24', '#d97706']),
+  character('void-sprite', '虚空精灵', ['#6f47a8', '#e879f9'], ['#6f47a8', '#8259bd', '#9a77ce'], ['#e879f9', '#f0abfc', '#c026d3']),
+];
+
+export const DEFAULT_PET_CHARACTER: PetCharacterId = 'classic';
+
+export const resolvePetCharacter = (id: string | undefined | null): PetCharacter =>
+  PET_CHARACTERS.find((c) => c.id === id) ?? PET_CHARACTERS[0];

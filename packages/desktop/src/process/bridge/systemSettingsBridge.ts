@@ -88,6 +88,17 @@ export function initSystemSettingsBridge(): void {
     resizePetWindow(size as PetSize);
   });
 
+  ipcBridge.systemSettings.getPetCharacter.provider(async () => {
+    const value = await ProcessConfig.get('pet.character');
+    return value ?? 'classic';
+  });
+
+  ipcBridge.systemSettings.setPetCharacter.provider(async ({ character }) => {
+    await ProcessConfig.set('pet.character', character);
+    const { setPetCharacter } = await import('@process/pet/petManager');
+    setPetCharacter(character);
+  });
+
   ipcBridge.systemSettings.getPetDnd.provider(async () => {
     const value = await ProcessConfig.get('pet.dnd');
     return value ?? false;

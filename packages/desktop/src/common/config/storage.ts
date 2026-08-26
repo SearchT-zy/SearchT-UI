@@ -75,6 +75,8 @@ export interface IConfigStorageRefer {
   // Desktop Pet: whether tool-call confirmations are routed to the pet's bubble
   // (true) or remain in the main chat window (false). Default true.
   'pet.confirmEnabled'?: boolean;
+  // Desktop Pet: selected character id (see PET_CHARACTERS in petTypes.ts)
+  'pet.character'?: string;
 }
 
 /**

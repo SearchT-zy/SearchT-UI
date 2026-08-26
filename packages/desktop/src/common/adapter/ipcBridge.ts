@@ -1614,6 +1614,8 @@ export const systemSettings = {
   setPetEnabled: bridge.buildProvider<void, { enabled: boolean }>('system-settings:set-pet-enabled'),
   getPetSize: bridge.buildProvider<number, void>('system-settings:get-pet-size'),
   setPetSize: bridge.buildProvider<void, { size: number }>('system-settings:set-pet-size'),
+  getPetCharacter: bridge.buildProvider<string, void>('system-settings:get-pet-character'),
+  setPetCharacter: bridge.buildProvider<void, { character: string }>('system-settings:set-pet-character'),
   getPetDnd: bridge.buildProvider<boolean, void>('system-settings:get-pet-dnd'),
   setPetDnd: bridge.buildProvider<void, { dnd: boolean }>('system-settings:set-pet-dnd'),
   getPetConfirmEnabled: bridge.buildProvider<boolean, void>('system-settings:get-pet-confirm-enabled'),

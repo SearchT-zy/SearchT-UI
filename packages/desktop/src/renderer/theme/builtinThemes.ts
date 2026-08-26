@@ -28,6 +28,9 @@ import quantumVioletCss from '@renderer/pages/settings/AppearanceSettings/preset
 import carbonAmberCss from '@renderer/pages/settings/AppearanceSettings/presets/carbon-amber.css?raw';
 import auroraTealCss from '@renderer/pages/settings/AppearanceSettings/presets/aurora-teal.css?raw';
 import dawnBlueCss from '@renderer/pages/settings/AppearanceSettings/presets/dawn-blue.css?raw';
+import nebulaDriftCss from '@renderer/pages/settings/AppearanceSettings/presets/nebula-drift.css?raw';
+import sunsetRidgeCss from '@renderer/pages/settings/AppearanceSettings/presets/sunset-ridge.css?raw';
+import emeraldMeshCss from '@renderer/pages/settings/AppearanceSettings/presets/emerald-mesh.css?raw';
 
 const T0 = 0;
 
@@ -71,6 +74,9 @@ export const BUILTIN_THEMES: Theme[] = [
   decorative('carbon-amber', '碳纤琥珀 Carbon', 'dark', carbonAmberCss),
   decorative('aurora-teal', '极光翠 Aurora', 'dark', auroraTealCss),
   decorative('dawn-blue', '曙光蓝 Dawn', 'light', dawnBlueCss),
+  decorative('nebula-drift', '星云漫游 Nebula（图片）', 'dark', nebulaDriftCss),
+  decorative('sunset-ridge', '落日山脊 Sunset（图片）', 'dark', sunsetRidgeCss),
+  decorative('emerald-mesh', '翡翠网格 Mesh（图片）', 'dark', emeraldMeshCss),
 ];
 
 export const BUILTIN_THEME_IDS = new Set(BUILTIN_THEMES.map((t) => t.id));

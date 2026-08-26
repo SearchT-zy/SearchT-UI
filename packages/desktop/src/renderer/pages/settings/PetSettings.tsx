@@ -10,6 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { systemSettings } from '@/common/adapter/ipcBridge';
 import { configService } from '@/common/config/configService';
 import { isElectronDesktop } from '@/renderer/utils/platform';
+import { PET_CHARACTERS } from '@process/pet/petTypes';
 import SettingsPageWrapper from './components/SettingsPageWrapper';
 import PreferenceRow from '@/renderer/components/settings/SettingsModal/contents/SystemModalContent/PreferenceRow';
 import AionScrollArea from '@/renderer/components/base/AionScrollArea';
@@ -21,6 +22,7 @@ const PetSettings: React.FC = () => {
   const [size, setSize] = useState(280);
   const [dnd, setDnd] = useState(false);
   const [confirmEnabled, setConfirmEnabled] = useState(true);
+  const [character, setCharacter] = useState('classic');
   const { t } = useTranslation();
   const viewMode = useSettingsViewMode();
   const isPageMode = viewMode === 'page';
@@ -45,10 +47,26 @@ const PetSettings: React.FC = () => {
         setEnabled(false);
         setEnabledResolved(true);
       });
+    systemSettings.getPetCharacter
+      .invoke()
+      .then((value) => {
+        if (active) setCharacter(value);
+      })
+      .catch((): undefined => undefined);
     return () => {
       active = false;
     };
   }, []);
+
+  const handleCharacterChange = useCallback((id: string): void => {
+    const prev = character;
+    setCharacter(id);
+    configService.setLocal('pet.character', id);
+    systemSettings.setPetCharacter.invoke({ character: id }).catch((): void => {
+      setCharacter(prev);
+      configService.setLocal('pet.character', prev);
+    });
+  }, [character]);
 
   const handleEnabledChange = useCallback((checked: boolean) => {
     setEnabled(checked);
@@ -115,6 +133,32 @@ const PetSettings: React.FC = () => {
           disabled={!enabledResolved}
           onChange={handleEnabledChange}
         />
+      ),
+    },
+    {
+      key: 'character',
+      label: t('pet.character', { defaultValue: '角色' }),
+      component: (
+        <div className='flex flex-wrap gap-8px'>
+          {PET_CHARACTERS.map((c) => (
+            <button
+              key={c.id}
+              type='button'
+              aria-label={c.name}
+              onClick={() => handleCharacterChange(c.id)}
+              className={`flex cursor-pointer items-center gap-6px border border-solid px-10px py-4px rd-8px text-12px transition-colors ${
+                character === c.id ? 'border-primary-6 bg-fill-2 text-t-primary' : 'border-border-2 text-t-secondary hover:border-primary-5'
+              }`}
+            >
+              <span
+                aria-hidden='true'
+                className='inline-block size-12px rd-full'
+                style={{ background: `linear-gradient(135deg, ${c.swatch[0]} 50%, ${c.swatch[1]} 50%)` }}
+              />
+              {c.name}
+            </button>
+          ))}
+        </div>
       ),
     },
     {

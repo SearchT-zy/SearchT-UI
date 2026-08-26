@@ -1,0 +1,191 @@
+/* Emerald Mesh 翡翠网格 — dark image theme
+ * Tech "grid horizon" look: deep emerald backdrop with a perspective
+ * neon grid, glow accents, and scanline shimmer. Pure CSS, no assets. */
+
+:root {
+  --color-primary: #10b981;
+  --primary: #10b981;
+  --color-primary-light-1: #34d399;
+  --color-primary-light-2: #6ee7b7;
+  --color-primary-light-3: #a7f3d0;
+  --color-primary-dark-1: #059669;
+  --primary-rgb: 16, 185, 129;
+
+  --brand: #22d3ee;
+  --brand-light: #0a2429;
+  --brand-hover: #67e8f9;
+
+  --bg-base: #04100c;
+  --bg-1: #061510;
+  --bg-2: #0a1e17;
+  --bg-3: #0e2a20;
+  --bg-4: #143629;
+  --color-bg-1: #061510;
+  --color-bg-2: #0a1e17;
+  --color-bg-3: #0e2a20;
+  --color-bg-4: #143629;
+
+  --bg-hover: #0c231b;
+  --bg-active: #102b21;
+
+  --text-primary: #dcf3e9;
+  --text-secondary: #8fc0ab;
+  --text-disabled: #4f7462;
+  --text-0: #e6f7ef;
+  --text-white: #e6f7ef;
+  --color-text-1: #dcf3e9;
+  --color-text-2: #8fc0ab;
+  --color-text-3: #648e7c;
+  --color-text-4: #41604f;
+
+  --border-base: #123528;
+  --border-light: #0d281e;
+  --color-border: #123528;
+  --color-border-1: #123528;
+  --color-border-2: #0d281e;
+
+  --fill: #061510;
+  --color-fill: #061510;
+  --fill-0: rgba(52, 211, 153, 0.06);
+  --fill-white-to-black: #04100c;
+  --dialog-fill-0: #0e2a20;
+  --inverse: #e6f7ef;
+
+  --success: #34d399;
+  --warning: #fbbf24;
+  --danger: #f87171;
+  --info: #22d3ee;
+
+  --message-user-bg: #103226;
+  --message-tips-bg: #0c271e;
+  --workspace-btn-bg: #0a2018;
+  --color-guid-agent-bar: #0b241c;
+}
+
+[data-theme='dark'] {
+  --color-primary: #34d399;
+  --primary: #34d399;
+  --color-primary-light-1: #6ee7b7;
+  --color-primary-light-2: #a7f3d0;
+  --color-primary-light-3: #d1fae5;
+  --color-primary-dark-1: #10b981;
+  --primary-rgb: 52, 211, 153;
+
+  --brand: #22d3ee;
+  --brand-light: #0a2429;
+  --brand-hover: #67e8f9;
+
+  --bg-base: #04100c;
+  --bg-1: #061510;
+  --bg-2: #0a1e17;
+  --bg-3: #0e2a20;
+  --bg-4: #143629;
+  --color-bg-1: #061510;
+  --color-bg-2: #0a1e17;
+  --color-bg-3: #0e2a20;
+  --color-bg-4: #143629;
+
+  --bg-hover: #0c231b;
+  --bg-active: #102b21;
+
+  --text-primary: #dcf3e9;
+  --text-secondary: #8fc0ab;
+  --text-disabled: #4f7462;
+  --text-0: #e6f7ef;
+  --text-white: #e6f7ef;
+  --color-text-1: #dcf3e9;
+  --color-text-2: #8fc0ab;
+  --color-text-3: #648e7c;
+  --color-text-4: #41604f;
+
+  --border-base: #123528;
+  --border-light: #0d281e;
+  --color-border: #123528;
+  --color-border-1: #123528;
+  --color-border-2: #0d281e;
+
+  --fill: #061510;
+  --color-fill: #061510;
+  --fill-0: rgba(52, 211, 153, 0.06);
+  --fill-white-to-black: #04100c;
+  --dialog-fill-0: #0e2a20;
+  --inverse: #e6f7ef;
+
+  --success: #34d399;
+  --warning: #fbbf24;
+  --danger: #f87171;
+  --info: #22d3ee;
+
+  --message-user-bg: #103226;
+  --message-tips-bg: #0c271e;
+  --workspace-btn-bg: #0a2018;
+  --color-guid-agent-bar: #0b241c;
+}
+
+/* ===== Perspective neon grid over emerald night (dark) ===== */
+[data-theme='dark'] body,
+[data-theme='dark'] #root {
+  background-color: #04100c;
+  background-image:
+    /* horizon glow */
+    radial-gradient(1000px 340px at 50% 118%, rgba(16, 185, 129, 0.28), transparent 58%),
+    radial-gradient(700px 300px at 82% -4%, rgba(34, 211, 238, 0.12), transparent 60%),
+    radial-gradient(600px 320px at 8% 12%, rgba(16, 185, 129, 0.10), transparent 62%),
+    linear-gradient(180deg, #04100c 0%, #051510 60%, #06170f 100%);
+  background-attachment: fixed;
+}
+
+/* Grid: verticals fanning + stacked horizontals compressed toward horizon. */
+[data-theme='dark'] body::before {
+  content: '';
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 46vh;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    /* vertical grid lines (repeating, fading up) */
+    repeating-linear-gradient(90deg, rgba(52, 211, 153, 0.16) 0 1px, transparent 1px 64px),
+    /* horizontal grid lines compressed toward the horizon */
+    repeating-linear-gradient(0deg, rgba(52, 211, 153, 0.12) 0 1px, transparent 1px 40px);
+  background-size: 100% 100%, 100% 100%;
+  mask-image: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.25) 18%, #000 100%);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.25) 18%, #000 100%);
+  transform: perspective(420px) rotateX(58deg);
+  transform-origin: bottom center;
+  opacity: 0.75;
+}
+
+/* Scanline shimmer overlay (subtle CRT-tech feel). */
+[data-theme='dark'] body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: repeating-linear-gradient(0deg, rgba(230, 247, 239, 0.022) 0 1px, transparent 1px 3px);
+}
+
+[data-theme='dark'] .bg-2,
+[data-theme='dark'] .bg-bg-2 {
+  background-color: rgba(10, 30, 23, 0.84) !important;
+  backdrop-filter: blur(10px);
+}
+
+[data-theme='dark'] .bg-1,
+[data-theme='dark'] .bg-bg-1 {
+  background-color: rgba(6, 21, 16, 0.68);
+}
+
+/* Light mode: mint lab wash. */
+body,
+#root {
+  background-color: #f2fbf6;
+  background-image:
+    radial-gradient(820px 400px at 14% -4%, rgba(16, 185, 129, 0.10), transparent 58%),
+    radial-gradient(640px 340px at 88% 8%, rgba(34, 211, 238, 0.09), transparent 60%),
+    linear-gradient(180deg, #f4fcf8 0%, #eefaf4 100%);
+  background-attachment: fixed;
+}

@@ -1,0 +1,193 @@
+/* Sunset Ridge 落日山脊 — dark image theme
+ * A dusky mountain-sky impression built from CSS gradients only: banded
+ * dusk sky, ridge silhouettes via layered linear-gradients, warm horizon
+ * glow. No external assets. */
+
+:root {
+  --color-primary: #e35d5d;
+  --primary: #e35d5d;
+  --color-primary-light-1: #ef7d76;
+  --color-primary-light-2: #f59e93;
+  --color-primary-light-3: #fbbfb3;
+  --color-primary-dark-1: #c74848;
+  --primary-rgb: 227, 93, 93;
+
+  --brand: #d97706;
+  --brand-light: #2e2113;
+  --brand-hover: #f59e0b;
+
+  --bg-base: #140d0f;
+  --bg-1: #1a1114;
+  --bg-2: #241619;
+  --bg-3: #2f1d20;
+  --bg-4: #3d262a;
+  --color-bg-1: #1a1114;
+  --color-bg-2: #241619;
+  --color-bg-3: #2f1d20;
+  --color-bg-4: #3d262a;
+
+  --bg-hover: #251719;
+  --bg-active: #2b1b1e;
+
+  --text-primary: #f6e9e4;
+  --text-secondary: #c4a39a;
+  --text-disabled: #7c5f58;
+  --text-0: #faf0ec;
+  --text-white: #faf0ec;
+  --color-text-1: #f6e9e4;
+  --color-text-2: #c4a39a;
+  --color-text-3: #9a7c73;
+  --color-text-4: #6d534c;
+
+  --border-base: #362226;
+  --border-light: #2a191d;
+  --color-border: #362226;
+  --color-border-1: #362226;
+  --color-border-2: #2a191d;
+
+  --fill: #1a1114;
+  --color-fill: #1a1114;
+  --fill-0: rgba(245, 158, 11, 0.05);
+  --fill-white-to-black: #140d0f;
+  --dialog-fill-0: #2a191d;
+  --inverse: #faf0ec;
+
+  --success: #6ee7a0;
+  --warning: #fbbf24;
+  --danger: #f87171;
+  --info: #ef7d76;
+
+  --message-user-bg: #35201f;
+  --message-tips-bg: #2a1a1a;
+  --workspace-btn-bg: #241719;
+  --color-guid-agent-bar: #27181a;
+}
+
+[data-theme='dark'] {
+  --color-primary: #ef7d76;
+  --primary: #ef7d76;
+  --color-primary-light-1: #f59e93;
+  --color-primary-light-2: #fbbfb3;
+  --color-primary-light-3: #fdd8d0;
+  --color-primary-dark-1: #d95f57;
+  --primary-rgb: 239, 125, 118;
+
+  --brand: #f59e0b;
+  --brand-light: #2e2113;
+  --brand-hover: #fbbf24;
+
+  --bg-base: #140d0f;
+  --bg-1: #1a1114;
+  --bg-2: #241619;
+  --bg-3: #2f1d20;
+  --bg-4: #3d262a;
+  --color-bg-1: #1a1114;
+  --color-bg-2: #241619;
+  --color-bg-3: #2f1d20;
+  --color-bg-4: #3d262a;
+
+  --bg-hover: #251719;
+  --bg-active: #2b1b1e;
+
+  --text-primary: #f6e9e4;
+  --text-secondary: #c4a39a;
+  --text-disabled: #7c5f58;
+  --text-0: #faf0ec;
+  --text-white: #faf0ec;
+  --color-text-1: #f6e9e4;
+  --color-text-2: #c4a39a;
+  --color-text-3: #9a7c73;
+  --color-text-4: #6d534c;
+
+  --border-base: #362226;
+  --border-light: #2a191d;
+  --color-border: #362226;
+  --color-border-1: #362226;
+  --color-border-2: #2a191d;
+
+  --fill: #1a1114;
+  --color-fill: #1a1114;
+  --fill-0: rgba(245, 158, 11, 0.05);
+  --fill-white-to-black: #140d0f;
+  --dialog-fill-0: #2a191d;
+  --inverse: #faf0ec;
+
+  --success: #6ee7a0;
+  --warning: #fbbf24;
+  --danger: #f87171;
+  --info: #ef7d76;
+
+  --message-user-bg: #35201f;
+  --message-tips-bg: #2a1a1a;
+  --workspace-btn-bg: #241719;
+  --color-guid-agent-bar: #27181a;
+}
+
+/* ===== Dusk sky + ridge silhouettes (dark) ===== */
+[data-theme='dark'] body,
+[data-theme='dark'] #root {
+  background-color: #140d0f;
+  background-image:
+    /* horizon glow */ radial-gradient(1200px 380px at 50% 108%, rgba(249, 115, 22, 0.30), transparent 60%),
+    /* dusk bands */ linear-gradient(180deg, #191019 0%, #241421 34%, #341a20 58%, #43201d 76%, #4d241a 92%, #140d0f 100%),
+    /* upper cool wash */ radial-gradient(900px 420px at 76% -6%, rgba(129, 74, 181, 0.22), transparent 62%);
+  background-attachment: fixed;
+}
+
+/* Ridge layers: three jagged silhouettes via stacked linear-gradients
+   (each uses a soft diagonal pattern that reads as distant mountains). */
+[data-theme='dark'] body::before {
+  content: '';
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 42vh;
+  pointer-events: none;
+  z-index: 0;
+  background-repeat: no-repeat;
+  background-image:
+    /* front ridge (darkest) */
+    linear-gradient(75deg, transparent 0 14%, #12090b 14.5% 26%, transparent 26.5% 40%, #12090b 40.5% 58%, transparent 58.5%),
+    /* mid ridge */
+    linear-gradient(100deg, transparent 0 8%, #1c1014 8.5% 22%, transparent 22.5% 36%, #1c1014 36.5% 52%, transparent 52.5% 68%, #1c1014 68.5% 84%, transparent 84.5%),
+    /* far ridge (tinted by dusk) */
+    linear-gradient(118deg, transparent 0 18%, #2a161a 18.5% 34%, transparent 34.5% 52%, #2a161a 52.5% 74%, transparent 74.5% 92%, #2a161a 92.5% 100%, transparent 100.5%);
+  background-size: 100% 34vh, 100% 26vh, 100% 18vh;
+  background-position: left bottom, left bottom, left bottom;
+  opacity: 0.9;
+  mask-image: linear-gradient(180deg, transparent 0%, #000 18%, #000 100%);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 18%, #000 100%);
+}
+
+/* Warm vignette keeps content readable near the horizon glow. */
+[data-theme='dark'] body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: linear-gradient(180deg, rgba(10, 6, 8, 0.35) 0%, transparent 22%, transparent 62%, rgba(10, 6, 8, 0.45) 100%);
+}
+
+[data-theme='dark'] .bg-2,
+[data-theme='dark'] .bg-bg-2 {
+  background-color: rgba(36, 22, 25, 0.82) !important;
+  backdrop-filter: blur(10px);
+}
+
+[data-theme='dark'] .bg-1,
+[data-theme='dark'] .bg-bg-1 {
+  background-color: rgba(26, 17, 20, 0.65);
+}
+
+/* Light mode: soft peach dawn wash. */
+body,
+#root {
+  background-color: #fbf6f2;
+  background-image:
+    radial-gradient(900px 420px at 18% -4%, rgba(249, 115, 22, 0.10), transparent 58%),
+    radial-gradient(720px 380px at 86% 6%, rgba(217, 70, 239, 0.07), transparent 60%),
+    linear-gradient(180deg, #fcf8f4 0%, #f8f0ea 100%);
+  background-attachment: fixed;
+}

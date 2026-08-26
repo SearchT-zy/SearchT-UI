@@ -1,0 +1,189 @@
+/* Nebula Drift 星云漫游 — dark image theme
+ * Deep-space nebula backdrop built purely from layered CSS gradients and
+ * radial glows (no external images, no copyright): aurora bands, star
+ * speckle, and a soft vignette. */
+
+:root {
+  --color-primary: #7c8cf8;
+  --primary: #7c8cf8;
+  --color-primary-light-1: #9aa8fb;
+  --color-primary-light-2: #b8c2fd;
+  --color-primary-light-3: #d5dbfe;
+  --color-primary-dark-1: #5f6fe0;
+  --primary-rgb: 124, 140, 248;
+
+  --brand: #34d399;
+  --brand-light: #1a2b26;
+  --brand-hover: #6ee7b7;
+
+  --bg-base: #070912;
+  --bg-1: #0b0e1a;
+  --bg-2: #111527;
+  --bg-3: #171c33;
+  --bg-4: #202647;
+  --color-bg-1: #0b0e1a;
+  --color-bg-2: #111527;
+  --color-bg-3: #171c33;
+  --color-bg-4: #202647;
+
+  --bg-hover: #131830;
+  --bg-active: #182043;
+
+  --text-primary: #e6e9f8;
+  --text-secondary: #9aa3c7;
+  --text-disabled: #565e85;
+  --text-0: #eef1fb;
+  --text-white: #eef1fb;
+  --color-text-1: #e6e9f8;
+  --color-text-2: #9aa3c7;
+  --color-text-3: #6f789e;
+  --color-text-4: #4a5175;
+
+  --border-base: #1d2340;
+  --border-light: #161b33;
+  --color-border: #1d2340;
+  --color-border-1: #1d2340;
+  --color-border-2: #161b33;
+
+  --fill: #0b0e1a;
+  --color-fill: #0b0e1a;
+  --fill-0: rgba(154, 168, 251, 0.06);
+  --fill-white-to-black: #070912;
+  --dialog-fill-0: #151a30;
+  --inverse: #eef1fb;
+
+  --success: #34d399;
+  --warning: #fbbf24;
+  --danger: #f87171;
+  --info: #7c8cf8;
+
+  --message-user-bg: #1a2145;
+  --message-tips-bg: #141a38;
+  --workspace-btn-bg: #12172e;
+  --color-guid-agent-bar: #141a36;
+}
+
+[data-theme='dark'] {
+  --color-primary: #7c8cf8;
+  --primary: #7c8cf8;
+  --color-primary-light-1: #9aa8fb;
+  --color-primary-light-2: #b8c2fd;
+  --color-primary-light-3: #d5dbfe;
+  --color-primary-dark-1: #5f6fe0;
+  --primary-rgb: 124, 140, 248;
+
+  --bg-base: #070912;
+  --bg-1: #0b0e1a;
+  --bg-2: #111527;
+  --bg-3: #171c33;
+  --bg-4: #202647;
+  --color-bg-1: #0b0e1a;
+  --color-bg-2: #111527;
+  --color-bg-3: #171c33;
+  --color-bg-4: #202647;
+
+  --bg-hover: #131830;
+  --bg-active: #182043;
+
+  --text-primary: #e6e9f8;
+  --text-secondary: #9aa3c7;
+  --text-disabled: #565e85;
+  --text-0: #eef1fb;
+  --text-white: #eef1fb;
+  --color-text-1: #e6e9f8;
+  --color-text-2: #9aa3c7;
+  --color-text-3: #6f789e;
+  --color-text-4: #4a5175;
+
+  --border-base: #1d2340;
+  --border-light: #161b33;
+  --color-border: #1d2340;
+  --color-border-1: #1d2340;
+  --color-border-2: #161b33;
+
+  --fill: #0b0e1a;
+  --color-fill: #0b0e1a;
+  --fill-0: rgba(154, 168, 251, 0.06);
+  --fill-white-to-black: #070912;
+  --dialog-fill-0: #151a30;
+  --inverse: #eef1fb;
+
+  --success: #34d399;
+  --warning: #fbbf24;
+  --danger: #f87171;
+  --info: #7c8cf8;
+
+  --message-user-bg: #1a2145;
+  --message-tips-bg: #141a38;
+  --workspace-btn-bg: #12172e;
+  --color-guid-agent-bar: #141a36;
+}
+
+/* ===== Nebula backdrop (dark): layered gradients over the app root ===== */
+[data-theme='dark'] body,
+[data-theme='dark'] #root {
+  background-color: #070912;
+  background-image:
+    radial-gradient(1100px 520px at 12% -8%, rgba(99, 102, 241, 0.28), transparent 62%),
+    radial-gradient(900px 480px at 88% 12%, rgba(56, 189, 248, 0.20), transparent 60%),
+    radial-gradient(760px 420px at 72% 96%, rgba(217, 70, 239, 0.16), transparent 64%),
+    radial-gradient(520px 320px at 22% 82%, rgba(52, 211, 153, 0.12), transparent 60%),
+    conic-gradient(from 210deg at 60% 40%, rgba(139, 92, 246, 0.06), transparent 30%, rgba(34, 211, 238, 0.05) 60%, transparent 85%),
+    linear-gradient(180deg, #070912 0%, #090c18 55%, #070912 100%);
+  background-attachment: fixed;
+}
+
+/* Star speckle: two layered dot grids at different scales/densities. */
+[data-theme='dark'] body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    radial-gradient(1.4px 1.4px at 18% 22%, rgba(255, 255, 255, 0.85), transparent 100%),
+    radial-gradient(1.1px 1.1px at 42% 12%, rgba(214, 226, 255, 0.65), transparent 100%),
+    radial-gradient(1.6px 1.6px at 66% 34%, rgba(255, 255, 255, 0.55), transparent 100%),
+    radial-gradient(1px 1px at 82% 18%, rgba(196, 216, 255, 0.7), transparent 100%),
+    radial-gradient(1.3px 1.3px at 30% 64%, rgba(255, 255, 255, 0.4), transparent 100%),
+    radial-gradient(1px 1px at 56% 78%, rgba(224, 231, 255, 0.5), transparent 100%),
+    radial-gradient(1.5px 1.5px at 90% 58%, rgba(255, 255, 255, 0.45), transparent 100%),
+    radial-gradient(1px 1px at 8% 46%, rgba(255, 255, 255, 0.35), transparent 100%),
+    radial-gradient(1.2px 1.2px at 74% 88%, rgba(209, 222, 255, 0.4), transparent 100%),
+    radial-gradient(1px 1px at 38% 92%, rgba(255, 255, 255, 0.3), transparent 100%);
+  opacity: 0.8;
+}
+
+/* Soft vignette so text areas keep contrast over the glows. */
+[data-theme='dark'] body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(120% 90% at 50% 42%, transparent 55%, rgba(4, 6, 14, 0.5) 100%);
+}
+
+/* Panels gain a translucent glass feel so the backdrop shows through. */
+[data-theme='dark'] .bg-2,
+[data-theme='dark'] .bg-bg-2 {
+  background-color: rgba(17, 21, 39, 0.82) !important;
+  backdrop-filter: blur(10px);
+}
+
+[data-theme='dark'] .bg-1,
+[data-theme='dark'] .bg-bg-1 {
+  background-color: rgba(11, 14, 26, 0.65);
+}
+
+/* Light mode: soft aurora-morning wash (subtle, keeps readability). */
+body,
+#root {
+  background-color: #f6f7fc;
+  background-image:
+    radial-gradient(900px 460px at 10% -6%, rgba(99, 102, 241, 0.12), transparent 60%),
+    radial-gradient(760px 400px at 92% 8%, rgba(56, 189, 248, 0.10), transparent 58%),
+    radial-gradient(600px 360px at 70% 100%, rgba(217, 70, 239, 0.07), transparent 62%),
+    linear-gradient(180deg, #f7f8fd 0%, #f3f5fb 100%);
+  background-attachment: fixed;
+}
