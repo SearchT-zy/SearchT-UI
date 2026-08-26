@@ -1,0 +1,151 @@
+/* Carbon Amber 碳纤琥珀 — industrial dark theme
+ * Neutral carbon greys with warm amber accents; machined-metal texture,
+ * precision-instrument feel. */
+
+:root {
+  --color-primary: #b45309;
+  --primary: #b45309;
+  --color-primary-light-1: #d97706;
+  --color-primary-light-2: #f59e0b;
+  --color-primary-light-3: #fbbf24;
+  --color-primary-dark-1: #92400e;
+  --primary-rgb: 180, 83, 9;
+
+  --brand: #475569;
+  --brand-light: #e2e8f0;
+  --brand-hover: #334155;
+
+  --aou-1: #fafafa;
+  --aou-2: #f4f4f5;
+  --aou-3: #e4e4e7;
+  --aou-4: #d4d4d8;
+  --aou-5: #a1a1aa;
+  --aou-6: #71717a;
+  --aou-7: #52525b;
+  --aou-8: #3f3f46;
+  --aou-9: #27272a;
+  --aou-10: #18181b;
+
+  --bg-base: #fafafa;
+  --bg-1: #f4f4f5;
+  --bg-2: #e9e9ec;
+  --bg-3: #dcdce0;
+  --bg-4: #c3c3c9;
+  --color-bg-1: #f4f4f5;
+  --color-bg-2: #e9e9ec;
+  --color-bg-3: #dcdce0;
+  --color-bg-4: #c3c3c9;
+
+  --bg-hover: #eeeeef;
+  --bg-active: #e6e6e9;
+
+  --text-primary: #18181b;
+  --text-secondary: #52525b;
+  --text-disabled: #a1a1aa;
+  --text-0: #18181b;
+  --text-white: #fafafa;
+  --color-text-1: #18181b;
+  --color-text-2: #52525b;
+  --color-text-3: #71717a;
+  --color-text-4: #a1a1aa;
+
+  --border-base: #d4d4d8;
+  --border-light: #e4e4e7;
+  --color-border: #d4d4d8;
+  --color-border-1: #d4d4d8;
+  --color-border-2: #e4e4e7;
+
+  --fill: #f4f4f5;
+  --color-fill: #f4f4f5;
+  --fill-0: rgba(24, 24, 27, 0.04);
+  --fill-white-to-black: #fafafa;
+  --dialog-fill-0: #ffffff;
+  --inverse: #18181b;
+
+  --success: #059669;
+  --warning: #d97706;
+  --danger: #dc2626;
+  --info: #0284c7;
+
+  --message-user-bg: #fef3c7;
+  --message-tips-bg: #fffbeb;
+  --workspace-btn-bg: #f4f4f5;
+  --color-guid-agent-bar: #e9e9ec;
+}
+
+[data-theme='dark'] {
+  --color-primary: #f59e0b;
+  --primary: #f59e0b;
+  --color-primary-light-1: #fbbf24;
+  --color-primary-light-2: #fcd34d;
+  --color-primary-light-3: #fde68a;
+  --color-primary-dark-1: #d97706;
+  --primary-rgb: 245, 158, 11;
+
+  --brand: #a1a1aa;
+  --brand-light: #27272a;
+  --brand-hover: #d4d4d8;
+
+  --aou-1: #101114;
+  --aou-2: #16181c;
+  --aou-3: #1c1f24;
+  --aou-4: #23272d;
+  --aou-5: #2e333b;
+  --aou-6: #3d434d;
+  --aou-7: #525a66;
+  --aou-8: #6e7784;
+  --aou-9: #9aa3b0;
+  --aou-10: #d6dbe2;
+
+  --bg-base: #0b0c0e;
+  --bg-1: #101114;
+  --bg-2: #16181c;
+  --bg-3: #1c1f24;
+  --bg-4: #23272d;
+  --bg-5: #2e333b;
+  --bg-6: #3d434d;
+  --bg-8: #6e7784;
+  --bg-9: #9aa3b0;
+  --bg-10: #d6dbe2;
+  --color-bg-1: #101114;
+  --color-bg-2: #16181c;
+  --color-bg-3: #1c1f24;
+  --color-bg-4: #23272d;
+
+  --bg-hover: #191c21;
+  --bg-active: #1f232a;
+
+  --text-primary: #f2f0eb;
+  --text-secondary: #9aa3b0;
+  --text-disabled: #525a66;
+  --text-0: #fafaf9;
+  --text-white: #fafaf9;
+  --color-text-1: #f2f0eb;
+  --color-text-2: #9aa3b0;
+  --color-text-3: #6e7784;
+  --color-text-4: #4a505a;
+
+  --border-base: #23272d;
+  --border-light: #1c1f24;
+  --border-special: #2e333b;
+  --color-border: #23272d;
+  --color-border-1: #23272d;
+  --color-border-2: #1c1f24;
+
+  --fill: #101114;
+  --color-fill: #101114;
+  --fill-0: rgba(245, 158, 11, 0.06);
+  --fill-white-to-black: #0b0c0e;
+  --dialog-fill-0: #1c1f24;
+  --inverse: #fafaf9;
+
+  --success: #34d399;
+  --warning: #fbbf24;
+  --danger: #f87171;
+  --info: #38bdf8;
+
+  --message-user-bg: #26221a;
+  --message-tips-bg: #1e1b15;
+  --workspace-btn-bg: #191c21;
+  --color-guid-agent-bar: #1a1d22;
+}

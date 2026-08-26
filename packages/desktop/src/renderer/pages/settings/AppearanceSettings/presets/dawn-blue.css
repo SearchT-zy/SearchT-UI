@@ -1,0 +1,152 @@
+/* Dawn Blue 曙光蓝 — crisp light theme
+ * Cloud-white surfaces with morning-sky blue accents; clean, airy,
+ * modern-SaaS polish. */
+
+:root {
+  --color-primary: #2563eb;
+  --primary: #2563eb;
+  --color-primary-light-1: #3b82f6;
+  --color-primary-light-2: #60a5fa;
+  --color-primary-light-3: #93c5fd;
+  --color-primary-dark-1: #1d4ed8;
+  --primary-rgb: 37, 99, 235;
+
+  --brand: #0ea5e9;
+  --brand-light: #e0f2fe;
+  --brand-hover: #0284c7;
+
+  --aou-1: #ffffff;
+  --aou-2: #f8fafc;
+  --aou-3: #f1f5f9;
+  --aou-4: #e2e8f0;
+  --aou-5: #cbd5e1;
+  --aou-6: #94a3b8;
+  --aou-7: #64748b;
+  --aou-8: #475569;
+  --aou-9: #334155;
+  --aou-10: #1e293b;
+
+  --bg-base: #f8fafc;
+  --bg-1: #ffffff;
+  --bg-2: #f1f5f9;
+  --bg-3: #e8eef4;
+  --bg-4: #dbe4ee;
+  --color-bg-1: #ffffff;
+  --color-bg-2: #f1f5f9;
+  --color-bg-3: #e8eef4;
+  --color-bg-4: #dbe4ee;
+
+  --bg-hover: #f4f7fb;
+  --bg-active: #edf2f8;
+
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --text-disabled: #b0bcc9;
+  --text-0: #1e293b;
+  --text-white: #ffffff;
+  --color-text-1: #1e293b;
+  --color-text-2: #64748b;
+  --color-text-3: #7e8ba0;
+  --color-text-4: #a8b3c2;
+
+  --border-base: #dfe6ee;
+  --border-light: #eaf0f6;
+  --border-special: #d3dce7;
+  --color-border: #dfe6ee;
+  --color-border-1: #dfe6ee;
+  --color-border-2: #eaf0f6;
+
+  --fill: #f1f5f9;
+  --color-fill: #f1f5f9;
+  --fill-0: rgba(30, 41, 59, 0.04);
+  --fill-white-to-black: #ffffff;
+  --dialog-fill-0: #ffffff;
+  --inverse: #1e293b;
+
+  --success: #059669;
+  --warning: #d97706;
+  --danger: #dc2626;
+  --info: #0284c7;
+
+  --message-user-bg: #e3edfd;
+  --message-tips-bg: #eff5fc;
+  --workspace-btn-bg: #f4f7fb;
+  --color-guid-agent-bar: #eef3f9;
+}
+
+[data-theme='dark'] {
+  --color-primary: #60a5fa;
+  --primary: #60a5fa;
+  --color-primary-light-1: #93c5fd;
+  --color-primary-light-2: #bfdbfe;
+  --color-primary-light-3: #dbeafe;
+  --color-primary-dark-1: #3b82f6;
+  --primary-rgb: 96, 165, 250;
+
+  --brand: #38bdf8;
+  --brand-light: #0c2436;
+  --brand-hover: #7dd3fc;
+
+  --aou-1: #0c121d;
+  --aou-2: #111a29;
+  --aou-3: #172233;
+  --aou-4: #1e2c41;
+  --aou-5: #293b56;
+  --aou-6: #3a4f6e;
+  --aou-7: #4f688c;
+  --aou-8: #6b85ab;
+  --aou-9: #9cb1cd;
+  --aou-10: #dbe6f3;
+
+  --bg-base: #080d15;
+  --bg-1: #0c121d;
+  --bg-2: #111a29;
+  --bg-3: #172233;
+  --bg-4: #1e2c41;
+  --bg-5: #293b56;
+  --bg-6: #3a4f6e;
+  --bg-8: #6b85ab;
+  --bg-9: #9cb1cd;
+  --bg-10: #dbe6f3;
+  --color-bg-1: #0c121d;
+  --color-bg-2: #111a29;
+  --color-bg-3: #172233;
+  --color-bg-4: #1e2c41;
+
+  --bg-hover: #131d2e;
+  --bg-active: #182437;
+
+  --text-primary: #e6ecf5;
+  --text-secondary: #9cb1cd;
+  --text-disabled: #51678a;
+  --text-0: #eef3fa;
+  --text-white: #eef3fa;
+  --color-text-1: #e6ecf5;
+  --color-text-2: #9cb1cd;
+  --color-text-3: #6b85ab;
+  --color-text-4: #44597a;
+
+  --border-base: #1e2c41;
+  --border-light: #172233;
+  --border-special: #293b56;
+  --color-border: #1e2c41;
+  --color-border-1: #1e2c41;
+  --color-border-2: #172233;
+
+  --fill: #0c121d;
+  --color-fill: #0c121d;
+  --fill-0: rgba(147, 197, 253, 0.06);
+  --fill-white-to-black: #080d15;
+  --dialog-fill-0: #172233;
+  --inverse: #eef3fa;
+
+  --success: #34d399;
+  --warning: #fbbf24;
+  --danger: #f87171;
+  --info: #38bdf8;
+
+  --message-user-bg: #16263d;
+  --message-tips-bg: #121e30;
+  --workspace-btn-bg: #131d2e;
+  --color-guid-agent-bar: #122032;
+}

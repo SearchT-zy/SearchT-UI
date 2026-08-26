@@ -23,6 +23,11 @@ import retromaY2kCss from '@renderer/pages/settings/AppearanceSettings/presets/r
 import retromaObsidianBookCss from '@renderer/pages/settings/AppearanceSettings/presets/retroma-obsidian-book.css?raw';
 import discourseHorizonCss from '@renderer/pages/settings/AppearanceSettings/presets/discourse-horizon.css?raw';
 import glitteringInputFieldCss from '@renderer/pages/settings/AppearanceSettings/presets/glittering-input-field.css?raw';
+import deepSpaceCss from '@renderer/pages/settings/AppearanceSettings/presets/deep-space.css?raw';
+import quantumVioletCss from '@renderer/pages/settings/AppearanceSettings/presets/quantum-violet.css?raw';
+import carbonAmberCss from '@renderer/pages/settings/AppearanceSettings/presets/carbon-amber.css?raw';
+import auroraTealCss from '@renderer/pages/settings/AppearanceSettings/presets/aurora-teal.css?raw';
+import dawnBlueCss from '@renderer/pages/settings/AppearanceSettings/presets/dawn-blue.css?raw';
 
 const T0 = 0;
 
@@ -61,6 +66,11 @@ export const BUILTIN_THEMES: Theme[] = [
   ),
   decorative('discourse-horizon', 'Discourse Horizon', 'light', discourseHorizonCss),
   decorative('glittering-input-field', 'Glittering Input Field', 'light', glitteringInputFieldCss),
+  decorative('deep-space', '深空科技 Deep Space', 'dark', deepSpaceCss),
+  decorative('quantum-violet', '量子紫 Quantum', 'dark', quantumVioletCss),
+  decorative('carbon-amber', '碳纤琥珀 Carbon', 'dark', carbonAmberCss),
+  decorative('aurora-teal', '极光翠 Aurora', 'dark', auroraTealCss),
+  decorative('dawn-blue', '曙光蓝 Dawn', 'light', dawnBlueCss),
 ];
 
 export const BUILTIN_THEME_IDS = new Set(BUILTIN_THEMES.map((t) => t.id));

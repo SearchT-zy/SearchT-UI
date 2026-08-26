@@ -1,0 +1,151 @@
+/* Aurora Teal 极光翠 — dark aurora theme
+ * Deep teal-black nights with aurora-green/cyan accents; calm, glassy,
+ * northern-lights atmosphere. */
+
+:root {
+  --color-primary: #0d9488;
+  --primary: #0d9488;
+  --color-primary-light-1: #14b8a6;
+  --color-primary-light-2: #2dd4bf;
+  --color-primary-light-3: #5eead4;
+  --color-primary-dark-1: #0f766e;
+  --primary-rgb: 13, 148, 136;
+
+  --brand: #0284c7;
+  --brand-light: #e0f2fe;
+  --brand-hover: #0369a1;
+
+  --aou-1: #f0fdfa;
+  --aou-2: #ccfbf1;
+  --aou-3: #99f6e4;
+  --aou-4: #5eead4;
+  --aou-5: #2dd4bf;
+  --aou-6: #14b8a6;
+  --aou-7: #0d9488;
+  --aou-8: #0f766e;
+  --aou-9: #115e59;
+  --aou-10: #042f2e;
+
+  --bg-base: #f0fdfa;
+  --bg-1: #eafaf5;
+  --bg-2: #dff3ed;
+  --bg-3: #d0ebe3;
+  --bg-4: #b6ddd3;
+  --color-bg-1: #eafaf5;
+  --color-bg-2: #dff3ed;
+  --color-bg-3: #d0ebe3;
+  --color-bg-4: #b6ddd3;
+
+  --bg-hover: #e2f6f0;
+  --bg-active: #d9f1ea;
+
+  --text-primary: #042f2e;
+  --text-secondary: #4b7c78;
+  --text-disabled: #9ec4bf;
+  --text-0: #042f2e;
+  --text-white: #f0fdfa;
+  --color-text-1: #042f2e;
+  --color-text-2: #4b7c78;
+  --color-text-3: #6a9e98;
+  --color-text-4: #9ec4bf;
+
+  --border-base: #c8e6de;
+  --border-light: #dbf0ea;
+  --color-border: #c8e6de;
+  --color-border-1: #c8e6de;
+  --color-border-2: #dbf0ea;
+
+  --fill: #eafaf5;
+  --color-fill: #eafaf5;
+  --fill-0: rgba(4, 47, 46, 0.04);
+  --fill-white-to-black: #f0fdfa;
+  --dialog-fill-0: #ffffff;
+  --inverse: #042f2e;
+
+  --success: #059669;
+  --warning: #d97706;
+  --danger: #dc2626;
+  --info: #0891b2;
+
+  --message-user-bg: #d5f3ec;
+  --message-tips-bg: #e5f8f4;
+  --workspace-btn-bg: #eafaf5;
+  --color-guid-agent-bar: #dff3ed;
+}
+
+[data-theme='dark'] {
+  --color-primary: #2dd4bf;
+  --primary: #2dd4bf;
+  --color-primary-light-1: #5eead4;
+  --color-primary-light-2: #99f6e4;
+  --color-primary-light-3: #ccfbf1;
+  --color-primary-dark-1: #14b8a6;
+  --primary-rgb: 45, 212, 191;
+
+  --brand: #38bdf8;
+  --brand-light: #082f49;
+  --brand-hover: #7dd3fc;
+
+  --aou-1: #06110f;
+  --aou-2: #0a1a17;
+  --aou-3: #0f241f;
+  --aou-4: #153029;
+  --aou-5: #1d4038;
+  --aou-6: #275449;
+  --aou-7: #356e5f;
+  --aou-8: #4a8d7b;
+  --aou-9: #7ab8a5;
+  --aou-10: #c2e8dc;
+
+  --bg-base: #040c0b;
+  --bg-1: #06110f;
+  --bg-2: #0a1a17;
+  --bg-3: #0f241f;
+  --bg-4: #153029;
+  --bg-5: #1d4038;
+  --bg-6: #275449;
+  --bg-8: #4a8d7b;
+  --bg-9: #7ab8a5;
+  --bg-10: #c2e8dc;
+  --color-bg-1: #06110f;
+  --color-bg-2: #0a1a17;
+  --color-bg-3: #0f241f;
+  --color-bg-4: #153029;
+
+  --bg-hover: #0c1e1a;
+  --bg-active: #10261f;
+
+  --text-primary: #dcefee;
+  --text-secondary: #8ab8ad;
+  --text-disabled: #49716a;
+  --text-0: #e8f7f2;
+  --text-white: #e8f7f2;
+  --color-text-1: #dcefee;
+  --color-text-2: #8ab8ad;
+  --color-text-3: #5f857c;
+  --color-text-4: #3d5a53;
+
+  --border-base: #153029;
+  --border-light: #0f241f;
+  --border-special: #1d4038;
+  --color-border: #153029;
+  --color-border-1: #153029;
+  --color-border-2: #0f241f;
+
+  --fill: #06110f;
+  --color-fill: #06110f;
+  --fill-0: rgba(94, 234, 212, 0.06);
+  --fill-white-to-black: #040c0b;
+  --dialog-fill-0: #0f241f;
+  --inverse: #e8f7f2;
+
+  --success: #34d399;
+  --warning: #fbbf24;
+  --danger: #f87171;
+  --info: #38bdf8;
+
+  --message-user-bg: #0f2d29;
+  --message-tips-bg: #0c231f;
+  --workspace-btn-bg: #0c1e1a;
+  --color-guid-agent-bar: #0d221e;
+}

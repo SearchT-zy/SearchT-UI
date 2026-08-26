@@ -1,0 +1,151 @@
+/* Quantum Violet 量子紫 — dark neon theme
+ * Obsidian-violet blacks with neon purple/magenta accents; a premium
+ * cyber-luxe feel. */
+
+:root {
+  --color-primary: #7c3aed;
+  --primary: #7c3aed;
+  --color-primary-light-1: #8b5cf6;
+  --color-primary-light-2: #a78bfa;
+  --color-primary-light-3: #c4b5fd;
+  --color-primary-dark-1: #6d28d9;
+  --primary-rgb: 124, 58, 237;
+
+  --brand: #c026d3;
+  --brand-light: #fae8ff;
+  --brand-hover: #a21caf;
+
+  --aou-1: #faf5ff;
+  --aou-2: #f3e8ff;
+  --aou-3: #e9d5ff;
+  --aou-4: #d8b4fe;
+  --aou-5: #c084fc;
+  --aou-6: #a855f7;
+  --aou-7: #9333ea;
+  --aou-8: #7e22ce;
+  --aou-9: #581c87;
+  --aou-10: #2e1065;
+
+  --bg-base: #faf5ff;
+  --bg-1: #f5edff;
+  --bg-2: #ede4f8;
+  --bg-3: #e3d5f3;
+  --bg-4: #d3bdec;
+  --color-bg-1: #f5edff;
+  --color-bg-2: #ede4f8;
+  --color-bg-3: #e3d5f3;
+  --color-bg-4: #d3bdec;
+
+  --bg-hover: #efe6fa;
+  --bg-active: #e8dcf6;
+
+  --text-primary: #1e0b36;
+  --text-secondary: #5b4680;
+  --text-disabled: #a99bc2;
+  --text-0: #1e0b36;
+  --text-white: #faf5ff;
+  --color-text-1: #1e0b36;
+  --color-text-2: #5b4680;
+  --color-text-3: #7d6a9e;
+  --color-text-4: #a99bc2;
+
+  --border-base: #dccbeb;
+  --border-light: #e9dcf5;
+  --color-border: #dccbeb;
+  --color-border-1: #dccbeb;
+  --color-border-2: #e9dcf5;
+
+  --fill: #f5edff;
+  --color-fill: #f5edff;
+  --fill-0: rgba(46, 16, 101, 0.04);
+  --fill-white-to-black: #faf5ff;
+  --dialog-fill-0: #ffffff;
+  --inverse: #1e0b36;
+
+  --success: #059669;
+  --warning: #d97706;
+  --danger: #dc2626;
+  --info: #7c3aed;
+
+  --message-user-bg: #f0e1fb;
+  --message-tips-bg: #f6ecfd;
+  --workspace-btn-bg: #f3ebfb;
+  --color-guid-agent-bar: #ede1f7;
+}
+
+[data-theme='dark'] {
+  --color-primary: #a78bfa;
+  --primary: #a78bfa;
+  --color-primary-light-1: #c4b5fd;
+  --color-primary-light-2: #ddd6fe;
+  --color-primary-light-3: #ede9fe;
+  --color-primary-dark-1: #8b5cf6;
+  --primary-rgb: 167, 139, 250;
+
+  --brand: #e879f9;
+  --brand-light: #3b0a45;
+  --brand-hover: #f0abfc;
+
+  --aou-1: #0f0817;
+  --aou-2: #170d24;
+  --aou-3: #201331;
+  --aou-4: #2c1a42;
+  --aou-5: #3d2560;
+  --aou-6: #533282;
+  --aou-7: #6f47a5;
+  --aou-8: #9064c4;
+  --aou-9: #bd9ce4;
+  --aou-10: #e9dcfb;
+
+  --bg-base: #0a0510;
+  --bg-1: #0f0817;
+  --bg-2: #170d24;
+  --bg-3: #201331;
+  --bg-4: #2c1a42;
+  --bg-5: #3d2560;
+  --bg-6: #533282;
+  --bg-8: #9064c4;
+  --bg-9: #bd9ce4;
+  --bg-10: #e9dcfb;
+  --color-bg-1: #0f0817;
+  --color-bg-2: #170d24;
+  --color-bg-3: #201331;
+  --color-bg-4: #2c1a42;
+
+  --bg-hover: #180e28;
+  --bg-active: #1f1233;
+
+  --text-primary: #ece6f8;
+  --text-secondary: #a894c7;
+  --text-disabled: #5e4b80;
+  --text-0: #f3edfd;
+  --text-white: #f3edfd;
+  --color-text-1: #ece6f8;
+  --color-text-2: #a894c7;
+  --color-text-3: #7d6a9e;
+  --color-text-4: #533f73;
+
+  --border-base: #2c1a42;
+  --border-light: #201331;
+  --border-special: #3d2560;
+  --color-border: #2c1a42;
+  --color-border-1: #2c1a42;
+  --color-border-2: #201331;
+
+  --fill: #0f0817;
+  --color-fill: #0f0817;
+  --fill-0: rgba(196, 181, 253, 0.07);
+  --fill-white-to-black: #0a0510;
+  --dialog-fill-0: #201331;
+  --inverse: #f3edfd;
+
+  --success: #4ade80;
+  --warning: #fbbf24;
+  --danger: #fb7185;
+  --info: #a78bfa;
+
+  --message-user-bg: #241238;
+  --message-tips-bg: #1c0f2c;
+  --workspace-btn-bg: #1a0e29;
+  --color-guid-agent-bar: #1c1030;
+}
