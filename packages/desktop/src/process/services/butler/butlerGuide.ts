@@ -22,9 +22,11 @@
 
 import { httpRequest } from '@/common/adapter/httpBridge';
 import { BUTLER_GUIDE_SKILL_NAME, BUTLER_GUIDE_SKILL_VERSION } from '@/common/utils/butlerGuideSkill';
-import type { ProcessConfig as ProcessConfigType } from '@process/utils/initStorage';
+import { ProcessConfig } from '@process/utils/initStorage';
 import fs from 'node:fs/promises';
 import path from 'node:path';
+
+type ConfigFile = typeof ProcessConfig;
 
 const GUIDE_VERSION_CONFIG_KEY = 'butler.guideSkillVersion';
 
@@ -84,12 +86,14 @@ description: >-
 - "数据在哪？" → 本地存储，设置-系统里可查看/修改工作目录与日志目录。
 `;
 
-export async function ensureButlerGuideSkill(configFile: ProcessConfigType): Promise<boolean> {
+export async function ensureButlerGuideSkill(configFile: ConfigFile): Promise<boolean> {
   try {
     const skills =
-      (await httpRequest<Array<{ name: string; is_custom: boolean }>>('GET', '/api/skills').catch(() => [])) || [];
+      (await httpRequest<Array<{ name: string; is_custom: boolean }>>('GET', '/api/skills').catch(
+        (): Array<{ name: string; is_custom: boolean }> => []
+      )) || [];
     const installed = skills.some((skill) => skill.name === BUTLER_GUIDE_SKILL_NAME);
-    const appliedVersion = await configFile.get(GUIDE_VERSION_CONFIG_KEY).catch(() => undefined);
+    const appliedVersion = await configFile.get(GUIDE_VERSION_CONFIG_KEY).catch((): undefined => undefined);
 
     if (installed && appliedVersion === BUTLER_GUIDE_SKILL_VERSION) {
       return true;

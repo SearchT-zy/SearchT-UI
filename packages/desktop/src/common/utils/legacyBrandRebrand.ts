@@ -70,7 +70,7 @@ const BRAND_AVATAR_DATA_URI =
       '</svg>'
   );
 
-function rebrandAvatar(avatar: string | undefined): string | undefined {
+export function rebrandAvatar(avatar: string | undefined): string | undefined {
   if (!avatar) return avatar;
   // Only upstream brand marks are swapped; assistant-uploaded avatars and
   // backend icons for third-party agents (claude.svg, codex.svg…) pass

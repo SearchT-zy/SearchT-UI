@@ -5,7 +5,7 @@
  */
 
 import type { TProviderWithModel } from '../config/storage';
-import { rebrandSkillNameList, restoreBackendSkillNameList } from '@/common/utils/legacyBrandRebrand';
+import { rebrandAvatar, rebrandLegacyText, rebrandSkillNameList, restoreBackendSkillNameList } from '@/common/utils/legacyBrandRebrand';
 
 export type ApiProviderWithModel = {
   provider_id: string;
@@ -60,8 +60,8 @@ export function buildCreateConversationBody(p: CreateConversationBodyInput): Rec
     type: hasAssistant ? undefined : p.type,
     id: p.id,
     name: p.name,
-    assistant: hasAssistant ? restoreAssistantSkillFields(p.assistant) : p.assistant,
-    extra: restoreExtraSkillFields(p.extra),
+    assistant: hasAssistant ? restoreAssistantSkillFields(p.assistant as AssistantLike) : p.assistant,
+    extra: restoreExtraSkillFields(p.extra as ExtraLike | undefined),
   };
   const model = p.type === 'acp' ? undefined : toApiModelOptional(p.model);
   if (model) body.model = model;
@@ -136,30 +136,40 @@ export function fromApiConversation<T>(raw: T): T {
   const r = raw as T & {
     model?: ApiProviderWithModel | null;
     extra?: Record<string, unknown> | null;
+    assistant?: { name?: string; avatar?: string } | null;
   };
   const next = { ...r } as unknown as T & {
     model?: TProviderWithModel;
     extra?: Record<string, unknown> | null;
+    assistant?: { name?: string; avatar?: string } | null;
   };
 
   if ('model' in r) {
     next.model = fromApiModelOptional(r.model);
   }
 
+  // Conversations embed an assistant snapshot (name/avatar) taken at creation
+  // time; rebrand it so history rows and headers don't resurface legacy names.
+  if (r.assistant && typeof r.assistant === 'object') {
+    next.assistant = {
+      ...r.assistant,
+      name: rebrandLegacyText(r.assistant.name) ?? r.assistant.name,
+      avatar: rebrandAvatar(r.assistant.avatar),
+    };
+  }
+
   const extra = r.extra;
   if (extra && typeof extra === 'object') {
-    const base = 'custom_workspace' in extra ? { ...extra } : {
+    const base = ('custom_workspace' in extra ? { ...extra } : {
       ...extra,
       custom_workspace:
         (typeof extra.workspace === 'string' ? extra.workspace : '').length > 0 &&
         extra.is_temporary_workspace !== true,
-    };
+    }) as Record<string, unknown> & { skills?: unknown };
     // `extra.skills` is the creation-time skill snapshot shown by the
     // conversation skills indicator; rebrand it so it joins against the
     // (rebranded) skills catalog instead of dangling on legacy ids.
-    next.extra = Array.isArray(base.skills)
-      ? { ...base, skills: rebrandSkillNameList(base.skills as string[]) }
-      : base;
+    next.extra = Array.isArray(base.skills) ? { ...base, skills: rebrandSkillNameList(base.skills as string[]) } : base;
   }
 
   return next;

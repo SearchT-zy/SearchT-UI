@@ -21,6 +21,7 @@ import {
   rebrandManagedAgent,
   rebrandSkillCatalogEntry,
   restoreBackendSkillName,
+  restoreBackendSkillNameList,
 } from '@/common/utils/legacyBrandRebrand';
 import { buildListTasksPath } from './teamTaskPath';
 import type { OpenDialogOptions } from 'electron';

@@ -66,6 +66,9 @@ export interface IConfigStorageRefer {
    * still-on-disk legacy field.
    */
   'migration.assistantsMigrated_v1'?: boolean;
+  // Butler guide skill: content version installed into the backend corpus
+  // (see process/services/butler/butlerGuide.ts)
+  'butler.guideSkillVersion'?: number;
   // Desktop Pet: whether the desktop pet feature is enabled
   'pet.enabled'?: boolean;
   // Desktop Pet: size in pixels (200, 280, or 360)
