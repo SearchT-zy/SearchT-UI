@@ -25,6 +25,7 @@
  */
 
 import { rebrandLegacyText, rebrandSkillName } from '@/common/utils/legacyBrandRebrand';
+import type { Dirent } from 'node:fs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
@@ -71,6 +72,132 @@ async function scrubSkillFiles(dataDir: string): Promise<number> {
       }
     } catch {
       // Missing skill (corpus layout changed upstream) — nothing to scrub.
+    }
+  }
+  return changed;
+}
+
+/**
+ * Trees that hold per-conversation materialized copies of skills (the agent
+ * reads THESE, not the corpus, when answering "what skills do I have") plus
+ * the custom-skill store. Every SKILL.md under them gets the same rewrite,
+ * so existing conversations report the new names on their next turn.
+ */
+const WORKSPACE_SKILL_ROOTS = ['conversations', 'aionrs-sessions', 'skills'];
+
+async function walkSkillFiles(root: string, depth: number, out: string[]): Promise<void> {
+  if (depth > 10) return;
+  let entries: Dirent[];
+  try {
+    entries = await fs.readdir(root, { withFileTypes: true });
+  } catch {
+    return;
+  }
+  for (const entry of entries) {
+    if (entry.isSymbolicLink()) continue;
+    const child = path.join(root, entry.name);
+    if (entry.isDirectory()) {
+      await walkSkillFiles(child, depth + 1, out);
+    } else if (entry.isFile() && entry.name === 'SKILL.md') {
+      out.push(child);
+    }
+  }
+}
+
+/**
+ * Materialized skills in conversation workspaces are SYMLINKS named after
+ * the skill id, pointing into the corpus (the corpus folders keep legacy
+ * names by design). The backend now creates them under the new ids, but
+ * links created before the rename linger and agents enumerate by link name.
+ * Rename legacy-named links; their targets are untouched.
+ */
+async function scrubWorkspaceSkillSymlinks(dataDir: string): Promise<number> {
+  let changed = 0;
+  for (const relative of WORKSPACE_SKILL_ROOTS) {
+    const root = resolveUnderCorpusRoot(dataDir, relative);
+    if (!root) continue;
+    const links: string[] = [];
+    await walkLegacySymlinks(root, 0, links);
+    for (const link of links) {
+      const renamed = rebrandSkillName(path.basename(link));
+      const target = path.join(path.dirname(link), renamed);
+      try {
+        await fs.access(target);
+        await fs.rm(link, { force: true });
+      } catch {
+        await fs.rename(link, target);
+      }
+      changed += 1;
+    }
+  }
+  return changed;
+}
+
+async function walkLegacySymlinks(root: string, depth: number, out: string[]): Promise<void> {
+  if (depth > 10) return;
+  let entries: Dirent[];
+  try {
+    entries = await fs.readdir(root, { withFileTypes: true });
+  } catch {
+    return;
+  }
+  for (const entry of entries) {
+    const child = path.join(root, entry.name);
+    if (entry.isSymbolicLink()) {
+      if (/^aionui-/.test(entry.name)) out.push(child);
+      continue;
+    }
+    if (entry.isDirectory()) {
+      await walkLegacySymlinks(child, depth + 1, out);
+    }
+  }
+}
+
+async function scrubWorkspaceSkillCopies(dataDir: string): Promise<number> {
+  let changed = 0;
+  for (const relative of WORKSPACE_SKILL_ROOTS) {
+    const root = resolveUnderCorpusRoot(dataDir, relative);
+    if (!root) continue;
+    const files: string[] = [];
+    await walkSkillFiles(root, 0, files);
+    for (const file of files) {
+      try {
+        const original = await fs.readFile(file, 'utf8');
+        // Only rewrite files that still carry replaceable legacy strings —
+        // user-authored skills must round-trip byte-identical. Runtime tool
+        // paths like `.aionrs/` and `~/.aionui/tools/` are real on-disk
+        // locations and must survive verbatim.
+        const probe = rebrandLegacyText(original) ?? original;
+        if (probe !== original || /^name:\s*aionui-/m.test(original)) {
+          let next = rebrandFrontmatterName(original);
+          next = rebrandLegacyText(next) ?? next;
+          if (next !== original) {
+            await fs.writeFile(file, next, 'utf8');
+            changed += 1;
+          }
+        }
+        // Agents enumerate materialized skills by FOLDER name; rename legacy
+        // folders independently of content (already-clean files still sit in
+        // legacy folders from earlier passes). These copies are never
+        // re-seeded, so renaming is safe here (unlike the corpus). If the
+        // renamed folder already exists, drop the stale one — the backend
+        // re-materializes from the catalog on demand.
+        const dir = path.dirname(file);
+        const dirName = path.basename(dir);
+        if (/^aionui-/.test(dirName)) {
+          const renamed = rebrandSkillName(dirName);
+          const target = path.join(path.dirname(dir), renamed);
+          try {
+            await fs.access(target);
+            await fs.rm(dir, { recursive: true, force: true });
+          } catch {
+            await fs.rename(dir, target);
+          }
+          changed += 1;
+        }
+      } catch {
+        // Unreadable/unwritable copy — next boot retries.
+      }
     }
   }
   return changed;
@@ -203,7 +330,10 @@ async function scrubDatabase(dbPath: string): Promise<number> {
 
 export async function runBackendBrandScrub(getDataDir: () => string): Promise<ScrubStats> {
   const dataDir = getDataDir();
-  const filesChanged = await scrubSkillFiles(dataDir);
+  const filesChanged =
+    (await scrubSkillFiles(dataDir)) +
+    (await scrubWorkspaceSkillCopies(dataDir)) +
+    (await scrubWorkspaceSkillSymlinks(dataDir));
   let rowsChanged = 0;
   try {
     rowsChanged = await scrubDatabase(path.join(dataDir, 'aionui-backend.db'));

@@ -2,7 +2,7 @@
   "platform": "win32",
   "arch": "x64",
   "version": "v0.1.63",
-  "generatedAt": "2026-08-26T09:37:10.143Z",
+  "generatedAt": "2026-08-26T12:59:52.989Z",
   "sourceType": "download",
   "source": {
     "url": "https://github.com/iOfficeAI/AionCore/releases/download/v0.1.63/aioncore-v0.1.63-x86_64-pc-windows-msvc.zip"
