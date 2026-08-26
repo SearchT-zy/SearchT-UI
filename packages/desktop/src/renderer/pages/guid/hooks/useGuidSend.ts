@@ -215,7 +215,7 @@ export const useGuidSend = (deps: GuidSendDeps): GuidSendResult => {
 
         await navigate(`/conversation/${conversation.id}`);
       } catch (error: unknown) {
-        console.error('Failed to create Aion CLI conversation:', error);
+        console.error('Failed to create SearchT CLI conversation:', error);
         throw error;
       }
       return;

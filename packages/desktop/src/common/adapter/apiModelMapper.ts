@@ -5,6 +5,7 @@
  */
 
 import type { TProviderWithModel } from '../config/storage';
+import { rebrandAvatar, rebrandLegacyText } from '@/common/utils/legacyBrandRebrand';
 
 export type ApiProviderWithModel = {
   provider_id: string;
@@ -90,14 +91,27 @@ export function fromApiConversation<T>(raw: T): T {
   const r = raw as T & {
     model?: ApiProviderWithModel | null;
     extra?: Record<string, unknown> | null;
+    assistant?: { name?: string; avatar?: string } | null;
   };
   const next = { ...r } as unknown as T & {
     model?: TProviderWithModel;
     extra?: Record<string, unknown> | null;
+    assistant?: { name?: string; avatar?: string } | null;
   };
 
   if ('model' in r) {
     next.model = fromApiModelOptional(r.model);
+  }
+
+  // The embedded assistant snapshot joins agent_metadata, which the backend
+  // can rewrite from its embedded manifest between boots — keep the small
+  // display pass here so history rows never resurface legacy names.
+  if (r.assistant && typeof r.assistant === 'object') {
+    next.assistant = {
+      ...r.assistant,
+      name: rebrandLegacyText(r.assistant.name) ?? r.assistant.name,
+      avatar: rebrandAvatar(r.assistant.avatar),
+    };
   }
 
   const extra = r.extra;

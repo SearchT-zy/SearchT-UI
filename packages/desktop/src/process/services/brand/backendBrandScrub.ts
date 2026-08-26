@@ -24,7 +24,7 @@
  * that re-seed old rows.
  */
 
-import { rebrandLegacyText, rebrandSkillName } from '@/common/utils/legacyBrandRebrand';
+import { rebrandAvatar, rebrandLegacyText, rebrandSkillName } from '@/common/utils/legacyBrandRebrand';
 import type { Dirent } from 'node:fs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -255,6 +255,21 @@ type ScrubStats = { filesChanged: number; rowsChanged: number };
 /** Text columns per table whose contents may carry legacy names or copy. */
 const TEXT_COLUMNS: Record<string, string[]> = {
   skills: ['name', 'description'],
+  // agent_metadata is the source behind the "Aion CLI" rows; the backend
+  // rewrites it from its embedded manifest on (infrequent) agent version
+  // checks, so this scrub keeps it clean across boots.
+  agent_metadata: [
+    'name',
+    'name_i18n',
+    'description',
+    'description_i18n',
+    'icon',
+    'last_check_guidance',
+    'last_check_error_message',
+    'available_commands',
+    'available_models',
+    'available_modes',
+  ],
   assistant_definitions: [
     'name',
     'name_i18n',
@@ -355,7 +370,12 @@ async function scrubDatabase(dbPath: string): Promise<number> {
       for (const row of selectStmt.all() as Array<Record<string, unknown>>) {
         let dirty = false;
         const next = usable.map((column) => {
-          const scrubbed = scrubValue(row[column]);
+          let current = row[column];
+          // Icon/avatar columns get the brand-mark swap before prose rules.
+          if ((column === 'icon' || column === 'avatar') && typeof current === 'string') {
+            current = rebrandAvatar(current);
+          }
+          const scrubbed = scrubValue(current);
           if (scrubbed !== row[column]) dirty = true;
           return scrubbed;
         });
