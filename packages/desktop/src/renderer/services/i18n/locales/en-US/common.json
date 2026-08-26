@@ -74,6 +74,8 @@
   "tray.checkUpdate": "Check Update",
   "tray.recentChats": "Recent Chats",
   "tray.untitled": "Untitled",
+  "tray.hiddenHintTitle": "SearchT-UI is still running",
+  "tray.hiddenHintBody": "The window was hidden to the system tray. Click the tray icon to bring it back.",
   "backendStartup": {
     "incompatibleRuntime": {
       "title": "This system is not supported by the bundled backend",

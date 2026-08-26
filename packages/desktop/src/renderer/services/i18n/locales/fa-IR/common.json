@@ -74,6 +74,8 @@
   "tray.checkUpdate": "بررسی به‌روزرسانی",
   "tray.recentChats": "چت‌های اخیر",
   "tray.untitled": "بدون عنوان",
+  "tray.hiddenHintTitle": "SearchT-UI همچنان در حال اجراست",
+  "tray.hiddenHintBody": "پنجره به سینی سیستم کوچک شد. برای باز کردن دوباره، روی نماد سینی کلیک کنید.",
   "backendStartup": {
     "incompatibleRuntime": {
       "title": "این سیستم توسط بک‌اند همراه پشتیبانی نمی‌شود",

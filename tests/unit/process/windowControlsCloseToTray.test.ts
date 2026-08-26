@@ -46,6 +46,7 @@ const getIsQuitting = vi.fn(() => false);
 vi.mock('@process/utils/tray', () => ({
   getCloseToTrayEnabled: () => getCloseToTrayEnabled(),
   getIsQuitting: () => getIsQuitting(),
+  notifyHiddenToTrayOnce: vi.fn(),
 }));
 
 type ProviderFn = () => Promise<void> | void;

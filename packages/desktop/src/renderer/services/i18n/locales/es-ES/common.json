@@ -73,6 +73,8 @@
   "tray.checkUpdate": "Buscar actualizaciones",
   "tray.recentChats": "Chats recientes",
   "tray.untitled": "Sin título",
+  "tray.hiddenHintTitle": "SearchT-UI sigue en ejecución",
+  "tray.hiddenHintBody": "La ventana se minimizó a la bandeja del sistema. Haga clic en el icono de la bandeja para volver a abrirla.",
   "backendStartup": {
     "incompatibleRuntime": {
       "title": "Este sistema no es compatible con el backend incluido",

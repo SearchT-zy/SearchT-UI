@@ -74,6 +74,8 @@
   "tray.checkUpdate": "检查更新",
   "tray.recentChats": "最近对话",
   "tray.untitled": "未命名",
+  "tray.hiddenHintTitle": "SearchT-UI 仍在运行",
+  "tray.hiddenHintBody": "窗口已最小化到系统托盘，点击托盘图标可重新打开。",
   "backendStartup": {
     "incompatibleRuntime": {
       "title": "当前系统不支持内置后端",

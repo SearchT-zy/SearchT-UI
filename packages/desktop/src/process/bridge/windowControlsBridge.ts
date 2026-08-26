@@ -14,7 +14,7 @@
 
 import { BrowserWindow } from 'electron';
 import { ipcBridge } from '@/common';
-import { getCloseToTrayEnabled, getIsQuitting } from '@process/utils/tray';
+import { getCloseToTrayEnabled, getIsQuitting, notifyHiddenToTrayOnce } from '@process/utils/tray';
 
 /**
  * Resolve the window targeted by title-bar controls.
@@ -95,6 +95,7 @@ export function initWindowControlsBridge(): void {
     }
     if (getCloseToTrayEnabled() && !getIsQuitting()) {
       window.hide();
+      notifyHiddenToTrayOnce();
     } else {
       window.close();
     }

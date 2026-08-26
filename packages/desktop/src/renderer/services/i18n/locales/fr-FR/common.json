@@ -74,6 +74,8 @@
   "tray.checkUpdate": "Vérifier les mises à jour",
   "tray.recentChats": "Chats récents",
   "tray.untitled": "Sans titre",
+  "tray.hiddenHintTitle": "SearchT-UI continue de s'exécuter",
+  "tray.hiddenHintBody": "La fenêtre a été réduite dans la zone de notification. Cliquez sur l'icône de la barre d'état système pour la rouvrir.",
   "backendStartup": {
     "incompatibleRuntime": {
       "title": "Ce système n'est pas pris en charge par le backend fourni",

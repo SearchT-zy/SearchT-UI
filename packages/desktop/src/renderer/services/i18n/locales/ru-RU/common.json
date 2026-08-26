@@ -73,6 +73,8 @@
   "tray.checkUpdate": "Проверить обновления",
   "tray.recentChats": "Недавние чаты",
   "tray.untitled": "Без названия",
+  "tray.hiddenHintTitle": "SearchT-UI продолжает работать",
+  "tray.hiddenHintBody": "Окно свёрнуто в область уведомлений. Щёлкните значок в трее, чтобы открыть его снова.",
   "backendStartup": {
     "incompatibleRuntime": {
       "title": "Эта система не поддерживается встроенным backend",

@@ -74,6 +74,8 @@
   "tray.checkUpdate": "更新を確認",
   "tray.recentChats": "最近のチャット",
   "tray.untitled": "無題",
+  "tray.hiddenHintTitle": "SearchT-UI は実行中です",
+  "tray.hiddenHintBody": "ウィンドウはトレイに最小化されました。トレイアイコンをクリックすると再び開きます。",
   "backendStartup": {
     "incompatibleRuntime": {
       "title": "このシステムは同梱バックエンドに対応していません",

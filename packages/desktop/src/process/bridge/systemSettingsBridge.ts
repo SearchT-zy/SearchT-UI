@@ -16,7 +16,7 @@ import { ipcBridge } from '@/common';
 import { ProcessConfig } from '@process/utils/initStorage';
 import { changeLanguage } from '@process/services/i18n';
 import type { PetSize } from '@process/pet/petTypes';
-import { createOrUpdateTray, destroyTray, setCloseToTrayEnabled } from '@process/utils/tray';
+import { createOrUpdateTray, setCloseToTrayEnabled } from '@process/utils/tray';
 import { readCloseToTraySetting, writeCloseToTraySetting } from '@process/utils/closeToTraySetting';
 
 type LanguageChangeListener = () => void;
@@ -36,11 +36,9 @@ export function initSystemSettingsBridge(): void {
   ipcBridge.systemSettings.setCloseToTray.provider(async ({ enabled }) => {
     await writeCloseToTraySetting(enabled);
     setCloseToTrayEnabled(enabled);
-    if (enabled) {
-      createOrUpdateTray();
-    } else {
-      destroyTray();
-    }
+    // 托盘常驻：开关只改变点 X 的行为（隐藏 vs 退出），不再销毁/重建托盘。
+    // Tray is resident: the toggle only changes what X does (hide vs quit).
+    createOrUpdateTray();
   });
 
   // 语言变更通知，同步主进程 i18n 并通知托盘重建

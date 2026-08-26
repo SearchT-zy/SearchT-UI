@@ -73,6 +73,8 @@
   "tray.checkUpdate": "Auf Updates prüfen",
   "tray.recentChats": "Letzte Chats",
   "tray.untitled": "Ohne Titel",
+  "tray.hiddenHintTitle": "SearchT-UI läuft weiter",
+  "tray.hiddenHintBody": "Das Fenster wurde in den Infobereich minimiert. Klicken Sie auf das Tray-Symbol, um es wieder zu öffnen.",
   "backendStartup": {
     "incompatibleRuntime": {
       "title": "Dieses System wird vom gebündelten Backend nicht unterstützt",

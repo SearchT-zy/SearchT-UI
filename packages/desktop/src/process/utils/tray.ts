@@ -9,6 +9,7 @@ import {
   electronApp as app,
   electronMenu as Menu,
   electronNativeImage as nativeImage,
+  electronNotification as Notification,
   electronTray as Tray,
 } from '@/common/electronSafe';
 import * as path from 'path';
@@ -64,6 +65,30 @@ const hideMainWindowToTray = (): void => {
   mainWindowRef.hide();
   if (process.platform === 'darwin' && app.dock) {
     void app.dock.hide();
+  }
+  notifyHiddenToTrayOnce();
+};
+
+let hiddenToTrayHintShown = false;
+
+/**
+ * One-time-per-session OS notification after the window hides to tray.
+ * Without it, a user clicking X sees the window vanish and assumes the app
+ * died or got stuck — the classic "why won't this app close" confusion.
+ * Called from every path that hides the main window to the tray.
+ */
+export const notifyHiddenToTrayOnce = (): void => {
+  if (hiddenToTrayHintShown) return;
+  hiddenToTrayHintShown = true;
+  try {
+    if (!Notification?.isSupported()) return;
+    const notification = new Notification({
+      title: i18n.t('common.tray.hiddenHintTitle'),
+      body: i18n.t('common.tray.hiddenHintBody'),
+    });
+    notification.show();
+  } catch {
+    // Cosmetic hint only; never let it break the hide-to-tray path.
   }
 };
 

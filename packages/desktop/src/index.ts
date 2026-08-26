@@ -75,6 +75,7 @@ import {
   destroyTray,
   getCloseToTrayEnabled,
   getIsQuitting,
+  notifyHiddenToTrayOnce,
   refreshTrayMenu,
   setCloseToTrayEnabled,
   setIsQuitting,
@@ -649,6 +650,7 @@ const createWindow = ({ showOnReady = true }: { showOnReady?: boolean } = {}): v
     if (getCloseToTrayEnabled() && !getIsQuitting()) {
       event.preventDefault();
       mainWindow.hide();
+      notifyHiddenToTrayOnce();
     }
   });
 };
@@ -964,15 +966,19 @@ const handleAppReady = async (): Promise<void> => {
       try {
         const savedCloseToTray = await readCloseToTraySetting();
         setCloseToTrayEnabled(savedCloseToTray);
-        if (getCloseToTrayEnabled()) {
-          createOrUpdateTray();
-        }
       } catch {
         // Ignore storage read errors, default to false
       }
+      // 商业软件惯例：托盘常驻（微信/Discord 模式），不再跟随「关闭到托盘」开关。
+      // 该开关只控制点 X 时是隐藏还是退出。createOrUpdateTray 幂等。
+      // Commercial convention: the tray is always resident. The close-to-tray
+      // toggle only decides whether X hides or quits; it no longer gates the tray.
+      createOrUpdateTray();
     }
 
-    const showMainWindowOnReady = !(wasLaunchedAtLogin() && getCloseToTrayEnabled());
+    // 开机自启拉起的会话不弹窗口，留在托盘（手动双击启动不受影响）。
+    // A login-item launch starts hidden in the tray; manual launches show the window.
+    const showMainWindowOnReady = !wasLaunchedAtLogin();
 
     createWindow({ showOnReady: showMainWindowOnReady });
     appReadyDone = true;

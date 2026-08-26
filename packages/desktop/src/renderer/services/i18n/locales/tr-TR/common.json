@@ -74,6 +74,8 @@
   "tray.checkUpdate": "Güncelleştirme Kontrolü",
   "tray.recentChats": "Son Sohbetler",
   "tray.untitled": "Adsız",
+  "tray.hiddenHintTitle": "SearchT-UI çalışmaya devam ediyor",
+  "tray.hiddenHintBody": "Pencere sistem tepsisine küçültüldü. Yeniden açmak için tepsi simgesine tıklayın.",
   "backendStartup": {
     "incompatibleRuntime": {
       "title": "Bu sistem paketlenmiş backend tarafından desteklenmiyor",
