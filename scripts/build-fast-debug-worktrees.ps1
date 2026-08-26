@@ -240,21 +240,21 @@ Invoke-Git $repoRoot @('diff', '--binary', 'HEAD', "--output=$patchPath") | Out-
 $hasPatch = (Get-Item -LiteralPath $patchPath).Length -gt 0
 $baseRef = (Invoke-Git $repoRoot @('rev-parse', 'HEAD')).Trim()
 $nodeModules = Join-Path $repoRoot 'node_modules'
-$localAioncoreBinary = Join-Path $repoRoot 'resources\bundled-aioncore\win32-x64\aioncore.exe'
-$localAioncoreBundleDir = Join-Path $repoRoot 'out\win-unpacked\resources\bundled-aioncore\win32-x64'
+$localAioncoreBinary = Join-Path $repoRoot 'resources\bundled-backend\win32-x64\searcht-backend.exe'
+$localAioncoreBundleDir = Join-Path $repoRoot 'out\win-unpacked\resources\bundled-backend\win32-x64'
 if (-not (Test-Path -LiteralPath (Join-Path $localAioncoreBundleDir 'managed-resources') -PathType Container)) {
-  $localAioncoreBundleDir = Join-Path $env:LOCALAPPDATA 'Programs\SearchT-UI\resources\bundled-aioncore\win32-x64'
+  $localAioncoreBundleDir = Join-Path $env:LOCALAPPDATA 'Programs\SearchT-UI\resources\bundled-backend\win32-x64'
 }
 if (Test-Path -LiteralPath (Join-Path $localAioncoreBundleDir 'managed-resources') -PathType Container) {
   $localAioncoreBundleDir = (Resolve-Path -LiteralPath $localAioncoreBundleDir).Path
-  Write-Host "=== using local aioncore bundle fallback: $localAioncoreBundleDir ==="
+  Write-Host "=== using local backend bundle fallback: $localAioncoreBundleDir ==="
 } else {
   $localAioncoreBundleDir = ''
-  Write-Warning 'Local aioncore bundle fallback was not found; builds may need to prepare managed resources.'
+  Write-Warning 'Local backend bundle fallback was not found; builds may need to prepare managed resources.'
 }
 if (Test-Path -LiteralPath $localAioncoreBinary -PathType Leaf) {
   $localAioncoreBinary = (Resolve-Path -LiteralPath $localAioncoreBinary).Path
-  Write-Host "=== using local aioncore fallback: $localAioncoreBinary ==="
+  Write-Host "=== using local backend fallback: $localAioncoreBinary ==="
 } else {
   $localAioncoreBinary = ''
   Write-Warning 'Local aioncore fallback was not found; builds may need to download aioncore.'

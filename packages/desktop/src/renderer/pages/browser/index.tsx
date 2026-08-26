@@ -6,10 +6,10 @@
 
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Button, Input, Message, Spin, Tag } from '@arco-design/web-react';
-import { ArrowLeft, ArrowRight, Copy, Earth, Home, Inbox, LoadingOne, Refresh } from '@icon-park/react';
+import { Button, Input, Message, Spin } from '@arco-design/web-react';
+import { ArrowLeft, ArrowRight, Close, Copy, Earth, Home, Inbox, LoadingOne, Plus, Refresh } from '@icon-park/react';
 import { ipcBridge } from '@/common';
-import type { BrowserViewState } from '@/common/types/searcht/browserView';
+import type { BrowserTabsSnapshot, BrowserViewState } from '@/common/types/searcht/browserView';
 import { isElectronDesktop } from '@/renderer/utils/platform';
 import {
   BROWSER_HOME_URL,
@@ -20,14 +20,22 @@ import {
   type PageSnapshot,
 } from './browserUtils';
 
+const EMPTY_SNAPSHOT: BrowserTabsSnapshot = { tabs: [], activeTabId: null };
+
+const tabLabel = (tab: BrowserViewState): string => {
+  if (tab.loading) return tab.url ? tab.url.replace(/^https?:\/\//, '').slice(0, 24) : '…';
+  if (tab.title) return tab.title.slice(0, 24);
+  if (tab.url && tab.url !== 'about:blank') return tab.url.replace(/^https?:\/\//, '').split('/')[0].slice(0, 24);
+  return '新标签页';
+};
+
 /**
- * Embedded browser page on the WebContentsView architecture.
+ * Multi-tab embedded browser on the WebContentsView architecture.
  *
- * The page renders a placeholder viewport; the actual web content lives in a
- * main-process WebContentsView positioned exactly over the placeholder (bounds
- * synced via ResizeObserver + IPC). Input goes to the native view directly —
- * the <webview> tag's Windows input-routing bug (real mouse clicks silently
- * dropped) does not apply to native views.
+ * Each tab owns a main-process WebContentsView; the page renders a placeholder
+ * viewport the active view is positioned over (bounds synced via
+ * ResizeObserver + IPC). Input goes to the native view directly — the
+ * <webview> tag's Windows input-routing bug does not apply to native views.
  */
 const BrowserPage: React.FC = () => {
   const { t } = useTranslation();
@@ -35,13 +43,8 @@ const BrowserPage: React.FC = () => {
   const viewportRef = useRef<HTMLDivElement | null>(null);
 
   const [address, setAddress] = useState(BROWSER_HOME_URL);
-  const [viewState, setViewState] = useState<BrowserViewState>({
-    url: BROWSER_HOME_URL,
-    title: '',
-    loading: false,
-    canGoBack: false,
-    canGoForward: false,
-  });
+  const [tabs, setTabs] = useState<BrowserTabsSnapshot>(EMPTY_SNAPSHOT);
+  const activeTab = tabs.tabs.find((tb) => tb.id === tabs.activeTabId) ?? null;
   const [snapshot, setSnapshot] = useState<PageSnapshot | null>(null);
   const [reading, setReading] = useState(false);
   const [savedToInbox, setSavedToInbox] = useState(false);
@@ -50,31 +53,45 @@ const BrowserPage: React.FC = () => {
   const [lastAction, setLastAction] = useState<ActionResult | null>(null);
   const [actionBusy, setActionBusy] = useState(false);
 
-  // Create/show the native view on mount, hide on unmount.
+  const applySnapshot = useCallback((next: BrowserTabsSnapshot | null | undefined): void => {
+    if (!next) return;
+    setTabs(next);
+    const active = next.tabs.find((tb) => tb.id === next.activeTabId);
+    if (active && active.url && active.url !== 'about:blank') setAddress(active.url);
+    setSavedToInbox(false);
+  }, []);
+
+  // Ensure one tab exists on mount, then keep in sync with main-process state.
   useEffect(() => {
     if (!desktop) return;
     let cancelled = false;
-      void ipcBridge.browserView.ensure
-        .invoke({ url: BROWSER_HOME_URL })
-        .then((state: BrowserViewState | null) => {
-          if (!cancelled && state) setViewState(state);
-        })
-        .catch((): undefined => undefined);
-    const removeStateListener = ipcBridge.browserView.state.on((state: BrowserViewState) => {
-      if (state) {
-        setViewState(state);
-        if (state.url && state.url !== 'about:blank') setAddress(state.url);
-        setSavedToInbox(false);
-      }
+    void ipcBridge.browserView.createTab
+      .invoke({ url: BROWSER_HOME_URL })
+      .then((state: BrowserTabsSnapshot | null) => {
+        if (!cancelled && state) {
+          // createTab always appends; if the manager already had tabs (kept
+          // alive from a previous mount), drop the extra blank tab we just
+          // added unless it navigated somewhere.
+          const blank = state.tabs.find((tb) => !tb.url || tb.url === 'about:blank');
+          if (state.tabs.length > 1 && blank && blank.id === state.activeTabId) {
+            void ipcBridge.browserView.closeTab.invoke({ tabId: blank.id }).then(applySnapshot).catch((): undefined => undefined);
+            return;
+          }
+          applySnapshot(state);
+        }
+      })
+      .catch((): undefined => undefined);
+    const removeStateListener = ipcBridge.browserView.state.on((state: BrowserTabsSnapshot) => {
+      if (!cancelled) applySnapshot(state);
     });
     return () => {
       cancelled = true;
       removeStateListener?.();
       void ipcBridge.browserView.hide.invoke().catch((): undefined => undefined);
     };
-  }, [desktop]);
+  }, [desktop, applySnapshot]);
 
-  // Keep the native view positioned over the placeholder viewport.
+  // Keep the ACTIVE native view positioned over the placeholder viewport.
   useEffect(() => {
     if (!desktop) return;
     const el = viewportRef.current;
@@ -112,6 +129,46 @@ const BrowserPage: React.FC = () => {
       });
     },
     [t]
+  );
+
+  const newTab = useCallback((): void => {
+    void ipcBridge.browserView.createTab
+      .invoke({ url: BROWSER_HOME_URL })
+      .then(applySnapshot)
+      .catch((): undefined => undefined);
+  }, [applySnapshot]);
+
+  const closeTab = useCallback(
+    (tabId: string): void => {
+      setSnapshot(null);
+      void ipcBridge.browserView.closeTab
+        .invoke({ tabId })
+        .then((next: BrowserTabsSnapshot | null) => {
+          // Closing the last tab opens a fresh home tab so the browser is
+          // never empty.
+          if (next && next.tabs.length === 0) {
+            void ipcBridge.browserView.createTab
+              .invoke({ url: BROWSER_HOME_URL })
+              .then(applySnapshot)
+              .catch((): undefined => undefined);
+            return;
+          }
+          applySnapshot(next);
+        })
+        .catch((): undefined => undefined);
+    },
+    [applySnapshot]
+  );
+
+  const switchTab = useCallback(
+    (tabId: string): void => {
+      setSnapshot(null);
+      void ipcBridge.browserView.switchTab
+        .invoke({ tabId })
+        .then(applySnapshot)
+        .catch((): undefined => undefined);
+    },
+    [applySnapshot]
   );
 
   const runInPage = async <T,>(script: string): Promise<T | null> => {
@@ -165,17 +222,62 @@ const BrowserPage: React.FC = () => {
     <Button type='text' size='small' icon={icon} aria-label={label} disabled={disabled} onClick={onClick} />
   );
 
-  const pageTitle = viewState.title;
-
   return (
     <div className='flex h-full max-w-full flex-col overflow-hidden bg-bg-1' data-testid='browser-page'>
+      {/* Tab strip */}
+      {desktop ? (
+        <div
+          className='flex shrink-0 items-stretch gap-2px overflow-x-auto border-b border-solid border-b-base px-8px pt-6px'
+          data-testid='browser-tabstrip'
+        >
+          {tabs.tabs.map((tab) => (
+            <div
+              key={tab.id}
+              role='tab'
+              aria-selected={tab.id === tabs.activeTabId}
+              data-testid={`browser-tab-${tab.id}`}
+              className={`group flex h-30px max-w-180px min-w-110px shrink-0 cursor-pointer items-center gap-6px rounded-t-6px px-10px text-12px ${
+                tab.id === tabs.activeTabId
+                  ? 'bg-bg-3 font-500 text-t-primary'
+                  : 'text-t-secondary hover:bg-fill-2'
+              }`}
+              onClick={() => switchTab(tab.id)}
+            >
+              {tab.loading ? <Spin size={12} /> : <Earth size='12' className='shrink-0' />}
+              <span className='min-w-0 flex-1 truncate'>{tabLabel(tab)}</span>
+              <span
+                role='button'
+                aria-label={t('personal.browser.closeTab', { defaultValue: '关闭标签页' })}
+                className='shrink-0 rd-4px p-2px opacity-40 hover:bg-fill-3 hover:opacity-100'
+                onClick={(e) => {
+                  e.stopPropagation();
+                  closeTab(tab.id);
+                }}
+              >
+                <Close size='10' />
+              </span>
+            </div>
+          ))}
+          <button
+            type='button'
+            aria-label={t('personal.browser.newTab', { defaultValue: '新建标签页' })}
+            data-testid='browser-new-tab'
+            className='my-4px ml-2px flex h-22px w-22px shrink-0 cursor-pointer items-center justify-center rd-6px text-t-secondary hover:bg-fill-2 hover:text-t-primary'
+            onClick={newTab}
+          >
+            <Plus size='12' />
+          </button>
+        </div>
+      ) : null}
+
+      {/* Toolbar */}
       <div className='flex shrink-0 flex-wrap items-center gap-8px border-b border-solid border-b-base px-12px py-8px'>
         {toolbarButton(t('personal.browser.back', { defaultValue: '后退' }), <ArrowLeft size='16' />, (): void => {
           void ipcBridge.browserView.back.invoke().catch((): undefined => undefined);
-        }, !viewState.canGoBack)}
+        }, !activeTab?.canGoBack)}
         {toolbarButton(t('personal.browser.forward', { defaultValue: '前进' }), <ArrowRight size='16' />, (): void => {
           void ipcBridge.browserView.forward.invoke().catch((): undefined => undefined);
-        }, !viewState.canGoForward)}
+        }, !activeTab?.canGoForward)}
         {toolbarButton(t('personal.browser.reload', { defaultValue: '刷新' }), <Refresh size='16' />, (): void => {
           void ipcBridge.browserView.reload.invoke().catch((): undefined => undefined);
         })}
@@ -187,8 +289,8 @@ const BrowserPage: React.FC = () => {
           className='min-w-240px flex-1'
           data-testid='browser-address'
           defaultValue={BROWSER_HOME_URL}
-          key={address}
-          loading={viewState.loading}
+          key={`${tabs.activeTabId}-${address}`}
+          loading={Boolean(activeTab?.loading)}
           prefix={<Earth size='14' />}
           placeholder={t('personal.browser.placeholder', { defaultValue: '输入网址或搜索关键词，回车打开' })}
           searchButton
@@ -196,17 +298,12 @@ const BrowserPage: React.FC = () => {
           onChange={setAddress}
           onSearch={(value) => navigate(value)}
         />
-        {pageTitle ? (
-          <Tag size='small' className='max-w-200px truncate'>
-            {pageTitle}
-          </Tag>
-        ) : null}
       </div>
 
       <div className='grid min-h-0 flex-1 grid-cols-1 lg:grid-cols-[minmax(0,1fr)_340px]'>
         <section className='relative min-h-0 min-w-0 border-r border-solid border-b-base'>
           {desktop ? (
-            // Placeholder: the main-process WebContentsView renders exactly over
+            // Placeholder: the active tab's WebContentsView renders exactly over
             // this box (bounds synced above). Native view = native input routing.
             <div
               ref={viewportRef}
@@ -219,7 +316,7 @@ const BrowserPage: React.FC = () => {
               {t('personal.browser.desktopOnly', { defaultValue: '内置浏览器仅在SearchT-UI桌面版中可用。' })}
             </div>
           )}
-          {viewState.loading ? (
+          {activeTab?.loading ? (
             <div className='pointer-events-none absolute inset-x-0 top-0 flex justify-center pt-8px'>
               <Spin size={20} />
             </div>

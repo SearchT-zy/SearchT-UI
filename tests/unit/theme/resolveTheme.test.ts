@@ -31,14 +31,14 @@ describe('resolveActiveTheme', () => {
   it('returns a user theme by id', () => {
     expect(resolveActiveTheme('u1', themes).id).toBe('u1');
   });
-  it('falls back to Light when id is unknown', () => {
-    expect(resolveActiveTheme('nope', themes).id).toBe(LIGHT_THEME_ID);
+  it('falls back to Dark when id is unknown', () => {
+    expect(resolveActiveTheme('nope', themes).id).toBe(DARK_THEME_ID);
   });
-  it('falls back to Light when id is empty', () => {
-    expect(resolveActiveTheme('', themes).id).toBe(LIGHT_THEME_ID);
+  it('falls back to Dark when id is empty', () => {
+    expect(resolveActiveTheme('', themes).id).toBe(DARK_THEME_ID);
   });
-  it('falls back to first theme when no Light present', () => {
-    expect(resolveActiveTheme('nope', [dark, userTheme]).id).toBe(DARK_THEME_ID);
+  it('falls back to first theme when no Dark present', () => {
+    expect(resolveActiveTheme('nope', [light, userTheme]).id).toBe(LIGHT_THEME_ID);
   });
   it('resolves system to Dark when prefersDark is true', () => {
     expect(resolveActiveTheme(SYSTEM_THEME_ID, themes, true).id).toBe(DARK_THEME_ID);
@@ -55,5 +55,11 @@ describe('resolveActiveTheme', () => {
   });
   it('falls back to Light when system resolves to a missing Dark theme', () => {
     expect(resolveActiveTheme(SYSTEM_THEME_ID, [light, userTheme], true).id).toBe(LIGHT_THEME_ID);
+  });
+  it('resolves a saved light id to a light decorative theme after Light removal', () => {
+    const dawnBlue = mk('dawn-blue');
+    const list = [dark, dawnBlue];
+    // Saved 'light' id no longer exists → Dark fallback chain, not crash.
+    expect(resolveActiveTheme(LIGHT_THEME_ID, list).id).toBe(DARK_THEME_ID);
   });
 });

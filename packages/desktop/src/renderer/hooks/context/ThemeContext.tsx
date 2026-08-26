@@ -9,7 +9,8 @@ import type { PropsWithChildren } from 'react';
 import React, { createContext, useCallback, useContext } from 'react';
 import type { Theme, ThemeAppearance } from '@/common/theme/types';
 import useTheme from '@renderer/hooks/system/useTheme';
-import { LIGHT_THEME_ID, DARK_THEME_ID } from '@/common/theme/constants';
+import { DARK_THEME_ID } from '@/common/theme/constants';
+import { BUILTIN_THEMES } from '@renderer/theme/builtinThemes';
 import useFontScale from '@renderer/hooks/ui/useFontScale';
 import useFontSizes from '@renderer/hooks/ui/useFontSizes';
 import type { FontSizeKey, FontSizes } from '@/common/config/fontSizes';
@@ -38,9 +39,17 @@ export const ThemeProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [activeTheme, selectTheme, activeId] = useTheme();
   const [fontScale, setFontScale] = useFontScale();
   const { fontSizes, setFontSize } = useFontSizes();
-  const theme: ThemeAppearance = activeTheme?.appearance ?? 'light';
+  const theme: ThemeAppearance = activeTheme?.appearance ?? 'dark';
   const setTheme = useCallback(
-    (appearance: ThemeAppearance) => selectTheme(appearance === 'dark' ? DARK_THEME_ID : LIGHT_THEME_ID),
+    (appearance: ThemeAppearance): Promise<void> => {
+      if (appearance === 'dark') {
+        return selectTheme(DARK_THEME_ID);
+      }
+      // Light builtin removed — route the light side to the first
+      // light-appearance builtin (dawn-blue) or keep current if none.
+      const lightTheme = BUILTIN_THEMES.find((t) => t.appearance === 'light');
+      return lightTheme ? selectTheme(lightTheme.id) : Promise.resolve();
+    },
     [selectTheme]
   );
 

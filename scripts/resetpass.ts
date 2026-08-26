@@ -30,7 +30,9 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { startBackend, stopBackend } from '@aionui/web-host';
 
-const BACKEND_BINARY = process.platform === 'win32' ? 'aioncore.exe' : 'aioncore';
+// Preferred binary name for OUR bundle output; the legacy 'aioncore' name is
+// still probed as a fallback for externally installed / older dev-machine builds.
+const BACKEND_BINARY_NAMES = process.platform === 'win32' ? ['searcht-backend.exe', 'aioncore.exe'] : ['searcht-backend', 'aioncore'];
 
 const __filename = fileURLToPath(import.meta.url);
 const repoRoot = path.resolve(path.dirname(__filename), '..');
@@ -82,21 +84,27 @@ function resolveWorkDir(): string {
 function resolveBackendBinary(): string {
   if (process.env.SEARCHT_BACKEND_BIN) return process.env.SEARCHT_BACKEND_BIN;
 
-  const bundledBase = process.env.SEARCHT_BACKEND_BUNDLED_DIR ?? path.join(repoRoot, 'resources', 'bundled-aioncore');
+  const bundledBase = process.env.SEARCHT_BACKEND_BUNDLED_DIR ?? path.join(repoRoot, 'resources', 'bundled-backend');
   const runtimeKey = `${process.platform}-${process.arch}`;
-  const bundled = path.join(bundledBase, runtimeKey, BACKEND_BINARY);
-  if (fs.existsSync(bundled)) return bundled;
+  for (const binaryName of BACKEND_BINARY_NAMES) {
+    const bundled = path.join(bundledBase, runtimeKey, binaryName);
+    if (fs.existsSync(bundled)) return bundled;
+  }
 
-  try {
-    const cmd = process.platform === 'win32' ? `where ${BACKEND_BINARY}` : `which ${BACKEND_BINARY}`;
-    const found = execSync(cmd, { encoding: 'utf-8', timeout: 5000 }).trim().split(/\r?\n/)[0];
-    if (found && fs.existsSync(found)) return found;
-  } catch {
-    // fall through
+  // PATH lookup: searcht-backend first, then the legacy aioncore name kept for
+  // dev machines that still carry an old externally installed binary.
+  for (const binaryName of BACKEND_BINARY_NAMES) {
+    try {
+      const cmd = process.platform === 'win32' ? `where ${binaryName}` : `which ${binaryName}`;
+      const found = execSync(cmd, { encoding: 'utf-8', timeout: 5000 }).trim().split(/\r?\n/)[0];
+      if (found && fs.existsSync(found)) return found;
+    } catch {
+      // fall through to the next candidate
+    }
   }
 
   throw new Error(
-    `Cannot find "${BACKEND_BINARY}". Set SEARCHT_BACKEND_BIN, put it on PATH, or place it at ${bundled}.`
+    `Cannot find "${BACKEND_BINARY_NAMES[0]}". Set SEARCHT_BACKEND_BIN, put it on PATH, or place it at ${path.join(bundledBase, runtimeKey, BACKEND_BINARY_NAMES[0])}.`
   );
 }
 

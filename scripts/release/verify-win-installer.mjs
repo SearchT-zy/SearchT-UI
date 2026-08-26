@@ -53,16 +53,16 @@ const mainExe = path.join(installDir, 'SearchT-UI.exe');
 if (!existsSync(mainExe)) fail(`SearchT-UI.exe missing after install: ${mainExe}`);
 console.log(`PASS  SearchT-UI.exe installed: ${mainExe}`);
 
-const bundledAioncore = path.join(installDir, 'resources', 'bundled-aioncore');
-if (!existsSync(bundledAioncore)) fail(`bundled-aioncore missing after install: ${bundledAioncore}`);
-console.log(`PASS  bundled-aioncore present`);
+const bundledBackend = path.join(installDir, 'resources', 'bundled-backend');
+if (!existsSync(bundledBackend)) fail(`bundled-backend missing after install: ${bundledBackend}`);
+console.log(`PASS  bundled-backend present`);
 
-const aioncoreBinary = path.join(bundledAioncore, 'win32-x64', 'aioncore.exe');
-const archFallback = existsSync(aioncoreBinary)
-  ? aioncoreBinary
-  : path.join(bundledAioncore, 'win32-arm64', 'aioncore.exe');
-if (!existsSync(archFallback)) fail(`aioncore.exe missing for any arch under ${bundledAioncore}`);
-console.log(`PASS  aioncore.exe present: ${archFallback}`);
+const backendBinary = path.join(bundledBackend, 'win32-x64', 'searcht-backend.exe');
+const archFallback = existsSync(backendBinary)
+  ? backendBinary
+  : path.join(bundledBackend, 'win32-arm64', 'searcht-backend.exe');
+if (!existsSync(archFallback)) fail(`searcht-backend.exe missing for any arch under ${bundledBackend}`);
+console.log(`PASS  searcht-backend.exe present: ${archFallback}`);
 
 // Uninstall registry entry (NSIS oneClick/perMachine writes these keys).
 const registryHive = perUserInstall ? 'HKCU' : 'HKLM';

@@ -4,11 +4,18 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-/** Shared state payload for the WebContentsView-based embedded browser. */
+/** Per-tab state for the multi-tab WebContentsView embedded browser. */
 export type BrowserViewState = {
+  id: string;
   url: string;
   title: string;
   loading: boolean;
   canGoBack: boolean;
   canGoForward: boolean;
+};
+
+/** Full snapshot pushed to the renderer on any tab/state change. */
+export type BrowserTabsSnapshot = {
+  tabs: BrowserViewState[];
+  activeTabId: string | null;
 };

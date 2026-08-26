@@ -776,16 +776,18 @@ try {
     return;
   }
 
-  // 5. Prepare aioncore binary (for packaged runtime usage)
-  const { prepareAioncore } = require('../packages/shared-scripts/src/prepare-aioncore.js');
-  const { resolveAioncoreVersion } = require('./resolveAioncoreVersion.js');
+  // 5. Prepare backend binary (for packaged runtime usage)
+  // Module file kept under its legacy name prepare-aioncore.js; it exports the
+  // rebranded prepareBackend API.
+  const { prepareBackend } = require('../packages/shared-scripts/src/prepare-aioncore.js');
+  const { resolveBackendVersion } = require('./resolveBackendVersion.js');
   const projectRoot = path.resolve(__dirname, '..');
   writeGeneratedSentryDsnInclude(projectRoot);
-  prepareAioncore({
+  prepareBackend({
     projectRoot,
     platform: process.platform,
     arch: targetArch,
-    version: resolveAioncoreVersion(projectRoot),
+    version: resolveBackendVersion(projectRoot),
   });
 
   // 6. Prepare hub resources (index.json + extension zips for offline fallback)

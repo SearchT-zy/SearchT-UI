@@ -1687,32 +1687,44 @@ export const calendar = {
 };
 
 /**
- * Embedded browser on WebContentsView (main-process native view).
+ * Multi-tab embedded browser on WebContentsView (main-process native views).
  * Replaces the <webview> tag, whose Windows guest input routing drops real
  * OS-level mouse events.
  */
 export const browserView = {
-  ensure: bridge.buildProvider<import('@/common/types/searcht/browserView').BrowserViewState, { url?: string }>(
-    'searcht.browser-view.ensure'
-  ),
+  createTab: bridge.buildProvider<
+    import('@/common/types/searcht/browserView').BrowserTabsSnapshot,
+    { url?: string }
+  >('searcht.browser-view.create-tab'),
+  closeTab: bridge.buildProvider<
+    import('@/common/types/searcht/browserView').BrowserTabsSnapshot,
+    { tabId: string }
+  >('searcht.browser-view.close-tab'),
+  switchTab: bridge.buildProvider<
+    import('@/common/types/searcht/browserView').BrowserTabsSnapshot,
+    { tabId: string }
+  >('searcht.browser-view.switch-tab'),
   setBounds: bridge.buildProvider<boolean, { x: number; y: number; width: number; height: number }>(
     'searcht.browser-view.set-bounds'
   ),
-  navigate: bridge.buildProvider<import('@/common/types/searcht/browserView').BrowserViewState, { url: string }>(
-    'searcht.browser-view.navigate'
-  ),
-  back: bridge.buildProvider<import('@/common/types/searcht/browserView').BrowserViewState, void>(
+  navigate: bridge.buildProvider<
+    import('@/common/types/searcht/browserView').BrowserTabsSnapshot,
+    { url: string }
+  >('searcht.browser-view.navigate'),
+  back: bridge.buildProvider<import('@/common/types/searcht/browserView').BrowserTabsSnapshot, void>(
     'searcht.browser-view.back'
   ),
-  forward: bridge.buildProvider<import('@/common/types/searcht/browserView').BrowserViewState, void>(
+  forward: bridge.buildProvider<import('@/common/types/searcht/browserView').BrowserTabsSnapshot, void>(
     'searcht.browser-view.forward'
   ),
-  reload: bridge.buildProvider<import('@/common/types/searcht/browserView').BrowserViewState, void>(
+  reload: bridge.buildProvider<import('@/common/types/searcht/browserView').BrowserTabsSnapshot, void>(
     'searcht.browser-view.reload'
   ),
   execute: bridge.buildProvider<unknown, { script: string }>('searcht.browser-view.execute'),
   hide: bridge.buildProvider<boolean, void>('searcht.browser-view.hide'),
-  state: bridge.buildEmitter<import('@/common/types/searcht/browserView').BrowserViewState>('browser-view.state'),
+  state: bridge.buildEmitter<import('@/common/types/searcht/browserView').BrowserTabsSnapshot>(
+    'browser-view.state'
+  ),
 };
 
 export const inbox = {

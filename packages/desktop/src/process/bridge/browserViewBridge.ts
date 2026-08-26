@@ -6,7 +6,7 @@
 
 import { BrowserWindow } from 'electron';
 import { ipcBridge } from '@/common';
-import { browserViewManager, type BrowserViewState } from '@process/services/browserViewService';
+import { browserViewManager } from '@process/services/browserViewService';
 
 /** Resolve the host window for browser-view commands (single main window app). */
 const hostWindow = (): BrowserWindow | null => {
@@ -14,10 +14,12 @@ const hostWindow = (): BrowserWindow | null => {
   return windows.find((win) => !win.isDestroyed()) ?? null;
 };
 
+const withWindow = (): BrowserWindow => hostWindow() ?? ({ isDestroyed: () => true } as unknown as BrowserWindow);
+
 export function initBrowserViewBridge(): void {
-  ipcBridge.browserView.ensure.provider(async (input) =>
-    browserViewManager.ensure(hostWindow() ?? ({ isDestroyed: () => true } as unknown as BrowserWindow), input?.url)
-  );
+  ipcBridge.browserView.createTab.provider(async (input) => browserViewManager.createTab(withWindow(), input?.url));
+  ipcBridge.browserView.closeTab.provider(async (input) => browserViewManager.closeTab(input.tabId));
+  ipcBridge.browserView.switchTab.provider(async (input) => browserViewManager.switchTab(input.tabId));
   ipcBridge.browserView.setBounds.provider(async (input) => {
     browserViewManager.setBounds(input);
     browserViewManager.show();
@@ -33,5 +35,3 @@ export function initBrowserViewBridge(): void {
     return true;
   });
 }
-
-export type { BrowserViewState };

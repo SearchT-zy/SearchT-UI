@@ -11,7 +11,7 @@ import { applyTheme, seedElectronTheme, setActiveTheme } from '@/renderer/utils/
 import { getSystemPrefersDark } from '@/renderer/utils/theme/systemAppearance';
 import { startSystemThemeWatcher } from '@/renderer/utils/theme/systemThemeWatcher';
 import { BUILTIN_THEMES } from '@renderer/theme/builtinThemes';
-import { LIGHT_THEME_ID } from '@/common/theme/constants';
+import { DARK_THEME_ID } from '@/common/theme/constants';
 import type { Theme } from '@/common/theme/types';
 import { useCallback, useEffect, useState } from 'react';
 
@@ -26,7 +26,9 @@ function cacheAppearance(theme: Theme): void {
 }
 
 function getPersistedActiveId(): string {
-  return (configService.get('theme.activeId') as string) || LIGHT_THEME_ID;
+  // Light was removed as a builtin; Dark is the default (users with a saved
+  // 'light' id resolve through the fallback chain in resolveActiveTheme).
+  return (configService.get('theme.activeId') as string) || DARK_THEME_ID;
 }
 
 async function initActiveTheme(): Promise<Theme> {
@@ -42,7 +44,7 @@ async function initActiveTheme(): Promise<Theme> {
     return resolved;
   } catch (e) {
     console.error('init theme failed', e);
-    const fallback = resolveActiveTheme(LIGHT_THEME_ID, BUILTIN_THEMES);
+    const fallback = resolveActiveTheme(DARK_THEME_ID, BUILTIN_THEMES);
     applyTheme(fallback);
     return fallback;
   }

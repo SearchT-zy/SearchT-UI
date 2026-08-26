@@ -8,7 +8,6 @@ import type { Theme } from '@/common/theme/types';
 import { LIGHT_THEME_ID, DARK_THEME_ID } from '@/common/theme/constants';
 
 import {
-  defaultThemeCover,
   misakaMikotoCover,
   helloKittyCover,
   retroWindowsCover,
@@ -46,15 +45,8 @@ const decorative = (id: string, name: string, appearance: Theme['appearance'], c
 });
 
 export const BUILTIN_THEMES: Theme[] = [
-  {
-    id: LIGHT_THEME_ID,
-    name: 'Light',
-    appearance: 'light',
-    cover: defaultThemeCover,
-    builtin: true,
-    created_at: T0,
-    updated_at: T0,
-  },
+  // 'Light' removed by product decision — Dark is the default; light surfaces
+  // remain available via the light-appearance decorative themes below.
   { id: DARK_THEME_ID, name: 'Dark', appearance: 'dark', builtin: true, created_at: T0, updated_at: T0 },
   decorative('misaka-mikoto-theme', 'Misaka Mikoto Theme', 'light', misakaMikotoCss, misakaMikotoCover),
   decorative('hello-kitty', 'Hello Kitty', 'light', helloKittyCss, helloKittyCover),

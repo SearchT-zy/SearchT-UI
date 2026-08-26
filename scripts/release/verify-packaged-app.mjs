@@ -2,7 +2,7 @@
 /**
  * Verify the packaged (unpacked or installed) SearchT-UI desktop app:
  *  - main executable exists
- *  - bundled aioncore binary + manifest exist for the target platform/arch
+ *  - bundled backend binary + manifest exist for the target platform/arch
  *  - electron-builder.yml extraResources mapping is honored
  *  - manifest version is compatible with the app version
  *
@@ -43,12 +43,12 @@ check('resources directory', existsSync(resourcesDir), resourcesDir);
 const appAsar = path.join(resourcesDir, 'app.asar');
 check('app.asar', existsSync(appAsar) || existsSync(path.join(resourcesDir, 'app')), appAsar);
 
-const bundledRoot = path.join(resourcesDir, 'bundled-aioncore');
-check('bundled-aioncore directory', existsSync(bundledRoot), bundledRoot);
+const bundledRoot = path.join(resourcesDir, 'bundled-backend');
+check('bundled-backend directory', existsSync(bundledRoot), bundledRoot);
 
-const aioncoreName = process.platform === 'win32' ? 'aioncore.exe' : 'aioncore';
-const aioncoreBinary = path.join(bundledRoot, platformArch, aioncoreName);
-check(`aioncore binary (${platformArch})`, existsSync(aioncoreBinary), aioncoreBinary);
+const backendName = process.platform === 'win32' ? 'searcht-backend.exe' : 'searcht-backend';
+const backendBinary = path.join(bundledRoot, platformArch, backendName);
+check(`backend binary (${platformArch})`, existsSync(backendBinary), backendBinary);
 
 const manifestPath = path.join(bundledRoot, platformArch, 'manifest.json');
 let manifestOk = false;
@@ -62,7 +62,7 @@ if (existsSync(manifestPath)) {
     manifestDetail = `invalid JSON: ${error.message}`;
   }
 }
-check('aioncore manifest.json', manifestOk, manifestDetail);
+check('backend manifest.json', manifestOk, manifestDetail);
 
 const packageJson = JSON.parse(readFileSync(new URL('../../package.json', import.meta.url), 'utf8'));
 check(
