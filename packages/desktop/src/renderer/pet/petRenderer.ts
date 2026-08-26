@@ -5,36 +5,35 @@ const FADE_MS = 150;
 const PET_STATES_BASE_PATH = '../pet-states';
 let currentObject: HTMLObjectElement | null = document.getElementById('pet') as HTMLObjectElement;
 
-/** Current character id; recolors every state SVG as it loads. */
+/** Current character id; recolors every state SVG after it loads. */
 let currentCharacterId = 'classic';
-/** state:character → blob URL cache (recoloring is string work; avoid repeats). */
-const svgUrlCache = new Map<string, string>();
 
 function getStateAssetPath(state: string): string {
   return `${PET_STATES_BASE_PATH}/${state}.svg`;
 }
 
-function applyPalette(svgText: string): string {
+/**
+ * Recolor a loaded SVG document in place. The object element loads the
+ * original file:// SVG (fetch() cannot read file:// in the packaged app);
+ * once loaded we walk the guest DOM and rewrite fill / stop-color attributes
+ * that match the base palette. Classic keeps the file untouched.
+ */
+function recolorObject(obj: HTMLObjectElement | null): void {
+  if (!obj) return;
   const { palette } = resolvePetCharacter(currentCharacterId);
-  if (!palette || Object.keys(palette).length === 0) return svgText;
-  let out = svgText;
-  for (const [from, to] of Object.entries(palette)) {
-    out = out.split(from).join(to);
-  }
-  return out;
-}
-
-async function getRecoloredUrl(state: string): Promise<string> {
-  const cacheKey = `${state}:${currentCharacterId}`;
-  const cached = svgUrlCache.get(cacheKey);
-  if (cached) return cached;
-  const response = await fetch(getStateAssetPath(state));
-  if (!response.ok) throw new Error(`pet svg ${state} not loadable`);
-  const svgText = applyPalette(await response.text());
-  const blob = new Blob([svgText], { type: 'image/svg+xml' });
-  const url = URL.createObjectURL(blob);
-  svgUrlCache.set(cacheKey, url);
-  return url;
+  if (!palette || Object.keys(palette).length === 0) return;
+  const doc = obj.contentDocument;
+  if (!doc) return;
+  const rewrite = (el: Element, attr: string): void => {
+    const value = el.getAttribute(attr);
+    if (value) {
+      const next = palette[value.toLowerCase()] ?? palette[value];
+      if (next && next !== value) el.setAttribute(attr, next);
+    }
+  };
+  doc.querySelectorAll('[fill]').forEach((el) => rewrite(el, 'fill'));
+  doc.querySelectorAll('[stop-color]').forEach((el) => rewrite(el, 'stop-color'));
+  doc.querySelectorAll('[stroke]').forEach((el) => rewrite(el, 'stroke'));
 }
 
 function setupTransitions(_target: HTMLObjectElement | null): void {
@@ -49,8 +48,16 @@ function setupTransitions(_target: HTMLObjectElement | null): void {
  * is removed only after the fade completes, so there's no white flash between
  * states. If the new SVG fails to load within LOAD_TIMEOUT we bail out silently
  * and keep showing the previous state.
+ *
+ * A generation counter guards the rapid state-change race: only the newest
+ * load may own the `#pet` id; an older generation's load event arriving late
+ * must not strip the id from the current object (that race left the pet
+ * invisible — a surviving object with no id gets none of the #pet styles).
  */
+let loadGeneration = 0;
+
 function loadSvg(state: string): void {
+  const generation = ++loadGeneration;
   const newObj = document.createElement('object');
   newObj.type = 'image/svg+xml';
   newObj.id = 'pet';
@@ -63,7 +70,8 @@ function loadSvg(state: string): void {
 
   let loaded = false;
   const timeout = setTimeout(() => {
-    if (!loaded) {
+    if (!loaded && generation === loadGeneration) {
+      // Failed to load — keep the previous object in charge.
       newObj.remove();
     }
   }, LOAD_TIMEOUT);
@@ -71,12 +79,23 @@ function loadSvg(state: string): void {
   newObj.addEventListener('load', () => {
     loaded = true;
     clearTimeout(timeout);
+    // A newer load superseded this one — drop this object entirely.
+    if (generation !== loadGeneration) {
+      newObj.remove();
+      return;
+    }
     setupTransitions(newObj);
+    try {
+      recolorObject(newObj);
+    } catch {
+      // Recolor is cosmetic — never let it break the state swap.
+    }
 
     const oldObj = currentObject;
     // Clear the old id immediately so duplicate #pet selectors (from CSS and
     // setupTransitions' query) never see two elements at once during the fade.
-    if (oldObj) oldObj.removeAttribute('id');
+    if (oldObj && oldObj !== newObj) oldObj.removeAttribute('id');
+    newObj.id = 'pet';
     currentObject = newObj;
 
     // Trigger the fade on the next frame so the browser has painted the
@@ -84,12 +103,12 @@ function loadSvg(state: string): void {
     // swap is instant.
     requestAnimationFrame(() => {
       newObj.style.opacity = '1';
-      if (oldObj) oldObj.style.opacity = '0';
+      if (oldObj && oldObj !== newObj) oldObj.style.opacity = '0';
     });
 
     // Remove the old object after the cross-fade completes. Keep a reference
     // via closure so we don't race with another state change in the meantime.
-    if (oldObj) {
+    if (oldObj && oldObj !== newObj) {
       setTimeout(() => {
         oldObj.remove();
       }, FADE_MS);
@@ -98,18 +117,9 @@ function loadSvg(state: string): void {
 
   document.body.appendChild(newObj);
 
-  // Async: fetch the state SVG, recolor it for the current character, and
-  // point the object at the blob URL. The object stays opacity:0 until its
-  // load event fires, so a slow fetch cannot flash an empty frame.
-  getRecoloredUrl(state)
-    .then((url) => {
-      if (!loaded) newObj.data = url;
-    })
-    .catch(() => {
-      // Recolor failed (fetch error) — remove the pending object silently.
-      newObj.remove();
-      clearTimeout(timeout);
-    });
+  // Direct file:// load through the object element (fetch cannot read file://
+  // in the packaged app — the previous fetch-based recolor emptied the pet).
+  newObj.data = getStateAssetPath(state);
 }
 
 // The initial SVG is hard-coded in pet.html without any transition setup or
@@ -121,14 +131,15 @@ if (currentObject) {
   currentObject.style.transition = `opacity ${FADE_MS}ms ease-out`;
   currentObject.addEventListener('load', () => {
     setupTransitions(currentObject);
+    recolorObject(currentObject);
   });
 }
 
 window.petAPI.onCharacterChanged((characterId: string) => {
   if (characterId === currentCharacterId) return;
   currentCharacterId = characterId;
-  // Re-skin immediately: reload the idle pose (and let subsequent states pick
-  // the new palette from the cache key).
+  // Re-skin immediately: reload the idle pose; recolorObject applies the new
+  // palette when it loads, and all later states pick it up too.
   loadSvg('idle');
 });
 
