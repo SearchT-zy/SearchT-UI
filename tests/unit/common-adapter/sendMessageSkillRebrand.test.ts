@@ -25,13 +25,17 @@ describe('conversation.sendMessage skill rebrand', () => {
     vi.stubGlobal('fetch', fetchMock);
   });
 
-  it('sends without throwing and restores backend skill ids on inject_skills', async () => {
+  it('sends without throwing and passes skill ids through verbatim', async () => {
+    // Skill names are scrubbed at the data level now — the bridge must not
+    // remap them. The test still guards against missing-import regressions
+    // (the original bug shipped as `restoreBackendSkillNameList is not
+    // defined` because esbuild does not type-check).
     const bridge = await import('@/common/adapter/ipcBridge');
 
     const result = await bridge.conversation.sendMessage.invoke({
       conversation_id: 'conv-1',
       input: 'hello',
-      inject_skills: ['searcht-config', 'searcht-app-guide'],
+      inject_skills: ['aionui-config', 'searcht-app-guide'],
     });
 
     expect(result.msg_id).toBe('m1');

@@ -483,6 +483,18 @@ const MIGRATION_STEPS: Array<{
   { name: 'migrateConfigStorage', run: async (configFile) => (await migrateConfigStorage(configFile), true) },
   { name: 'migrateProviders', run: async (configFile) => (await migrateProviders(configFile), true) },
   {
+    // Rewrites legacy brand names directly in the backend's own storage
+    // (skill SKILL.md frontmatter + SQLite catalog rows) instead of masking
+    // them in the UI. Idempotent, self-healing after backend re-seeds.
+    name: 'runBackendBrandScrub',
+    run: async () => {
+      const { getDataPath } = await import('./utils');
+      const { runBackendBrandScrub } = await import('@process/services/brand/backendBrandScrub');
+      await runBackendBrandScrub(getDataPath);
+      return true;
+    },
+  },
+  {
     // Installs/refreshes the desktop-managed SearchT-UI feature guide that the
     // built-in butler answers from (its upstream aionui-* skills are locked).
     name: 'ensureButlerGuideSkill',

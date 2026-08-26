@@ -187,21 +187,21 @@ describe('apiModelMapper', () => {
       expect('model' in body).toBe(false);
     });
 
-    it('restores backend skill ids from rebranded display names on create', () => {
-      // The skills catalog shows searcht-* display names; writes must map them
-      // back to the aionui-* ids the backend resolves, or selections dangle.
+    it('passes conversation skill fields through verbatim', () => {
+      // Skill names are scrubbed at the data level (backend SQLite + SKILL.md
+      // frontmatter), so the create body must NOT remap anything.
       const body = buildCreateConversationBody({
         name: 'hello',
         assistant: {
           id: 'aionui-assistant',
           conversation_overrides: {
-            skill_ids: ['searcht-config', 'searcht-app-guide'],
-            disabled_builtin_skill_ids: ['searcht-troubleshooting'],
+            skill_ids: ['aionui-config', 'searcht-app-guide'],
+            disabled_builtin_skill_ids: ['aionui-troubleshooting'],
           },
         },
         extra: {
-          preset_enabled_skills: ['searcht-webui-public'],
-          exclude_auto_inject_skills: ['searcht-webui-setup'],
+          preset_enabled_skills: ['aionui-webui-public'],
+          exclude_auto_inject_skills: ['aionui-webui-setup'],
         },
       });
 
@@ -214,21 +214,6 @@ describe('apiModelMapper', () => {
       const extra = body.extra as { preset_enabled_skills: string[]; exclude_auto_inject_skills: string[] };
       expect(extra.preset_enabled_skills).toEqual(['aionui-webui-public']);
       expect(extra.exclude_auto_inject_skills).toEqual(['aionui-webui-setup']);
-    });
-
-    it('leaves non-rebranded skill names untouched on create', () => {
-      const body = buildCreateConversationBody({
-        name: 'hello',
-        assistant: {
-          id: 'user-assistant',
-          conversation_overrides: { skill_ids: ['officecli', 'pdf'] },
-        },
-        extra: { preset_enabled_skills: ['cron'] },
-      });
-
-      const assistant = body.assistant as { conversation_overrides: { skill_ids: string[] } };
-      expect(assistant.conversation_overrides.skill_ids).toEqual(['officecli', 'pdf']);
-      expect((body.extra as { preset_enabled_skills: string[] }).preset_enabled_skills).toEqual(['cron']);
     });
   });
 
@@ -374,24 +359,6 @@ describe('apiModelMapper', () => {
 
       // Should preserve the existing value
       expect(result.extra?.custom_workspace).toBe(true);
-    });
-
-    it('rebrands the creation-time skill snapshot in extra.skills', () => {
-      const raw = {
-        id: 'conv1',
-        extra: {
-          workspace: '',
-          skills: ['aionui-config', 'aionui-webui-public', 'officecli'],
-        },
-      };
-
-      const result = fromApiConversation(raw);
-
-      expect((result.extra as { skills: string[] }).skills).toEqual([
-        'searcht-config',
-        'searcht-webui-public',
-        'officecli',
-      ]);
     });
 
     it('returns input unchanged for non-object types', () => {

@@ -5,7 +5,6 @@
  */
 
 import type { TProviderWithModel } from '../config/storage';
-import { rebrandAvatar, rebrandLegacyText, rebrandSkillNameList, restoreBackendSkillNameList } from '@/common/utils/legacyBrandRebrand';
 
 export type ApiProviderWithModel = {
   provider_id: string;
@@ -60,57 +59,12 @@ export function buildCreateConversationBody(p: CreateConversationBodyInput): Rec
     type: hasAssistant ? undefined : p.type,
     id: p.id,
     name: p.name,
-    assistant: hasAssistant ? restoreAssistantSkillFields(p.assistant as AssistantLike) : p.assistant,
-    extra: restoreExtraSkillFields(p.extra as ExtraLike | undefined),
+    assistant: p.assistant,
+    extra: p.extra,
   };
   const model = p.type === 'acp' ? undefined : toApiModelOptional(p.model);
   if (model) body.model = model;
   return body;
-}
-
-// The skills catalog shows rebranded display names (aionui-* → searcht-*);
-// restore the backend ids on the way in so selections still resolve. See
-// common/utils/legacyBrandRebrand.ts for the two-way contract.
-type AssistantLike = {
-  conversation_overrides?: {
-    skill_ids?: string[] | null;
-    disabled_builtin_skill_ids?: string[] | null;
-    [key: string]: unknown;
-  };
-  [key: string]: unknown;
-};
-
-function restoreAssistantSkillFields<T extends AssistantLike>(assistant: T): T {
-  const overrides = assistant.conversation_overrides;
-  if (!overrides) return assistant;
-  return {
-    ...assistant,
-    conversation_overrides: {
-      ...overrides,
-      skill_ids: restoreBackendSkillNameList(overrides.skill_ids ?? undefined) ?? overrides.skill_ids,
-      disabled_builtin_skill_ids:
-        restoreBackendSkillNameList(overrides.disabled_builtin_skill_ids ?? undefined) ??
-        overrides.disabled_builtin_skill_ids,
-    },
-  };
-}
-
-type ExtraLike = {
-  preset_enabled_skills?: string[] | null;
-  exclude_auto_inject_skills?: string[] | null;
-  [key: string]: unknown;
-};
-
-function restoreExtraSkillFields<T extends ExtraLike>(extra: T | undefined): T | undefined {
-  if (!extra) return extra;
-  return {
-    ...extra,
-    preset_enabled_skills:
-      restoreBackendSkillNameList(extra.preset_enabled_skills ?? undefined) ?? extra.preset_enabled_skills,
-    exclude_auto_inject_skills:
-      restoreBackendSkillNameList(extra.exclude_auto_inject_skills ?? undefined) ??
-      extra.exclude_auto_inject_skills,
-  };
 }
 
 // ── Backend → Frontend ──────────────────────────────────────────────────
@@ -136,40 +90,24 @@ export function fromApiConversation<T>(raw: T): T {
   const r = raw as T & {
     model?: ApiProviderWithModel | null;
     extra?: Record<string, unknown> | null;
-    assistant?: { name?: string; avatar?: string } | null;
   };
   const next = { ...r } as unknown as T & {
     model?: TProviderWithModel;
     extra?: Record<string, unknown> | null;
-    assistant?: { name?: string; avatar?: string } | null;
   };
 
   if ('model' in r) {
     next.model = fromApiModelOptional(r.model);
   }
 
-  // Conversations embed an assistant snapshot (name/avatar) taken at creation
-  // time; rebrand it so history rows and headers don't resurface legacy names.
-  if (r.assistant && typeof r.assistant === 'object') {
-    next.assistant = {
-      ...r.assistant,
-      name: rebrandLegacyText(r.assistant.name) ?? r.assistant.name,
-      avatar: rebrandAvatar(r.assistant.avatar),
-    };
-  }
-
   const extra = r.extra;
-  if (extra && typeof extra === 'object') {
-    const base = ('custom_workspace' in extra ? { ...extra } : {
+  if (extra && typeof extra === 'object' && !('custom_workspace' in extra)) {
+    const workspace = typeof extra.workspace === 'string' ? extra.workspace : '';
+    const isTemporary = extra.is_temporary_workspace === true;
+    next.extra = {
       ...extra,
-      custom_workspace:
-        (typeof extra.workspace === 'string' ? extra.workspace : '').length > 0 &&
-        extra.is_temporary_workspace !== true,
-    }) as Record<string, unknown> & { skills?: unknown };
-    // `extra.skills` is the creation-time skill snapshot shown by the
-    // conversation skills indicator; rebrand it so it joins against the
-    // (rebranded) skills catalog instead of dangling on legacy ids.
-    next.extra = Array.isArray(base.skills) ? { ...base, skills: rebrandSkillNameList(base.skills as string[]) } : base;
+      custom_workspace: workspace.length > 0 && !isTemporary,
+    };
   }
 
   return next;

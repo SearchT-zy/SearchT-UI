@@ -16,12 +16,7 @@ import type { IConfirmation } from '@/common/chat/chatLib';
 import type { AcpSlashCommandApiItem } from '@/common/chat/slash/types';
 import { bridge } from '@/common/platform/bridge';
 import {
-  rebrandAssistantList,
-  rebrandAssistantProfileFields,
   rebrandManagedAgent,
-  rebrandSkillCatalogEntry,
-  restoreBackendSkillName,
-  restoreBackendSkillNameList,
 } from '@/common/utils/legacyBrandRebrand';
 import { buildListTasksPath } from './teamTaskPath';
 import type { OpenDialogOptions } from 'electron';
@@ -303,24 +298,24 @@ export const shell = {
 // ---------------------------------------------------------------------------
 
 export const assistants = {
-  // Backend catalog rows still carry upstream Aion branding ("Aion CLI",
-  // "AionUi管家") and the backend rejects renames on them; rebrand at the
-  // response seam so every consumer (home quick-select, settings, teams…)
-  // shows SearchT names without touching the rows themselves.
+  // Catalog data (skills, butler row, descriptions) is scrubbed at the data
+  // level by runBackendBrandScrub. One exception still needs a display pass:
+  // the backend rewrites agent_metadata ("Aion CLI") from its embedded
+  // manifest at runtime, so a data rename cannot survive — rebrand those
+  // strings at the response seam instead. Skill arrays are already real data
+  // and pass through untouched.
   list: withResponseMap(httpGet<Assistant[], void>('/api/assistants'), (list) =>
-    rebrandAssistantList(list) ?? list
+    list ? list.map(rebrandManagedAgent) : list
   ),
   get: withResponseMap(
     httpGet<AssistantDetail, { id: string; locale?: string }>(
       ({ id, locale }) =>
         `/api/assistants/${encodeURIComponent(id)}${locale ? `?locale=${encodeURIComponent(locale)}` : ''}`
     ),
-    rebrandAssistantProfileFields
+    rebrandManagedAgent
   ),
-  create: httpPost<Assistant, CreateAssistantRequest>('/api/assistants', (p) => restoreAssistantSkillFields(p)),
-  update: httpPut<Assistant, UpdateAssistantRequest>((p) => `/api/assistants/${p.id}`, (p) =>
-    restoreAssistantSkillFields(p)
-  ),
+  create: httpPost<Assistant, CreateAssistantRequest>('/api/assistants'),
+  update: httpPut<Assistant, UpdateAssistantRequest>((p) => `/api/assistants/${p.id}`),
   delete: httpDelete<void, { id: string }>((p) => `/api/assistants/${p.id}`),
   setState: httpPatch<Assistant, SetAssistantStateRequest>(
     (p) => `/api/assistants/${p.id}/state`,
@@ -329,24 +324,8 @@ export const assistants = {
       return body;
     }
   ),
-  import: httpPost<ImportAssistantsResult, ImportAssistantsRequest>('/api/assistants/import', (p) => ({
-    ...p,
-    assistants: (p.assistants ?? []).map(restoreAssistantSkillFields),
-  })),
+  import: httpPost<ImportAssistantsResult, ImportAssistantsRequest>('/api/assistants/import'),
 };
-
-/** Map displayed skill names back to the backend ids on assistant writes. */
-function restoreAssistantSkillFields<T extends { enabled_skills?: string[]; custom_skill_names?: string[]; disabled_builtin_skills?: string[] }>(
-  request: T
-): T {
-  return {
-    ...request,
-    enabled_skills: restoreBackendSkillNameList(request.enabled_skills) ?? request.enabled_skills,
-    custom_skill_names: restoreBackendSkillNameList(request.custom_skill_names) ?? request.custom_skill_names,
-    disabled_builtin_skills:
-      restoreBackendSkillNameList(request.disabled_builtin_skills) ?? request.disabled_builtin_skills,
-  };
-}
 
 // ---------------------------------------------------------------------------
 // Conversation — REST + WS
@@ -445,7 +424,7 @@ export const conversation = {
       content: p.input,
       files: p.files,
       loading_id: p.loading_id,
-      inject_skills: restoreBackendSkillNameList(p.inject_skills) ?? p.inject_skills,
+      inject_skills: p.inject_skills,
     })
   ),
   getSlashCommands: httpGet<AcpSlashCommandApiItem[], { conversation_id: string }>(
@@ -958,31 +937,24 @@ export const fs = {
   deleteAssistantRule: httpDelete<boolean, { assistant_id: string }>(
     (p) => `/api/skills/assistant-rule/${p.assistant_id}`
   ),
-  // The corpus seeds `aionui-*` builtins whose names/descriptions surface in
-  // every skill picker; rebrand on read and restore backend names on every
-  // write that carries skill ids (selections are matched by name server-side).
-  listAvailableSkills: withResponseMap(
-    httpGet<
-      Array<{
-        name: string;
-        description: string;
-        location: string;
-        relative_location?: string;
-        is_auto_inject: boolean;
-        is_custom: boolean;
-        source: 'builtin' | 'custom' | 'cron' | 'extension';
-      }>,
-      void
-    >('/api/skills'),
-    (list) => (list ? list.map(rebrandSkillCatalogEntry) : list)
-  ),
+  // Corpus names are scrubbed at the data level (SKILL.md frontmatter +
+  // SQLite skills table), so reads/writes pass through unmapped.
+  listAvailableSkills: httpGet<
+    Array<{
+      name: string;
+      description: string;
+      location: string;
+      relative_location?: string;
+      is_auto_inject: boolean;
+      is_custom: boolean;
+      source: 'builtin' | 'custom' | 'cron' | 'extension';
+    }>,
+    void
+  >('/api/skills'),
   materializeSkillsForAgent: httpPost<
     { skills: Array<{ name: string; source_path: string }> },
     { conversation_id: string; skills: string[] }
-  >('/api/skills/materialize-for-agent', (p) => ({
-    ...p,
-    skills: (p.skills ?? []).map(restoreBackendSkillName),
-  })),
+  >('/api/skills/materialize-for-agent'),
   readSkillInfo: httpPost<{ name: string; description: string }, { skill_path: string }>('/api/skills/info'),
   importSkill: httpPost<
     {
