@@ -105,6 +105,53 @@ async function walkSkillFiles(root: string, depth: number, out: string[]): Promi
 }
 
 /**
+ * Agent session state (state.json under aionrs-sessions) persists the skill
+ * manifest injected at session start ("skills from the system reminder are:
+ * aionui-config…") plus the conversation transcript. Sessions started before
+ * the rename keep answering with legacy names from this state, so rewrite
+ * the strings in place. Runtime tool paths (".aionrs/" style) match no rule
+ * and survive verbatim; JSON structure is untouched (plain string replacement).
+ */
+async function scrubSessionStateFiles(dataDir: string): Promise<number> {
+  const root = resolveUnderCorpusRoot(dataDir, 'aionrs-sessions');
+  if (!root) return 0;
+  const files: string[] = [];
+  await walkJsonFiles(root, 0, files);
+  let changed = 0;
+  for (const file of files) {
+    try {
+      const original = await fs.readFile(file, 'utf8');
+      const probe = rebrandLegacyText(original) ?? original;
+      if (probe === original) continue;
+      await fs.writeFile(file, probe, 'utf8');
+      changed += 1;
+    } catch {
+      // Next boot retries.
+    }
+  }
+  return changed;
+}
+
+async function walkJsonFiles(root: string, depth: number, out: string[]): Promise<void> {
+  if (depth > 10) return;
+  let entries: Dirent[];
+  try {
+    entries = await fs.readdir(root, { withFileTypes: true });
+  } catch {
+    return;
+  }
+  for (const entry of entries) {
+    const child = path.join(root, entry.name);
+    if (entry.isSymbolicLink()) continue;
+    if (entry.isDirectory()) {
+      await walkJsonFiles(child, depth + 1, out);
+    } else if (entry.isFile() && entry.name.endsWith('.json')) {
+      out.push(child);
+    }
+  }
+}
+
+/**
  * Materialized skills in conversation workspaces are SYMLINKS named after
  * the skill id, pointing into the corpus (the corpus folders keep legacy
  * names by design). The backend now creates them under the new ids, but
@@ -333,7 +380,8 @@ export async function runBackendBrandScrub(getDataDir: () => string): Promise<Sc
   const filesChanged =
     (await scrubSkillFiles(dataDir)) +
     (await scrubWorkspaceSkillCopies(dataDir)) +
-    (await scrubWorkspaceSkillSymlinks(dataDir));
+    (await scrubWorkspaceSkillSymlinks(dataDir)) +
+    (await scrubSessionStateFiles(dataDir));
   let rowsChanged = 0;
   try {
     rowsChanged = await scrubDatabase(path.join(dataDir, 'aionui-backend.db'));

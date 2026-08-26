@@ -53,6 +53,13 @@ const prepareFixture = async (): Promise<string> => {
     path.join(root, 'conversations/users/system_default_user/2026/08/26/claude-temp-y/.claude/skills/aionui-config'),
     'junction'
   );
+  // Agent session state carrying the pre-rename skill manifest reminder
+  await fs.mkdir(path.join(root, 'aionrs-sessions/sessions/conv-old'), { recursive: true });
+  await fs.writeFile(
+    path.join(root, 'aionrs-sessions/sessions/conv-old/state.json'),
+    '{"reminder":"skills from the system reminder are:\\n- aionui-config\\n- aionui-troubleshooting","path":"x/.aionrs/skills"}',
+    'utf8'
+  );
   return root;
 };
 
@@ -95,6 +102,12 @@ describe('runBackendBrandScrub (files)', () => {
     await expect(
       fs.access(path.join(root, 'conversations/users/system_default_user/2026/08/26/claude-temp-y/.claude/skills/aionui-config'))
     ).rejects.toThrow();
+
+    // Session state rewritten: legacy manifest names gone, runtime paths kept
+    const state = await fs.readFile(path.join(root, 'aionrs-sessions/sessions/conv-old/state.json'), 'utf8');
+    expect(state).toContain('searcht-config');
+    expect(state).toContain('.aionrs/skills');
+    expect(state).not.toContain('aionui-');
 
     const clean = await fs.readFile(path.join(root, 'skills/users/mine/SKILL.md'), 'utf8');
     expect(clean).toBe('---\nname: my-clean-skill\ndescription: Nothing legacy here.\n---\n\nClean content.\n');
