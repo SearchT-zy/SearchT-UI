@@ -367,11 +367,11 @@ jobs:
           MSVS_VERSION: 2022
           GYP_MSVS_VERSION: 2022
 
-      - name: Prepare aioncore binary
+      - name: Prepare backend binary
         shell: bash
-        run: node scripts/prepareAioncore.js
+        run: node scripts/prepareBackend.js
         env:
-          # Version is pinned in repo-root package.json (aioncoreVersion).
+          # Version is pinned in repo-root package.json (searchtBackendVersion).
           # Set SEARCHT_BACKEND_VERSION here only to override for ad-hoc builds.
           SEARCHT_BACKEND_RUN_ID: ${{ inputs.aioncore_run_id }}
           SEARCHT_BACKEND_ARCH: ${{ matrix.arch }}

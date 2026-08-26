@@ -11,8 +11,8 @@ import {
   managedAgentSearchText,
   type ManagedAgent,
 } from '@/renderer/utils/model/agentTypes';
-import AionModal from '@/renderer/components/base/AionModal';
-import { AionSearchInput } from '@/renderer/components/base';
+import SearchtModal from '@/renderer/components/base/SearchtModal';
+import { SearchtSearchInput } from '@/renderer/components/base';
 import { useLayoutContext } from '@/renderer/hooks/context/LayoutContext';
 import { useManagedAgents } from '@/renderer/hooks/agent/useManagedAgents';
 import { openExternalUrl } from '@/renderer/utils/platform';
@@ -132,10 +132,10 @@ const LocalAgents: React.FC = () => {
   const sortedOfficialAgents = useMemo(
     () =>
       officialAgents.toSorted((left, right) => {
-        const leftIsAionrs = left.agent_type === 'aionrs' || left.backend === 'aionrs';
-        const rightIsAionrs = right.agent_type === 'aionrs' || right.backend === 'aionrs';
-        if (leftIsAionrs !== rightIsAionrs) {
-          return leftIsAionrs ? -1 : 1;
+        const leftIsSearcht = left.agent_type === 'aionrs' || left.backend === 'aionrs';
+        const rightIsSearcht = right.agent_type === 'aionrs' || right.backend === 'aionrs';
+        if (leftIsSearcht !== rightIsSearcht) {
+          return leftIsSearcht ? -1 : 1;
         }
         // Strategic partner: pin Kimi right after the builtin aionrs agent.
         const leftIsKimi = left.backend === 'kimi';
@@ -279,7 +279,7 @@ const LocalAgents: React.FC = () => {
                 : t('settings.agentManagement.checkInstalled')}
             </Button>
             {!isMobile && (
-              <AionSearchInput
+              <SearchtSearchInput
                 className='shrink-0 w-[200px] hidden md:flex'
                 data-testid='input-search-agents'
                 placeholder={t('settings.agentManagement.searchPlaceholder', { defaultValue: 'Search agents...' })}
@@ -406,7 +406,7 @@ const LocalAgents: React.FC = () => {
         </Typography.Text>
       </div>
 
-      <AionModal
+      <SearchtModal
         visible={editorVisible}
         onCancel={() => {
           setEditorVisible(false);
@@ -443,7 +443,7 @@ const LocalAgents: React.FC = () => {
             }}
           />
         )}
-      </AionModal>
+      </SearchtModal>
 
       <div data-testid='agent-management-custom-section'>
         <div className='flex flex-col gap-8px rounded-12px border border-border-2 bg-2 p-8px md:rounded-16px md:p-10px'>

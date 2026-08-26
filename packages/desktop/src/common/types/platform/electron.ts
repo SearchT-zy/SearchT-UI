@@ -57,7 +57,7 @@ export interface BackendStartupFailureInfo {
   localDataIssueKind?: BackendLocalDataIssueKind;
   startupDirectoryIssueKind?: BackendStartupDirectoryIssueKind;
   missingBackendBinary?: boolean;
-  missingBundledAioncoreDir?: boolean;
+  missingBundledBackendDir?: boolean;
   missingHubDir?: boolean;
   missingPetStatesDir?: boolean;
   missingPwaDir?: boolean;

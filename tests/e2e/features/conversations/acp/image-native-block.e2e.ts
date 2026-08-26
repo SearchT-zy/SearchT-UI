@@ -149,7 +149,7 @@ test.describe('ACP multimodal prompt', () => {
       // 2. Attach the probe image through the REAL upload input (uploads to
       //    POST /api/fs/upload and lands in the uploadFile chip lane).
       const probePng = writeProbePng();
-      const fileInput = page.locator('[data-testid="aionrs-file-upload-input"]');
+      const fileInput = page.locator('[data-testid="searcht-file-upload-input"]');
       try {
         await fileInput.setInputFiles(probePng, { timeout: 60_000 });
       } catch (error) {

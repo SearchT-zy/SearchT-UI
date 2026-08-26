@@ -16,7 +16,7 @@ function writeJson(filePath: string, value: unknown) {
   writeFile(filePath, `${JSON.stringify(value, null, 2)}\n`);
 }
 
-describe('Windows bundled aioncore install verifier', () => {
+describe('Windows bundled backend install verifier', () => {
   it('reads managed resources manifest instead of deriving Codex platform paths', () => {
     expect(script).toContain("Join-Path $managedRoot 'manifest.json'");
     expect(script).toContain('schemaVersion');
@@ -42,13 +42,13 @@ describe('Windows bundled aioncore install verifier', () => {
   runOnWindows('fails an old-version-only Codex CLI install directory', () => {
     const tmp = mkdtempSync(join(tmpdir(), 'aionui-install-verify-'));
     const installDir = join(tmp, 'install');
-    const managedRoot = join(installDir, 'resources', 'bundled-aioncore', 'win32-x64', 'managed-resources');
+    const managedRoot = join(installDir, 'resources', 'bundled-backend', 'win32-x64', 'managed-resources');
     const logPath = join(tmp, 'verify.log');
     const codexTriple = 'x86_64-pc-windows-msvc';
 
     try {
-      writeFile(join(installDir, 'resources', 'bundled-aioncore', 'win32-x64', 'aioncore.exe'), 'x');
-      writeJson(join(installDir, 'resources', 'bundled-aioncore', 'win32-x64', 'manifest.json'), {
+      writeFile(join(installDir, 'resources', 'bundled-backend', 'win32-x64', 'searcht-backend.exe'), 'x');
+      writeJson(join(installDir, 'resources', 'bundled-backend', 'win32-x64', 'manifest.json'), {
         platform: 'win32',
         arch: 'x64',
       });

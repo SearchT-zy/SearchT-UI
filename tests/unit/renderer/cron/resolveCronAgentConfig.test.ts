@@ -20,7 +20,7 @@ describe('resolveCronAgentConfig', () => {
           agent: agent('agent-aionrs', 'aionrs'),
         }),
       ],
-      selectedAionrsProvider: {
+      selectedSearchtProvider: {
         id: 'provider-gemini',
         name: 'Gemini',
       },

@@ -58,7 +58,7 @@ describe('team agent type policy', () => {
 
 function assistant(id: string, team_selectable: boolean, team_block_reason?: string, runtimeKey = 'claude'): Assistant {
   const agentId = `agent-${runtimeKey}`;
-  const isAionrs = runtimeKey === 'aionrs';
+  const isSearcht = runtimeKey === 'aionrs';
   return {
     id,
     source: 'generated',
@@ -68,7 +68,7 @@ function assistant(id: string, team_selectable: boolean, team_block_reason?: str
     enabled: true,
     sort_order: 0,
     agent_id: agentId,
-    agent: isAionrs
+    agent: isSearcht
       ? { type: 'aionrs', source: 'internal' }
       : { type: 'acp', source: 'builtin', acp_backend: runtimeKey },
     enabled_skills: [],

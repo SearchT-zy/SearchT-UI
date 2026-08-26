@@ -155,7 +155,7 @@ const Layout: React.FC<{
     // Mirror Titlebar's handleBackToChat convention: return to the last non-settings path.
     let target: string | null = null;
     try {
-      target = sessionStorage.getItem('aion:last-non-settings-path');
+      target = sessionStorage.getItem('searcht:last-non-settings-path');
     } catch {
       // ignore
     }

@@ -222,7 +222,7 @@ describe('classifyBackendStartupFailure', () => {
       stage: 'resolve_binary',
       isPackaged: true,
       runtimeKey: 'win32-x64',
-      binaryName: 'aioncore.exe',
+      binaryName: 'searcht-backend.exe',
       bundledDirExists: false,
       runtimeDirExists: false,
       resourcesDirEntries: [
@@ -240,11 +240,11 @@ describe('classifyBackendStartupFailure', () => {
       reason: 'backend_incomplete_installation',
       incompleteInstallationKind: 'missing_directory_resources',
       missingBackendBinary: true,
-      missingBundledAioncoreDir: true,
+      missingBundledBackendDir: true,
       missingHubDir: true,
       missingPetStatesDir: true,
       missingPwaDir: true,
-      missingResources: ['bundled-aioncore/', 'bundled-aioncore/win32-x64/'],
+      missingResources: ['bundled-backend/', 'bundled-backend/win32-x64/'],
       missingRuntimeDir: true,
     });
   });
@@ -257,7 +257,7 @@ describe('classifyBackendStartupFailure', () => {
       stage: 'resolve_binary',
       isPackaged: true,
       runtimeKey: 'win32-x64',
-      binaryName: 'aioncore.exe',
+      binaryName: 'searcht-backend.exe',
       bundledDirExists: true,
       runtimeDirExists: true,
       resourcesDirEntries: [
@@ -265,7 +265,7 @@ describe('classifyBackendStartupFailure', () => {
         'app.asar',
         'app.asar.unpacked/',
         'app.png',
-        'bundled-aioncore/',
+        'bundled-backend/',
         'elevate.exe',
         'hub/',
         'manifest.webmanifest',
@@ -280,11 +280,14 @@ describe('classifyBackendStartupFailure', () => {
       reason: 'backend_incomplete_installation',
       incompleteInstallationKind: 'missing_directory_resources',
       missingBackendBinary: true,
-      missingBundledAioncoreDir: false,
+      missingBundledBackendDir: false,
       missingHubDir: false,
       missingPetStatesDir: false,
       missingPwaDir: false,
-      missingResources: ['bundled-aioncore/win32-x64/managed-resources/', 'bundled-aioncore/win32-x64/aioncore.exe'],
+      missingResources: [
+        'bundled-backend/win32-x64/managed-resources/',
+        'bundled-backend/win32-x64/searcht-backend.exe',
+      ],
       missingRuntimeDir: false,
     });
   });

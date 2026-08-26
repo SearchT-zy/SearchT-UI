@@ -12,7 +12,7 @@ import { ensureAdminPassword } from './ensureAdminPassword.js';
 //   searcht-web/
 //   ├── searcht-web              ← bun-compiled standalone binary (process.execPath)
 //   ├── package.json             ← for runtime version lookup
-//   ├── bundled-aioncore/<plat-arch>/aioncore[.exe]
+//   ├── bundled-backend/<plat-arch>/searcht-backend[.exe]
 //   └── static/                  ← SPA assets
 //
 // Under `bun build --compile`, import.meta.url resolves to a virtual /$bunfs/
@@ -49,7 +49,9 @@ const isPackaged = (() => {
   return exeName === 'searcht-web' || exeName === 'searcht-web.exe';
 })();
 
-const BACKEND_BINARY = process.platform === 'win32' ? 'aioncore.exe' : 'aioncore';
+// Preferred binary name for OUR tarball bundle; the legacy 'aioncore' name is
+// still probed as a fallback for tarballs produced before the rebrand.
+const BACKEND_BINARY_NAMES = process.platform === 'win32' ? ['searcht-backend.exe', 'aioncore.exe'] : ['searcht-backend', 'aioncore'];
 const DEFAULT_PORT = 25808;
 const RESET_COMMAND = isPackaged ? 'searcht-web resetpass' : 'bun run resetpass';
 
@@ -79,8 +81,12 @@ function resolveBackendBinary(flags: Map<string, string | true>): string {
   const envOverride = process.env.SEARCHT_BACKEND_BIN;
   if (envOverride) return path.resolve(envOverride);
   const platArch = `${process.platform}-${process.arch}`;
-  const bundled = path.join(cliRoot, 'bundled-aioncore', platArch, BACKEND_BINARY);
-  return bundled;
+  for (const binaryName of BACKEND_BINARY_NAMES) {
+    const bundled = path.join(cliRoot, 'bundled-backend', platArch, binaryName);
+    if (fs.existsSync(bundled)) return bundled;
+  }
+  // New-layout default; used for the "missing" hint when neither layout exists.
+  return path.join(cliRoot, 'bundled-backend', platArch, BACKEND_BINARY_NAMES[0]);
 }
 
 function resolveStaticDir(flags: Map<string, string | true>): string {
@@ -170,7 +176,7 @@ async function runStart(flags: Map<string, string | true>): Promise<void> {
     console.warn('⚠️  Backend binary not found — starting in FRONTEND-ONLY mode.');
     console.warn(`   Missing: ${backendBin}`);
     console.warn('   The web UI will load but API calls will fail until a backend is available.');
-    console.warn('   To enable backend: download aioncore and set SEARCHT_BACKEND_BIN.');
+    console.warn('   To enable backend: download the SearchT backend and set SEARCHT_BACKEND_BIN.');
     console.warn('');
 
     const handle = await startStaticServer({

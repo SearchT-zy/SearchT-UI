@@ -12,7 +12,7 @@ import { resolveDefaultTeamAgentModel } from '../teamCreateModelResolver';
 import TeamAssistantPickerDropdown from './TeamAssistantPickerDropdown';
 
 const useAcpDraft = getSendBoxDraftHook('acp', { _type: 'acp', atPath: [], content: '', uploadFile: [] });
-const useAionrsDraft = getSendBoxDraftHook('aionrs', { _type: 'aionrs', atPath: [], content: '', uploadFile: [] });
+const useSearchtDraft = getSendBoxDraftHook('aionrs', { _type: 'aionrs', atPath: [], content: '', uploadFile: [] });
 
 type Props = {
   children: React.ReactElement;
@@ -31,7 +31,7 @@ const TeamAddMemberPopover: React.FC<Props> = ({ children, disabled = false }) =
   const leader = teamMembers.find((m) => m.role === 'leader');
   const leaderConversationId = leader?.conversation_id ?? '';
   const acpDraft = useAcpDraft(leaderConversationId);
-  const aionrsDraft = useAionrsDraft(leaderConversationId);
+  const searchtDraft = useSearchtDraft(leaderConversationId);
 
   useEffect(() => {
     if (disabled) setVisible(false);
@@ -44,12 +44,12 @@ const TeamAddMemberPopover: React.FC<Props> = ({ children, disabled = false }) =
       defaultValue: 'Help me add a member good at ___ to the team',
     });
     if (leader.assistant_backend === 'aionrs') {
-      aionrsDraft.mutate((prev) => ({ ...prev, content: text }));
+      searchtDraft.mutate((prev) => ({ ...prev, content: text }));
     } else {
       acpDraft.mutate((prev) => ({ ...prev, content: text }));
     }
     setVisible(false);
-  }, [leader?.slot_id, leader?.assistant_backend, leaderConversationId, switchTab, t, acpDraft, aionrsDraft]);
+  }, [leader?.slot_id, leader?.assistant_backend, leaderConversationId, switchTab, t, acpDraft, searchtDraft]);
 
   const handleSelect = async (assistant: TeamAssistantOption) => {
     if (disabled || !addAssistant || pendingAssistantId) return;

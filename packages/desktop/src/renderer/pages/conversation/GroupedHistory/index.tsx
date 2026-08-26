@@ -5,7 +5,7 @@
  */
 
 import type { TChatConversation } from '@/common/config/storage';
-import AionModal from '@/renderer/components/base/AionModal';
+import SearchtModal from '@/renderer/components/base/SearchtModal';
 import { useLayoutContext } from '@/renderer/hooks/context/LayoutContext';
 import { useCronJobsMap } from '@/renderer/pages/cron';
 import { restrictToVerticalAxis } from '@/renderer/utils/ui/dndModifiers';
@@ -300,8 +300,8 @@ const WorkspaceGroupedHistory: React.FC<WorkspaceGroupedHistoryProps> = ({
         </div>
       )}
 
-      {/* 移除项目确认弹窗 — 使用项目自家 AionModal + 圆角线框按钮（红色危险态） */}
-      <AionModal
+      {/* 移除项目确认弹窗 — 使用项目自家 SearchtModal + 圆角线框按钮（红色危险态） */}
+      <SearchtModal
         visible={removeProjectTarget !== null}
         style={{ width: '400px' }}
         header={{
@@ -365,7 +365,7 @@ const WorkspaceGroupedHistory: React.FC<WorkspaceGroupedHistoryProps> = ({
             count: removeProjectTarget?.conversations.length ?? 0,
           })}
         </div>
-      </AionModal>
+      </SearchtModal>
 
       <div>
         {/* L1: Pinned section */}

@@ -13,7 +13,7 @@ import { isElectronDesktop } from '@/renderer/utils/platform';
 import { PET_CHARACTERS } from '@process/pet/petTypes';
 import SettingsPageWrapper from './components/SettingsPageWrapper';
 import PreferenceRow from '@/renderer/components/settings/SettingsModal/contents/SystemModalContent/PreferenceRow';
-import AionScrollArea from '@/renderer/components/base/AionScrollArea';
+import SearchtScrollArea from '@/renderer/components/base/SearchtScrollArea';
 import { useSettingsViewMode } from '@/renderer/components/settings/SettingsModal/settingsViewContext';
 
 const PetSettings: React.FC = () => {
@@ -111,13 +111,13 @@ const PetSettings: React.FC = () => {
   if (!isDesktop) {
     return (
       <SettingsPageWrapper>
-        <AionScrollArea className='flex-1 min-h-0 pb-16px' disableOverflow={isPageMode}>
+        <SearchtScrollArea className='flex-1 min-h-0 pb-16px' disableOverflow={isPageMode}>
           <div className='space-y-16px'>
             <div className='px-[12px] md:px-[32px] py-16px bg-2 rd-16px'>
               <p className='m-0 text-13px text-t-secondary'>{t('pet.desktopOnly')}</p>
             </div>
           </div>
-        </AionScrollArea>
+        </SearchtScrollArea>
       </SettingsPageWrapper>
     );
   }
@@ -188,7 +188,7 @@ const PetSettings: React.FC = () => {
 
   return (
     <SettingsPageWrapper>
-      <AionScrollArea className='flex-1 min-h-0 pb-16px' disableOverflow={isPageMode}>
+      <SearchtScrollArea className='flex-1 min-h-0 pb-16px' disableOverflow={isPageMode}>
         <div className='space-y-16px'>
           <div className='px-[12px] md:px-[32px] py-16px bg-2 rd-16px space-y-12px'>
             <div className='w-full flex flex-col divide-y divide-border-2'>
@@ -200,7 +200,7 @@ const PetSettings: React.FC = () => {
             </div>
           </div>
         </div>
-      </AionScrollArea>
+      </SearchtScrollArea>
     </SettingsPageWrapper>
   );
 };

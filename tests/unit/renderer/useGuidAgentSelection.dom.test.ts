@@ -516,7 +516,7 @@ function assistantFixture({
   source: Assistant['source'];
   sortOrder: number;
 }): Assistant {
-  const isAionrs = runtimeKey === 'aionrs';
+  const isSearcht = runtimeKey === 'aionrs';
   return {
     id,
     source,
@@ -526,7 +526,7 @@ function assistantFixture({
     enabled: true,
     sort_order: sortOrder,
     agent_id: `agent-${runtimeKey}`,
-    agent: isAionrs
+    agent: isSearcht
       ? { type: 'aionrs', source: 'internal' }
       : { type: 'acp', source: 'builtin', acp_backend: runtimeKey },
     enabled_skills: [],

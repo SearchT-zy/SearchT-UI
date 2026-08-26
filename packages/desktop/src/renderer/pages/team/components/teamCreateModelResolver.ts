@@ -12,7 +12,7 @@ import { assistantRuntimeKey, type AssistantDetail } from '@/common/types/agent/
  *
  * Backend `service.rs` consumes `input.model` verbatim with no default, so an
  * empty or backend-name-only value (e.g. "gemini") ends up persisted as
- * `use_model: null`. Downstream, GeminiSendBox / AionrsSendBox gate the
+ * `use_model: null`. Downstream, GeminiSendBox / SearchtSendBox gate the
  * textarea on `current_model?.useModel` and render disabled. See mnemo #297.
  *
  * This resolver reads assistant-owned defaults first and then falls back to
@@ -71,7 +71,7 @@ function resolveBackendDefaultModel(assistant_backend?: string): Promise<string>
   }
 
   if (assistant_backend === 'aionrs') {
-    return resolveAionrsDefaultModel();
+    return resolveSearchtDefaultModel();
   }
 
   if (assistant_backend === 'antigravity') {
@@ -100,6 +100,6 @@ async function resolveGeminiDefaultModel(): Promise<string> {
   return 'auto';
 }
 
-async function resolveAionrsDefaultModel(): Promise<string> {
+async function resolveSearchtDefaultModel(): Promise<string> {
   return 'default';
 }

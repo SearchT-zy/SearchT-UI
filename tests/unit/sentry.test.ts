@@ -154,7 +154,7 @@ describe('captureBackendStartupFailure', () => {
     expect(Sentry.flush).toHaveBeenCalledWith(2000);
     expect(Sentry.withScope).toHaveBeenCalledOnce();
     expect(scopeSetContext).toHaveBeenCalledWith(
-      'aioncore_install_diagnostics',
+      'searcht.backend_install_diagnostics',
       expect.objectContaining({
         appVersion: '0.0.0-test',
         isPackaged: false,
@@ -215,10 +215,10 @@ describe('captureBackendStartupFailure', () => {
       expect(scopeSetTag).toHaveBeenCalledWith('searcht.backend_startup.seconds_since_quit_and_install', '46');
       expect(scopeSetTag).toHaveBeenCalledWith('searcht.backend_startup.install_path_kind', 'user_local_programs');
       expect(scopeSetContext).toHaveBeenCalledWith(
-        'aioncore_startup_classification',
+        'searcht.backend_startup_classification',
         expect.objectContaining({
           incompleteInstallationKind: 'missing_directory_resources',
-          missingBundledAioncoreDir: true,
+          missingBundledBackendDir: true,
           missingRuntimeDir: true,
           missingBackendBinary: true,
         })
@@ -383,7 +383,7 @@ describe('initSentry beforeSend', () => {
       exception: {
         values: [
           {
-            value: '[WebUI] Cannot start: aioncore is not running (globalThis.__backendPort unset)',
+            value: '[WebUI] Cannot start: searcht-backend is not running (globalThis.__backendPort unset)',
           },
         ],
       },

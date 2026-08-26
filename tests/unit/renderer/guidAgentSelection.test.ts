@@ -35,7 +35,7 @@ function assistant(
   overrides: Partial<Assistant> & { id: string; source: Assistant['source']; runtimeKey: string }
 ): Assistant {
   const agentId = `agent-${overrides.runtimeKey}`;
-  const isAionrs = overrides.runtimeKey === 'aionrs';
+  const isSearcht = overrides.runtimeKey === 'aionrs';
   return {
     id: overrides.id,
     source: overrides.source,
@@ -45,7 +45,7 @@ function assistant(
     enabled: true,
     sort_order: overrides.sort_order ?? 0,
     agent_id: agentId,
-    agent: isAionrs
+    agent: isSearcht
       ? { type: 'aionrs', source: 'internal' }
       : { type: 'acp', source: 'builtin', acp_backend: overrides.runtimeKey },
     enabled_skills: [],

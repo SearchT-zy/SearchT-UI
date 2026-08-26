@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import AionModal from '@renderer/components/base/AionModal';
+import SearchtModal from '@renderer/components/base/SearchtModal';
 import { openExternalUrl } from '@/renderer/utils/platform';
 import { Button } from '@arco-design/web-react';
 import { Down } from '@icon-park/react';
@@ -103,7 +103,7 @@ const UpdateMigrationDialog: React.FC = () => {
   };
 
   return (
-    <AionModal
+    <SearchtModal
       variant='standard'
       visible={visible}
       onCancel={close}
@@ -192,7 +192,7 @@ const UpdateMigrationDialog: React.FC = () => {
           </div>
         )}
       </div>
-    </AionModal>
+    </SearchtModal>
   );
 };
 

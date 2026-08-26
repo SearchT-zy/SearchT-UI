@@ -11,7 +11,7 @@ import { useTeammateColor } from '../identity/TeamIdentityContext';
 import { Robot } from '@icon-park/react';
 
 const useAcpDraft = getSendBoxDraftHook('acp', { _type: 'acp', atPath: [], content: '', uploadFile: [] });
-const useAionrsDraft = getSendBoxDraftHook('aionrs', { _type: 'aionrs', atPath: [], content: '', uploadFile: [] });
+const useSearchtDraft = getSendBoxDraftHook('aionrs', { _type: 'aionrs', atPath: [], content: '', uploadFile: [] });
 
 type Props = {
   conversation_id: string;
@@ -77,10 +77,10 @@ const TeamChatEmptyState: React.FC<Props> = ({
 
   // Hooks must run unconditionally; the lookup below picks the right draft at call time.
   const acpDraft = useAcpDraft(conversation_id);
-  const aionrsDraft = useAionrsDraft(conversation_id);
+  const searchtDraft = useSearchtDraft(conversation_id);
   const setContentByKind = {
     acp: (text: string) => acpDraft.mutate((prev) => ({ ...prev, content: text })),
-    aionrs: (text: string) => aionrsDraft.mutate((prev) => ({ ...prev, content: text })),
+    aionrs: (text: string) => searchtDraft.mutate((prev) => ({ ...prev, content: text })),
   } satisfies Record<TeamDraftKind, (text: string) => void>;
 
   const fillDraft = useCallback(

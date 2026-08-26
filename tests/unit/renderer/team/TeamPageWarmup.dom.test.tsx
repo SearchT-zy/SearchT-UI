@@ -127,9 +127,9 @@ vi.mock('@/renderer/components/agent/AcpModelSelector', () => ({
   },
 }));
 
-vi.mock('@/renderer/pages/conversation/platforms/aionrs/AionrsModelSelector', () => ({
+vi.mock('@/renderer/pages/conversation/platforms/aionrs/SearchtModelSelector', () => ({
   __esModule: true,
-  default: () => <div data-testid='mock-aionrs-model-selector' />,
+  default: () => <div data-testid='mock-searcht-model-selector' />,
 }));
 
 vi.mock('@/renderer/pages/team/components/TeamChatView', () => ({

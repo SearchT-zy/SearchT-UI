@@ -82,7 +82,7 @@ try {
       'Uninstall SearchT-UI.exe',
       'resources\app.asar',
       'resources\app-update.yml',
-      'resources\bundled-aioncore\win32-x64\aioncore.exe'
+      'resources\bundled-backend\win32-x64\searcht-backend.exe'
     )
     $known = @(
       $knownRelative |

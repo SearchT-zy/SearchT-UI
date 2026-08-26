@@ -1,5 +1,5 @@
 /**
- * Aionrs Chat E2E Tests - Basic Flow (P0 Priority)
+ * Searcht Chat E2E Tests - Basic Flow (P0 Priority)
  *
  * Test Cases Covered:
  * - TC-A-01: Minimal path (no attachments + default model + default permission)
@@ -7,42 +7,42 @@
  * - TC-A-03: Upload single file
  *
  * Prerequisites:
- * - aionrs binary available (via ipcBridge.fs.findAionrsBinary)
+ * - aionrs binary available (via ipcBridge.fs.findSearchtBinary)
  * - User logged in
  * - At least 1 ACP model available (filtered Google Auth)
  *
  * Data-testid references:
  * - AgentPillBar: data-agent-backend="aionrs"
  * - AgentModeSelector: data-testid="agent-mode-selector-aionrs"
- * - AionrsSendBox: data-testid="aionrs-sendbox"
- * - FileAttachButton: data-testid="aionrs-attach-folder-btn"
+ * - SearchtSendBox: data-testid="searcht-sendbox"
+ * - FileAttachButton: data-testid="searcht-attach-folder-btn"
  */
 
 import { test, expect } from '../../../fixtures';
 import {
-  resolveAionrsPreconditions,
-  cleanupE2EAionrsConversations,
-  createAionrsConversationViaBridge,
-  sendAionrsMessage,
-  getAionrsMessages,
-  waitForAionrsReply,
-  getAionrsConversationDB,
+  resolveSearchtPreconditions,
+  cleanupE2ESearchtConversations,
+  createSearchtConversationViaBridge,
+  sendSearchtMessage,
+  getSearchtMessages,
+  waitForSearchtReply,
+  getSearchtConversationDB,
   createTempWorkspace,
-  type AionrsTestModels,
+  type SearchtTestModels,
 } from '../../../helpers';
 import { takeScreenshot } from '../../../helpers/screenshots';
 import * as fs from 'fs/promises';
 import * as path from 'path';
 
-test.describe('Aionrs Chat - Basic Flow (P0)', () => {
+test.describe('Searcht Chat - Basic Flow (P0)', () => {
   // Set longer timeout for aionrs tests (binary calls can be slow)
-  test.setTimeout(240_000); // 4 minutes — allow 150s waitForAionrsReply + buffer
+  test.setTimeout(240_000); // 4 minutes — allow 150s waitForSearchtReply + buffer
 
-  let preconditions: { binary: string | null; models: AionrsTestModels | null };
+  let preconditions: { binary: string | null; models: SearchtTestModels | null };
 
   // Check aionrs binary and provider availability before all tests
   test.beforeAll(async ({ page }) => {
-    preconditions = await resolveAionrsPreconditions(page);
+    preconditions = await resolveSearchtPreconditions(page);
     if (!preconditions.binary || !preconditions.models) {
       test.skip(true, 'No aionrs-compatible provider found, skipping E2E tests');
     }
@@ -56,7 +56,7 @@ test.describe('Aionrs Chat - Basic Flow (P0)', () => {
     }
 
     // 2. Delete E2E conversations from DB (cascades to messages)
-    await cleanupE2EAionrsConversations(page);
+    await cleanupE2ESearchtConversations(page);
 
     // 3. Clear sessionStorage
     await page.evaluate(() => {
@@ -88,7 +88,7 @@ test.describe('Aionrs Chat - Basic Flow (P0)', () => {
       await takeScreenshot(page, `chat-aionrs/tc-a-01/01-guid-page-initial.png`);
 
       // Step 2: Create conversation via bridge (uses prioritized aionrs-compatible provider)
-      const conversationId = await createAionrsConversationViaBridge(page, {
+      const conversationId = await createSearchtConversationViaBridge(page, {
         name: conversationName,
         workspace: tempWorkspace.path,
         provider: preconditions.models!.modelA,
@@ -97,11 +97,11 @@ test.describe('Aionrs Chat - Basic Flow (P0)', () => {
       await takeScreenshot(page, `chat-aionrs/tc-a-01/02-conversation-created.png`);
 
       // Step 3: Send simple message
-      await sendAionrsMessage(page, conversationId, 'Say hi in one word.');
+      await sendSearchtMessage(page, conversationId, 'Say hi in one word.');
       await takeScreenshot(page, `chat-aionrs/tc-a-01/03-message-sent.png`);
 
       // Step 4: Wait for AI reply
-      await waitForAionrsReply(page, conversationId);
+      await waitForSearchtReply(page, conversationId);
       await takeScreenshot(page, `chat-aionrs/tc-a-01/04-reply-completed.png`);
 
       // ============================================================================
@@ -109,7 +109,7 @@ test.describe('Aionrs Chat - Basic Flow (P0)', () => {
       // ============================================================================
 
       // 1. Verify conversation created
-      const conversation = await getAionrsConversationDB(page, conversationId);
+      const conversation = await getSearchtConversationDB(page, conversationId);
       expect(conversation).toBeDefined();
       expect(conversation.type).toBe('aionrs');
 
@@ -119,7 +119,7 @@ test.describe('Aionrs Chat - Basic Flow (P0)', () => {
       expect(['default', 'auto_edit', 'yolo']).toContain(extra.sessionMode);
 
       // 2. Verify user message
-      const messages = await getAionrsMessages(page, conversationId);
+      const messages = await getSearchtMessages(page, conversationId);
       expect(messages.length).toBeGreaterThanOrEqual(2); // At least user + AI
 
       const userMessages = messages.filter((m) => m.position === 'right');
@@ -165,7 +165,7 @@ test.describe('Aionrs Chat - Basic Flow (P0)', () => {
       await takeScreenshot(page, `chat-aionrs/tc-a-02/01-guid-page-before-create.png`);
 
       // Step 2: Create conversation via bridge with workspace pre-configured
-      const conversationId = await createAionrsConversationViaBridge(page, {
+      const conversationId = await createSearchtConversationViaBridge(page, {
         name: conversationName,
         workspace: testFolderPath,
         provider: preconditions.models!.modelA,
@@ -173,13 +173,13 @@ test.describe('Aionrs Chat - Basic Flow (P0)', () => {
       });
 
       // Step 3: Send message asking about folder (via bridge, no UI interaction needed)
-      await sendAionrsMessage(page, conversationId, 'What files are in the attached folder?');
+      await sendSearchtMessage(page, conversationId, 'What files are in the attached folder?');
 
       // Screenshot 02: message sent
       await takeScreenshot(page, `chat-aionrs/tc-a-02/02-message-sent.png`);
 
       // Step 4: Wait for AI reply
-      await waitForAionrsReply(page, conversationId);
+      await waitForSearchtReply(page, conversationId);
 
       // Screenshot 03: AI reply completed
       await takeScreenshot(page, `chat-aionrs/tc-a-02/03-reply-completed.png`);
@@ -188,7 +188,7 @@ test.describe('Aionrs Chat - Basic Flow (P0)', () => {
       // DB Assertions
       // ============================================================================
 
-      const messages = await getAionrsMessages(page, conversationId);
+      const messages = await getSearchtMessages(page, conversationId);
 
       // 1. Verify user message contains folder reference
       const userMessages = messages.filter((m) => m.position === 'right');
@@ -235,7 +235,7 @@ test.describe('Aionrs Chat - Basic Flow (P0)', () => {
       // Step 2: Create conversation via bridge (Electron mode)
       // Note: In real usage, file would be uploaded via UI. For E2E, we create conversation
       // with workspace containing the test file, which aionrs can access
-      const conversationId = await createAionrsConversationViaBridge(page, {
+      const conversationId = await createSearchtConversationViaBridge(page, {
         name: conversationName,
         workspace: tempWorkspace.path,
         provider: preconditions.models!.modelA,
@@ -243,7 +243,7 @@ test.describe('Aionrs Chat - Basic Flow (P0)', () => {
       });
 
       // Step 3: Send message about file (via bridge)
-      await sendAionrsMessage(
+      await sendSearchtMessage(
         page,
         conversationId,
         'What is the content of the file e2e-test-file.txt in the workspace?'
@@ -253,7 +253,7 @@ test.describe('Aionrs Chat - Basic Flow (P0)', () => {
       await takeScreenshot(page, `chat-aionrs/tc-a-03/02-message-sent.png`);
 
       // Step 4: Wait for AI reply
-      await waitForAionrsReply(page, conversationId);
+      await waitForSearchtReply(page, conversationId);
 
       // Screenshot 03: reply completed
       await takeScreenshot(page, `chat-aionrs/tc-a-03/03-reply-completed.png`);
@@ -262,7 +262,7 @@ test.describe('Aionrs Chat - Basic Flow (P0)', () => {
       // DB Assertions
       // ============================================================================
 
-      const messages = await getAionrsMessages(page, conversationId);
+      const messages = await getSearchtMessages(page, conversationId);
 
       // 1. Verify user message exists
       const userMessages = messages.filter((m) => m.position === 'right');

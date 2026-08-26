@@ -23,7 +23,7 @@ vi.mock('react-i18next', () => ({
   useTranslation: () => ({ t: (key: string) => key }),
 }));
 
-vi.mock('@/renderer/components/base/AionModal', () => ({
+vi.mock('@/renderer/components/base/SearchtModal', () => ({
   default: ({ children, visible }: { children: React.ReactNode; visible: boolean }) =>
     visible ? <div>{children}</div> : null,
 }));

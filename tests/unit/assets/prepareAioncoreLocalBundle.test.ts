@@ -3,21 +3,22 @@ import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
-const { prepareAioncore } = require('../../../packages/shared-scripts/src/prepare-aioncore');
+const { prepareBackend } = require('../../../packages/shared-scripts/src/prepare-aioncore');
 
-describe('prepare-aioncore local bundle input', () => {
+describe('prepare-backend local bundle input', () => {
   it('hard fails local bundle input that lacks managed-resources manifest', () => {
     const tmp = mkdtempSync(join(tmpdir(), 'aionui-local-bundle-'));
     const projectRoot = join(tmp, 'project');
     const localBundle = join(tmp, 'bundle');
     mkdirSync(join(localBundle, 'managed-resources'), { recursive: true });
+    // Legacy-named binary: prepare must accept the old archive name too.
     writeFileSync(join(localBundle, 'aioncore.exe'), '');
 
     const previous = process.env.SEARCHT_BACKEND_LOCAL_BUNDLE_DIR;
     process.env.SEARCHT_BACKEND_LOCAL_BUNDLE_DIR = localBundle;
     try {
       expect(() =>
-        prepareAioncore({
+        prepareBackend({
           projectRoot,
           platform: 'win32',
           arch: 'x64',

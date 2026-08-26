@@ -708,10 +708,10 @@ const handleAppReady = async (): Promise<void> => {
    *
    * ⚠️ 必须在 startBackendOrExit() 之前 —— 这是硬顺序，不是风格问题。
    *
-   * 两个值靠进程继承链传给 Agent：aioncore 是本进程的子进程，内置浏览器 MCP 又是
-   * aioncore 的子进程，所以不用落库、不用写配置。但继承是「spawn 那一刻的快照」：
-   * backend-launcher 用 `{ ...process.env }` spawn aioncore，此后我们再改 process.env
-   * 对已经起来的 aioncore 毫无影响。一旦这段挪到 backend 启动之后，aioncore 继承到的
+   * 两个值靠进程继承链传给 Agent：后端（searcht-backend）是本进程的子进程，内置浏览器 MCP 又是
+   * 后端的子进程，所以不用落库、不用写配置。但继承是「spawn 那一刻的快照」：
+   * backend-launcher 用 `{ ...process.env }` spawn 后端，此后我们再改 process.env
+   * 对已经起来的后端毫无影响。一旦这段挪到 backend 启动之后，后端继承到的
    * 口令就是 undefined，浏览器 MCP 读不到凭证直接 exit(1)，「Agent 可控」这条链就断在
    * 最后一环 —— 而手动浏览、标签、前进后退全都正常，故障看起来跟浏览器无关，极难排查。
    *
@@ -721,11 +721,11 @@ const handleAppReady = async (): Promise<void> => {
    * Start the single-target CDP bridge and publish port/token into our own env.
    *
    * ⚠️ MUST run before startBackendOrExit(). This ordering is a hard requirement, not
-   * style. Both values reach the agent by process inheritance (aioncore is our child; the
-   * in-app browser MCP is aioncore's child), so neither is persisted. But inheritance is a
-   * snapshot taken at spawn time: backend-launcher spawns aioncore with
+   * style. Both values reach the agent by process inheritance (the backend is our child; the
+   * in-app browser MCP is the backend's child), so neither is persisted. But inheritance is a
+   * snapshot taken at spawn time: backend-launcher spawns the backend with
    * `{ ...process.env }`, and any later mutation of our process.env is invisible to the
-   * already-running aioncore. Move this block after backend startup and aioncore inherits
+   * already-running backend. Move this block after backend startup and the backend inherits
    * an undefined token, so the browser MCP exits(1) for want of credentials and agent
    * control silently breaks at the last hop — while manual browsing, tabs and history all
    * keep working, making the failure look unrelated to the browser and very hard to trace.
@@ -777,7 +777,7 @@ const handleAppReady = async (): Promise<void> => {
     applyDebugBackendStartupFailure(debugBackendStartupFailure);
     mark(`debugBackendStartupFailure:${debugBackendStartupFailure.reason}`);
   } else {
-    // Start aioncore only after initializeProcess(). initStorage may open
+    // Start the backend only after initializeProcess(). initStorage may open
     // the legacy Electron SQLite catalog for a one-shot v26 migration and must
     // close it before the backend touches the same file.
     const backendStartup = await startBackendOrExit({
@@ -932,7 +932,7 @@ const handleAppReady = async (): Promise<void> => {
             // Spawning a second backend here would race the first on SQLite.
             const port = (globalThis as typeof globalThis & { __backendPort?: number }).__backendPort;
             if (!port) {
-              throw new Error('[WebUI] Cannot start: aioncore is not running (globalThis.__backendPort unset)');
+              throw new Error('[WebUI] Cannot start: searcht-backend is not running (globalThis.__backendPort unset)');
             }
             return port;
           })(),
@@ -1055,8 +1055,8 @@ app.on('open-url', (event, url) => {
 installGpuCrashHandler();
 
 // Register the backend startup flow only when this process owns the single
-// instance lock. A lock-losing instance must NOT spawn a competing aioncore
-// backend — doing so races the first instance's aioncore over the same data
+// instance lock. A lock-losing instance must NOT spawn a competing backend
+// process — doing so races the first instance's backend over the same data
 // directory and produced the "local data repair failed" false alarm
 // (Sentry 135525166). Gating here (rather than at the top-level second-instance
 // block) keeps it after handleAppReady is declared.
@@ -1120,7 +1120,7 @@ installQuitCleanup({
   stopWebDavConnectorScheduler: stopWebDavSyncScheduler,
   stopReminderScheduler: stopPersonalReminderScheduler,
   closePersonalCore,
-  // Stop aioncore subprocess — backend shutdown kills all agent children
+  // Stop the backend subprocess — backend shutdown kills all agent children
   // transitively (no separate frontend workerTaskManager remains).
   stopBackend: () => backendManager.stop(),
   destroyPetWindow: async () => {

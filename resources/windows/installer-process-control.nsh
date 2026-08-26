@@ -112,7 +112,7 @@ Var /GLOBAL SearchtCurrentOutDir
         } elseif ($$targetPath -and (Test-Path -LiteralPath $$targetPath -PathType Container)) { \
           $$root = [System.IO.Path]::GetFullPath($$targetPath); \
           $$topLevel = @(Get-ChildItem -LiteralPath $$root -Force -File -ErrorAction SilentlyContinue | ForEach-Object { $$_.FullName }); \
-          $$knownRelative = @('${SEARCHT_APP_EXECUTABLE_FILENAME}', '${UNINSTALL_FILENAME}', 'resources\app.asar', 'resources\app-update.yml', 'resources\bundled-aioncore\win32-x64\aioncore.exe'); \
+          $$knownRelative = @('${SEARCHT_APP_EXECUTABLE_FILENAME}', '${UNINSTALL_FILENAME}', 'resources\app.asar', 'resources\app-update.yml', 'resources\bundled-backend\win32-x64\searcht-backend.exe'); \
           $$known = @($$knownRelative | ForEach-Object { Join-Path $$root $$_ } | Where-Object { Test-Path -LiteralPath $$_ -PathType Leaf }); \
           $$resources = @($$topLevel + $$known | Where-Object { $$_ -and $$_.Trim().Length -gt 0 } | Select-Object -Unique | Select-Object -First 512); \
         } \

@@ -7,7 +7,7 @@
 import type { IChannelPluginStatus } from '@/common/types/channel/channel';
 import type { IProvider, TProviderWithModel } from '@/common/config/storage';
 import { channel, webui, type IWebUIStatus } from '@/common/adapter/ipcBridge';
-import AionScrollArea from '@/renderer/components/base/AionScrollArea';
+import SearchtScrollArea from '@/renderer/components/base/SearchtScrollArea';
 import { useModelProviderList } from '@/renderer/hooks/agent/useModelProviderList';
 import type { GoogleModelSelection } from '@/renderer/pages/conversation/platforms/gemini/useGoogleModelSelection';
 import { useGoogleModelSelection } from '@/renderer/pages/conversation/platforms/gemini/useGoogleModelSelection';
@@ -897,7 +897,7 @@ const ChannelModalContent: React.FC = () => {
   ];
 
   return (
-    <AionScrollArea className={isPageMode ? 'h-full' : ''}>
+    <SearchtScrollArea className={isPageMode ? 'h-full' : ''}>
       <div className='px-[12px] md:px-[28px]'>
         <h2 className='text-20px font-500 text-t-primary m-0'>{t('settings.channels.title', 'Channels')}</h2>
         <div className='space-y-8px mt-10px'>
@@ -927,7 +927,7 @@ const ChannelModalContent: React.FC = () => {
           ))}
         </div>
       </div>
-    </AionScrollArea>
+    </SearchtScrollArea>
   );
 };
 

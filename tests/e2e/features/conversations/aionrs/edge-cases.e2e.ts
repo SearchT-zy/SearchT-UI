@@ -1,5 +1,5 @@
 /**
- * Aionrs Chat E2E Tests - Edge Cases (P2 Priority)
+ * Searcht Chat E2E Tests - Edge Cases (P2 Priority)
  *
  * Test Cases Covered:
  * - TC-A-13: Binary不可达时跳过
@@ -7,34 +7,34 @@
  * - TC-A-15: 关联不存在的文件夹
  *
  * Prerequisites:
- * - aionrs binary available (via ipcBridge.fs.findAionrsBinary)
+ * - aionrs binary available (via ipcBridge.fs.findSearchtBinary)
  * - User logged in
  * - At least 1 ACP model available
  */
 
 import { test, expect } from '../../../fixtures';
 import {
-  resolveAionrsPreconditions,
-  cleanupE2EAionrsConversations,
-  createAionrsConversationViaBridge,
-  sendAionrsMessage,
-  getAionrsMessages,
-  waitForAionrsReply,
-  getAionrsConversationDB,
+  resolveSearchtPreconditions,
+  cleanupE2ESearchtConversations,
+  createSearchtConversationViaBridge,
+  sendSearchtMessage,
+  getSearchtMessages,
+  waitForSearchtReply,
+  getSearchtConversationDB,
   createTempWorkspace,
-  type AionrsTestModels,
+  type SearchtTestModels,
 } from '../../../helpers';
 import { takeScreenshot } from '../../../helpers/screenshots';
 import * as fs from 'fs/promises';
 import * as path from 'path';
 
-test.describe('Aionrs Chat - Edge Cases (P2)', () => {
+test.describe('Searcht Chat - Edge Cases (P2)', () => {
   test.setTimeout(240_000); // 4 minutes for edge case tests
 
-  let preconditions: { binary: string | null; models: AionrsTestModels | null };
+  let preconditions: { binary: string | null; models: SearchtTestModels | null };
 
   test.beforeAll(async ({ page }) => {
-    preconditions = await resolveAionrsPreconditions(page);
+    preconditions = await resolveSearchtPreconditions(page);
     if (!preconditions.binary || !preconditions.models) {
       test.skip(true, 'No aionrs-compatible provider found, skipping E2E tests');
     }
@@ -48,7 +48,7 @@ test.describe('Aionrs Chat - Edge Cases (P2)', () => {
     }
 
     // 2. Delete E2E conversations from DB (cascades to messages)
-    await cleanupE2EAionrsConversations(page);
+    await cleanupE2ESearchtConversations(page);
 
     // 3. Clear sessionStorage
     await page.evaluate(() => {
@@ -68,7 +68,7 @@ test.describe('Aionrs Chat - Edge Cases (P2)', () => {
   // ============================================================================
 
   test('TC-A-13: should skip when aionrs binary is not reachable', async ({ page }) => {
-    // This test verifies the skip logic in beforeAll when resolveAionrsBinary() returns null
+    // This test verifies the skip logic in beforeAll when resolveSearchtBinary() returns null
     // In normal test environment, this test will pass because binary IS available
     // The actual skip behavior is tested by the beforeAll hook above
 
@@ -116,7 +116,7 @@ test.describe('Aionrs Chat - Edge Cases (P2)', () => {
       let conversationId = '';
 
       try {
-        conversationId = await createAionrsConversationViaBridge(page, {
+        conversationId = await createSearchtConversationViaBridge(page, {
           name: conversationName,
           workspace: tempWorkspace.path,
           provider: preconditions.models!.modelA,
@@ -124,7 +124,7 @@ test.describe('Aionrs Chat - Edge Cases (P2)', () => {
         });
 
         // If conversation created, try to trigger file access
-        await sendAionrsMessage(page, conversationId, `Read the file: ${largeFilePath}`);
+        await sendSearchtMessage(page, conversationId, `Read the file: ${largeFilePath}`);
         await page.waitForTimeout(2000); // Wait for potential error
       } catch (error) {
         errorOccurred = true;
@@ -183,7 +183,7 @@ test.describe('Aionrs Chat - Edge Cases (P2)', () => {
       let errorMessage = '';
 
       try {
-        const conversationId = await createAionrsConversationViaBridge(page, {
+        const conversationId = await createSearchtConversationViaBridge(page, {
           name: conversationName,
           workspace: deletedFolderPath,
           provider: preconditions.models!.modelA,

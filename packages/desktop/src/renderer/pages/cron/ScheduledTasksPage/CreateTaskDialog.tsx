@@ -7,7 +7,7 @@
 import React, { useState, useMemo, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Form, Input, Select, Message, TimePicker, Radio, Button, Switch } from '@arco-design/web-react';
-import AionModal from '@renderer/components/base/AionModal';
+import SearchtModal from '@renderer/components/base/SearchtModal';
 import { Down, Robot } from '@icon-park/react';
 import { ipcBridge } from '@/common';
 import { resolveLocaleKey } from '@/common/utils';
@@ -26,7 +26,7 @@ import { getConversationCreateErrorMessage } from '@renderer/pages/conversation/
 import { resolveAssistantAvatar } from '@renderer/utils/model/assistantAvatar';
 import { resolveAssistantName } from '@renderer/utils/model/assistantDisplay';
 import { resolveCronAgentConfig } from './resolveCronAgentConfig';
-import { assistantRuntimeKey, isAionrsAssistant } from '@/common/types/agent/assistantTypes';
+import { assistantRuntimeKey, isSearchtAssistant } from '@/common/types/agent/assistantTypes';
 import {
   resolveCreateTaskInitialDraft,
   type CreateTaskDialogInitialDraft,
@@ -386,15 +386,15 @@ const CreateTaskDialog: React.FC<CreateTaskDialogProps> = ({
   // Providers compatible with aionrs (AionCLI does not support Google Auth).
   // Computed independent of the current selection so assistant options backed
   // by aionrs can be disabled when no provider is configured.
-  const aionrsProviders = useMemo(
+  const searchtProviders = useMemo(
     () => providers.filter((p) => !p.platform?.toLowerCase().includes('gemini-with-google-auth')),
     [providers]
   );
-  const hasAionrsProvider = aionrsProviders.length > 0;
+  const hasSearchtProvider = searchtProviders.length > 0;
 
   const filteredProviders = useMemo(
-    () => (resolvedBackend === 'aionrs' ? aionrsProviders : providers),
-    [resolvedBackend, providers, aionrsProviders]
+    () => (resolvedBackend === 'aionrs' ? searchtProviders : providers),
+    [resolvedBackend, providers, searchtProviders]
   );
 
   // Build Gemini current_model from model_id for GuidModelSelector.
@@ -445,14 +445,14 @@ const CreateTaskDialog: React.FC<CreateTaskDialogProps> = ({
   // list — do NOT read from any frontend-cached default.
   useEffect(() => {
     if (resolvedBackend !== 'aionrs' || model_id) return;
-    for (const provider of aionrsProviders) {
+    for (const provider of searchtProviders) {
       const models = getAvailableModels(provider);
       if (models.length > 0) {
         setModelId(models[0]);
         return;
       }
     }
-  }, [resolvedBackend, model_id, aionrsProviders, getAvailableModels]);
+  }, [resolvedBackend, model_id, searchtProviders, getAvailableModels]);
 
   const showTimePicker = frequency === 'daily' || frequency === 'weekdays' || frequency === 'weekly';
   const showWeekdayPicker = frequency === 'weekly';
@@ -554,7 +554,7 @@ const CreateTaskDialog: React.FC<CreateTaskDialogProps> = ({
         agent_config = resolveCronAgentConfig({
           agentValue: assistantValue,
           presetAssistants,
-          selectedAionrsProvider: geminiCurrentModel
+          selectedSearchtProvider: geminiCurrentModel
             ? {
                 id: geminiCurrentModel.id as string | undefined,
                 name: geminiCurrentModel.name,
@@ -624,7 +624,7 @@ const CreateTaskDialog: React.FC<CreateTaskDialogProps> = ({
   };
 
   return (
-    <AionModal
+    <SearchtModal
       variant='standard'
       header={{ title: isEditMode ? t('cron.page.editTask') : t('cron.page.createTask'), showClose: true }}
       visible={visible}
@@ -682,7 +682,7 @@ const CreateTaskDialog: React.FC<CreateTaskDialogProps> = ({
               {presetAssistants.map((assistant) => {
                 const name = resolveAssistantName(assistant, localeKey, assistant.name);
                 const avatar = resolveAssistantAvatar(assistant.avatar);
-                const disabled = isAionrsAssistant(assistant) && !hasAionrsProvider;
+                const disabled = isSearchtAssistant(assistant) && !hasSearchtProvider;
                 return (
                   <Option key={assistant.id} value={assistant.id} disabled={disabled}>
                     <div
@@ -1015,7 +1015,7 @@ const CreateTaskDialog: React.FC<CreateTaskDialogProps> = ({
           )}
         </Form>
       </div>
-    </AionModal>
+    </SearchtModal>
   );
 };
 

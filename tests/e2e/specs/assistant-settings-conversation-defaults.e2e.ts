@@ -25,7 +25,7 @@ import {
 } from '../helpers';
 import { CHAT_INPUT } from '../helpers/selectors';
 import { goToNewChat, waitForAiReply } from '../helpers/conversation';
-import { getAionrsTestModels, type TProviderWithModel } from '../helpers/chatAionrs';
+import { getSearchtTestModels, type TProviderWithModel } from '../helpers/chatSearcht';
 
 type AssistantDetail = {
   id: string;
@@ -94,7 +94,7 @@ type ConversationCreatePayload = {
   };
 };
 
-type EnsuredAionrsModels = {
+type EnsuredSearchtModels = {
   cleanupProviderId: string | null;
   modelA: TProviderWithModel;
   modelB: TProviderWithModel | null;
@@ -118,8 +118,8 @@ async function findAssistantIdByName(page: Page, name: string): Promise<string |
   return null;
 }
 
-async function ensureAionrsTestModels(page: Page): Promise<EnsuredAionrsModels> {
-  const existing = await getAionrsTestModels(page);
+async function ensureSearchtTestModels(page: Page): Promise<EnsuredSearchtModels> {
+  const existing = await getSearchtTestModels(page);
   if (existing?.modelA) {
     return {
       cleanupProviderId: null,
@@ -404,7 +404,7 @@ function normalizeUiText(value: string | null | undefined): string {
 
 function locateConversationModelButton(page: Page) {
   return page
-    .locator('[data-testid="aionrs-model-selector"], [data-testid="chat-model-selector"], .header-model-btn')
+    .locator('[data-testid="searcht-model-selector"], [data-testid="chat-model-selector"], .header-model-btn')
     .first();
 }
 
@@ -780,7 +780,7 @@ test.describe('Assistant Settings Conversation Defaults', () => {
     electronApp,
   }) => {
     const assistantName = `Auto Fixed Switch ${Date.now()}`;
-    const aionrsModels = await ensureAionrsTestModels(page);
+    const aionrsModels = await ensureSearchtTestModels(page);
 
     await goToAssistantSettings(page);
     const skills = await httpGet<SkillRecord[]>(page, '/api/skills');
@@ -864,7 +864,7 @@ test.describe('Assistant Settings Conversation Defaults', () => {
     electronApp,
   }) => {
     const assistantName = `Fixed Auto Switch ${Date.now()}`;
-    const aionrsModels = await ensureAionrsTestModels(page);
+    const aionrsModels = await ensureSearchtTestModels(page);
 
     await goToAssistantSettings(page);
     const skills = await httpGet<SkillRecord[]>(page, '/api/skills');

@@ -20,7 +20,7 @@ vi.mock('react-i18next', () => ({
   useTranslation: () => ({ t: (key: string) => key }),
 }));
 
-// AionModal reads ThemeContext for font scaling; provide a minimal theme so it mounts.
+// SearchtModal reads ThemeContext for font scaling; provide a minimal theme so it mounts.
 vi.mock('@/renderer/hooks/context/ThemeContext', () => ({
   useThemeContext: () => ({ theme: 'light', fontScale: 1 }),
 }));

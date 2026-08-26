@@ -6,7 +6,7 @@ import { delimiter, dirname, join } from 'node:path';
 const {
   getActionsArtifactName,
   getActionsArtifactMissingMessage,
-  prepareAioncore,
+  prepareBackend,
 } = require('../../../packages/shared-scripts/src/prepare-aioncore');
 
 const posixFakeToolchainIt = process.platform === 'win32' ? it.skip : it;
@@ -97,13 +97,13 @@ chmod +x "$out/aioncore"
 }
 
 afterEach(() => {
-  delete process.env.AIONUI_BACKEND_RUN_ID;
-  delete process.env.AIONUI_BACKEND_LOCAL_BINARY;
+  delete process.env.SEARCHT_BACKEND_RUN_ID;
+  delete process.env.SEARCHT_BACKEND_LOCAL_BINARY;
   rmSync(join(tmpdir(), 'aioncore-prepare', 'v0.1.46'), { recursive: true, force: true });
   rmSync(join(tmpdir(), 'aioncore-prepare-actions', '123'), { recursive: true, force: true });
 });
 
-describe('prepare-aioncore GitHub Actions artifact resolver', () => {
+describe('prepare-backend GitHub Actions artifact resolver', () => {
   it.each([
     ['win32', 'x64', 'aioncore-manual-windows-x64'],
     ['win32', 'arm64', 'aioncore-manual-windows-arm64'],
@@ -140,11 +140,11 @@ describe('prepare-aioncore GitHub Actions artifact resolver', () => {
     const fakeBin = createFakeToolchain(tmp);
     const previousPath = process.env.PATH;
     process.env.PATH = `${fakeBin}${delimiter}${previousPath || ''}`;
-    process.env.AIONUI_BACKEND_RUN_ID = '123';
+    process.env.SEARCHT_BACKEND_RUN_ID = '123';
 
     try {
       expect(() =>
-        prepareAioncore({
+        prepareBackend({
           projectRoot: join(tmp, 'project'),
           platform: 'linux',
           arch: 'x64',
@@ -166,7 +166,7 @@ describe('prepare-aioncore GitHub Actions artifact resolver', () => {
 
     try {
       expect(() =>
-        prepareAioncore({
+        prepareBackend({
           projectRoot: join(tmp, 'project'),
           platform: 'linux',
           arch: 'x64',
@@ -187,11 +187,11 @@ describe('prepare-aioncore GitHub Actions artifact resolver', () => {
     const fakeBin = createFakeToolchain(tmp, { curlFails: true });
     const previousPath = process.env.PATH;
     process.env.PATH = `${fakeBin}${delimiter}${previousPath || ''}`;
-    process.env.AIONUI_BACKEND_LOCAL_BINARY = localBinary;
+    process.env.SEARCHT_BACKEND_LOCAL_BINARY = localBinary;
 
     try {
       expect(() =>
-        prepareAioncore({
+        prepareBackend({
           projectRoot: join(tmp, 'project'),
           platform: 'linux',
           arch: 'x64',

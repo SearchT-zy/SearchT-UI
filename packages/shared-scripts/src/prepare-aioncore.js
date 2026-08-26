@@ -1,5 +1,5 @@
 /**
- * Prepare aioncore binary for packaging.
+ * Prepare the SearchT backend binary for packaging.
  *
  * Resolution order:
  *  1. GitHub Actions artifact download when SEARCHT_BACKEND_RUN_ID is set
@@ -7,19 +7,19 @@
  *  3. Complete local bundle from SEARCHT_BACKEND_LOCAL_BUNDLE_DIR
  *  4. Local binary fallback from SEARCHT_BACKEND_LOCAL_BINARY
  *
- * Output: {projectRoot}/resources/bundled-aioncore/{platform}-{arch}/
- *   - aioncore[.exe]
+ * Output: {projectRoot}/resources/bundled-backend/{platform}-{arch}/
+ *   - searcht-backend[.exe] (renamed from the upstream archive binary)
  *   - manifest.json
  *   - managed-resources/...
  *
- * @module prepare-aioncore
+ * @module prepare-backend (file kept under legacy name)
  */
 
 const { execSync, execFileSync } = require('child_process');
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
-const { verifyBundledAioncoreResources } = require('./verify-bundled-aioncore-resources');
+const { verifyBundledBackendResources } = require('./verify-bundled-backend-resources');
 
 const GITHUB_OWNER = 'iOfficeAI';
 const GITHUB_REPO = 'AionCore';
@@ -87,6 +87,12 @@ function writeJson(filePath, payload) {
 }
 
 function getBinaryName(platform) {
+  // Bundled (output) name — our own branding; the upstream archive ships the
+  // binary as aioncore[.exe] and it is renamed when copied into the bundle.
+  return platform === 'win32' ? 'searcht-backend.exe' : 'searcht-backend';
+}
+
+function getArchiveBinaryName(platform) {
   return platform === 'win32' ? 'aioncore.exe' : 'aioncore';
 }
 
@@ -136,15 +142,15 @@ function prepareManagedResources(binaryPath, targetDir) {
   return bundleOut;
 }
 
-function verifyPreparedAioncoreBundle(projectRoot, platform, arch) {
-  const result = verifyBundledAioncoreResources({
+function verifyPreparedBackendBundle(projectRoot, platform, arch) {
+  const result = verifyBundledBackendResources({
     resourcesDir: path.join(projectRoot, 'resources'),
     electronPlatformName: platform,
     targetArch: arch,
   });
   if (result.missing.length > 0 || result.failures.length > 0) {
     const summary = result.missing.length > 0 ? result.missing.join(', ') : JSON.stringify(result.failures);
-    throw new Error(`Prepared aioncore bundle is missing required bundled resource(s): ${summary}`);
+    throw new Error(`Prepared backend bundle is missing required bundled resource(s): ${summary}`);
   }
   return result;
 }
@@ -211,7 +217,7 @@ function getDownloadUrl(assetName, tag) {
 }
 
 function downloadFile(url, outputPath) {
-  console.log(`  Downloading aioncore from ${url}`);
+  console.log(`  Downloading backend from ${url}`);
   if (process.platform === 'win32') {
     const ps = `$ProgressPreference='SilentlyContinue'; Invoke-WebRequest -Uri '${url}' -OutFile '${outputPath.replace(/'/g, "''")}'`;
     execFileSync('powershell', ['-NoProfile', '-NonInteractive', '-Command', ps], {
@@ -374,7 +380,7 @@ function downloadAndExtractActionsArtifact(platform, arch, runId) {
   const downloadUrl =
     artifact.archive_download_url ||
     `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/actions/artifacts/${artifact.id}/zip`;
-  console.log(`  Downloading aioncore from AionCore run ${runId} artifact ${expectedArtifactName}`);
+  console.log(`  Downloading backend from AionCore run ${runId} artifact ${expectedArtifactName}`);
   downloadFileWithAuth(downloadUrl, artifactZipPath);
   extractArchive(artifactZipPath, artifactExtractDir, platform);
 
@@ -385,10 +391,10 @@ function downloadAndExtractActionsArtifact(platform, arch, runId) {
 
   extractArchive(archivePath, binaryExtractDir, platform);
 
-  const binaryName = getBinaryName(platform);
-  const binaryPath = findBinaryInDir(binaryExtractDir, binaryName);
+  const archiveBinaryName = getArchiveBinaryName(platform);
+  const binaryPath = findBinaryInDir(binaryExtractDir, archiveBinaryName);
   if (!binaryPath) {
-    throw new Error(`Binary ${binaryName} not found in AionCore artifact ${expectedArtifactName} from run ${runId}`);
+    throw new Error(`Binary ${archiveBinaryName} not found in AionCore artifact ${expectedArtifactName} from run ${runId}`);
   }
 
   return {
@@ -403,7 +409,7 @@ function downloadAndExtractActionsArtifact(platform, arch, runId) {
 function downloadAndExtract(platform, arch, tag) {
   const assetName = getAssetName(platform, arch, tag);
   if (!assetName) {
-    throw new Error(`Unsupported aioncore target: ${platform}-${arch}`);
+    throw new Error(`Unsupported backend target: ${platform}-${arch}`);
   }
 
   const url = getDownloadUrl(assetName, tag);
@@ -417,10 +423,10 @@ function downloadAndExtract(platform, arch, tag) {
   downloadFile(url, archivePath);
   extractArchive(archivePath, extractDir, platform);
 
-  const binaryName = getBinaryName(platform);
-  const binaryPath = findBinaryInDir(extractDir, binaryName);
+  const archiveBinaryName = getArchiveBinaryName(platform);
+  const binaryPath = findBinaryInDir(extractDir, archiveBinaryName);
   if (!binaryPath) {
-    throw new Error(`Binary ${binaryName} not found in downloaded archive`);
+    throw new Error(`Binary ${archiveBinaryName} not found in downloaded archive`);
   }
 
   return { binaryPath, tempDir, url };
@@ -431,7 +437,7 @@ function downloadAndExtract(platform, arch, tag) {
 // ---------------------------------------------------------------------------
 
 /**
- * Prepare aioncore binary for packaging.
+ * Prepare the SearchT backend binary for packaging.
  *
  * @param {object} options - Configuration options
  * @param {string} options.projectRoot - Project root directory
@@ -440,7 +446,7 @@ function downloadAndExtract(platform, arch, tag) {
  * @param {string} options.version - Backend version (default: 'latest')
  * @returns {{ prepared: true; dir: string; sourceType: string }}
  */
-function prepareAioncore(options) {
+function prepareBackend(options) {
   const { projectRoot, platform, arch, version = 'latest' } = options;
   const runtimeKey = `${platform}-${arch}`;
   const actionsRunId = (process.env.SEARCHT_BACKEND_RUN_ID || '').trim();
@@ -451,21 +457,22 @@ function prepareAioncore(options) {
     if (version === 'latest') {
       const resolved = resolveLatestTag();
       if (!resolved) {
-        throw new Error('Failed to resolve latest aioncore release tag from GitHub API');
+        throw new Error('Failed to resolve latest backend release tag from GitHub API');
       }
       tag = resolved;
-      console.log(`Resolved aioncore "latest" → ${tag}`);
+      console.log(`Resolved backend "latest" → ${tag}`);
     } else {
       tag = version.startsWith('v') ? version : `v${version}`;
     }
   }
 
-  const targetDir = path.join(projectRoot, 'resources', 'bundled-aioncore', runtimeKey);
+  const targetDir = path.join(projectRoot, 'resources', 'bundled-backend', runtimeKey);
   const binaryName = getBinaryName(platform);
+  const archiveBinaryName = getArchiveBinaryName(platform);
   const targetBinaryPath = path.join(targetDir, binaryName);
 
   console.log(
-    `Preparing aioncore for ${runtimeKey} (${actionsRunId ? `actions run: ${actionsRunId}` : `version: ${tag}`})`
+    `Preparing backend for ${runtimeKey} (${actionsRunId ? `actions run: ${actionsRunId}` : `version: ${tag}`})`
   );
 
   removeDirectorySafe(targetDir);
@@ -474,15 +481,23 @@ function prepareAioncore(options) {
   const localBundleDir = (process.env.SEARCHT_BACKEND_LOCAL_BUNDLE_DIR || '').trim();
   if (localBundleDir) {
     const resolvedLocalBundleDir = path.resolve(localBundleDir);
-    const localBinaryPath = path.join(resolvedLocalBundleDir, binaryName);
+    // Accept the bundle under either the new binary name or the legacy one.
+    const localBinaryPath = [binaryName, archiveBinaryName]
+      .map((name) => path.join(resolvedLocalBundleDir, name))
+      .find((candidate) => fs.existsSync(candidate));
     const localManagedResourcesDir = path.join(resolvedLocalBundleDir, 'managed-resources');
     if (
       fs.existsSync(resolvedLocalBundleDir) &&
       fs.statSync(resolvedLocalBundleDir).isDirectory() &&
-      fs.existsSync(localBinaryPath) &&
+      localBinaryPath &&
       fs.existsSync(localManagedResourcesDir)
     ) {
       copyDirectorySafe(resolvedLocalBundleDir, targetDir);
+      // Normalize the binary name inside the copied bundle.
+      const copiedLegacy = path.join(targetDir, archiveBinaryName);
+      if (localBinaryPath.endsWith(archiveBinaryName) && fs.existsSync(copiedLegacy)) {
+        fs.renameSync(copiedLegacy, targetBinaryPath);
+      }
       ensureExecutableMode(targetBinaryPath);
       const manifest = {
         platform,
@@ -494,11 +509,11 @@ function prepareAioncore(options) {
         files: [binaryName, 'managed-resources/'],
       };
       writeJson(path.join(targetDir, 'manifest.json'), manifest);
-      verifyPreparedAioncoreBundle(projectRoot, platform, arch);
-      console.log(`  Using local aioncore bundle: ${resolvedLocalBundleDir}`);
+      verifyPreparedBackendBundle(projectRoot, platform, arch);
+      console.log(`  Using local backend bundle: ${resolvedLocalBundleDir}`);
       return { prepared: true, dir: targetDir, sourceType: 'local-bundle' };
     }
-    console.warn(`  Local aioncore bundle is incomplete or missing: ${resolvedLocalBundleDir}`);
+    console.warn(`  Local backend bundle is incomplete or missing: ${resolvedLocalBundleDir}`);
   }
 
   let sourcePath = null;
@@ -570,9 +585,9 @@ function prepareAioncore(options) {
     };
 
     writeJson(path.join(targetDir, 'manifest.json'), manifest);
-    verifyPreparedAioncoreBundle(projectRoot, platform, arch);
+    verifyPreparedBackendBundle(projectRoot, platform, arch);
     console.log(
-      `  Bundled aioncore prepared: resources/bundled-aioncore/${runtimeKey}/${binaryName} [source=${sourceType}]`
+      `  Bundled backend prepared: resources/bundled-backend/${runtimeKey}/${binaryName} [source=${sourceType}]`
     );
     console.log(`  Bundled managed resources prepared: ${bundledManagedResourcesDir}`);
 
@@ -580,12 +595,12 @@ function prepareAioncore(options) {
     return { prepared: true, dir: targetDir, sourceType };
   }
 
-  throw new Error(`aioncore binary not found for ${runtimeKey} (tag: ${tag})`);
+  throw new Error(`Backend binary not found for ${runtimeKey} (tag: ${tag})`);
 }
 
 module.exports = {
   getActionsArtifactMissingMessage,
   getActionsArtifactName,
-  prepareAioncore,
-  verifyPreparedAioncoreBundle,
+  prepareBackend,
+  verifyPreparedBackendBundle,
 };

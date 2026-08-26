@@ -14,8 +14,8 @@ import ChatSlider from '@renderer/pages/conversation/components/ChatSlider.tsx';
 import { useTeamPendingPermissions } from './hooks/useTeamPendingPermissions';
 import { buildTeamRetryStartHandler } from './components/teamSendRuntime';
 import AcpModelSelector, { type AcpWarmupStatus } from '@/renderer/components/agent/AcpModelSelector';
-import AionrsModelSelector from '@/renderer/pages/conversation/platforms/aionrs/AionrsModelSelector';
-import { useAionrsModelSelection } from '@/renderer/pages/conversation/platforms/aionrs/useAionrsModelSelection';
+import SearchtModelSelector from '@/renderer/pages/conversation/platforms/aionrs/SearchtModelSelector';
+import { useSearchtModelSelection } from '@/renderer/pages/conversation/platforms/aionrs/useSearchtModelSelection';
 import { CronJobManager } from '@/renderer/pages/cron';
 import { resolveCronJobId } from '@/renderer/pages/cron/cronUtils';
 import TeamTabs from './components/TeamTabs';
@@ -69,7 +69,7 @@ const configErrorMessageKey = (error: unknown) => {
 };
 
 /** Compact aionrs model selector for the agent header */
-const AionrsHeaderModelSelector: React.FC<{ conversation_id: string; initialModel?: TProviderWithModel }> = ({
+const SearchtHeaderModelSelector: React.FC<{ conversation_id: string; initialModel?: TProviderWithModel }> = ({
   conversation_id,
   initialModel,
 }) => {
@@ -83,7 +83,7 @@ const AionrsHeaderModelSelector: React.FC<{ conversation_id: string; initialMode
     },
     [conversation_id]
   );
-  const modelSelection = useAionrsModelSelection({ initialModel, onSelectModel });
+  const modelSelection = useSearchtModelSelection({ initialModel, onSelectModel });
   const runtimeConfig = useAcpConfigOptions({
     conversation_id,
     prepareSetRuntime: teamPermission?.warmupSession,
@@ -104,7 +104,7 @@ const AionrsHeaderModelSelector: React.FC<{ conversation_id: string; initialMode
     [runtimeConfig, t]
   );
   return (
-    <AionrsModelSelector
+    <SearchtModelSelector
       selection={modelSelection}
       thoughtLevel={runtimeConfig.thoughtLevel}
       setStatus={runtimeConfig.setStatus}
@@ -150,7 +150,7 @@ const AssistantChatSlot: React.FC<{
     () => getConversationOrNull(assistant.conversation_id)
   );
 
-  const isAionrs = conversation?.type === 'aionrs';
+  const isSearcht = conversation?.type === 'aionrs';
   const initialModelId = (conversation?.extra as { current_model_id?: string })?.current_model_id;
   const isAcpLike = conversation?.type === 'acp' || isAcpLikeBackend(assistant.assistant_backend);
   const cronJobId = resolveCronJobId(conversation?.extra);
@@ -180,7 +180,7 @@ const AssistantChatSlot: React.FC<{
         />
         <div className='flex items-center gap-8px shrink-0'>
           {conversation && <CronJobManager conversation_id={conversation.id} cron_job_id={cronJobId} />}
-          {!isMobile && assistant.conversation_id && !isAionrs && isAcpLike && (
+          {!isMobile && assistant.conversation_id && !isSearcht && isAcpLike && (
             <div className='min-w-0 max-w-140px [&_button]:max-w-full [&_button_span]:truncate'>
               <AcpModelSelector
                 key={assistant.conversation_id}
@@ -193,9 +193,9 @@ const AssistantChatSlot: React.FC<{
               />
             </div>
           )}
-          {!isMobile && isAionrs && assistant.conversation_id && (
+          {!isMobile && isSearcht && assistant.conversation_id && (
             <div className='min-w-0 max-w-140px [&_button]:max-w-full [&_button_span]:truncate'>
-              <AionrsHeaderModelSelector
+              <SearchtHeaderModelSelector
                 key={assistant.conversation_id}
                 conversation_id={assistant.conversation_id}
                 initialModel={conversation?.model as TProviderWithModel | undefined}

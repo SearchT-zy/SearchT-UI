@@ -4,12 +4,12 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { isAionrsAssistant, type Assistant } from '@/common/types/agent/assistantTypes';
+import { isSearchtAssistant, type Assistant } from '@/common/types/agent/assistantTypes';
 import type { IChannelAssistantBindingRead, IChannelAssistantBindingWrite } from '@/common/types/channel/channel';
 
 /**
  * Channel settings UI consumes backend-normalized assistant bindings.
- * Legacy backend/custom-agent migration is handled by aionCore during channel
+ * Legacy backend/custom-agent migration is handled by the backend during channel
  * settings reads; renderer-side selection must only trust canonical
  * `assistant_id` bindings.
  */
@@ -22,8 +22,8 @@ export type ResolvedChannelAssistantSelection = {
 
 export function getDefaultChannelAssistant(assistants: Assistant[]): Assistant | undefined {
   return (
-    assistants.find((assistant) => assistant.source === 'generated' && isAionrsAssistant(assistant)) ||
-    assistants.find((assistant) => isAionrsAssistant(assistant)) ||
+    assistants.find((assistant) => assistant.source === 'generated' && isSearchtAssistant(assistant)) ||
+    assistants.find((assistant) => isSearchtAssistant(assistant)) ||
     assistants[0]
   );
 }

@@ -1,5 +1,5 @@
 /**
- * Resolve the aioncore binary path.
+ * Resolve the SearchT backend binary path.
  *
  * Search order:
  *  1. Bundled with app (production)
@@ -10,7 +10,10 @@ import { existsSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { execSync } from 'node:child_process';
 
-const BINARY_NAME = 'aioncore';
+const BINARY_NAME = 'searcht-backend';
+// Legacy binary name from before the rebrand. Dev machines may still carry an
+// externally installed binary under this name, so the PATH lookup falls back to it.
+const LEGACY_BINARY_NAME = 'aioncore';
 const MAX_DIR_ENTRIES = 20;
 const MAX_LOOKUP_TEXT_LENGTH = 1000;
 
@@ -61,33 +64,34 @@ function trimLookupText(text: string): string {
 }
 
 /**
- * Resolve the aioncore binary path.
+ * Resolve the SearchT backend binary path.
  * Returns the absolute path to the binary, or throws if not found.
  */
 export function resolveBinaryPath(): string {
   const runtimeKey = getRuntimeKey();
   const binaryName = getBinaryName();
+  const lookupCommands = getPathLookupCommands();
   const diagnostics: BackendBinaryResolveDiagnostics = {
     runtimeKey,
     binaryName,
-    pathLookupCommand: process.platform === 'win32' ? `where ${BINARY_NAME}` : `which ${BINARY_NAME}`,
+    pathLookupCommand: lookupCommands.join('; '),
   };
 
   const bundled = bundledPath(runtimeKey, binaryName, diagnostics);
   if (bundled) return bundled;
 
-  const fromPath = resolveFromSystemPATH(diagnostics);
+  const fromPath = resolveFromSystemPATH(lookupCommands, diagnostics);
   if (fromPath) return fromPath;
 
   throw new BackendBinaryResolveError(
-    `Cannot find "${BINARY_NAME}" binary. Checked bundled location and system PATH.`,
+    `Cannot find "${BINARY_NAME}" binary. Checked bundled location and system PATH (${BINARY_NAME}, legacy ${LEGACY_BINARY_NAME}).`,
     diagnostics
   );
 }
 
 /**
  * Check bundled binary in resources directory.
- * Layout: bundled-aioncore/{platform}-{arch}/aioncore[.exe]
+ * Layout: bundled-backend/{platform}-{arch}/searcht-backend[.exe]
  */
 function bundledPath(
   runtimeKey: string,
@@ -98,7 +102,7 @@ function bundledPath(
   if (!resourcesPath) return null;
   diagnostics.resourcesPath = resourcesPath;
 
-  const bundledDir = join(resourcesPath, 'bundled-aioncore');
+  const bundledDir = join(resourcesPath, 'bundled-backend');
   const runtimeDir = join(bundledDir, runtimeKey);
   const candidate = join(runtimeDir, binaryName);
   diagnostics.checkedBundledPath = candidate;
@@ -112,17 +116,31 @@ function bundledPath(
 }
 
 /**
+ * Build the PATH lookup command list: searcht-backend first, then the legacy
+ * aioncore name so dev machines with an old external install keep working.
+ */
+function getPathLookupCommands(): string[] {
+  const tool = process.platform === 'win32' ? 'where' : 'which';
+  return [BINARY_NAME, LEGACY_BINARY_NAME].map((name) => `${tool} ${name}`);
+}
+
+/**
  * Try to find the binary on the system PATH.
  */
-function resolveFromSystemPATH(diagnostics: BackendBinaryResolveDiagnostics): string | null {
-  try {
-    const result = execSync(diagnostics.pathLookupCommand, { encoding: 'utf-8', timeout: 5000 }).trim();
-    diagnostics.pathLookupResult = trimLookupText(result);
-    const firstMatch = result.split(/\r?\n/).find((line) => line.trim());
-    if (firstMatch && existsSync(firstMatch.trim())) return firstMatch.trim();
-  } catch (error) {
-    diagnostics.pathLookupError = error instanceof Error ? trimLookupText(error.message) : String(error);
-    return null;
+function resolveFromSystemPATH(lookupCommands: string[], diagnostics: BackendBinaryResolveDiagnostics): string | null {
+  const errors: string[] = [];
+  for (const command of lookupCommands) {
+    try {
+      const result = execSync(command, { encoding: 'utf-8', timeout: 5000 }).trim();
+      diagnostics.pathLookupResult = trimLookupText(result);
+      const firstMatch = result.split(/\r?\n/).find((line) => line.trim());
+      if (firstMatch && existsSync(firstMatch.trim())) return firstMatch.trim();
+    } catch (error) {
+      errors.push(error instanceof Error ? trimLookupText(error.message) : String(error));
+    }
+  }
+  if (errors.length > 0) {
+    diagnostics.pathLookupError = trimLookupText(errors.join('; '));
   }
   return null;
 }

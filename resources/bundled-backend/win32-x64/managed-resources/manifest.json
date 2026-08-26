@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 2,
+  "runtimeKey": "win32-x64",
+  "node": {
+    "version": "24.11.0",
+    "root": "node/node-v24.11.0-win-x64",
+    "executable": "node.exe"
+  },
+  "clis": []
+}
