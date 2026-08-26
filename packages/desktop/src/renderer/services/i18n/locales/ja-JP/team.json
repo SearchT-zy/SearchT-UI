@@ -40,7 +40,7 @@
     "subAgentsPlaceholder": "メンバー",
     "confirm": "Confirm Create",
     "noSupportedAgents": "利用可能なアシスタントが見つかりません",
-    "supportedAgentsHint": "現在 Claude と Aion CLI のアシスタントに対応しています。ほかのアシスタントも順次追加予定です。",
+    "supportedAgentsHint": "現在 Claude と SearchT CLI のアシスタントに対応しています。ほかのアシスタントも順次追加予定です。",
     "leaderDesc": "目標を理解し、作業を分解してグループを調整します",
     "searchPlaceholder": "Search",
     "noSearchResults": "結果が見つかりません",

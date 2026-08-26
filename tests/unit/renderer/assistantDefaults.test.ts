@@ -167,4 +167,35 @@ describe('resolveGuidAssistantDefaults', () => {
       mcpIds: [],
     });
   });
+
+  it('appends the app-guide skill to the butler defaults (aionui-assistant id)', () => {
+    const detail = {
+      ...buildDetail({ skills: { mode: 'fixed', value: ['aionui-config', 'aionui-troubleshooting'] } }),
+      id: 'aionui-assistant',
+    } satisfies AssistantDetail;
+
+    expect(resolveGuidAssistantDefaults(detail).skillIds).toEqual([
+      'aionui-config',
+      'aionui-troubleshooting',
+      'searcht-app-guide',
+    ]);
+  });
+
+  it('appends the app-guide skill to the butler defaults (searcht-assistant id)', () => {
+    const detail = {
+      ...buildDetail({ skills: { mode: 'fixed', value: [] } }),
+      id: 'searcht-assistant',
+    } satisfies AssistantDetail;
+
+    expect(resolveGuidAssistantDefaults(detail).skillIds).toEqual(['searcht-app-guide']);
+  });
+
+  it('does not duplicate the app-guide skill when already part of the defaults', () => {
+    const detail = {
+      ...buildDetail({ skills: { mode: 'fixed', value: ['searcht-app-guide'] } }),
+      id: 'builtin-aionui-assistant',
+    } satisfies AssistantDetail;
+
+    expect(resolveGuidAssistantDefaults(detail).skillIds).toEqual(['searcht-app-guide']);
+  });
 });

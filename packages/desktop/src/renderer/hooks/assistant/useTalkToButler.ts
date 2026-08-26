@@ -6,31 +6,28 @@
 
 import { ipcBridge } from '@/common';
 import type { Assistant } from '@/common/types/agent/assistantTypes';
+import { isButlerAssistantId } from '@/common/utils/legacyBrandRebrand';
 import { globalNavigate } from '@/renderer/utils/navigation';
 import { Message } from '@arco-design/web-react';
 import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { mutate as swrMutate } from 'swr';
 
-/** Backend manifest id of the built-in SearchT-UI Butler assistant. */
-const BUTLER_ASSISTANT_ID = 'searcht-assistant';
+/**
+ * Resolve the Butler assistant from the catalog. The backend has shipped the
+ * butler under different ids across generations (`aionui-assistant` today,
+ * `searcht-assistant` in newer upstream builds); match both rather than a
+ * single literal.
+ */
+const findButler = (assistants: Assistant[]): Assistant | undefined => {
+  return assistants.find((assistant) => isButlerAssistantId(assistant.id));
+};
 
 export type TalkToButlerArgs = {
   /** Prompt pre-filled into the home chat input. */
   prompt: string;
   /** Optional file paths pre-attached to the input (e.g. report screenshots). */
   files?: string[];
-};
-
-/**
- * Resolve the Butler assistant from the catalog, tolerating the `builtin-`
- * prefix the frontend sometimes carries on built-in ids.
- */
-const findButler = (assistants: Assistant[]): Assistant | undefined => {
-  const candidates = new Set([BUTLER_ASSISTANT_ID, `builtin-${BUTLER_ASSISTANT_ID}`]);
-  return assistants.find(
-    (assistant) => candidates.has(assistant.id) || assistant.id.replace(/^builtin-/, '') === BUTLER_ASSISTANT_ID
-  );
 };
 
 /**

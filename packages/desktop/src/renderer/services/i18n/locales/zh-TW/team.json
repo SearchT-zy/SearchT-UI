@@ -40,7 +40,7 @@
     "subAgentsPlaceholder": "成員",
     "confirm": "確認建立",
     "noSupportedAgents": "未偵測到可用的助手",
-    "supportedAgentsHint": "目前支援 Claude 和 Aion CLI 助手，更多助手適配中",
+    "supportedAgentsHint": "目前支援 Claude 和 SearchT CLI 助手，更多助手適配中",
     "leaderDesc": "理解你的目標、拆解工作並協調群組成員",
     "searchPlaceholder": "搜尋",
     "noSearchResults": "未找到結果",

@@ -40,7 +40,7 @@
     "subAgentsPlaceholder": "Учасники",
     "confirm": "Confirm Create",
     "noSupportedAgents": "Немає доступних підтримуваних асистентів",
-    "supportedAgentsHint": "Наразі підтримуються асистенти Claude та Aion CLI. Інші асистенти з'являться незабаром.",
+    "supportedAgentsHint": "Наразі підтримуються асистенти Claude та SearchT CLI. Інші асистенти з'являться незабаром.",
     "leaderDesc": "Розуміє мету, ділить роботу та координує групу",
     "searchPlaceholder": "Search",
     "noSearchResults": "Нічого не знайдено",

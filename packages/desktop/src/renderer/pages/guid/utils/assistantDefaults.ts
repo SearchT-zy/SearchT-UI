@@ -1,4 +1,6 @@
 import type { AssistantDetail } from '@/common/types/agent/assistantTypes';
+import { BUTLER_GUIDE_SKILL_NAME } from '@/common/utils/butlerGuideSkill';
+import { isButlerAssistantId } from '@/common/utils/legacyBrandRebrand';
 
 export type ResolvedGuidAssistantDefaults = {
   modelId?: string;
@@ -66,11 +68,19 @@ export const resolveGuidAssistantDefaults = (
         ? (detail.preferences.last_mcp_ids ?? [])
         : [];
 
+  // The butler's built-in skills (`aionui-*`) are locked upstream and know
+  // nothing about this fork. Always carry the desktop-managed app guide so a
+  // fresh butler conversation can answer "这个软件有哪些功能". Dedup keeps the
+  // chip list clean when the skill is already part of the defaults.
+  const resolvedSkillIds = isButlerAssistantId(detail.id)
+    ? Array.from(new Set([...skillIds, BUTLER_GUIDE_SKILL_NAME]))
+    : skillIds;
+
   return {
     modelId: modelId || undefined,
     permissionMode: permissionMode || undefined,
     thoughtLevel: thoughtLevel || undefined,
-    skillIds,
+    skillIds: resolvedSkillIds,
     disabledBuiltinSkillIds,
     mcpIds,
   };

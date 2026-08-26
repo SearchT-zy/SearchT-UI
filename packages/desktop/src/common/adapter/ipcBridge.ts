@@ -15,6 +15,10 @@
 import type { IConfirmation } from '@/common/chat/chatLib';
 import type { AcpSlashCommandApiItem } from '@/common/chat/slash/types';
 import { bridge } from '@/common/platform/bridge';
+import {
+  rebrandAssistantList,
+  rebrandAssistantProfileFields,
+} from '@/common/utils/legacyBrandRebrand';
 import { buildListTasksPath } from './teamTaskPath';
 import type { OpenDialogOptions } from 'electron';
 import type {
@@ -295,10 +299,19 @@ export const shell = {
 // ---------------------------------------------------------------------------
 
 export const assistants = {
-  list: httpGet<Assistant[], void>('/api/assistants'),
-  get: httpGet<AssistantDetail, { id: string; locale?: string }>(
-    ({ id, locale }) =>
-      `/api/assistants/${encodeURIComponent(id)}${locale ? `?locale=${encodeURIComponent(locale)}` : ''}`
+  // Backend catalog rows still carry upstream Aion branding ("Aion CLI",
+  // "AionUi管家") and the backend rejects renames on them; rebrand at the
+  // response seam so every consumer (home quick-select, settings, teams…)
+  // shows SearchT names without touching the rows themselves.
+  list: withResponseMap(httpGet<Assistant[], void>('/api/assistants'), (list) =>
+    rebrandAssistantList(list) ?? list
+  ),
+  get: withResponseMap(
+    httpGet<AssistantDetail, { id: string; locale?: string }>(
+      ({ id, locale }) =>
+        `/api/assistants/${encodeURIComponent(id)}${locale ? `?locale=${encodeURIComponent(locale)}` : ''}`
+    ),
+    rebrandAssistantProfileFields
   ),
   create: httpPost<Assistant, CreateAssistantRequest>('/api/assistants'),
   update: httpPut<Assistant, UpdateAssistantRequest>((p) => `/api/assistants/${p.id}`),

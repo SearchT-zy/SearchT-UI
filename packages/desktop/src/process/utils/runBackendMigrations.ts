@@ -483,6 +483,15 @@ const MIGRATION_STEPS: Array<{
   { name: 'migrateConfigStorage', run: async (configFile) => (await migrateConfigStorage(configFile), true) },
   { name: 'migrateProviders', run: async (configFile) => (await migrateProviders(configFile), true) },
   {
+    // Installs/refreshes the desktop-managed SearchT-UI feature guide that the
+    // built-in butler answers from (its upstream aionui-* skills are locked).
+    name: 'ensureButlerGuideSkill',
+    run: async (configFile) => {
+      const { ensureButlerGuideSkill } = await import('@process/services/butler/butlerGuide');
+      return ensureButlerGuideSkill(configFile);
+    },
+  },
+  {
     name: 'ensureBootstrapMcpServersInDb',
     run: async (configFile) => (await ensureBootstrapMcpServersInDb(configFile), true),
   },

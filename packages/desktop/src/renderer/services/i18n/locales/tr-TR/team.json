@@ -40,7 +40,7 @@
     "subAgentsPlaceholder": "Üyeler",
     "confirm": "Confirm Create",
     "noSupportedAgents": "Desteklenen uygun asistan bulunamadı",
-    "supportedAgentsHint": "Şu anda Claude ve Aion CLI asistanları desteklenmektedir. Daha fazla asistan yakında eklenecek.",
+    "supportedAgentsHint": "Şu anda Claude ve SearchT CLI asistanları desteklenmektedir. Daha fazla asistan yakında eklenecek.",
     "leaderDesc": "Hedefinizi anlar, işi böler ve grubu koordine eder",
     "searchPlaceholder": "Search",
     "noSearchResults": "Sonuç bulunamadı",
