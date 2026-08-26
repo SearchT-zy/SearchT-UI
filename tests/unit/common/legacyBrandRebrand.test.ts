@@ -8,7 +8,12 @@ import { describe, expect, it } from 'vitest';
 import {
   isButlerAssistantId,
   rebrandAssistant,
+  rebrandAssistantProfileFields,
   rebrandLegacyText,
+  rebrandManagedAgent,
+  rebrandSkillCatalogEntry,
+  rebrandSkillName,
+  restoreBackendSkillName,
 } from '@/common/utils/legacyBrandRebrand';
 import type { Assistant } from '@/common/types/agent/assistantTypes';
 
@@ -109,5 +114,103 @@ describe('isButlerAssistantId', () => {
     expect(isButlerAssistantId('bare:632f31d2')).toBe(false);
     expect(isButlerAssistantId(undefined)).toBe(false);
     expect(isButlerAssistantId('')).toBe(false);
+  });
+});
+
+describe('skill name remapping', () => {
+  it('rebrands the four upstream aionui-* builtins', () => {
+    expect(rebrandSkillName('aionui-config')).toBe('searcht-config');
+    expect(rebrandSkillName('aionui-troubleshooting')).toBe('searcht-troubleshooting');
+    expect(rebrandSkillName('aionui-webui-public')).toBe('searcht-webui-public');
+    expect(rebrandSkillName('aionui-webui-setup')).toBe('searcht-webui-setup');
+    expect(rebrandSkillName('officecli')).toBe('officecli');
+  });
+
+  it('restores backend ids losslessly (round-trip)', () => {
+    for (const name of ['aionui-config', 'aionui-troubleshooting', 'aionui-webui-public', 'aionui-webui-setup', 'cron', 'pdf']) {
+      expect(restoreBackendSkillName(rebrandSkillName(name))).toBe(name);
+    }
+  });
+
+  it('rebrands catalog entries name + description + relative location', () => {
+    const entry = rebrandSkillCatalogEntry({
+      name: 'aionui-config',
+      description: 'Configure AionUi itself through the bundled aioncore config CLI',
+      location: 'C:/corpus/aionui-config',
+      relative_location: 'auto-inject/aionui-config/SKILL.md',
+      is_auto_inject: true,
+      is_custom: false,
+      source: 'builtin' as const,
+    });
+    expect(entry.name).toBe('searcht-config');
+    expect(entry.description).not.toMatch(/aion/i);
+    // Absolute path stays functional for fs operations.
+    expect(entry.location).toBe('C:/corpus/aionui-config');
+  });
+
+  it('rebrands skill-id arrays on assistant rows', () => {
+    const row = rebrandAssistant(
+      buildAssistant({
+        enabled_skills: ['aionui-config', 'officecli'],
+        disabled_builtin_skills: ['aionui-webui-setup'],
+      })
+    );
+    expect(row.enabled_skills).toEqual(['searcht-config', 'officecli']);
+    expect(row.disabled_builtin_skills).toEqual(['searcht-webui-setup']);
+  });
+
+  it('rebrands skill-id arrays and builtin rule text on assistant details', () => {
+    const detail = {
+      id: 'aionui-assistant',
+      source: 'builtin',
+      profile: { name: 'AionUi管家' },
+      enabled_skills: ['aionui-config'],
+      defaults: { skills: { mode: 'fixed' as const, value: ['aionui-config', 'pdf'] } },
+      preferences: { last_skill_ids: ['aionui-troubleshooting'], last_disabled_builtin_skill_ids: null },
+      capabilities: { default_skill_ids: ['aionui-webui-public'], default_disabled_builtin_skill_ids: [] },
+      rules: { content: 'You are AionUi\'s built-in butler', storage_mode: 'builtin' as const },
+    };
+    const out = rebrandAssistantProfileFields(detail);
+    expect(out.enabled_skills).toEqual(['searcht-config']);
+    expect((out.defaults as { skills: { value: string[] } }).skills.value).toEqual(['searcht-config', 'pdf']);
+    expect((out.preferences as { last_skill_ids: string[] }).last_skill_ids).toEqual(['searcht-troubleshooting']);
+    expect((out.capabilities as { default_skill_ids: string[] }).default_skill_ids).toEqual(['searcht-webui-public']);
+    expect((out.rules as { content: string }).content).not.toMatch(/aion/i);
+  });
+
+  it('keeps user-authored rule text verbatim on non-builtin details', () => {
+    const detail = {
+      id: 'user-1',
+      source: 'user',
+      profile: { name: 'My writer' },
+      rules: { content: 'Call the tool AionUi-config if you must', storage_mode: 'user_file' as const },
+    };
+    const out = rebrandAssistantProfileFields(detail);
+    expect((out.rules as { content: string }).content).toBe('Call the tool AionUi-config if you must');
+  });
+});
+
+describe('rebrandManagedAgent', () => {
+  it('rebrands agent names, icons and status guidance across the row', () => {
+    const agent = rebrandManagedAgent({
+      id: 'bare:632f31d2',
+      name: 'Aion CLI',
+      icon: '/api/assets/logos/brand/aion.svg',
+      agent_type: 'aionrs',
+      last_check_guidance:
+        'The installed claude is newer than the version AionUi verified. It should still work.',
+      available_commands: [{ name: 'agent-reach', description: 'route through the AionUi browser' }],
+      native_skills_dirs: ['.aionrs/skills'],
+    });
+
+    expect(agent.name).toBe('SearchT CLI');
+    expect(agent.icon?.startsWith('data:image/svg+xml')).toBe(true);
+    expect(agent.last_check_guidance).not.toMatch(/aion/i);
+    expect(agent.available_commands[0].name).toBe('agent-reach');
+    expect(agent.available_commands[0].description).toBe('route through the SearchT-UI browser');
+    // Functional discriminants and real paths must survive verbatim.
+    expect(agent.agent_type).toBe('aionrs');
+    expect(agent.id).toBe('bare:632f31d2');
+    expect(agent.native_skills_dirs).toEqual(['.aionrs/skills']);
   });
 });

@@ -20,4 +20,4 @@
 export const BUTLER_GUIDE_SKILL_NAME = 'searcht-app-guide';
 
 /** Content version of the staged guide; parsed by the uploader, not the agent. */
-export const BUTLER_GUIDE_SKILL_VERSION = 1;
+export const BUTLER_GUIDE_SKILL_VERSION = 2;

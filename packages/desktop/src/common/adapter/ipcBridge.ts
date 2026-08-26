@@ -18,6 +18,9 @@ import { bridge } from '@/common/platform/bridge';
 import {
   rebrandAssistantList,
   rebrandAssistantProfileFields,
+  rebrandManagedAgent,
+  rebrandSkillCatalogEntry,
+  restoreBackendSkillName,
 } from '@/common/utils/legacyBrandRebrand';
 import { buildListTasksPath } from './teamTaskPath';
 import type { OpenDialogOptions } from 'electron';
@@ -313,8 +316,10 @@ export const assistants = {
     ),
     rebrandAssistantProfileFields
   ),
-  create: httpPost<Assistant, CreateAssistantRequest>('/api/assistants'),
-  update: httpPut<Assistant, UpdateAssistantRequest>((p) => `/api/assistants/${p.id}`),
+  create: httpPost<Assistant, CreateAssistantRequest>('/api/assistants', (p) => restoreAssistantSkillFields(p)),
+  update: httpPut<Assistant, UpdateAssistantRequest>((p) => `/api/assistants/${p.id}`, (p) =>
+    restoreAssistantSkillFields(p)
+  ),
   delete: httpDelete<void, { id: string }>((p) => `/api/assistants/${p.id}`),
   setState: httpPatch<Assistant, SetAssistantStateRequest>(
     (p) => `/api/assistants/${p.id}/state`,
@@ -323,8 +328,24 @@ export const assistants = {
       return body;
     }
   ),
-  import: httpPost<ImportAssistantsResult, ImportAssistantsRequest>('/api/assistants/import'),
+  import: httpPost<ImportAssistantsResult, ImportAssistantsRequest>('/api/assistants/import', (p) => ({
+    ...p,
+    assistants: (p.assistants ?? []).map(restoreAssistantSkillFields),
+  })),
 };
+
+/** Map displayed skill names back to the backend ids on assistant writes. */
+function restoreAssistantSkillFields<T extends { enabled_skills?: string[]; custom_skill_names?: string[]; disabled_builtin_skills?: string[] }>(
+  request: T
+): T {
+  return {
+    ...request,
+    enabled_skills: restoreBackendSkillNameList(request.enabled_skills) ?? request.enabled_skills,
+    custom_skill_names: restoreBackendSkillNameList(request.custom_skill_names) ?? request.custom_skill_names,
+    disabled_builtin_skills:
+      restoreBackendSkillNameList(request.disabled_builtin_skills) ?? request.disabled_builtin_skills,
+  };
+}
 
 // ---------------------------------------------------------------------------
 // Conversation — REST + WS
@@ -423,7 +444,7 @@ export const conversation = {
       content: p.input,
       files: p.files,
       loading_id: p.loading_id,
-      inject_skills: p.inject_skills,
+      inject_skills: restoreBackendSkillNameList(p.inject_skills) ?? p.inject_skills,
     })
   ),
   getSlashCommands: httpGet<AcpSlashCommandApiItem[], { conversation_id: string }>(
@@ -936,22 +957,31 @@ export const fs = {
   deleteAssistantRule: httpDelete<boolean, { assistant_id: string }>(
     (p) => `/api/skills/assistant-rule/${p.assistant_id}`
   ),
-  listAvailableSkills: httpGet<
-    Array<{
-      name: string;
-      description: string;
-      location: string;
-      relative_location?: string;
-      is_auto_inject: boolean;
-      is_custom: boolean;
-      source: 'builtin' | 'custom' | 'cron' | 'extension';
-    }>,
-    void
-  >('/api/skills'),
+  // The corpus seeds `aionui-*` builtins whose names/descriptions surface in
+  // every skill picker; rebrand on read and restore backend names on every
+  // write that carries skill ids (selections are matched by name server-side).
+  listAvailableSkills: withResponseMap(
+    httpGet<
+      Array<{
+        name: string;
+        description: string;
+        location: string;
+        relative_location?: string;
+        is_auto_inject: boolean;
+        is_custom: boolean;
+        source: 'builtin' | 'custom' | 'cron' | 'extension';
+      }>,
+      void
+    >('/api/skills'),
+    (list) => (list ? list.map(rebrandSkillCatalogEntry) : list)
+  ),
   materializeSkillsForAgent: httpPost<
     { skills: Array<{ name: string; source_path: string }> },
     { conversation_id: string; skills: string[] }
-  >('/api/skills/materialize-for-agent'),
+  >('/api/skills/materialize-for-agent', (p) => ({
+    ...p,
+    skills: (p.skills ?? []).map(restoreBackendSkillName),
+  })),
   readSkillInfo: httpPost<{ name: string; description: string }, { skill_path: string }>('/api/skills/info'),
   importSkill: httpPost<
     {
@@ -1152,7 +1182,10 @@ export const acpConversation = {
   sendMessage: conversation.sendMessage,
   responseStream: conversation.responseStream,
   /** Management view used by Agent settings. */
-  getManagedAgents: httpGet<import('@/renderer/utils/model/agentTypes').ManagedAgent[], void>('/api/agents/management'),
+  getManagedAgents: withResponseMap(
+    httpGet<import('@/renderer/utils/model/agentTypes').ManagedAgent[], void>('/api/agents/management'),
+    (list) => (list ? list.map(rebrandManagedAgent) : list)
+  ),
   getAgentOverrides: httpGet<
     { command_override?: string; env_override: { name: string; value: string }[] },
     { id: string }
