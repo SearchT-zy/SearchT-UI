@@ -100,12 +100,20 @@ export function isButlerAssistantId(id: string | undefined | null): boolean {
 }
 
 /**
+ * Keys holding backend identifiers. NEVER text-replace these: the lowercase
+ * `aionui-` rule would rewrite the butler's id (`aionui-assistant` →
+ * `searcht-assistant`), and conversations created against the rewritten id
+ * fail backend validation ("Either `type` or `assistant.id` is required").
+ */
+const IDENTIFIER_KEY = /^(?:id|.*_id)$/;
+
+/**
  * Display pass for the managed-agents feed. Its guidance copy
  * (last_check_guidance — "newer than the version <old-brand> verified") is
  * generated at runtime by the backend, so there is no stored row to scrub;
- * walk every string instead. Identifier-ish values (agent_type, ids, skill
- * dir paths) match none of the replacement patterns and pass through
- * untouched; icon/avatar strings get the brand-mark swap.
+ * walk every string instead, skipping identifier keys and runtime
+ * discriminants (agent_type, ids, skill dir paths match no replacement
+ * pattern anyway); icon/avatar strings get the brand-mark swap.
  */
 export function rebrandManagedAgent<T>(agent: T): T {
   const visit = (value: unknown): unknown => {
@@ -114,8 +122,13 @@ export function rebrandManagedAgent<T>(agent: T): T {
     if (value && typeof value === 'object') {
       const out: Record<string, unknown> = {};
       for (const [key, entry] of Object.entries(value as Record<string, unknown>)) {
-        out[key] =
-          (key === 'icon' || key === 'avatar') && typeof entry === 'string' ? rebrandAvatar(entry) : visit(entry);
+        if (IDENTIFIER_KEY.test(key)) {
+          out[key] = entry;
+        } else if ((key === 'icon' || key === 'avatar') && typeof entry === 'string') {
+          out[key] = rebrandAvatar(entry);
+        } else {
+          out[key] = visit(entry);
+        }
       }
       return out;
     }

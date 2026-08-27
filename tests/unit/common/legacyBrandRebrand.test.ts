@@ -98,4 +98,24 @@ describe('rebrandManagedAgent', () => {
     expect(agent.id).toBe('bare:632f31d2');
     expect(agent.native_skills_dirs).toEqual(['.aionrs/skills']);
   });
+
+  it('never rewrites identifier keys — regression: the butler id must survive', () => {
+    // The lowercase aionui- rule used to rewrite aionui-assistant into
+    // searcht-assistant in the assistants.list seam, and conversations
+    // created against the phantom id failed backend validation.
+    const butler = rebrandManagedAgent({
+      id: 'aionui-assistant',
+      agent_id: 'aionui-agent-1',
+      conversation_id: 'aionui-conv',
+      name: 'AionUi管家',
+      nested: { user_id: 'aionui-user', label: 'aionui-config skill' },
+    });
+
+    expect(butler.id).toBe('aionui-assistant');
+    expect(butler.agent_id).toBe('aionui-agent-1');
+    expect(butler.conversation_id).toBe('aionui-conv');
+    expect(butler.nested.user_id).toBe('aionui-user');
+    expect(butler.name).toBe('SearchT-UI 管家');
+    expect(butler.nested.label).toBe('searcht-config skill');
+  });
 });
