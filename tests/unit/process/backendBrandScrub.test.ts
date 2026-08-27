@@ -10,6 +10,7 @@
  */
 
 import { afterAll, describe, expect, it } from 'vitest';
+import Database from 'better-sqlite3';
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
@@ -122,5 +123,64 @@ describe('runBackendBrandScrub (files)', () => {
     const stats = await runBackendBrandScrub(() => root);
     expect(stats.filesChanged).toBe(0);
     expect(stats.rowsChanged).toBe(0);
+  });
+
+  it('installs triggers that scrub rows the backend writes at RUNTIME', async () => {
+    // The butler's rule text is injected by the backend when a NEW
+    // conversation is created — long after the boot scrub. Triggers must
+    // rewrite such writes atomically.
+    const root = fixtureRoot!;
+    const db = new Database(path.join(root, 'aionui-backend.db'));
+    db.exec(`
+      CREATE TABLE IF NOT EXISTS conversations (id TEXT PRIMARY KEY, extra TEXT);
+      CREATE TABLE IF NOT EXISTS conversation_assistant_snapshots (conversation_id TEXT PRIMARY KEY, rules_content TEXT);
+    `);
+    // Seed a legacy row so the pass scrub has something to clean, then run
+    // the scrubber (which also installs the triggers).
+    db.prepare("INSERT INTO conversations (id, extra) VALUES ('c1', ?)").run(
+      '{"preset_rules":"# AionUi Butler\\nYou are AionUi\'s butler"}'
+    );
+    db.close();
+
+    const { runBackendBrandScrub } = await import('@/process/services/brand/backendBrandScrub');
+    await runBackendBrandScrub(() => root);
+
+    const db2 = new Database(path.join(root, 'aionui-backend.db'));
+    const boot = db2.prepare("SELECT extra FROM conversations WHERE id='c1'").get() as { extra: string };
+    expect(boot.extra).not.toMatch(/AionUi/);
+
+    // Runtime INSERT with the embedded legacy rule — trigger scrubs it.
+    db2
+      .prepare('INSERT INTO conversations (id, extra) VALUES (?, ?)')
+      .run('c2', '{"preset_rules":"# AionUi Butler\\nUse the aionui-config skill"}');
+    const ins = db2.prepare("SELECT extra FROM conversations WHERE id='c2'").get() as { extra: string };
+    expect(ins.extra).toContain('SearchT-UI Butler');
+    expect(ins.extra).toContain('searcht-config');
+    expect(ins.extra).not.toMatch(/aionui/i);
+
+    // Snapshot rules injected at creation — trigger on the second table.
+    db2
+      .prepare('INSERT INTO conversation_assistant_snapshots (conversation_id, rules_content) VALUES (?, ?)')
+      .run('c2', 'You are AionUi管家. Use aionui-troubleshooting.');
+    const snap = db2
+      .prepare("SELECT rules_content FROM conversation_assistant_snapshots WHERE conversation_id='c2'")
+      .get() as { rules_content: string };
+    expect(snap.rules_content).toContain('SearchT-UI 管家');
+    expect(snap.rules_content).toContain('searcht-troubleshooting');
+
+    // Clean rows pass through byte-identical; NULL survives.
+    db2.prepare("INSERT INTO conversations (id, extra) VALUES ('c3', ?)").run('{"workspace":"x/.aionrs/tmp"}');
+    const clean = db2.prepare("SELECT extra FROM conversations WHERE id='c3'").get() as { extra: string };
+    expect(clean.extra).toBe('{"workspace":"x/.aionrs/tmp"}');
+    db2.prepare("INSERT INTO conversations (id, extra) VALUES ('c4', NULL)").run();
+    const nullable = db2.prepare("SELECT extra FROM conversations WHERE id='c4'").get() as { extra: string | null };
+    expect(nullable.extra).toBeNull();
+
+    // UPDATE writing legacy text back is scrubbed again (self-healing).
+    db2.prepare("UPDATE conversations SET extra = ? WHERE id = 'c3'").run('{"note":"aionui-config again"}');
+    const upd = db2.prepare("SELECT extra FROM conversations WHERE id='c3'").get() as { extra: string };
+    expect(upd.extra).toContain('searcht-config');
+
+    db2.close();
   });
 });

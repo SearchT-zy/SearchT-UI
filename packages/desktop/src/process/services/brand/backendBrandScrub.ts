@@ -321,12 +321,63 @@ function scrubValue(value: unknown): unknown {
   return rebrandLegacyText(value) ?? value;
 }
 
+/**
+ * SQLite triggers that rebrand legacy strings the moment the BACKEND writes
+ * them. The butler's built-in rule ("You are AionUi's built-in butler…") is
+ * embedded in the backend binary and injected into every NEW butler
+ * conversation (snapshot rules_content + conversations.extra preset_rules)
+ * at creation time — long after the boot scrub ran. Row-level triggers make
+ * the rewrite atomic with the backend's own insert, so no timing window
+ * exists. The WHEN clause stops re-triggering once the row is clean.
+ */
+const TRIGGER_TARGETS: Array<{ table: string; column: string }> = [
+  { table: 'conversations', column: 'extra' },
+  { table: 'conversation_assistant_snapshots', column: 'rules_content' },
+];
+
+const TRIGGER_WHEN = (column: string) =>
+  `WHEN NEW.${column} IS NOT NULL AND (NEW.${column} LIKE '%AionUi%' OR NEW.${column} LIKE '%Aionui%' OR NEW.${column} LIKE '%Aion UI%' OR NEW.${column} LIKE '%Aion CLI%' OR NEW.${column} LIKE '%aioncore%' OR NEW.${column} LIKE '%aionui-%')`;
+
+const TRIGGER_SET = (column: string) =>
+  `UPDATE ${'{table}'} SET ${column} = replace(replace(replace(replace(replace(replace(replace(NEW.${column},
+    'AionUi管家', 'SearchT-UI 管家'),
+    'AionUi Butler', 'SearchT-UI Butler'),
+    'Aion UI', 'SearchT-UI'),
+    'AionUi', 'SearchT-UI'),
+    'Aion CLI', 'SearchT CLI'),
+    'aioncore', 'searcht-backend'),
+    'aionui-', 'searcht-')
+  WHERE rowid = NEW.rowid`;
+
+function ensureBrandScrubTriggers(db: { prepare(sql: string): { run(): unknown } }): number {
+  let created = 0;
+  for (const { table, column } of TRIGGER_TARGETS) {
+    for (const timing of ['INSERT', 'UPDATE'] as const) {
+      const name = `searcht_brand_scrub_${table}_${timing.toLowerCase()}`;
+      const sql = `CREATE TRIGGER IF NOT EXISTS ${name}
+AFTER ${timing} ON ${table}
+${TRIGGER_WHEN(column)}
+BEGIN
+  ${TRIGGER_SET(column).replace('{table}', table)};
+END`;
+      try {
+        db.prepare(sql).run();
+        created += 1;
+      } catch {
+        // Table missing on a fresh install — nothing to guard yet.
+      }
+    }
+  }
+  return created;
+}
+
 async function scrubDatabase(dbPath: string): Promise<number> {
   const { default: Database } = await import('better-sqlite3');
   const db = new Database(dbPath);
   try {
     db.pragma('busy_timeout = 5000');
     db.pragma('journal_mode = WAL');
+    ensureBrandScrubTriggers(db);
 
     // skills.name is UNIQUE: an earlier partial pass (or a re-seeded corpus)
     // can leave both the legacy row and a renamed row behind. Drop the legacy
