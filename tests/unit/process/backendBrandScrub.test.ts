@@ -10,10 +10,9 @@
  */
 
 import { afterAll, describe, expect, it } from 'vitest';
-// The physical better-sqlite3 under node_modules carries the Electron ABI
-// (dev app); a shadow copy at .bun/better-sqlite3@12.8.0+nodeabi carries the
-// Node ABI for vitest. See scripts note in backendBrandScrub.loadSqlite.
-import Database from '../../../node_modules/.bun/better-sqlite3@12.8.0+nodeabi/node_modules/better-sqlite3';
+// Resolves via the vitest alias to the Node-ABI shadow copy; the app itself
+// loads the Electron-ABI entity. See vitest.config.ts.
+import Database from 'better-sqlite3';
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';

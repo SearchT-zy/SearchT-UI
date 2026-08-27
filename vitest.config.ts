@@ -9,10 +9,18 @@ const aliases = {
   '@mcp/models/': path.resolve(__dirname, './packages/desktop/src/common/models') + '/',
   '@mcp/types/': path.resolve(__dirname, './packages/desktop/src/common') + '/',
   '@mcp/': path.resolve(__dirname, './packages/desktop/src/common') + '/',
-  // The bun-managed better-sqlite3 copy is rebuilt for the Electron ABI by
-  // `just rebuild-native`; tests run under system Node, so pin the top-level
-  // copy (kept Node-built via `npm rebuild better-sqlite3`) instead.
-  'better-sqlite3': path.resolve(__dirname, './node_modules/better-sqlite3'),
+  // The bun-managed better-sqlite3 entity under node_modules stays on the
+  // Electron ABI (dev/packaged app). The top-level path is a SYMLINK into
+  // that entity, so an `npm rebuild better-sqlite3` silently flips the shared
+  // entity to the Node ABI and breaks dev/e2e launches. Tests therefore
+  // resolve to an independent Node-ABI shadow copy instead. Refresh the
+  // shadow with:
+  //   cd node_modules/.bun/better-sqlite3@12.8.0+nodeabi/node_modules/better-sqlite3
+  //   bun x prebuild-install --runtime=node --force
+  'better-sqlite3': path.resolve(
+    __dirname,
+    './node_modules/.bun/better-sqlite3@12.8.0+nodeabi/node_modules/better-sqlite3'
+  ),
 };
 
 export default defineConfig({
