@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="800" viewBox="0 0 1600 800" role="img" aria-label="SearchT-UI — local-first AI personal workspace">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#070A14"/>
+      <stop offset="0.55" stop-color="#0D1226"/>
+      <stop offset="1" stop-color="#101731"/>
+    </linearGradient>
+    <radialGradient id="glowViolet" cx="0.22" cy="0.18" r="0.55">
+      <stop offset="0" stop-color="#7C5CFF" stop-opacity="0.32"/>
+      <stop offset="1" stop-color="#7C5CFF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowCyan" cx="0.88" cy="0.82" r="0.6">
+      <stop offset="0" stop-color="#2DE2C5" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#2DE2C5" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="logoGlow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#7C5CFF" stop-opacity="0.55"/>
+      <stop offset="0.7" stop-color="#7C5CFF" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#7C5CFF" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="titleGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="0.6" stop-color="#EAF0FF"/>
+      <stop offset="1" stop-color="#9FB4FF"/>
+    </linearGradient>
+    <linearGradient id="pillGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.14"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0.05"/>
+    </linearGradient>
+    <linearGradient id="orbit" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#7C5CFF" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#7C5CFF" stop-opacity="0.8"/>
+      <stop offset="1" stop-color="#2DE2C5" stop-opacity="0"/>
+    </linearGradient>
+    <pattern id="grid" width="64" height="64" patternUnits="userSpaceOnUse">
+      <path d="M64 0H0V64" fill="none" stroke="#FFFFFF" stroke-opacity="0.045" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <!-- backdrop -->
+  <rect width="1600" height="800" fill="url(#bg)"/>
+  <rect width="1600" height="800" fill="url(#grid)"/>
+  <rect width="1600" height="800" fill="url(#glowViolet)"/>
+  <rect width="1600" height="800" fill="url(#glowCyan)"/>
+
+  <!-- starfield -->
+  <g fill="#FFFFFF">
+    <circle cx="180" cy="120" r="1.4" opacity="0.7"/>
+    <circle cx="420" cy="70" r="1" opacity="0.5"/>
+    <circle cx="700" cy="150" r="1.2" opacity="0.6"/>
+    <circle cx="980" cy="90" r="1" opacity="0.45"/>
+    <circle cx="1240" cy="170" r="1.4" opacity="0.65"/>
+    <circle cx="1460" cy="100" r="1" opacity="0.5"/>
+    <circle cx="90" cy="420" r="1.1" opacity="0.55"/>
+    <circle cx="1520" cy="480" r="1.3" opacity="0.6"/>
+    <circle cx="320" cy="700" r="1.2" opacity="0.5"/>
+    <circle cx="1180" cy="640" r="1" opacity="0.45"/>
+    <circle cx="820" cy="730" r="1.3" opacity="0.55"/>
+  </g>
+
+  <!-- orbit arcs: search / coordination motif -->
+  <path d="M -60 640 A 900 900 0 0 1 1660 620" fill="none" stroke="url(#orbit)" stroke-width="2.5" stroke-linecap="round" opacity="0.65"/>
+  <path d="M -60 700 A 980 980 0 0 1 1660 680" fill="none" stroke="url(#orbit)" stroke-width="1.4" stroke-linecap="round" opacity="0.35"/>
+  <circle cx="1310" cy="574" r="6" fill="#2DE2C5"/>
+  <circle cx="1310" cy="574" r="12" fill="none" stroke="#2DE2C5" stroke-opacity="0.4" stroke-width="1.5"/>
+
+  <!-- logo block -->
+  <g transform="translate(150, 250)">
+    <circle cx="150" cy="150" r="210" fill="url(#logoGlow)"/>
+    <g transform="translate(55, 55)">
+      <rect x="0" y="0" width="190" height="190" rx="42" fill="#191928"/>
+      <rect x="0" y="0" width="190" height="190" rx="42" fill="none" stroke="#FFFFFF" stroke-opacity="0.14" stroke-width="2"/>
+      <circle cx="95" cy="95" r="58" fill="none" stroke="#FFFFFF" stroke-width="11"/>
+      <path d="M69 76 h52 M95 76 v42" stroke="#FFFFFF" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </g>
+    <circle cx="52" cy="26" r="5" fill="#7C5CFF"/>
+    <circle cx="262" cy="228" r="4" fill="#2DE2C5"/>
+  </g>
+
+  <!-- title -->
+  <g font-family="'Segoe UI', 'PingFang SC', 'Microsoft YaHei', -apple-system, 'Helvetica Neue', Arial, sans-serif">
+    <text x="520" y="335" font-size="96" font-weight="800" letter-spacing="2" fill="url(#titleGrad)">SearchT&#8209;UI</text>
+    <text x="524" y="398" font-size="34" font-weight="600" fill="#8FA3D9">Your Local&#8209;First AI Personal Workspace</text>
+    <text x="524" y="446" font-size="24" font-weight="400" fill="#5F6F9F">本地优先的 AI 个人工作台 — 数据在你手里，AI 在你身边</text>
+  </g>
+
+  <!-- feature pills -->
+  <g font-family="'Segoe UI', -apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="21" font-weight="600">
+    <g>
+      <rect x="524" y="500" width="150" height="44" rx="22" fill="url(#pillGrad)" stroke="#FFFFFF" stroke-opacity="0.18"/>
+      <text x="599" y="529" text-anchor="middle" fill="#DCE6FF">Agent Teams</text>
+    </g>
+    <g>
+      <rect x="688" y="500" width="184" height="44" rx="22" fill="url(#pillGrad)" stroke="#FFFFFF" stroke-opacity="0.18"/>
+      <text x="780" y="529" text-anchor="middle" fill="#DCE6FF">Embedded Browser</text>
+    </g>
+    <g>
+      <rect x="886" y="500" width="148" height="44" rx="22" fill="url(#pillGrad)" stroke="#FFFFFF" stroke-opacity="0.18"/>
+      <text x="960" y="529" text-anchor="middle" fill="#DCE6FF">Memory &amp; Skills</text>
+    </g>
+    <g>
+      <rect x="1048" y="500" width="140" height="44" rx="22" fill="url(#pillGrad)" stroke="#FFFFFF" stroke-opacity="0.18"/>
+      <text x="1118" y="529" text-anchor="middle" fill="#DCE6FF">E2E Encrypted</text>
+    </g>
+    <g>
+      <rect x="1202" y="500" width="128" height="44" rx="22" fill="url(#pillGrad)" stroke="#FFFFFF" stroke-opacity="0.18"/>
+      <text x="1266" y="529" text-anchor="middle" fill="#DCE6FF">13 Languages</text>
+    </g>
+  </g>
+
+  <!-- footer meta -->
+  <g font-family="'Segoe UI', -apple-system, 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="500" fill="#66759E">
+    <text x="524" y="640">Windows · macOS · Linux</text>
+    <circle cx="712" cy="633" r="3" fill="#3A4670"/>
+    <text x="728" y="640">Apache&#8209;2.0</text>
+    <circle cx="848" cy="633" r="3" fill="#3A4670"/>
+    <text x="864" y="640">100% Local Data · Offline&#8209;Capable</text>
+  </g>
+</svg>

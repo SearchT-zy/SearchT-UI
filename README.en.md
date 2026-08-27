@@ -2,6 +2,10 @@
 
 **English** | [简体中文](README.md)
 
+<p align="center">
+  <img src="docs/assets/banner.svg" alt="SearchT-UI — Your Local-First AI Personal Workspace" width="880">
+</p>
+
 **A local-first AI personal workspace.** SearchT-UI brings your calendar, tasks, notes, knowledge base, inbox, long-term memory, skills, workflows and on-device agent collaboration into one offline-capable desktop app — your data stays on your machine, with AI working right beside you.
 
 ![License](https://img.shields.io/badge/license-Apache--2.0-blue)
