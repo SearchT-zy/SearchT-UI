@@ -5,6 +5,17 @@
 **A local-first AI personal workspace.** SearchT-UI 把日程、待办、笔记、知识库、收件箱、长期记忆、技能沉淀、工作流和本机 Agent 协作放进一个可离线使用的桌面应用——你的数据保存在本机，AI 在你身边工作。
 
 ![License](https://img.shields.io/badge/license-Apache--2.0-blue)
+![Release](https://img.shields.io/github/v/release/SearchT-zy/SearchT-UI)
+
+## 下载安装
+
+从 [Releases](https://github.com/SearchT-zy/SearchT-UI/releases/latest) 获取最新版本：
+
+| 文件 | 平台 |
+| --- | --- |
+| `SearchTUI-<版本>-win-x64.exe` | Windows 10/11 x64（NSIS 安装器） |
+
+安装后首次启动会引导完成六步设置。macOS / Linux 用户请从源码构建（见下）。
 
 ## 界面预览
 

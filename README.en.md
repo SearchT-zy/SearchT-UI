@@ -5,6 +5,17 @@
 **A local-first AI personal workspace.** SearchT-UI brings your calendar, tasks, notes, knowledge base, inbox, long-term memory, skills, workflows and on-device agent collaboration into one offline-capable desktop app — your data stays on your machine, with AI working right beside you.
 
 ![License](https://img.shields.io/badge/license-Apache--2.0-blue)
+![Release](https://img.shields.io/github/v/release/SearchT-zy/SearchT-UI)
+
+## Download & Install
+
+Grab the latest build from [Releases](https://github.com/SearchT-zy/SearchT-UI/releases/latest):
+
+| File | Platform |
+| --- | --- |
+| `SearchT-UI-<version>-win-x64.exe` | Windows 10/11 x64 (NSIS installer) |
+
+The first launch walks you through a six-step onboarding. macOS / Linux users: build from source (see below).
 
 ## Screenshots
 
