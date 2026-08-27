@@ -26,8 +26,41 @@
 
 import { rebrandAvatar, rebrandLegacyText, rebrandSkillName } from '@/common/utils/legacyBrandRebrand';
 import type { Dirent } from 'node:fs';
+import { createRequire } from 'node:module';
 import fs from 'node:fs/promises';
 import path from 'node:path';
+
+type SqliteDatabase = {
+  pragma(stmt: string): unknown;
+  prepare(sql: string): {
+    all(...args: unknown[]): Array<Record<string, unknown>>;
+    get(...args: unknown[]): Record<string, unknown> | undefined;
+    run(...args: unknown[]): unknown;
+  };
+  close(): void;
+};
+
+/**
+ * better-sqlite3 physically exists once under node_modules (Electron ABI —
+ * that is what the dev/packaged app loads); a shadow copy at
+ * `.bun/better-sqlite3@12.8.0+nodeabi` carries the Node ABI for vitest.
+ * Resolve whichever loads in the current runtime.
+ */
+const loadSqlite = async (): Promise<new (dbPath: string) => SqliteDatabase> => {
+  try {
+    const mod = (await import('better-sqlite3')).default as new (dbPath: string) => SqliteDatabase;
+    // The native binding loads lazily — an ABI mismatch only throws on first
+    // construction, so probe it here before trusting the module.
+    const probe = new mod(':memory:');
+    probe.close();
+    return mod;
+  } catch {
+    const require_ = createRequire(import.meta.url);
+    return require_(
+      path.join(process.cwd(), 'node_modules/.bun/better-sqlite3@12.8.0+nodeabi/node_modules/better-sqlite3')
+    ) as new (dbPath: string) => SqliteDatabase;
+  }
+};
 
 /** SKILL.md locations of the four upstream aionui-* builtins (dir names stay). */
 const LEGACY_SKILL_FILES = [
@@ -372,7 +405,7 @@ END`;
 }
 
 async function scrubDatabase(dbPath: string): Promise<number> {
-  const { default: Database } = await import('better-sqlite3');
+  const Database = await loadSqlite();
   const db = new Database(dbPath);
   try {
     db.pragma('busy_timeout = 5000');
