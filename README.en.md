@@ -45,7 +45,7 @@ Real app captures (v2.1.53, Chinese UI).
 | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
 | Personal hub    | Today view, tasks (with recurrence), calendar (reminders), notes (version history), knowledge base (full-text search), inbox, trash & restore |
 | Embedded browser| Browse and search the web in-app; extract page content into the inbox; click / fill / scroll programmatically via CSS selectors            |
-| Agent teams     | Local agent group chats (task split, @mentions, result summary, failure recovery); invite codes and human members                          |
+| Agent teams     | Local agent group chats: a Leader coordinator decomposes goals, distributes tasks to members and summarizes results (see the [Agent Teams guide](docs/guide/agent-teams.md)); @mentions & broadcast, task blocking, queueing and failure recovery |
 | Long-term memory| Memory candidates review, confirmation, expiry & forgetting, semantic retrieval                                                            |
 | Skill building  | Candidate review, immutable versioned releases, rollback, enable/disable                                                                   |
 | Workflows       | Template installation, scheduled runs, approvals and permission (grant) management                                                          |
