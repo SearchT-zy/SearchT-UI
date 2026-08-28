@@ -9,11 +9,11 @@ Var /GLOBAL SearchtInnerFailureReadResult
 !macro SEARCHT_READ_LAST_INNER_FAILURE
   InitPluginsDir
   StrCpy $SearchtInnerRootCode ""
-  StrCpy $SearchtInnerFailureSummary "No specific locking process was identified. Close SearchT-UI, terminals, editors, and file managers opened in the install folder."
+  StrCpy $SearchtInnerFailureSummary "No specific locking process was identified. Close SearchT, terminals, editors, and file managers opened in the install folder."
   nsExec::ExecToStack `"$SYSDIR\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -ExecutionPolicy Bypass -Command "& { \
     $$ErrorActionPreference = 'SilentlyContinue'; \
     $$logPath = '$SearchtSessionLogPath'; \
-    $$summary = 'No specific locking process was identified. Close SearchT-UI, terminals, editors, and file managers opened in the install folder.'; \
+    $$summary = 'No specific locking process was identified. Close SearchT, terminals, editors, and file managers opened in the install folder.'; \
     $$code = ''; \
     if ($$logPath -and (Test-Path -LiteralPath $$logPath)) { \
       $$events = @(Get-Content -LiteralPath $$logPath -ErrorAction SilentlyContinue | ForEach-Object { try { $$_ | ConvertFrom-Json } catch { $$null } } | Where-Object { $$_ }); \
@@ -70,9 +70,9 @@ Var /GLOBAL SearchtInnerFailureReadResult
   StrCpy $SearchtInstalledUninstaller "$INSTDIR\${UNINSTALL_FILENAME}"
 
   InitPluginsDir
-  StrCpy $SearchtBundledUninstaller "$PLUGINSDIR\SearchT-UI-fixed-uninstaller.exe"
+  StrCpy $SearchtBundledUninstaller "$PLUGINSDIR\SearchT-fixed-uninstaller.exe"
   SetOverwrite on
-  File "/oname=$PLUGINSDIR\SearchT-UI-fixed-uninstaller.exe" "${UNINSTALLER_OUT_FILE}"
+  File "/oname=$PLUGINSDIR\SearchT-fixed-uninstaller.exe" "${UNINSTALLER_OUT_FILE}"
 
   ${If} ${FileExists} "$SearchtInstalledUninstaller"
     ClearErrors

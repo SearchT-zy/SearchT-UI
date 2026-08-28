@@ -1,15 +1,15 @@
-# SearchT-UI Personal Workspace Design
+# SearchT Personal Workspace Design
 
 **Status:** In implementation; local workspace, long-term memory, skill consolidation, and workflow automation delivered
 **Date:** 2026-08-16
-**Product name:** SearchT-UI (SearchT-UI)  
+**Product name:** SearchT (SearchT)  
 **Research baseline:** upstream 2.1.52, repository commit `b678d83`, AionCore v0.1.62
 
 ## 1. Summary
 
-SearchT-UI is a local-first personal AI workspace built as a controlled hard fork of SearchT-UI. The fork retains SearchT-UI's existing application shell, navigation patterns, conversation experience, workspace, themes, assistants, Skills Hub, MCP management, Cron scheduling, model providers, channels, and component system.
+SearchT is a local-first personal AI workspace built as a controlled hard fork of SearchT. The fork retains SearchT's existing application shell, navigation patterns, conversation experience, workspace, themes, assistants, Skills Hub, MCP management, Cron scheduling, model providers, channels, and component system.
 
-SearchT-UI adds first-class personal information management and automation domains:
+SearchT adds first-class personal information management and automation domains:
 
 - Today
 - Unified Inbox
@@ -28,16 +28,16 @@ The product targets general users rather than developers. It is usable without a
 
 ## 2. Confirmed Product Decisions
 
-1. SearchT-UI is a controlled hard fork with its own brand, application identifiers, data directories, release channel, and update lifecycle.
-2. SearchT-UI upstream updates do not automatically enter SearchT-UI. Security fixes and useful changes are selectively reviewed and backported.
-3. The user interface remains recognizably SearchT-UI. SearchT-UI adds pages and settings using the existing component library and semantic design tokens.
+1. SearchT is a controlled hard fork with its own brand, application identifiers, data directories, release channel, and update lifecycle.
+2. SearchT upstream updates do not automatically enter SearchT. Security fixes and useful changes are selectively reviewed and backported.
+3. The user interface remains recognizably SearchT. SearchT adds pages and settings using the existing component library and semantic design tokens.
 4. The product is local-first. Core features work offline and without registration.
 5. Synchronization is optional. Users may choose official end-to-end encrypted sync, WebDAV, S3-compatible storage, or no sync.
 6. AI access uses a mixed model: included cloud allowance, user-provided API keys, and optional local models.
 7. The first market is Chinese users. International connectors remain compatible with the same connector contract.
 8. Permissions use a combined model: risk-based confirmation by default, plus explicit persistent authorization per workflow.
-9. SearchT-UI's built-in Agent remains the default runtime. Hermes is not a runtime dependency.
-10. Long-term memory and skill consolidation are implemented inside SearchT-UI Personal Core while reusing SearchT-UI skills, conversations, tools, and approval surfaces.
+9. SearchT's built-in Agent remains the default runtime. Hermes is not a runtime dependency.
+10. Long-term memory and skill consolidation are implemented inside SearchT Personal Core while reusing SearchT skills, conversations, tools, and approval surfaces.
 
 ## 3. Goals
 
@@ -51,7 +51,7 @@ The product targets general users rather than developers. It is usable without a
 
 ## 4. Non-Goals
 
-- Reimplementing SearchT-UI's conversation, Agent, Skills, MCP, Cron, theme, or workspace systems.
+- Reimplementing SearchT's conversation, Agent, Skills, MCP, Cron, theme, or workspace systems.
 - Copying Codex branding, proprietary assets, or exact interface styling.
 - Supporting multi-user real-time collaborative document editing in the first release.
 - Replacing full-featured office suites, mail clients, or cloud drives.
@@ -61,9 +61,9 @@ The product targets general users rather than developers. It is usable without a
 
 ## 5. Incremental UI Strategy
 
-### 5.1 Retained SearchT-UI Surfaces
+### 5.1 Retained SearchT Surfaces
 
-SearchT-UI retains the existing:
+SearchT retains the existing:
 
 - Electron window and application layout
 - Sider and sortable entries
@@ -106,7 +106,7 @@ Entries use `SiderItem`, `SortableSiderEntry`, `siderOrder`, and `useStoredSider
 - No second application shell or parallel design system.
 - No permanent right-hand assistant panel added globally.
 - No hardcoded colors or raw interactive HTML.
-- New pages must look native to SearchT-UI and use its established density and interaction patterns.
+- New pages must look native to SearchT and use its established density and interaction patterns.
 - Technical configuration is available under advanced settings, not shown during ordinary workflows.
 
 ## 6. Core User Experience
@@ -171,7 +171,7 @@ Knowledge does not automatically become long-term memory. Memory never replaces 
 
 ## 7. Desktop Architecture
 
-SearchT-UI follows SearchT-UI's existing Electron process boundaries.
+SearchT follows SearchT's existing Electron process boundaries.
 
 ### 7.1 Renderer
 
@@ -220,7 +220,7 @@ The Agent uses Personal Core through registered tools and typed domain commands.
 
 ### 8.1 Database Separation
 
-SearchT-UI's existing conversation database remains intact. SearchT-UI creates `searcht-personal.db` for personal domains. This separation limits migration risk and keeps SearchT-UI conversation recovery behavior independent.
+SearchT's existing conversation database remains intact. SearchT creates `searcht-personal.db` for personal domains. This separation limits migration risk and keeps SearchT conversation recovery behavior independent.
 
 The personal database uses:
 
@@ -426,7 +426,7 @@ The provider gateway supports:
 
 - Included cloud allowance
 - User API keys
-- SearchT-UI-supported cloud providers
+- SearchT-supported cloud providers
 - Local OpenAI-compatible endpoints and Ollama-style local providers
 - Capability detection
 - Cost and quota status
@@ -466,13 +466,13 @@ The existing GuidPage style is extended with five skippable steps:
 2. Select one or more scenario packs: office, creator, study, personal life.
 3. Select included cloud allowance, personal API key, or local model.
 4. Optionally connect email, calendar, drive, and messaging services.
-5. Review default permissions and enter the existing SearchT-UI home experience.
+5. Review default permissions and enter the existing SearchT home experience.
 
 Ordinary UI uses user-facing actions such as "Connect QQ Mail" and "Choose a folder." Protocol and provider terminology appears only under advanced settings.
 
 ## 16. Personalization
 
-SearchT-UI extends existing SearchT-UI personalization rather than replacing it:
+SearchT extends existing SearchT personalization rather than replacing it:
 
 - Existing CSS themes and custom CSS
 - Light, dark, and system appearance behavior
@@ -491,7 +491,7 @@ Presets provide useful defaults. Personalization does not become a general low-c
 ### 17.1 Database
 
 - Integrity check at startup
-- Existing SearchT-UI corruption recovery remains unchanged for conversation data
+- Existing SearchT corruption recovery remains unchanged for conversation data
 - Personal database snapshots before migration
 - Failed migrations roll back without opening a partially migrated schema
 - Rebuildable search indexes are recreated from primary data
@@ -511,9 +511,9 @@ Presets provide useful defaults. Personalization does not become a general low-c
 - Local-to-cloud fallback is never silent
 - Memory or skill extraction failure does not fail the original user task
 
-## 18. SearchT-UI Data Import
+## 18. SearchT Data Import
 
-SearchT-UI uses its own application ID, product name, data directory, signing identity, and update server. On first start it may offer a one-time, non-destructive import from an existing SearchT-UI installation:
+SearchT uses its own application ID, product name, data directory, signing identity, and update server. On first start it may offer a one-time, non-destructive import from an existing SearchT installation:
 
 - Model configuration
 - Assistants
@@ -523,13 +523,13 @@ SearchT-UI uses its own application ID, product name, data directory, signing id
 - Workspaces
 - Appearance themes
 
-The importer creates a backup and never modifies the original SearchT-UI data directory.
+The importer creates a backup and never modifies the original SearchT data directory.
 
 ## 19. Delivery Decomposition
 
 Implementation is split into independently mergeable work streams:
 
-1. Fork identity, package metadata, data directory, updater, and SearchT-UI import contract.
+1. Fork identity, package metadata, data directory, updater, and SearchT import contract.
 2. Personal database foundation, migrations, repository contracts, and IPC conventions.
 3. Sider registration, module visibility, module ordering, and route shells.
 4. Tasks domain.
@@ -545,7 +545,7 @@ Implementation is split into independently mergeable work streams:
 14. Extended GuidPage onboarding and scenario packs.
 15. Packaging, migration, recovery, and release hardening.
 
-Each code change follows SearchT-UI's atomic PR requirement. Cross-domain foundation is introduced only when the next independently useful feature needs it.
+Each code change follows SearchT's atomic PR requirement. Cross-domain foundation is introduced only when the next independently useful feature needs it.
 
 ### 19.1 Current Delivery Status (2026-08-16)
 
@@ -558,7 +558,7 @@ Delivered in the current local build:
 - Today projection for overdue and due-today tasks, limited to eight actionable items.
 - Local calendar, unified Inbox, file capture, notes with revision history, and knowledge indexing.
 - Long-term memory candidates, review, scoped retrieval, expiry, reactivation, and permanent forgetting.
-- Skill candidates, local validation, explicit review, SearchT-UI publication, immutable versions, disable/enable, and rollback.
+- Skill candidates, local validation, explicit review, SearchT publication, immutable versions, disable/enable, and rollback.
 - Conversation skill suggestions can enter the review queue without gaining publication or filesystem authority.
 - Four Chinese-first workflow templates with AionCore Cron materialization, immediate runs, enable/disable, and missing-job repair.
 - Immutable workflow versions, version-pinned run history, soft deletion, recoverable workflow trash, and disabled-on-restore safety.
@@ -596,12 +596,12 @@ Not delivered in this phase:
 - Workflow waiting for approval and resuming after confirmation
 - Connector expiration and reauthorization without local data loss
 - Offline startup and use without account login
-- SearchT-UI data import without modifying source data
+- SearchT data import without modifying source data
 
 ### 20.3 Product Acceptance
 
 - Core local features function without network access or registration.
-- New pages visually conform to SearchT-UI and use existing components and semantic tokens.
+- New pages visually conform to SearchT and use existing components and semantic tokens.
 - Ordinary users can complete onboarding without seeing protocol configuration.
 - Search over 50,000 local indexed records targets a response within 500 ms on supported baseline hardware.
 - No external write occurs outside its explicit permission scope.
@@ -620,4 +620,4 @@ Not delivered in this phase:
 
 ## 22. Final Product Statement
 
-The first impression remains SearchT-UI: the same desktop structure, conversation workflow, settings conventions, themes, assistants, and tools. SearchT-UI adds calendar, tasks, notes, knowledge, Inbox, long-term memory, personal automation, and local-first synchronization as native SearchT-UI-style capabilities under the SearchT-UI brand.
+The first impression remains SearchT: the same desktop structure, conversation workflow, settings conventions, themes, assistants, and tools. SearchT adds calendar, tasks, notes, knowledge, Inbox, long-term memory, personal automation, and local-first synchronization as native SearchT-style capabilities under the SearchT brand.

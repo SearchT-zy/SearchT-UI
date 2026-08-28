@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 SearchT-UI Contributors (Apache-2.0)
+ * Copyright 2025 SearchT Contributors (Apache-2.0)
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -13,8 +13,8 @@ import {
 
 describe('resolveLocalFileLinkPath', () => {
   it('recognizes Windows absolute paths emitted as root-relative markdown links', () => {
-    expect(resolveLocalFileLinkPath('/C:/Users/Administrator/AppData/Roaming/SearchT-UI/report.xlsx')).toBe(
-      'C:/Users/Administrator/AppData/Roaming/SearchT-UI/report.xlsx'
+    expect(resolveLocalFileLinkPath('/C:/Users/Administrator/AppData/Roaming/SearchT/report.xlsx')).toBe(
+      'C:/Users/Administrator/AppData/Roaming/SearchT/report.xlsx'
     );
   });
 
@@ -34,32 +34,32 @@ describe('resolveLocalFileLinkPath', () => {
 
   it('recognizes line suffixes without confusing Windows drive letters', () => {
     const reference = resolveLocalFileLinkReference(
-      'C:/Users/Administrator/AppData/Roaming/SearchT-UI/logs/app.log:1421'
+      'C:/Users/Administrator/AppData/Roaming/SearchT/logs/app.log:1421'
     );
 
     expect(reference).toEqual({
-      filePath: 'C:/Users/Administrator/AppData/Roaming/SearchT-UI/logs/app.log',
-      rawReference: 'C:/Users/Administrator/AppData/Roaming/SearchT-UI/logs/app.log:1421',
+      filePath: 'C:/Users/Administrator/AppData/Roaming/SearchT/logs/app.log',
+      rawReference: 'C:/Users/Administrator/AppData/Roaming/SearchT/logs/app.log:1421',
       line: 1421,
     });
-    expect(resolveLocalFileLinkPath('C:/Users/Administrator/AppData/Roaming/SearchT-UI/logs/app.log:1421')).toBe(
-      'C:/Users/Administrator/AppData/Roaming/SearchT-UI/logs/app.log'
+    expect(resolveLocalFileLinkPath('C:/Users/Administrator/AppData/Roaming/SearchT/logs/app.log:1421')).toBe(
+      'C:/Users/Administrator/AppData/Roaming/SearchT/logs/app.log'
     );
   });
 
   it('recognizes line and column suffixes without including the line in the file path', () => {
     const reference = resolveLocalFileLinkReference(
-      'C:/Users/Administrator/AppData/Roaming/SearchT-UI/logs/app.log:1421:7'
+      'C:/Users/Administrator/AppData/Roaming/SearchT/logs/app.log:1421:7'
     );
 
     expect(reference).toEqual({
-      filePath: 'C:/Users/Administrator/AppData/Roaming/SearchT-UI/logs/app.log',
-      rawReference: 'C:/Users/Administrator/AppData/Roaming/SearchT-UI/logs/app.log:1421:7',
+      filePath: 'C:/Users/Administrator/AppData/Roaming/SearchT/logs/app.log',
+      rawReference: 'C:/Users/Administrator/AppData/Roaming/SearchT/logs/app.log:1421:7',
       line: 1421,
       column: 7,
     });
-    expect(resolveLocalFileLinkPath('C:/Users/Administrator/AppData/Roaming/SearchT-UI/logs/app.log:1421:7')).toBe(
-      'C:/Users/Administrator/AppData/Roaming/SearchT-UI/logs/app.log'
+    expect(resolveLocalFileLinkPath('C:/Users/Administrator/AppData/Roaming/SearchT/logs/app.log:1421:7')).toBe(
+      'C:/Users/Administrator/AppData/Roaming/SearchT/logs/app.log'
     );
   });
 
@@ -133,20 +133,20 @@ describe('resolveLocalFileLinkPath', () => {
     expect(resolveLocalFileLinkReference('./user.ts')).toBeNull();
     expect(resolveLocalFileLinkReference('../user.ts')).toBeNull();
     expect(resolveLocalFileLinkReference('/settings')).toBeNull();
-    expect(resolveLocalFileLinkReference('https://github.com/searcht-ui/SearchT-UI/docs#L10')).toBeNull();
+    expect(resolveLocalFileLinkReference('https://github.com/searcht-ui/SearchT/docs#L10')).toBeNull();
     expect(resolveLocalFileLinkReference('https://github.com/org/repo/blob/main/file.ts#L10')).toBeNull();
     expect(resolveLocalFileLinkReference('/Users/demo/file.ts#l10')).toBeNull();
     expect(resolveLocalFileLinkReference('/Users/demo/file.ts#L10-l20')).toBeNull();
   });
 
   it('does not treat normal web links or app routes as local files', () => {
-    expect(resolveLocalFileLinkPath('https://github.com/searcht-ui/SearchT-UI/docs')).toBeNull();
+    expect(resolveLocalFileLinkPath('https://github.com/searcht-ui/SearchT/docs')).toBeNull();
     expect(resolveLocalFileLinkPath('/settings')).toBeNull();
   });
 
   it('formats local file paths as file URLs for browser link copying', () => {
-    expect(toLocalFileHref('C:/Users/Administrator/AppData/Roaming/SearchT-UI/report.xlsx')).toBe(
-      'file:///C:/Users/Administrator/AppData/Roaming/SearchT-UI/report.xlsx'
+    expect(toLocalFileHref('C:/Users/Administrator/AppData/Roaming/SearchT/report.xlsx')).toBe(
+      'file:///C:/Users/Administrator/AppData/Roaming/SearchT/report.xlsx'
     );
     expect(toLocalFileHref('/var/folders/demo/report.xlsx')).toBe('file:///var/folders/demo/report.xlsx');
   });

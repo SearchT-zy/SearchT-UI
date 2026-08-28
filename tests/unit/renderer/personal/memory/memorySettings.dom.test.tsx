@@ -16,7 +16,7 @@ vi.mock('@renderer/pages/settings/components/SettingsPageWrapper', async (import
 
 const copy: Record<string, string> = {
   'personal.memory.title': '长期记忆',
-  'personal.memory.description': '查看和管理SearchT-UI记住的内容',
+  'personal.memory.description': '查看和管理SearchT记住的内容',
   'personal.memory.add': '添加记忆',
   'personal.memory.retry': '重试',
   'personal.memory.loadFailed': '记忆加载失败',

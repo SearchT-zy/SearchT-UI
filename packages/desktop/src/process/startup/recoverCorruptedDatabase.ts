@@ -13,11 +13,11 @@ export type RecoverCorruptedDatabaseDeps = {
 export async function recoverCorruptedDatabaseAfterUserConfirmation(deps: RecoverCorruptedDatabaseDeps): Promise<void> {
   const failure = deps.getFailure();
   if (failure?.reason !== 'backend_recoverable_database_corruption') {
-    deps.logWarn('[SearchT-UI] Ignoring corrupted database recovery request outside recoverable failure state.');
+    deps.logWarn('[SearchT] Ignoring corrupted database recovery request outside recoverable failure state.');
     throw new Error('backend_corrupted_database_recovery_not_available');
   }
 
-  deps.logInfo('[SearchT-UI] User confirmed corrupted database backup and rebuild.');
+  deps.logInfo('[SearchT] User confirmed corrupted database backup and rebuild.');
   await deps.stopBackend();
   const port = await deps.startBackendWithRecovery();
   deps.markReady(port, 'backendManager.recoverCorruptedDatabase');

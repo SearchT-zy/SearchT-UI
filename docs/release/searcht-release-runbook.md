@@ -1,4 +1,4 @@
-# SearchT-UI（SearchT-UI）发布运行手册
+# SearchT（SearchT）发布运行手册
 
 本手册覆盖从源码构建到正式发布的完整链路：构建矩阵、安装包实测、aioncore 打包校验、自动更新服务、签名与卸载验证。
 
@@ -32,7 +32,7 @@ node scripts/release/verify-packaged-app.mjs out/win-unpacked win32-x64
 
 ```powershell
 # 静默安装 → 校验安装目录/卸载注册表 → 启动 12 秒冒烟 → 静默卸载 → 校验清理
-node scripts/release/verify-win-installer.mjs ".\SearchT-UI Setup 2.1.53.exe"
+node scripts/release/verify-win-installer.mjs ".\SearchT Setup 2.1.53.exe"
 
 # 附加旗标
 #   --per-user  按 currentuser 安装（默认 allusers）
@@ -42,9 +42,9 @@ node scripts/release/verify-win-installer.mjs ".\SearchT-UI Setup 2.1.53.exe"
 人工补充项（脚本无法覆盖）：
 
 - 安装/卸载 UAC 提示与开始菜单、桌面快捷方式。
-- 覆盖安装（升级）保留用户数据：`%APPDATA%\SearchT-UI` 下的 `searcht/`、`config/` 目录不变。
+- 覆盖安装（升级）保留用户数据：`%APPDATA%\SearchT` 下的 `searcht/`、`config/` 目录不变。
 - 卸载后重装可正常启动（数据目录不随卸载删除）。
-- 崩溃恢复：手动结束进程后再次启动，会话列表与SearchT-UI个人库（`searcht-personal.db`）完好。
+- 崩溃恢复：手动结束进程后再次启动，会话列表与SearchT个人库（`searcht-personal.db`）完好。
 
 ## 4. 自动更新服务
 
@@ -57,7 +57,7 @@ node scripts/release/verify-win-installer.mjs ".\SearchT-UI Setup 2.1.53.exe"
 
 ```bash
 # 1. 暂存安装包并生成 latest.yml（含 sha512/size）
-node scripts/release/publish-update.mjs ./release-stage "out/SearchT-UI Setup 2.1.53.exe" "out/SearchT-UI Setup 2.1.53.exe.blockmap"
+node scripts/release/publish-update.mjs ./release-stage "out/SearchT Setup 2.1.53.exe" "out/SearchT Setup 2.1.53.exe.blockmap"
 
 # 2. 本地/内网验证 feed（另一台机器装旧版，指向该地址检查更新）
 node scripts/release/update-server.mjs 8787 ./release-stage
@@ -80,8 +80,8 @@ node scripts/release/update-server.mjs 8787 ./release-stage
 安装器与卸载器全生命周期均已实测通过（全新安装、升级覆盖安装、启动、静默卸载、注册表清理）。此前记录的"静默卸载失效 / `/D=` 反斜杠被吞 / E1002 升级阻塞"均为**测试脚本转义问题**（heredoc 吞掉一层反斜杠，`D:\searcht` 变成 `D:searcht`），不是产品缺陷。正确调用方式：
 
 1. **静默安装到指定目录**（Node 脚本内，JS 字符串中 `\\` 才是一个反斜杠）：`spawnSync(installerExe, ['/S', '/D=D:\\searcht'])` — `/D=` 必须是最后一个参数、不加引号。
-2. **静默卸载**（与注册表 QuietUninstallString 一致）：`spawnSync('D:\\searcht\\Uninstall SearchT-UI.exe', ['/currentuser', '/S'])` — 原进程立即返回 0，实际删除由其 %TEMP% 副本异步完成（约 10-40 秒），完成后安装目录与卸载注册表键全部清除。以安装目录消失为完成信号。
-3. **`_?=目录` 原地模式**仅用于需要同步退出码的场合：卸载器无法删除自身，会残留 `Uninstall SearchT-UI.exe` 并因残留检查以退出码 2 结束——预期行为，不要当作失败。
+2. **静默卸载**（与注册表 QuietUninstallString 一致）：`spawnSync('D:\\searcht\\Uninstall SearchT.exe', ['/currentuser', '/S'])` — 原进程立即返回 0，实际删除由其 %TEMP% 副本异步完成（约 10-40 秒），完成后安装目录与卸载注册表键全部清除。以安装目录消失为完成信号。
+3. **`_?=目录` 原地模式**仅用于需要同步退出码的场合：卸载器无法删除自身，会残留 `Uninstall SearchT.exe` 并因残留检查以退出码 2 结束——预期行为，不要当作失败。
 4. **升级覆盖安装**：对同作用域已有安装直接再次运行新安装器即可，内部先静默卸载旧版再装新版（实测完整成功）。同作用域共享同一卸载键（electron-builder 默认行为）。
 5. **防御加固**：安装器 `customInit` 会把盘符相对的 `INSTDIR`（如 `D:searcht`）规整为 `D:\searcht`，即使调用方转义出错也能保证注册表与文件布局确定。
 

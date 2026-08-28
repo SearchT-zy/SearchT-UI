@@ -1,13 +1,13 @@
 import { describe, expect, it } from 'vitest';
 import { SEARCHT_BRAND } from '@/common/config/brand';
 
-describe('SearchT-UI brand contract', () => {
-  it('uses identifiers that cannot collide with SearchT-UI', () => {
+describe('SearchT brand contract', () => {
+  it('uses identifiers that cannot collide with SearchT', () => {
     expect(SEARCHT_BRAND).toEqual({
       appId: 'cn.searcht.desktop',
-      appName: 'SearchT-UI',
-      displayName: 'SearchT-UI',
-      executableName: 'SearchT-UI',
+      appName: 'SearchT',
+      displayName: 'SearchT',
+      executableName: 'SearchT',
       protocol: 'searcht',
       dataDirectoryName: 'searcht',
       cliDataDirectoryName: '.searcht',

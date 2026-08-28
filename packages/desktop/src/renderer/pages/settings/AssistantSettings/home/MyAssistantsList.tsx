@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 SearchT-UI Contributors (Apache-2.0)
+ * Copyright 2025 SearchT Contributors (Apache-2.0)
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -51,7 +51,7 @@ const MyAssistantsList: React.FC<MyAssistantsListProps> = ({
   const talkToButler = useTalkToButler();
   const [filter, setFilter] = useState<AssistantEnabledFilter>('all');
 
-  // "Create via chat": hand off to the SearchT-UI Butler on the home page with a
+  // "Create via chat": hand off to the SearchT Butler on the home page with a
   // ready-made create-an-assistant prompt (same flow as the header action).
   const handleCreateViaChat = () => {
     void talkToButler({

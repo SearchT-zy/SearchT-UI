@@ -12,10 +12,10 @@
     "clearWorkspace": "Quitar proyecto",
     "openFolder": "Abrir carpeta",
     "none": "Ninguno",
-    "quickActionsTitle": "¿Qué puede hacer SearchT-UI?",
+    "quickActionsTitle": "¿Qué puede hacer SearchT?",
     "quickActionFeedback": "Reportar problema",
     "quickActionStar": "¿Te gusta? ¡Danos una estrella!",
-    "skillsMarket": "Mercado de habilidades de SearchT-UI",
+    "skillsMarket": "Mercado de habilidades de SearchT",
     "skillsMarketDesc": "Busca y activa habilidades de la comunidad según sea necesario. Configúralo una vez, disponible para todos los asistentes.",
     "skillsMarketDetails": "Ver más >>"
   },
@@ -306,7 +306,7 @@
       },
       "MCP_HTTP_RESPONSE_READ_FAILED": {
         "title": "Failed to read the team helper response",
-        "body": "SearchT-UI could not read the local team helper response. Retry once, and if it keeps happening, restart the app."
+        "body": "SearchT could not read the local team helper response. Retry once, and if it keeps happening, restart the app."
       },
       "MCP_TOOL_REMOTE_ERROR": {
         "title": "The local team helper rejected the request",
@@ -314,11 +314,11 @@
       },
       "MCP_TOOL_RESPONSE_UNEXPECTED": {
         "title": "The team helper returned an unexpected response",
-        "body": "SearchT-UI received an unexpected response from the local team helper. Retry once, and report it if the problem persists."
+        "body": "SearchT received an unexpected response from the local team helper. Retry once, and report it if the problem persists."
       },
       "MCP_TCP_READ_FAILED": {
         "title": "Failed to read from the local team helper",
-        "body": "SearchT-UI could not read the local team helper TCP response. Retry once, and restart the app if it keeps failing."
+        "body": "SearchT could not read the local team helper TCP response. Retry once, and restart the app if it keeps failing."
       },
       "TEAM_SERVICE_UNAVAILABLE": {
         "title": "Team service is not ready yet",
@@ -594,13 +594,13 @@
         "body": "{{count}} paso(s) han fallado y NO se han aplicado. agy termina estos turnos como correctos igualmente, así que comprueba el resultado real en lugar de la respuesta."
       },
       "CLI_VERSION_OLDER": {
-        "body": "El {{cli}} instalado es anterior a la versión verificada por SearchT-UI; puede que falten funciones. Se recomienda actualizar {{cli}}. (instalado: {{reported}} / verificado por SearchT-UI: {{verified}})"
+        "body": "El {{cli}} instalado es anterior a la versión verificada por SearchT; puede que falten funciones. Se recomienda actualizar {{cli}}. (instalado: {{reported}} / verificado por SearchT: {{verified}})"
       },
       "CLI_VERSION_NEWER": {
-        "body": "El {{cli}} instalado es posterior a la versión verificada por SearchT-UI. Debería seguir funcionando; informa de cualquier comportamiento extraño. (instalado: {{reported}} / verificado por SearchT-UI: {{verified}})"
+        "body": "El {{cli}} instalado es posterior a la versión verificada por SearchT. Debería seguir funcionando; informa de cualquier comportamiento extraño. (instalado: {{reported}} / verificado por SearchT: {{verified}})"
       },
       "CODEX_RETRYING": {
-        "body": "{{detail}} (intento {{attempts}}, {{elapsed}} transcurridos: el proveedor del agente corta la conexión una y otra vez; SearchT-UI está esperando.)"
+        "body": "{{detail}} (intento {{attempts}}, {{elapsed}} transcurridos: el proveedor del agente corta la conexión una y otra vez; SearchT está esperando.)"
       }
     }
   },
@@ -672,7 +672,7 @@
         "conflicted": "!",
         "unknown": "?"
       },
-      "conflictedHint": "Resuelve este conflicto fuera de SearchT-UI primero",
+      "conflictedHint": "Resuelve este conflicto fuera de SearchT primero",
       "opaqueHint": "Este estado proviene de un backend más nuevo — se muestra solo lectura",
       "degraded": "La actualización va en un modo más lento porque no se puede escribir el índice de git",
       "truncated": "Demasiados cambios para listar — mostrando solo la primera parte",
@@ -691,7 +691,7 @@
         "discard": "Descartar cambios",
         "stageAll": "Preparar todo",
         "unstageAll": "Quitar todo de preparados",
-        "blockedHint": "Resuelve el conflicto fuera de SearchT-UI antes de preparar o descartar",
+        "blockedHint": "Resuelve el conflicto fuera de SearchT antes de preparar o descartar",
         "confirmDiscardTitle": "¿Descartar los cambios?",
         "confirmDiscardTracked": "Las ediciones de {{count}} archivos se perderán. Esto no se puede deshacer.",
         "confirmDiscardUntracked": "{{count}} archivos nuevos se moverán a la papelera.",

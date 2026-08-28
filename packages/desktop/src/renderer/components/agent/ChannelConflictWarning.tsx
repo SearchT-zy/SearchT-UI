@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 SearchT-UI Contributors (Apache-2.0)
+ * Copyright 2025 SearchT Contributors (Apache-2.0)
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -18,7 +18,7 @@ interface ChannelConflictWarningProps {
 }
 
 /**
- * Warning component when OpenClaw channel conflicts with SearchT-UI Channels
+ * Warning component when OpenClaw channel conflicts with SearchT Channels
  */
 export const ChannelConflictWarning: React.FC<ChannelConflictWarningProps> = ({
   platform,
@@ -37,14 +37,14 @@ export const ChannelConflictWarning: React.FC<ChannelConflictWarningProps> = ({
       content={
         <Space direction='vertical' size='medium' style={{ width: '100%' }}>
           <Paragraph>
-            <Text bold>OpenClaw is handling {platformName} messages, not SearchT-UI.</Text>
+            <Text bold>OpenClaw is handling {platformName} messages, not SearchT.</Text>
           </Paragraph>
 
           <Paragraph>
             Your {platformName} bot credentials are also configured in OpenClaw. This means:
             <ul>
               <li>
-                <Text type='error'>✗ Switching agents in SearchT-UI will have no effect</Text>
+                <Text type='error'>✗ Switching agents in SearchT will have no effect</Text>
               </li>
               <li>
                 <Text type='error'>✗ Messages are processed by OpenClaw's agent</Text>
@@ -56,7 +56,7 @@ export const ChannelConflictWarning: React.FC<ChannelConflictWarningProps> = ({
           </Paragraph>
 
           <Paragraph>
-            <Text bold>To use SearchT-UI Channels and switch agents:</Text>
+            <Text bold>To use SearchT Channels and switch agents:</Text>
           </Paragraph>
 
           <Paragraph>
@@ -66,19 +66,19 @@ export const ChannelConflictWarning: React.FC<ChannelConflictWarningProps> = ({
             <br />
             Set: <Text code>{`channels.${channelKey}.enabled = false`}</Text>
             <br />
-            Then restart OpenClaw and SearchT-UI.
+            Then restart OpenClaw and SearchT.
           </Paragraph>
 
           <Paragraph>
             <Text type='secondary'>Option 2: Use a different bot</Text>
             <br />
-            Create a new {platformName} bot with different credentials for SearchT-UI.
+            Create a new {platformName} bot with different credentials for SearchT.
           </Paragraph>
 
           <Paragraph>
             <Text type='secondary'>Option 3: Keep using OpenClaw</Text>
             <br />
-            Disable {platformName} in SearchT-UI Channels and continue using OpenClaw's integration.
+            Disable {platformName} in SearchT Channels and continue using OpenClaw's integration.
           </Paragraph>
 
           <Space>

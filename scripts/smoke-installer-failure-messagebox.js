@@ -21,8 +21,8 @@ const INSTALLER_ERROR_SCENARIOS = [
     id: 'uninstaller-copy-or-rebuild-failed',
     defineName: 'SEARCHT_E_UNINSTALLER_COPY_OR_REBUILD_FAILED',
     code: 'E1001',
-    message: 'SearchT-UI could not repair the installed uninstaller.',
-    action: 'Close SearchT-UI, restart Windows if needed, then run this installer again.',
+    message: 'SearchT could not repair the installed uninstaller.',
+    action: 'Close SearchT, restart Windows if needed, then run this installer again.',
     diagnostics:
       'scenario=uninstaller-copy-or-rebuild-failed phase=uninstaller-repair result=copy-failed-retry-bundled-missing',
   },
@@ -30,7 +30,7 @@ const INSTALLER_ERROR_SCENARIOS = [
     id: 'old-uninstall-failed',
     defineName: 'SEARCHT_E_OLD_UNINSTALL_FAILED',
     code: 'E1002',
-    message: 'The previous SearchT-UI uninstaller returned an error.',
+    message: 'The previous SearchT uninstaller returned an error.',
     action:
       'Close any program using the install folder, then run this installer again. If no program is listed, restart Windows and run this installer again.',
     diagnostics: 'scenario=old-uninstall-failed phase=old-uninstaller exitCode=2',
@@ -39,23 +39,23 @@ const INSTALLER_ERROR_SCENARIOS = [
     id: 'install-dir-remove-or-locked',
     defineName: 'SEARCHT_E_INSTALL_DIR_REMOVE_OR_LOCKED',
     code: 'E1003',
-    message: 'SearchT-UI could not remove or replace the previous installation directory.',
-    action: 'Close SearchT-UI and any program using the install folder, then run this installer again.',
+    message: 'SearchT could not remove or replace the previous installation directory.',
+    action: 'Close SearchT and any program using the install folder, then run this installer again.',
     diagnostics: 'scenario=install-dir-remove-or-locked phase=atomic-failed failedPath=install-dir',
   },
   {
     id: 'extract-failed',
     defineName: 'SEARCHT_E_EXTRACT_FAILED',
     code: 'E1010',
-    message: 'SearchT-UI could not extract the application files correctly.',
+    message: 'SearchT could not extract the application files correctly.',
     action: 'Download a fresh installer and run it again.',
-    diagnostics: 'scenario=extract-failed phase=extract method=zip missing=SearchT-UI.exe',
+    diagnostics: 'scenario=extract-failed phase=extract method=zip missing=SearchT.exe',
   },
   {
     id: 'disk-insufficient',
     defineName: 'SEARCHT_E_DISK_INSUFFICIENT',
     code: 'E1020',
-    message: 'SearchT-UI cannot continue because the target disk does not have enough free space.',
+    message: 'SearchT cannot continue because the target disk does not have enough free space.',
     action: 'Free disk space on the target drive, then run this installer again.',
     diagnostics: 'scenario=disk-insufficient phase=preflight requiredMb=1024 availableMb=0',
   },
@@ -63,7 +63,7 @@ const INSTALLER_ERROR_SCENARIOS = [
     id: 'bundled-aioncore-incomplete',
     defineName: 'SEARCHT_E_BUNDLED_AIONCORE_INCOMPLETE',
     code: 'E1030',
-    message: 'SearchT-UI installed, but the bundled AionCore resources are incomplete.',
+    message: 'SearchT installed, but the bundled AionCore resources are incomplete.',
     action: 'Download a fresh installer and run it again.',
     diagnostics: 'scenario=bundled-aioncore-incomplete phase=verify-bundled-aioncore runtime=win32-x64 result=1',
   },
@@ -71,8 +71,8 @@ const INSTALLER_ERROR_SCENARIOS = [
     id: 'core-app-files-incomplete',
     defineName: 'SEARCHT_E_CORE_APP_FILES_INCOMPLETE',
     code: 'E1031',
-    message: 'SearchT-UI installation is incomplete because a required application file is missing.',
-    action: 'Reinstall SearchT-UI or download a newer installer.',
+    message: 'SearchT installation is incomplete because a required application file is missing.',
+    action: 'Reinstall SearchT or download a newer installer.',
     diagnostics: 'scenario=core-app-files-incomplete phase=verify-required-file missing=resources/app.asar',
   },
   {
@@ -80,14 +80,14 @@ const INSTALLER_ERROR_SCENARIOS = [
     defineName: 'SEARCHT_E_ARCH_MISMATCH',
     code: 'E1040',
     message: 'Installation package architecture mismatch.',
-    action: 'Download the SearchT-UI installer that matches this Windows architecture, then run it again.',
+    action: 'Download the SearchT installer that matches this Windows architecture, then run it again.',
     diagnostics: 'scenario=arch-mismatch phase=arch-check target=x64 actual=arm64',
   },
   {
     id: 'active-installer-conflict',
     defineName: 'SEARCHT_E_ACTIVE_INSTALLER_CONFLICT',
     code: 'E1050',
-    message: 'Another SearchT-UI installer appears to still be active.',
+    message: 'Another SearchT installer appears to still be active.',
     action: 'Close the other installer window or wait for it to finish, then run this installer again.',
     diagnostics: 'scenario=active-installer-conflict phase=active-installer-marker state=active',
   },
@@ -95,15 +95,15 @@ const INSTALLER_ERROR_SCENARIOS = [
     id: 'registry-state-invalid',
     defineName: 'SEARCHT_E_REGISTRY_STATE_INVALID',
     code: 'E1060',
-    message: 'SearchT-UI found an invalid previous-install registry state.',
-    action: 'Uninstall the old SearchT-UI from Windows Settings, then run this installer again.',
+    message: 'SearchT found an invalid previous-install registry state.',
+    action: 'Uninstall the old SearchT from Windows Settings, then run this installer again.',
     diagnostics: 'scenario=registry-state-invalid phase=registry-heal installLocation=invalid uninstallString=missing',
   },
   {
     id: 'active-marker-write-failed',
     defineName: 'SEARCHT_E_ACTIVE_MARKER_WRITE_FAILED',
     code: 'E1070',
-    message: 'SearchT-UI could not write the active-installer marker.',
+    message: 'SearchT could not write the active-installer marker.',
     action: 'Restart Windows, then run this installer again.',
     diagnostics: 'scenario=active-marker-write-failed phase=active-installer-marker-write result=failed',
   },
@@ -314,7 +314,7 @@ function Find-FailureWindow([string]$Code, [int]$TimeoutSec = 90) {
     $windows = $root.FindAll([System.Windows.Automation.TreeScope]::Children, $windowCond)
     foreach ($window in $windows) {
       $text = Get-WindowText $window
-      if ($text -like "*SearchT-UI installation failed ($Code)*" -or
+      if ($text -like "*SearchT installation failed ($Code)*" -or
           ($text -like "*($Code)*" -and $text -like '*Send this installer failure report*')) {
         return [ordered]@{ window = $window; text = $text; title = $window.Current.Name }
       }
@@ -329,7 +329,7 @@ $proc = Start-Process -FilePath $ExePath -PassThru
 try {
   $failure = Find-FailureWindow $Code
   foreach ($required in @(
-    "SearchT-UI installation failed ($Code)",
+    "SearchT installation failed ($Code)",
     "scenario=$ScenarioId",
     'Suggested action:',
     'Diagnostics:',
@@ -381,7 +381,7 @@ function createHarnessNsi({ exePath, logPath, projectRoot, scenario }) {
   const detail = `${scenario.diagnostics} smoke=messagebox`;
   return `
 Unicode true
-Name "SearchT-UI Failure MessageBox Smoke"
+Name "SearchT Failure MessageBox Smoke"
 OutFile "${nsisQuote(exePath)}"
 RequestExecutionLevel user
 SilentInstall normal
@@ -397,10 +397,10 @@ SilentInstall normal
 !include "${nsisQuote(path.join(projectRoot, 'resources', 'windows', 'installer-errors-sentry.nsh'))}"
 
 Section
-  StrCpy $INSTDIR "$TEMP\\SearchT-UI-messagebox-smoke"
-  StrCpy $SearchT-UISessionId "smokembox-${nsisQuote(scenario.code)}"
-  StrCpy $SearchT-UIIsUpdated "1"
-  StrCpy $SearchT-UISessionLogPath "${nsisQuote(logPath)}"
+  StrCpy $INSTDIR "$TEMP\\SearchT-messagebox-smoke"
+  StrCpy $SearchTSessionId "smokembox-${nsisQuote(scenario.code)}"
+  StrCpy $SearchTIsUpdated "1"
+  StrCpy $SearchTSessionLogPath "${nsisQuote(logPath)}"
   BringToFront
   !insertmacro SEARCHT_FAIL_UX \
     "${nsisQuote(scenario.code)}" \
@@ -520,7 +520,7 @@ function runHarness({ autoDecline, compileOnly, makensis, scenario }) {
         if (status.status !== 'skipped' || status.reason !== 'empty-dsn') {
           throw new Error(`unexpected report status for ${code}: ${JSON.stringify(status)}`);
         }
-        if (typeof status.copyText !== 'string' || !status.copyText.includes(`SearchT-UI installer failure ${code}`)) {
+        if (typeof status.copyText !== 'string' || !status.copyText.includes(`SearchT installer failure ${code}`)) {
           throw new Error(`report copyText missing support payload for ${code}`);
         }
       }

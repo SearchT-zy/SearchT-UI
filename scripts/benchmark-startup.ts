@@ -2,8 +2,8 @@
  * Electron Cold Startup Benchmark
  *
  * Launches the Electron app N times and measures per-phase startup timings by
- * parsing the electron-log file for [SearchT-UI:ready] / [SearchT-UI:init] /
- * [SearchT-UI:process] marks, plus `ready-to-show` / `did-finish-load` /
+ * parsing the electron-log file for [SearchT:ready] / [SearchT:init] /
+ * [SearchT:process] marks, plus `ready-to-show` / `did-finish-load` /
  * time-to-interactive (chat input visible).
  *
  * Optional `--with-memory` mode samples RSS / heap in the main and renderer
@@ -111,14 +111,14 @@ type StartupTiming = {
   wallDomContentLoadedMs: number;
   wallTimeToInteractiveMs: number;
   wallTotalMs: number;
-  // Parsed from [SearchT-UI:ready] marks
+  // Parsed from [SearchT:ready] marks
   readyInitializeProcessMs: number;
   readyInitializeZoomFactorMs: number;
   readyCreateWindowMs: number;
   readyInitializeAcpDetectorMs: number;
-  // Parsed from [SearchT-UI:init] marks
+  // Parsed from [SearchT:init] marks
   initTotalMs: number;
-  // Parsed from [SearchT-UI:process] marks
+  // Parsed from [SearchT:process] marks
   processInitStorageMs: number;
   processExtensionRegistryMs: number;
   processChannelManagerMs: number;
@@ -142,7 +142,7 @@ function getLogFilePath(): string {
   const candidates: string[] = [];
   if (process.platform === 'darwin') {
     candidates.push(
-      path.join(os.homedir(), 'Library', 'Logs', 'SearchT-UI-Dev', `${today}.log`),
+      path.join(os.homedir(), 'Library', 'Logs', 'SearchT-Dev', `${today}.log`),
       path.join(os.homedir(), 'Library', 'Logs', 'AionUi', `${today}.log`)
     );
   } else if (process.platform === 'win32') {
@@ -178,10 +178,10 @@ function readNewLogLines(logPath: string, offset: number): string[] {
 
 // ── Log parsing ─────────────────────────────────────────────────────────────
 
-// Matches: [SearchT-UI:ready] <label> +<ms>ms
-// Matches: [SearchT-UI:init]  <label> +<ms>ms
-// Matches: [SearchT-UI:process] <label> +<ms>ms
-const MARK_REGEX = /\[SearchT-UI:(ready|init|process)\]\s+([^+]+?)\s+\+(\d+)ms/;
+// Matches: [SearchT:ready] <label> +<ms>ms
+// Matches: [SearchT:init]  <label> +<ms>ms
+// Matches: [SearchT:process] <label> +<ms>ms
+const MARK_REGEX = /\[SearchT:(ready|init|process)\]\s+([^+]+?)\s+\+(\d+)ms/;
 
 type ParsedMarks = {
   ready: Map<string, number>;
@@ -210,9 +210,9 @@ function parseStartupLog(lines: string[]): ParsedMarks {
       continue;
     }
 
-    if (line.includes('[SearchT-UI] Renderer did-finish-load')) marks.logs.rendererDidFinishLoad = true;
-    else if (line.includes('[SearchT-UI] Window ready-to-show')) marks.logs.windowReadyToShow = true;
-    else if (line.includes('[SearchT-UI] Showing main window')) marks.logs.showingMainWindow = true;
+    if (line.includes('[SearchT] Renderer did-finish-load')) marks.logs.rendererDidFinishLoad = true;
+    else if (line.includes('[SearchT] Window ready-to-show')) marks.logs.windowReadyToShow = true;
+    else if (line.includes('[SearchT] Showing main window')) marks.logs.showingMainWindow = true;
   }
 
   return marks;

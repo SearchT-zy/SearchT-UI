@@ -63,10 +63,10 @@
   "more": "More",
   "refresh": "Refresh",
   "readOnly": "Read only",
-  "tray.showWindow": "Show SearchT-UI",
+  "tray.showWindow": "Show SearchT",
   "tray.newChat": "New Chat",
   "tray.closeToTray": "Hide to Tray",
-  "tray.about": "About SearchT-UI",
+  "tray.about": "About SearchT",
   "tray.restart": "Restart App",
   "tray.quit": "Quit",
   "tray.runningTasks": "Running Tasks",
@@ -74,31 +74,31 @@
   "tray.checkUpdate": "Check Update",
   "tray.recentChats": "Recent Chats",
   "tray.untitled": "Untitled",
-  "tray.hiddenHintTitle": "SearchT-UI is still running",
+  "tray.hiddenHintTitle": "SearchT is still running",
   "tray.hiddenHintBody": "The window was hidden to the system tray. Click the tray icon to bring it back.",
   "backendStartup": {
     "incompatibleRuntime": {
       "title": "This system is not supported by the bundled backend",
-      "description": "SearchT-UI opened, but the local AionCore backend cannot run on this Linux version. Please upgrade to a supported Linux distribution and restart SearchT-UI.",
+      "description": "SearchT opened, but the local AionCore backend cannot run on this Linux version. Please upgrade to a supported Linux distribution and restart SearchT.",
       "requiredVersions": "Required runtime symbols: {{versions}}"
     },
     "incompleteInstallation": {
-      "title": "SearchT-UI installation is incomplete",
-      "description": "This installation is missing required local resources, so AionCore cannot start. Please download and reinstall the latest SearchT-UI. If the issue returns after reinstalling, check whether security or antivirus software quarantined AionCore.",
+      "title": "SearchT installation is incomplete",
+      "description": "This installation is missing required local resources, so AionCore cannot start. Please download and reinstall the latest SearchT. If the issue returns after reinstalling, check whether security or antivirus software quarantined AionCore.",
       "downloadLatest": "Download latest",
       "sendDiagnostics": "Send diagnostics",
       "diagnosticsSent": "Diagnostics sent",
       "diagnosticsReportSuccess": "Diagnostics report sent",
       "diagnosticsReportFailed": "Failed to send diagnostics report",
-      "runtimeComponentDescription": "This installation is missing required bundled runtime components, so {{resource}} cannot start. Reinstall the latest SearchT-UI package. If it still happens after reinstalling, check whether security or antivirus software quarantined SearchT-UI components."
+      "runtimeComponentDescription": "This installation is missing required bundled runtime components, so {{resource}} cannot start. Reinstall the latest SearchT package. If it still happens after reinstalling, check whether security or antivirus software quarantined SearchT components."
     },
     "packageArchitectureMismatch": {
-      "title": "SearchT-UI package architecture mismatch",
-      "description": "This SearchT-UI package is for {{packageArch}}, but this Mac is {{deviceArch}}. You may have downloaded the wrong package. Please download and install the {{expectedArch}} package."
+      "title": "SearchT package architecture mismatch",
+      "description": "This SearchT package is for {{packageArch}}, but this Mac is {{deviceArch}}. You may have downloaded the wrong package. Please download and install the {{expectedArch}} package."
     },
     "dataMigration": {
       "title": "Local data migration failed",
-      "description": "SearchT-UI opened, but AionCore stopped while initializing local data. Reinstalling SearchT-UI may not fix this. Send a diagnostics report or contact support so the local database migration can be inspected.",
+      "description": "SearchT opened, but AionCore stopped while initializing local data. Reinstalling SearchT may not fix this. Send a diagnostics report or contact support so the local database migration can be inspected.",
       "sendDiagnostics": "Send diagnostics",
       "diagnosticsSent": "Diagnostics sent",
       "diagnosticsReportSuccess": "Diagnostics report sent",
@@ -106,7 +106,7 @@
     },
     "localDataRepair": {
       "title": "Local data repair failed",
-      "description": "SearchT-UI opened, but AionCore stopped while preparing local startup data such as assistant or agent records. Reinstalling SearchT-UI may not fix this. Send a diagnostics report or contact support so the local database can be inspected.",
+      "description": "SearchT opened, but AionCore stopped while preparing local startup data such as assistant or agent records. Reinstalling SearchT may not fix this. Send a diagnostics report or contact support so the local database can be inspected.",
       "sendDiagnostics": "Send diagnostics",
       "diagnosticsSent": "Diagnostics sent",
       "diagnosticsReportSuccess": "Diagnostics report sent",
@@ -114,7 +114,7 @@
     },
     "startupDirectory": {
       "title": "Startup directory is unavailable",
-      "description": "SearchT-UI opened, but AionCore could not start because the configured work or log directory is missing, unavailable, or blocked by permissions. Check that the configured directories exist and are writable, then restart SearchT-UI.",
+      "description": "SearchT opened, but AionCore could not start because the configured work or log directory is missing, unavailable, or blocked by permissions. Check that the configured directories exist and are writable, then restart SearchT.",
       "sendDiagnostics": "Send diagnostics",
       "diagnosticsSent": "Diagnostics sent",
       "diagnosticsReportSuccess": "Diagnostics report sent",
@@ -122,7 +122,7 @@
     },
     "recoverableDatabaseCorruption": {
       "title": "Local data is corrupted",
-      "description": "SearchT-UI detected that the local database is corrupted and cannot continue startup. After confirmation, SearchT-UI will back up the old database and create a new local database to continue startup. Past conversations will no longer be shown, and the old database will be kept as a backup file.",
+      "description": "SearchT detected that the local database is corrupted and cannot continue startup. After confirmation, SearchT will back up the old database and create a new local database to continue startup. Past conversations will no longer be shown, and the old database will be kept as a backup file.",
       "confirmRebuild": "Back up old DB and rebuild new DB",
       "sendDiagnostics": "Send diagnostics",
       "diagnosticsHint": "Sending diagnostics will not modify the local database.",
@@ -138,8 +138,8 @@
       }
     },
     "transientConcurrentStartup": {
-      "title": "SearchT-UI is starting up",
-      "description": "Another SearchT-UI startup was still using the local data when this window opened. This is temporary and your data is safe — no reinstall is needed. Please wait a moment and try again, or restart SearchT-UI.",
+      "title": "SearchT is starting up",
+      "description": "Another SearchT startup was still using the local data when this window opened. This is temporary and your data is safe — no reinstall is needed. Please wait a moment and try again, or restart SearchT.",
       "sendDiagnostics": "Send diagnostics",
       "diagnosticsSent": "Diagnostics sent",
       "diagnosticsReportSuccess": "Diagnostics report sent",

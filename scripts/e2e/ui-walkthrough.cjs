@@ -1,5 +1,5 @@
 /**
- * Full real-UI walkthrough of the installed SearchT-UI desktop app over CDP.
+ * Full real-UI walkthrough of the installed SearchT desktop app over CDP.
  *
  *   node scripts/e2e/ui-walkthrough.cjs <installDir>
  *
@@ -17,7 +17,7 @@ const { spawn, execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
-const installDir = process.argv[2] || 'D:\\SearchT-UI';
+const installDir = process.argv[2] || 'D:\\SearchT';
 const shotDir = path.resolve('output/ui-e2e');
 fs.mkdirSync(shotDir, { recursive: true });
 
@@ -36,8 +36,8 @@ async function guarded(name, body) {
 }
 
 async function main() {
-  const exe = path.join(installDir, 'SearchT-UI.exe');
-  if (!fs.existsSync(exe)) throw new Error(`SearchT-UI.exe not found: ${exe}`);
+  const exe = path.join(installDir, 'SearchT.exe');
+  if (!fs.existsSync(exe)) throw new Error(`SearchT.exe not found: ${exe}`);
 
   const child = spawn(exe, ['--remote-debugging-port=9222'], { detached: true, stdio: 'ignore' });
   child.unref();
@@ -220,8 +220,8 @@ async function main() {
   // --- personal workspace: import + cloud sync panels ----------------------------
   await guarded('个人工作台 panels', async () => {
     await goto('#/settings/personal-workspace');
-    await page.getByText('SearchT-UI 数据').first().waitFor({ timeout: 6000 });
-    report('SearchT-UI import section renders', true);
+    await page.getByText('SearchT 数据').first().waitFor({ timeout: 6000 });
+    report('SearchT import section renders', true);
     await shot('18-personal-import');
     await page
       .getByText(/云同步/)

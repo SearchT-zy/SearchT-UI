@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 SearchT-UI Contributors (Apache-2.0)
+ * Copyright 2025 SearchT Contributors (Apache-2.0)
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -71,29 +71,29 @@ const makeGitHubReleaseResponse = () => [
     tag_name: 'v1.9.22',
     name: 'v1.9.22',
     body: 'release notes',
-    html_url: 'https://github.com/searcht-ui/SearchT-UI/releases/tag/v1.9.22',
+    html_url: 'https://github.com/searcht-ui/SearchT/releases/tag/v1.9.22',
     published_at: '2026-04-29T00:00:00Z',
     prerelease: false,
     draft: false,
     assets: [
       {
-        name: 'SearchT-UI-1.9.22-mac-arm64.dmg',
+        name: 'SearchT-1.9.22-mac-arm64.dmg',
         browser_download_url:
-          'https://github.com/searcht-ui/SearchT-UI/releases/download/v1.9.22/SearchT-UI-1.9.22-mac-arm64.dmg',
+          'https://github.com/searcht-ui/SearchT/releases/download/v1.9.22/SearchT-1.9.22-mac-arm64.dmg',
         size: 123,
         content_type: 'application/x-apple-diskimage',
       },
       {
-        name: 'SearchT-UI-1.9.22-win-x64.exe',
+        name: 'SearchT-1.9.22-win-x64.exe',
         browser_download_url:
-          'https://github.com/searcht-ui/SearchT-UI/releases/download/v1.9.22/SearchT-UI-1.9.22-win-x64.exe',
+          'https://github.com/searcht-ui/SearchT/releases/download/v1.9.22/SearchT-1.9.22-win-x64.exe',
         size: 456,
         content_type: 'application/vnd.microsoft.portable-executable',
       },
       {
-        name: 'SearchT-UI-1.9.22-linux-amd64.deb',
+        name: 'SearchT-1.9.22-linux-amd64.deb',
         browser_download_url:
-          'https://github.com/searcht-ui/SearchT-UI/releases/download/v1.9.22/SearchT-UI-1.9.22-linux-amd64.deb',
+          'https://github.com/searcht-ui/SearchT/releases/download/v1.9.22/SearchT-1.9.22-linux-amd64.deb',
         size: 789,
       },
     ],
@@ -139,20 +139,20 @@ const makeDeferred = () => {
 // version + assets, GitHub only enriches release notes. Serve both hosts.
 const CDN_CHANNEL_YML = `version: 1.9.22
 files:
-  - url: SearchT-UI-1.9.22-mac-arm64.dmg
+  - url: SearchT-1.9.22-mac-arm64.dmg
     size: 123
-  - url: SearchT-UI-1.9.22-win-x64.exe
+  - url: SearchT-1.9.22-win-x64.exe
     size: 456
-  - url: SearchT-UI-1.9.22-linux-amd64.deb
+  - url: SearchT-1.9.22-linux-amd64.deb
     size: 789
-path: SearchT-UI-1.9.22-mac-arm64.dmg
+path: SearchT-1.9.22-mac-arm64.dmg
 releaseDate: '2026-04-29T00:00:00Z'
 `;
 
 const stubCdnAndGitHubFetch = () => {
   const fetchMock = vi.fn(async (input: RequestInfo | URL) => {
     const url = String(input);
-    if (url.startsWith('https://github.com/searcht-ui/SearchT-UI/releases/download/latest')) {
+    if (url.startsWith('https://github.com/searcht-ui/SearchT/releases/download/latest')) {
       return new Response(CDN_CHANNEL_YML, { status: 200 });
     }
     if (url.startsWith('https://api.github.com/')) {
@@ -174,25 +174,25 @@ describe('updateBridge CDN URL rewriting', () => {
 
     try {
       const handler = await getCheckHandler();
-      const result = await handler({ repo: 'searcht-ui/SearchT-UI' });
+      const result = await handler({ repo: 'searcht-ui/SearchT' });
 
       expect(result.success).toBe(true);
       expect(result.data?.currentVersion).toBe('1.0.0');
       const assets = result.data?.latest?.assets ?? [];
       expect(assets.length).toBe(3);
 
-      const macAsset = assets.find((a: { name: string }) => a.name === 'SearchT-UI-1.9.22-mac-arm64.dmg');
+      const macAsset = assets.find((a: { name: string }) => a.name === 'SearchT-1.9.22-mac-arm64.dmg');
       expect(macAsset).toBeDefined();
       expect(macAsset?.url).toBe(
-        'https://github.com/searcht-ui/SearchT-UI/releases/download/1.9.22/SearchT-UI-1.9.22-mac-arm64.dmg'
+        'https://github.com/searcht-ui/SearchT/releases/download/1.9.22/SearchT-1.9.22-mac-arm64.dmg'
       );
       expect(macAsset?.fallbackUrl).toBe(
-        'https://github.com/searcht-ui/SearchT-UI/releases/download/v1.9.22/SearchT-UI-1.9.22-mac-arm64.dmg'
+        'https://github.com/searcht-ui/SearchT/releases/download/v1.9.22/SearchT-1.9.22-mac-arm64.dmg'
       );
 
-      const linuxAsset = assets.find((a: { name: string }) => a.name === 'SearchT-UI-1.9.22-linux-amd64.deb');
+      const linuxAsset = assets.find((a: { name: string }) => a.name === 'SearchT-1.9.22-linux-amd64.deb');
       expect(linuxAsset?.url).toBe(
-        'https://github.com/searcht-ui/SearchT-UI/releases/download/1.9.22/SearchT-UI-1.9.22-linux-amd64.deb'
+        'https://github.com/searcht-ui/SearchT/releases/download/1.9.22/SearchT-1.9.22-linux-amd64.deb'
       );
       expect(fetchMock).toHaveBeenCalled();
     } finally {
@@ -205,9 +205,9 @@ describe('updateBridge CDN URL rewriting', () => {
 
     try {
       const handler = await getCheckHandler();
-      const result = await handler({ repo: 'searcht-ui/SearchT-UI' });
+      const result = await handler({ repo: 'searcht-ui/SearchT' });
       const asset = result.data?.latest?.assets?.[0];
-      expect(asset?.url).toMatch(/^https:\/\/github\.com\/searcht-ui\/SearchT-UI\/releases\/download\/1\.9\.22\//);
+      expect(asset?.url).toMatch(/^https:\/\/github\.com\/searcht-ui\/SearchT\/releases\/download\/1\.9\.22\//);
       expect(asset?.url).not.toMatch(/\/v1\.9\.22\//);
     } finally {
       vi.unstubAllGlobals();
@@ -244,8 +244,8 @@ describe('updateBridge allowlist includes CDN host', () => {
 
       const result = await handler({
         downloadId: 'manual-download-1',
-        url: 'https://github.com/searcht-ui/SearchT-UI/releases/download/1.9.22/SearchT-UI-1.9.22-mac-arm64.dmg',
-        file_name: 'SearchT-UI-1.9.22-mac-arm64.dmg',
+        url: 'https://github.com/searcht-ui/SearchT/releases/download/1.9.22/SearchT-1.9.22-mac-arm64.dmg',
+        file_name: 'SearchT-1.9.22-mac-arm64.dmg',
       });
 
       expect(result.success).toBe(true);

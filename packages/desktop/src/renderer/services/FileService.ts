@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 SearchT-UI Contributors (Apache-2.0)
+ * Copyright 2025 SearchT Contributors (Apache-2.0)
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -206,7 +206,7 @@ export function getFileExtension(file_name: string): string {
 
 import { SEARCHT_TIMESTAMP_REGEX } from '@/common/config/constants';
 
-// 清理 SearchT-UI 时间戳后缀，返回原始文件名
+// 清理 SearchT 时间戳后缀，返回原始文件名
 export function cleanSearchtTimestamp(file_name: string): string {
   return file_name.replace(SEARCHT_TIMESTAMP_REGEX, '$1');
 }

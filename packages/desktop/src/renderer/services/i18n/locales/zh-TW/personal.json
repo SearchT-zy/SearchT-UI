@@ -339,7 +339,7 @@
   },
   "memory": {
     "title": "長期記憶",
-    "description": "查看和管理SearchT-UI為你記住的內容。",
+    "description": "查看和管理SearchT為你記住的內容。",
     "add": "新增記憶",
     "retry": "重試",
     "loadFailed": "無法載入記憶",
@@ -501,7 +501,7 @@
   },
   "settings": {
     "title": "個人工作台",
-    "description": "決定SearchT-UI顯示什麼，以及開啟應用程式時先去哪裡。",
+    "description": "決定SearchT顯示什麼，以及開啟應用程式時先去哪裡。",
     "modules": "顯示模組",
     "startPage": "開啟應用程式時",
     "scenePack": "工作方式",
@@ -510,7 +510,7 @@
     "backup": "建立備份",
     "backupDone": "備份已建立",
     "backupFailed": "無法建立備份",
-    "import": "SearchT-UI 資料",
+    "import": "SearchT 資料",
     "saveFailed": "儲存失敗，已還原原設定"
   },
   "scene": {
@@ -527,8 +527,8 @@
   },
   "connectors": {
     "title": "連接",
-    "description": "讓SearchT-UI自動接收指定資料夾中新建或更新的檔案。",
-    "desktopOnly": "本機資料夾連接僅在SearchT-UI桌面版中可用。",
+    "description": "讓SearchT自動接收指定資料夾中新建或更新的檔案。",
+    "desktopOnly": "本機資料夾連接僅在SearchT桌面版中可用。",
     "addFolder": "加入資料夾",
     "includeSubfolders": "包含子資料夾",
     "includeSubfoldersHint": "加入時也接收子資料夾中的檔案",
@@ -554,7 +554,7 @@
     "loadFailed": "無法讀取連接",
     "actionFailed": "操作未完成",
     "folderUnavailable": "找不到這個資料夾，請確認它仍然可用。",
-    "desktopOnlyAll": "連接功能僅在SearchT-UI桌面版中可用。",
+    "desktopOnlyAll": "連接功能僅在SearchT桌面版中可用。",
     "emptyAllTitle": "尚未建立連接",
     "emptyAllDescription": "連接信箱或本機資料夾，新內容會自動進入收件箱。",
     "addEmail": "連接信箱",
@@ -807,7 +807,7 @@
     "reload": "刷新",
     "home": "首页",
     "loadFailed": "页面加载失败",
-    "desktopOnly": "内置浏览器仅在SearchT-UI桌面版中可用。",
+    "desktopOnly": "内置浏览器仅在SearchT桌面版中可用。",
     "recognize": "识别页面内容",
     "recognizeHint": "提取当前页面的标题、正文与链接数量，可一键存入收件箱。",
     "read": "读取页面内容",

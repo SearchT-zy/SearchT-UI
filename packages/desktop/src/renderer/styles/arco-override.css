@@ -183,7 +183,7 @@ body[arco-theme='dark'] .arco-tag-checked.arco-tag-gray {
   color: rgb(209, 213, 219) !important;
 }
 
-/* SearchT-UI Steps wrapper styles */
+/* SearchT Steps wrapper styles */
 .searcht-steps .arco-steps-item-process .arco-steps-item-icon {
   background-color: var(--aou-6-brand) !important;
   border-color: var(--aou-6-brand) !important;
@@ -199,7 +199,7 @@ body[arco-theme='dark'] .arco-tag-checked.arco-tag-gray {
   line-height: 28px !important;
 }
 
-/* SearchT-UI Modal wrapper styles */
+/* SearchT Modal wrapper styles */
 .searcht-modal .arco-modal-content {
   background: var(--dialog-fill-0) !important;
   border: 1px solid var(--border-base) !important;

@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 SearchT-UI Contributors (Apache-2.0)
+ * Copyright 2025 SearchT Contributors (Apache-2.0)
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -11,7 +11,7 @@ type RestartableApp = Pick<App, 'isPackaged' | 'relaunch' | 'exit'>;
 
 export function restartApplication(app: RestartableApp): IAppRestartResult {
   if (!app.isPackaged) {
-    console.info('[SearchT-UI] Restart skipped in development mode; manual restart required');
+    console.info('[SearchT] Restart skipped in development mode; manual restart required');
     return {
       restarted: false,
       manualRestartRequired: true,
@@ -19,7 +19,7 @@ export function restartApplication(app: RestartableApp): IAppRestartResult {
     };
   }
 
-  console.info('[SearchT-UI] Relaunching application to apply changes');
+  console.info('[SearchT] Relaunching application to apply changes');
   app.relaunch();
   app.exit(0);
   return {

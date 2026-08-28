@@ -1,23 +1,23 @@
-# SearchT-UI
+# SearchT
 
 **English** | [简体中文](README.md)
 
 <p align="center">
-  <img src="docs/assets/banner.svg" alt="SearchT-UI — Your Local-First AI Personal Workspace" width="880">
+  <img src="docs/assets/banner.svg" alt="SearchT — Your Local-First AI Personal Workspace" width="880">
 </p>
 
-**A local-first AI personal workspace.** SearchT-UI brings your calendar, tasks, notes, knowledge base, inbox, long-term memory, skills, workflows and on-device agent collaboration into one offline-capable desktop app — your data stays on your machine, with AI working right beside you.
+**A local-first AI personal workspace.** SearchT brings your calendar, tasks, notes, knowledge base, inbox, long-term memory, skills, workflows and on-device agent collaboration into one offline-capable desktop app — your data stays on your machine, with AI working right beside you.
 
 ![License](https://img.shields.io/badge/license-Apache--2.0-blue)
-![Release](https://img.shields.io/github/v/release/SearchT-zy/SearchT-UI)
+![Release](https://img.shields.io/github/v/release/SearchT-zy/SearchT)
 
 ## Download & Install
 
-Grab the latest build from [Releases](https://github.com/SearchT-zy/SearchT-UI/releases/latest):
+Grab the latest build from [Releases](https://github.com/SearchT-zy/SearchT/releases/latest):
 
 | File | Platform |
 | --- | --- |
-| `SearchT-UI-<version>-win-x64.exe` | Windows 10/11 x64 (NSIS installer) |
+| `SearchT-<version>-win-x64.exe` | Windows 10/11 x64 (NSIS installer) |
 
 The first launch walks you through a six-step onboarding. macOS / Linux users: build from source (see below).
 
@@ -73,9 +73,9 @@ On first launch a six-step setup walks you through: working style → workspace 
 
 | Platform | Path                                                                                     |
 | -------- | ---------------------------------------------------------------------------------------- |
-| Windows  | `%APPDATA%\SearchT-UI\searcht\` (personal database `searcht-personal.db`)                 |
-| macOS    | `~/Library/Application Support/SearchT-UI/searcht/`                                      |
-| Linux    | `~/.config/SearchT-UI/searcht/`                                                           |
+| Windows  | `%APPDATA%\SearchT\searcht\` (personal database `searcht-personal.db`)                 |
+| macOS    | `~/Library/Application Support/SearchT/searcht/`                                      |
+| Linux    | `~/.config/SearchT/searcht/`                                                           |
 
 Auto-update is disabled by default; operators can point `SEARCHT_UPDATE_BASE_URL` at a self-hosted HTTPS update feed (see `docs/release/searcht-release-runbook.md`).
 
@@ -88,4 +88,4 @@ Auto-update is disabled by default; operators can point `SEARCHT_UPDATE_BASE_URL
 
 ## License
 
-Apache-2.0. SearchT-UI is derived from AionUi (Apache-2.0) with substantial modification; per Section 4 of Apache-2.0, please retain the upstream copyright notices when redistributing (SPDX headers in each source file).
+Apache-2.0. SearchT is derived from AionUi (Apache-2.0) with substantial modification; per Section 4 of Apache-2.0, please retain the upstream copyright notices when redistributing (SPDX headers in each source file).

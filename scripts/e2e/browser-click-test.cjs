@@ -8,7 +8,7 @@ const { spawn } = require('child_process');
 const path = require('path');
 
 async function main() {
-  const child = spawn('D:/SearchT-UI/SearchT-UI.exe', ['--remote-debugging-port=9222'], {
+  const child = spawn('D:/SearchT/SearchT.exe', ['--remote-debugging-port=9222'], {
     detached: true,
     stdio: 'ignore',
   });
@@ -87,9 +87,9 @@ async function main() {
     try {
       const searchBox = bingPage.locator('#sb_form_q, input[name="q"]').first();
       await searchBox.click({ timeout: 5000 });
-      await searchBox.type('SearchT-UI test', { timeout: 5000 });
+      await searchBox.type('SearchT test', { timeout: 5000 });
       const value = await searchBox.inputValue();
-      check('input field accepts typing', value === 'SearchT-UI test', value);
+      check('input field accepts typing', value === 'SearchT test', value);
     } catch (e) {
       check('input field accepts typing', false, e.message.split('\n')[0]);
     }

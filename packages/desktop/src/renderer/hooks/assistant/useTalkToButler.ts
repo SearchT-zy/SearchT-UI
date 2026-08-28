@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 SearchT-UI Contributors (Apache-2.0)
+ * Copyright 2025 SearchT Contributors (Apache-2.0)
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -32,7 +32,7 @@ export type TalkToButlerArgs = {
 
 /**
  * Shared entry point behind every "via chat" action: jump to the home page,
- * select the SearchT-UI Butler, and pre-fill the chat input with a ready-made
+ * select the SearchT Butler, and pre-fill the chat input with a ready-made
  * prompt (and optional attachments). Auto-enables the Butler if the user has
  * disabled it, since clicking the action is an explicit intent to use it.
  *
@@ -57,7 +57,7 @@ export const useTalkToButler = (): ((args: TalkToButlerArgs) => Promise<void>) =
             await ipcBridge.assistants.setState.invoke({ id: butler.id, enabled: true });
             await swrMutate('assistants.list');
             Message.success(
-              t('settings.talkToButler.enabledToast', { defaultValue: 'Enabled the SearchT-UI Butler for you' })
+              t('settings.talkToButler.enabledToast', { defaultValue: 'Enabled the SearchT Butler for you' })
             );
           }
         }

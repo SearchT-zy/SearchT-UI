@@ -1,4 +1,4 @@
-# SearchT-UI Docs
+# SearchT Docs
 
 Documentation is organized by reader intent, not by document type.
 

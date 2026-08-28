@@ -53,8 +53,8 @@ foreach ($version in $buildVersions) {
       throw "build $version failed with exit code $LASTEXITCODE"
     }
 
-    $source = Join-Path $repoRoot "out\SearchT-UI-$version-win-x64.exe"
-    $target = Join-Path $OutputDir "SearchT-UI-$version-win-x64.exe"
+    $source = Join-Path $repoRoot "out\SearchT-$version-win-x64.exe"
+    $target = Join-Path $OutputDir "SearchT-$version-win-x64.exe"
     if (-not (Test-Path -LiteralPath $source)) {
       throw "Expected artifact was not produced: $source"
     }

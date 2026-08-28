@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 SearchT-UI Contributors (Apache-2.0)
+ * Copyright 2025 SearchT Contributors (Apache-2.0)
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -499,12 +499,12 @@ describe('transformMessage', () => {
     const message: IResponseMessage = {
       type: 'tips',
       data: {
-        content: 'SearchT-UI failed while sending the message',
+        content: 'SearchT failed while sending the message',
         type: 'error',
         source: 'send_failed',
         code: 'INTERNAL_ERROR',
         error: {
-          message: 'SearchT-UI failed while sending the message',
+          message: 'SearchT failed while sending the message',
           code: 'SEARCHT_INTERNAL_ERROR',
           ownership: 'searcht',
           detail: 'Failed to write Codex sandbox config',
@@ -524,7 +524,7 @@ describe('transformMessage', () => {
 
     expect(transformed.type).toBe('tips');
     expect(transformed.content.error).toEqual({
-      message: 'SearchT-UI failed while sending the message',
+      message: 'SearchT failed while sending the message',
       code: 'SEARCHT_INTERNAL_ERROR',
       ownership: 'searcht',
       detail: 'Failed to write Codex sandbox config',

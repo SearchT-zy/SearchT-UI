@@ -2,10 +2,10 @@ const { chromium } = require('playwright');
 const { spawn, execSync } = require('child_process');
 
 async function main() {
-  try { execSync('taskkill /IM SearchT-UI.exe /F', { stdio: 'ignore' }); } catch {}
+  try { execSync('taskkill /IM SearchT.exe /F', { stdio: 'ignore' }); } catch {}
   await new Promise((r) => setTimeout(r, 3000));
 
-  const child = spawn('D:/SearchT-UI/SearchT-UI.exe', ['--remote-debugging-port=9222'], { detached: true, stdio: 'ignore' });
+  const child = spawn('D:/SearchT/SearchT.exe', ['--remote-debugging-port=9222'], { detached: true, stdio: 'ignore' });
   child.unref();
   console.log('waiting for app + CDP...');
   await new Promise((r) => setTimeout(r, 15000));

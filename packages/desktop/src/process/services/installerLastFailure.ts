@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2026 SearchT-UI Contributors
+ * Copyright 2026 SearchT Contributors
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -18,7 +18,7 @@ type ConsumeOptions = {
 const isString = (value: unknown): value is string => typeof value === 'string' && value.trim().length > 0;
 
 export function getInstallerLastFailureMarkerPath(appDataDir: string): string {
-  return path.join(appDataDir, 'SearchT-UI', INSTALLER_LAST_FAILURE_FILE_NAME);
+  return path.join(appDataDir, 'SearchT', INSTALLER_LAST_FAILURE_FILE_NAME);
 }
 
 export function parseInstallerLastFailureMarker(raw: unknown): InstallerLastFailureMarker | null {

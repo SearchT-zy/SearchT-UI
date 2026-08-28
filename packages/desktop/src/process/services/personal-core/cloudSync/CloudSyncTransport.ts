@@ -1,7 +1,7 @@
 import { createHmac, createHash } from 'node:crypto';
 
 /**
- * Remote storage contract for SearchT-UI cloud sync. Objects are opaque encrypted
+ * Remote storage contract for SearchT cloud sync. Objects are opaque encrypted
  * bundles; only a flat key space under a fixed root prefix is used.
  */
 export type CloudSyncTransport = {

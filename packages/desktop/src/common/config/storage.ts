@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 SearchT-UI Contributors (Apache-2.0)
+ * Copyright 2025 SearchT Contributors (Apache-2.0)
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -624,7 +624,7 @@ export interface IMcpServer {
   created_at: number;
   updated_at: number;
   original_json: string; // 存储原始JSON配置，用于编辑时的准确显示
-  /** Built-in MCP server managed by SearchT-UI (hide edit/delete in UI) */
+  /** Built-in MCP server managed by SearchT (hide edit/delete in UI) */
   builtin?: boolean;
 }
 
@@ -642,7 +642,7 @@ export interface IConversationMcpStatus {
 /** Stable ID for the built-in image generation MCP server */
 export const BUILTIN_IMAGE_GEN_ID = 'builtin-image-gen';
 export const BUILTIN_IMAGE_GEN_NAME = 'searcht-image-generation';
-export const BUILTIN_IMAGE_GEN_LEGACY_NAMES = ['SearchT-UI Image Generation', BUILTIN_IMAGE_GEN_ID] as const;
+export const BUILTIN_IMAGE_GEN_LEGACY_NAMES = ['SearchT Image Generation', BUILTIN_IMAGE_GEN_ID] as const;
 
 export interface IMcpTool {
   name: string;

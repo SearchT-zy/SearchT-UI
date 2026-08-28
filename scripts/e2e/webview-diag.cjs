@@ -4,11 +4,11 @@ const path = require('path');
 
 async function main() {
   try {
-    execSync('taskkill /IM SearchT-UI.exe /F', { stdio: 'ignore' });
+    execSync('taskkill /IM SearchT.exe /F', { stdio: 'ignore' });
   } catch {}
   await new Promise((r) => setTimeout(r, 3000));
 
-  const child = spawn('D:/SearchT-UI/SearchT-UI.exe', ['--remote-debugging-port=9222'], {
+  const child = spawn('D:/SearchT/SearchT.exe', ['--remote-debugging-port=9222'], {
     detached: true,
     stdio: 'ignore',
   });

@@ -1,7 +1,7 @@
 {
-  "name": "SearchT-UI",
-  "short_name": "SearchT-UI",
-  "description": "SearchT-UI WebUI for mobile and desktop browsers.",
+  "name": "SearchT",
+  "short_name": "SearchT",
+  "description": "SearchT WebUI for mobile and desktop browsers.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

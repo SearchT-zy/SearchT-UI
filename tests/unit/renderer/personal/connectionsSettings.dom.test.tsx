@@ -12,12 +12,12 @@ vi.mock('@renderer/pages/settings/components/SettingsPageWrapper', () => ({
 
 const copy: Record<string, string> = {
   'personal.connectors.title': '连接',
-  'personal.connectors.description': '让SearchT-UI自动接收指定文件夹中新建或更新的文件。',
-  'personal.connectors.desktopOnly': '本地文件夹连接仅在SearchT-UI桌面版中可用。',
+  'personal.connectors.description': '让SearchT自动接收指定文件夹中新建或更新的文件。',
+  'personal.connectors.desktopOnly': '本地文件夹连接仅在SearchT桌面版中可用。',
   'personal.connectors.addFolder': '添加文件夹',
   'personal.connectors.addEmail': 'Connect email',
   'personal.connectors.addWebDav': 'Connect cloud drive',
-  'personal.connectors.desktopOnlyAll': 'Connections are managed in the SearchT-UI desktop app.',
+  'personal.connectors.desktopOnlyAll': 'Connections are managed in the SearchT desktop app.',
   'personal.connectors.emptyAllTitle': 'No connections yet',
   'personal.connectors.emptyAllDescription': 'Connect email or a local folder.',
   'personal.connectors.email.sectionTitle': 'Email',
@@ -196,7 +196,7 @@ describe('ConnectionsSettings', () => {
   it('explains that local folder connections require the desktop app in WebUI', () => {
     render(<ConnectionsSettings desktop={false} client={makeClient()} />);
 
-    expect(screen.getByText('Connections are managed in the SearchT-UI desktop app.')).toBeInTheDocument();
+    expect(screen.getByText('Connections are managed in the SearchT desktop app.')).toBeInTheDocument();
     expect(screen.queryByRole('button', { name: '添加文件夹' })).not.toBeInTheDocument();
     expect(screen.queryByLabelText('Authorization code')).not.toBeInTheDocument();
     expect(screen.queryByRole('button', { name: 'Connect cloud drive' })).not.toBeInTheDocument();

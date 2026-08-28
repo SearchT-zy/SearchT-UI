@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 SearchT-UI Contributors (Apache-2.0)
+ * Copyright 2025 SearchT Contributors (Apache-2.0)
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -273,7 +273,7 @@ const handleSocketMessage = async (ws: WebSocket, raw: string, announcedSessions
     sendError(
       ws,
       id,
-      'The in-app browser is not currently attached. Open the browser panel in SearchT-UI so a page is available to control.',
+      'The in-app browser is not currently attached. Open the browser panel in SearchT so a page is available to control.',
       sessionId
     );
     return;

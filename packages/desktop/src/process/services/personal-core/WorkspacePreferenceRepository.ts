@@ -131,8 +131,8 @@ export class WorkspacePreferenceRepository {
   }
 
   set(preferences: WorkspacePreferences): WorkspacePreferences {
-    if (!isStartPage(preferences.startPage)) throw new Error('Invalid SearchT-UI start page');
-    if (!isScenePack(preferences.scenePack)) throw new Error('Invalid SearchT-UI scene pack');
+    if (!isStartPage(preferences.startPage)) throw new Error('Invalid SearchT start page');
+    if (!isScenePack(preferences.scenePack)) throw new Error('Invalid SearchT scene pack');
 
     const saved = normalizeStoredPreferences(preferences);
     this.write(saved, Date.now());

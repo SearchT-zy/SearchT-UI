@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 SearchT-UI Contributors (Apache-2.0)
+ * Copyright 2025 SearchT Contributors (Apache-2.0)
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -8,8 +8,8 @@
  * Helpers for injecting user-selected background images into theme CSS.
  */
 
-export const BACKGROUND_BLOCK_START = '/* SearchT-UI Theme Background Start */';
-export const BACKGROUND_BLOCK_END = '/* SearchT-UI Theme Background End */';
+export const BACKGROUND_BLOCK_START = '/* SearchT Theme Background Start */';
+export const BACKGROUND_BLOCK_END = '/* SearchT Theme Background End */';
 
 // Precompiled regex for better performance / 预编译正则以提升性能
 const escapeRegex = (str: string) => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');

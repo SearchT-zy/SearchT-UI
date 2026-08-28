@@ -28,6 +28,33 @@ if (e2eUserDataDir && e2eUserDataDir.trim() !== '') {
   app.setPath('userData', e2eUserDataDir);
 }
 
+// ============ Packaged: one-time userData rename (SearchT-UI → SearchT) ============
+// The product was renamed from "SearchT-UI" to "SearchT"; the packaged
+// userData directory follows productName, so on first launch of the renamed
+// build move the legacy directory into place. Runs before any other userData
+// consumer. NOTE: app.getPath('userData') CREATES the directory as a side
+// effect, so "new dir exists" cannot be the test — compare real data
+// (the `searcht` subtree) instead. If anything fails, keep running on the
+// legacy directory: data integrity beats the directory name.
+if (app.isPackaged && !e2eUserDataDir) {
+  const currentDir = app.getPath('userData');
+  if (path.basename(currentDir) === 'SearchT') {
+    const legacyDir = path.join(path.dirname(currentDir), 'SearchT-UI');
+    const currentHasData = fs.existsSync(path.join(currentDir, 'searcht'));
+    const legacyHasData = fs.existsSync(path.join(legacyDir, 'searcht'));
+    if (legacyHasData && !currentHasData) {
+      try {
+        // currentDir is the empty skeleton Electron just created — safe to
+        // remove and replace with a rename of the legacy directory.
+        fs.rmSync(currentDir, { recursive: true, force: true });
+        fs.renameSync(legacyDir, currentDir);
+      } catch {
+        app.setPath('userData', legacyDir);
+      }
+    }
+  }
+}
+
 // ============ Environment Separation ============
 // Set app name before any getPath() call so userData is isolated from production.
 // Note: getPlatformServices() auto-registration also applies this as a safety net

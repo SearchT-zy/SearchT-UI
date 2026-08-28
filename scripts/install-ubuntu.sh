@@ -1,19 +1,19 @@
 #!/usr/bin/env bash
 # ============================================================================
-# SearchT-UI — Ubuntu / Debian 一鍵自動化安裝腳本
+# SearchT — Ubuntu / Debian 一鍵自動化安裝腳本
 # ============================================================================
 # 功能：
 #   1. 自動偵測系統架構 (amd64 / arm64)
 #   2. 從 GitHub Release 下載指定版本的 .deb 套件（預設 latest）
 #   3. 安裝 .deb + 自動修復依賴
 #   4. 安裝 Xvfb 等 headless 運行所需套件
-#   5. 建立服務管理腳本 (/opt/SearchT-UI/start-searcht.sh)
+#   5. 建立服務管理腳本 (/opt/SearchT/start-searcht.sh)
 #   6. (可選) 建立 systemd service
 #   7. (可選) 建立桌面捷徑
 #
 # 用法：
 #   # 建議先下載並檢查腳本後再執行（避免直接 pipe to bash）：
-#   curl -fsSL -o install-searcht-ui.sh https://raw.githubusercontent.com/searcht-ui/SearchT-UI/main/scripts/install-ubuntu.sh
+#   curl -fsSL -o install-searcht-ui.sh https://raw.githubusercontent.com/searcht-ui/SearchT/main/scripts/install-ubuntu.sh
 #   less install-searcht-ui.sh   # 檢查內容
 #   bash install-searcht-ui.sh
 #   # 或指定版本：
@@ -43,7 +43,7 @@ die()     { error "$*"; exit 1; }
 banner() {
     echo -e "${CYAN}${BOLD}"
     echo "  ╔══════════════════════════════════════════════╗"
-    echo "  ║          SearchT-UI Installer for Ubuntu         ║"
+    echo "  ║          SearchT Installer for Ubuntu         ║"
     echo "  ╚══════════════════════════════════════════════╝"
     echo -e "${NC}"
 }
@@ -96,10 +96,10 @@ resolve_version() {
         info "正在查詢最新版本..."
         # 透過 GitHub API 取得 latest release tag
         if command -v curl &>/dev/null; then
-            VERSION=$(curl -fsSL "https://api.github.com/repos/searcht-ui/SearchT-UI/releases/latest" \
+            VERSION=$(curl -fsSL "https://api.github.com/repos/searcht-ui/SearchT/releases/latest" \
                 | grep '"tag_name"' | head -1 | sed 's/.*"v\([^"]*\)".*/\1/')
         elif command -v wget &>/dev/null; then
-            VERSION=$(wget -qO- "https://api.github.com/repos/searcht-ui/SearchT-UI/releases/latest" \
+            VERSION=$(wget -qO- "https://api.github.com/repos/searcht-ui/SearchT/releases/latest" \
                 | grep '"tag_name"' | head -1 | sed 's/.*"v\([^"]*\)".*/\1/')
         else
             die "需要 curl 或 wget 來下載，請先安裝: sudo apt-get install -y curl"
@@ -111,8 +111,8 @@ resolve_version() {
         info "最新版本: ${BOLD}v$VERSION${NC}"
     fi
 
-    DEB_FILENAME="SearchT-UI-${VERSION}-linux-${DEB_ARCH}.deb"
-    DOWNLOAD_URL="https://github.com/searcht-ui/SearchT-UI/releases/download/v${VERSION}/${DEB_FILENAME}"
+    DEB_FILENAME="SearchT-${VERSION}-linux-${DEB_ARCH}.deb"
+    DOWNLOAD_URL="https://github.com/searcht-ui/SearchT/releases/download/v${VERSION}/${DEB_FILENAME}"
 }
 
 # ─── 下載 .deb 套件 ──────────────────────────────────────────────────────────
@@ -137,7 +137,7 @@ download_deb() {
 
 # ─── 安裝 .deb + 修復依賴 ────────────────────────────────────────────────────
 install_deb() {
-    info "安裝 SearchT-UI .deb 套件..."
+    info "安裝 SearchT .deb 套件..."
 
     # dpkg 安裝（可能會缺依賴）
     $SUDO dpkg -i "$DEB_PATH" 2>/dev/null || true
@@ -146,13 +146,13 @@ install_deb() {
     info "修復依賴套件..."
     $SUDO apt-get install -f -y
 
-    success "SearchT-UI v${VERSION} 安裝完成"
+    success "SearchT v${VERSION} 安裝完成"
 
     # 驗證安裝
-    if command -v SearchT-UI &>/dev/null || [[ -x /usr/bin/SearchT-UI ]]; then
-        success "SearchT-UI 已安裝至 $(which SearchT-UI 2>/dev/null || echo '/usr/bin/SearchT-UI')"
+    if command -v SearchT &>/dev/null || [[ -x /usr/bin/SearchT ]]; then
+        success "SearchT 已安裝至 $(which SearchT 2>/dev/null || echo '/usr/bin/SearchT')"
     else
-        warn "安裝可能不完整，找不到 SearchT-UI 執行檔"
+        warn "安裝可能不完整，找不到 SearchT 執行檔"
     fi
 
     # 清理暫存
@@ -181,7 +181,7 @@ install_headless_deps() {
 
 # ─── 建立服務管理腳本 ─────────────────────────────────────────────────────────
 create_service_script() {
-    local script_dir="/opt/SearchT-UI"
+    local script_dir="/opt/SearchT"
     local script_path="${script_dir}/start-searcht.sh"
 
     info "建立服務管理腳本: $script_path"
@@ -190,7 +190,7 @@ create_service_script() {
     $SUDO tee "$script_path" > /dev/null << 'SCRIPT_EOF'
 #!/bin/bash
 # ============================================================================
-# SearchT-UI WebUI Headless 服務管理腳本
+# SearchT WebUI Headless 服務管理腳本
 # 用法: ./start-searcht.sh [start|stop|restart|status|logs]
 # ============================================================================
 
@@ -200,27 +200,27 @@ WORKDIR="${SEARCHT_WORKDIR:-$HOME}"
 
 start() {
     if [ -f "$PIDFILE" ] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null; then
-        echo "⚡ SearchT-UI 已在執行中 (PID: $(cat "$PIDFILE"))"
+        echo "⚡ SearchT 已在執行中 (PID: $(cat "$PIDFILE"))"
         return 1
     fi
 
-    echo "🚀 正在啟動 SearchT-UI WebUI..."
+    echo "🚀 正在啟動 SearchT WebUI..."
     cd "$WORKDIR" || exit 1
 
     nohup xvfb-run --auto-servernum --server-args="-screen 0 1920x1080x24" \
-        /usr/bin/SearchT-UI --webui --remote --no-sandbox \
+        /usr/bin/SearchT --webui --remote --no-sandbox \
         > "$LOGFILE" 2>&1 &
 
     echo $! > "$PIDFILE"
     sleep 3
 
     if kill -0 "$(cat "$PIDFILE")" 2>/dev/null; then
-        echo "✅ SearchT-UI 啟動成功 (PID: $(cat "$PIDFILE"))"
+        echo "✅ SearchT 啟動成功 (PID: $(cat "$PIDFILE"))"
         local ip
         ip=$(hostname -I 2>/dev/null | awk '{print $1}')
         echo "🌐 WebUI: http://${ip:-localhost}:25808"
     else
-        echo "❌ SearchT-UI 啟動失敗，請查看日誌: $LOGFILE"
+        echo "❌ SearchT 啟動失敗，請查看日誌: $LOGFILE"
         rm -f "$PIDFILE"
         return 1
     fi
@@ -228,18 +228,18 @@ start() {
 
 stop() {
     if [ ! -f "$PIDFILE" ]; then
-        echo "⚠️  SearchT-UI 未在執行"
+        echo "⚠️  SearchT 未在執行"
         return 1
     fi
     local pid
     pid=$(cat "$PIDFILE")
-    echo "🛑 正在停止 SearchT-UI (PID: $pid)..."
+    echo "🛑 正在停止 SearchT (PID: $pid)..."
     kill "$pid" 2>/dev/null
     sleep 2
     kill -9 "$pid" 2>/dev/null
-    pkill -f "SearchT-UI --webui" 2>/dev/null
+    pkill -f "SearchT --webui" 2>/dev/null
     rm -f "$PIDFILE"
-    echo "✅ SearchT-UI 已停止"
+    echo "✅ SearchT 已停止"
 }
 
 restart() {
@@ -250,10 +250,10 @@ restart() {
 
 status() {
     if [ -f "$PIDFILE" ] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null; then
-        echo "✅ SearchT-UI 執行中 (PID: $(cat "$PIDFILE"))"
+        echo "✅ SearchT 執行中 (PID: $(cat "$PIDFILE"))"
         ss -tlnp 2>/dev/null | grep 25808 || netstat -tlnp 2>/dev/null | grep 25808 || true
     else
-        echo "⚠️  SearchT-UI 未在執行"
+        echo "⚠️  SearchT 未在執行"
         rm -f "$PIDFILE" 2>/dev/null
     fi
 }
@@ -276,7 +276,7 @@ case "${1:-}" in
         echo "用法: $0 {start|stop|restart|status|logs}"
         echo ""
         echo "環境變數:"
-        echo "  SEARCHT_WORKDIR  - SearchT-UI 工作目錄 (預設: \$HOME)"
+        echo "  SEARCHT_WORKDIR  - SearchT 工作目錄 (預設: \$HOME)"
         ;;
     *)
         echo "用法: $0 {start|stop|restart|status|logs}"
@@ -303,8 +303,8 @@ create_systemd_service() {
 
     $SUDO tee "$service_path" > /dev/null << 'SERVICE_EOF'
 [Unit]
-Description=SearchT-UI AI Agent Desktop App (WebUI Mode)
-Documentation=https://github.com/searcht-ui/SearchT-UI
+Description=SearchT AI Agent Desktop App (WebUI Mode)
+Documentation=https://github.com/searcht-ui/SearchT
 After=network-online.target
 Wants=network-online.target
 
@@ -312,7 +312,7 @@ Wants=network-online.target
 Type=simple
 User=root
 WorkingDirectory=/root
-ExecStart=/usr/bin/xvfb-run --auto-servernum --server-args="-screen 0 1920x1080x24" /usr/bin/SearchT-UI --webui --remote --no-sandbox
+ExecStart=/usr/bin/xvfb-run --auto-servernum --server-args="-screen 0 1920x1080x24" /usr/bin/SearchT --webui --remote --no-sandbox
 Restart=on-failure
 RestartSec=10
 StandardOutput=journal
@@ -345,15 +345,15 @@ create_desktop_entry() {
 
     cat > "$desktop_file" << 'DESKTOP_EOF'
 [Desktop Entry]
-Name=SearchT-UI
+Name=SearchT
 Comment=AI Agent Cowork Platform
-Exec=/usr/bin/SearchT-UI --no-sandbox %U
-Icon=SearchT-UI
+Exec=/usr/bin/SearchT --no-sandbox %U
+Icon=SearchT
 Terminal=false
 Type=Application
 Categories=Office;Utility;Development;
 MimeType=x-scheme-handler/aionui;
-StartupWMClass=SearchT-UI
+StartupWMClass=SearchT
 DESKTOP_EOF
 
     success "桌面捷徑已建立: $desktop_file"
@@ -363,20 +363,20 @@ DESKTOP_EOF
 print_summary() {
     echo ""
     echo -e "${GREEN}${BOLD}══════════════════════════════════════════════════${NC}"
-    echo -e "${GREEN}${BOLD}  🎉 SearchT-UI v${VERSION} 安裝完成！${NC}"
+    echo -e "${GREEN}${BOLD}  🎉 SearchT v${VERSION} 安裝完成！${NC}"
     echo -e "${GREEN}${BOLD}══════════════════════════════════════════════════${NC}"
     echo ""
-    echo -e "  ${BOLD}📍 執行檔位置:${NC}  /usr/bin/SearchT-UI"
-    echo -e "  ${BOLD}📍 管理腳本:${NC}    /opt/SearchT-UI/start-searcht.sh"
+    echo -e "  ${BOLD}📍 執行檔位置:${NC}  /usr/bin/SearchT"
+    echo -e "  ${BOLD}📍 管理腳本:${NC}    /opt/SearchT/start-searcht.sh"
     echo ""
 
     if [[ "${MODE}" == "headless" ]]; then
         echo -e "  ${BOLD}🖥️  Headless 模式使用方式:${NC}"
         echo ""
         echo "    # 使用管理腳本"
-        echo "    /opt/SearchT-UI/start-searcht.sh start"
-        echo "    /opt/SearchT-UI/start-searcht.sh status"
-        echo "    /opt/SearchT-UI/start-searcht.sh stop"
+        echo "    /opt/SearchT/start-searcht.sh start"
+        echo "    /opt/SearchT/start-searcht.sh status"
+        echo "    /opt/SearchT/start-searcht.sh stop"
         echo ""
         if command -v systemctl &>/dev/null; then
             echo "    # 或使用 systemd"
@@ -390,14 +390,14 @@ print_summary() {
         echo -e "  ${BOLD}🖥️  桌面模式使用方式:${NC}"
         echo ""
         echo "    # 直接啟動（桌面環境）"
-        echo "    SearchT-UI --no-sandbox"
+        echo "    SearchT --no-sandbox"
         echo ""
-        echo "    # 或從應用程式選單尋找 SearchT-UI"
+        echo "    # 或從應用程式選單尋找 SearchT"
         echo ""
     fi
 
-    echo -e "  ${BOLD}📖 文件:${NC}  https://github.com/searcht-ui/SearchT-UI"
-    echo -e "  ${BOLD}🐛 回報:${NC}  https://github.com/searcht-ui/SearchT-UI/issues"
+    echo -e "  ${BOLD}📖 文件:${NC}  https://github.com/searcht-ui/SearchT"
+    echo -e "  ${BOLD}🐛 回報:${NC}  https://github.com/searcht-ui/SearchT/issues"
     echo ""
 
     if [[ "${MODE}" == "headless" ]]; then

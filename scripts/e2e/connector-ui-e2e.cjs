@@ -17,7 +17,7 @@ const report = (name, ok, detail = '') => {
 };
 
 async function main() {
-  const child = spawn('D:/searcht/SearchT-UI.exe', ['--remote-debugging-port=9222'], {
+  const child = spawn('D:/searcht/SearchT.exe', ['--remote-debugging-port=9222'], {
     detached: true,
     stdio: 'ignore',
     env: { ...process.env, NODE_TLS_REJECT_UNAUTHORIZED: '0' },

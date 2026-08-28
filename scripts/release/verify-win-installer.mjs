@@ -8,7 +8,7 @@
  * VM or CI runner with a real GUI session.
  *
  * Usage:
- *   node scripts/release/verify-win-installer.mjs <path-to-SearchT-UI-Setup-x.y.z.exe> [--keep]
+ *   node scripts/release/verify-win-installer.mjs <path-to-SearchT-Setup-x.y.z.exe> [--keep]
  *
  * Flags:
  *   --keep  keep the installation after the run (skip uninstall phase)
@@ -32,7 +32,7 @@ function run(command, args, options = {}) {
 const installer = process.argv[2];
 const keep = process.argv.includes('--keep');
 if (!installer || !existsSync(installer)) {
-  fail('usage: node scripts/release/verify-win-installer.mjs <SearchT-UI-Setup.exe> [--keep]');
+  fail('usage: node scripts/release/verify-win-installer.mjs <SearchT-Setup.exe> [--keep]');
 }
 if (process.platform !== 'win32') {
   fail('this smoke test must run on Windows');
@@ -40,8 +40,8 @@ if (process.platform !== 'win32') {
 
 const perUserInstall = !process.argv.includes('--all-users');
 const installDir = perUserInstall
-  ? path.join(os.homedir(), 'AppData', 'Local', 'Programs', 'SearchT-UI')
-  : path.join(process.env.ProgramFiles ?? 'C:\\Program Files', 'SearchT-UI');
+  ? path.join(os.homedir(), 'AppData', 'Local', 'Programs', 'SearchT')
+  : path.join(process.env.ProgramFiles ?? 'C:\\Program Files', 'SearchT');
 
 console.log(`[verify-win-installer] installing ${installer} silently to ${installDir}`);
 // Assisted NSIS installers built with perMachine=false already default to a
@@ -49,9 +49,9 @@ console.log(`[verify-win-installer] installing ${installer} silently to ${instal
 // because older installer builds reject unknown switches with exit code 2.
 run(installer, ['/S', ...(perUserInstall ? [] : ['/allusers'])], { timeout: 10 * 60_000 });
 
-const mainExe = path.join(installDir, 'SearchT-UI.exe');
-if (!existsSync(mainExe)) fail(`SearchT-UI.exe missing after install: ${mainExe}`);
-console.log(`PASS  SearchT-UI.exe installed: ${mainExe}`);
+const mainExe = path.join(installDir, 'SearchT.exe');
+if (!existsSync(mainExe)) fail(`SearchT.exe missing after install: ${mainExe}`);
+console.log(`PASS  SearchT.exe installed: ${mainExe}`);
 
 const bundledBackend = path.join(installDir, 'resources', 'bundled-backend');
 if (!existsSync(bundledBackend)) fail(`bundled-backend missing after install: ${bundledBackend}`);
@@ -66,11 +66,11 @@ console.log(`PASS  searcht-backend.exe present: ${archFallback}`);
 
 // Uninstall registry entry (NSIS oneClick/perMachine writes these keys).
 const registryHive = perUserInstall ? 'HKCU' : 'HKLM';
-const uninstallKey = `${registryHive}\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\SearchT-UI`;
+const uninstallKey = `${registryHive}\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\SearchT`;
 let registryOk = false;
 try {
   const output = run('reg', ['query', uninstallKey, '/v', 'DisplayName']);
-  registryOk = output.includes('SearchT-UI');
+  registryOk = output.includes('SearchT');
 } catch {
   registryOk = false;
 }
@@ -78,7 +78,7 @@ if (!registryOk) fail(`uninstall registry entry missing: ${uninstallKey}`);
 console.log(`PASS  uninstall registry entry: ${uninstallKey}`);
 
 // Launch smoke: start the app, give it time to create the window, then stop it.
-console.log('[verify-win-installer] launching SearchT-UI.exe for a 12s smoke window');
+console.log('[verify-win-installer] launching SearchT.exe for a 12s smoke window');
 const launched = spawn(mainExe, ['--smoke-test'], { detached: true, stdio: 'ignore' });
 launched.unref();
 Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 12_000);
@@ -98,7 +98,7 @@ if (keep) {
   process.exit(0);
 }
 
-const uninstaller = path.join(installDir, 'Uninstall SearchT-UI.exe');
+const uninstaller = path.join(installDir, 'Uninstall SearchT.exe');
 if (!existsSync(uninstaller)) fail(`uninstaller missing: ${uninstaller}`);
 console.log('[verify-win-installer] running silent uninstall');
 run(uninstaller, ['/S', '--force-run'], { timeout: 5 * 60_000 });

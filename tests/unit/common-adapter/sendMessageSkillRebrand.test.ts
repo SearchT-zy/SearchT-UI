@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2026 SearchT-UI Contributors (Apache-2.0)
+ * Copyright 2026 SearchT Contributors (Apache-2.0)
  * SPDX-License-Identifier: Apache-2.0
  *
  * Regression: the sendMessage body mapper must resolve every helper it uses.

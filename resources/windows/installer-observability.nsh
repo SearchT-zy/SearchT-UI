@@ -1,7 +1,7 @@
 !ifndef SEARCHT_INSTALLER_OBSERVABILITY_NSH
 !define SEARCHT_INSTALLER_OBSERVABILITY_NSH
 
-!define SEARCHT_APP_EXECUTABLE_FILENAME "SearchT-UI.exe"
+!define SEARCHT_APP_EXECUTABLE_FILENAME "SearchT.exe"
 !define SEARCHT_FALLBACK_LOG "searcht-installer-${VERSION}-fallback-log.jsonl"
 
 !pragma warning disable 6001

@@ -1,10 +1,10 @@
 appId: cn.searcht.desktop
-productName: SearchT-UI
-executableName: SearchT-UI
-copyright: Copyright © 2026 SearchT-UI
+productName: SearchT
+executableName: SearchT
+copyright: Copyright © 2026 SearchT
 
 protocols:
-  - name: SearchT-UI Protocol
+  - name: SearchT Protocol
     schemes:
       - searcht
 
@@ -175,9 +175,9 @@ linux:
   description: ${description}
   desktop:
     entry:
-      Name: SearchT-UI
+      Name: SearchT
       Comment: ${description}
-      Icon: SearchT-UI
+      Icon: SearchT
       Categories: Office;Utility;
       MimeType: x-scheme-handler/searcht;
 

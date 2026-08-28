@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 SearchT-UI Contributors (Apache-2.0)
+ * Copyright 2025 SearchT Contributors (Apache-2.0)
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -60,10 +60,10 @@ interface AutoUpdateCheckParams {
   includePrerelease?: boolean;
 }
 
-const DEFAULT_REPO = 'searcht-ui/SearchT-UI';
-const DEFAULT_USER_AGENT = 'SearchT-UI';
+const DEFAULT_REPO = 'searcht-ui/SearchT';
+const DEFAULT_USER_AGENT = 'SearchT';
 const ALLOWED_ASSET_EXTS = new Set(['.exe', '.msi', '.dmg', '.zip', '.deb', '.rpm']);
-// SearchT-UI ships no first-party CDN: release assets resolve against the
+// SearchT ships no first-party CDN: release assets resolve against the
 // project GitHub repository (operators can mirror via SEARCHT_UPDATE_BASE_URL,
 // see scripts/release/update-server.mjs).
 const CDN_HOST = 'github.com';
@@ -434,7 +434,7 @@ const sanitizeFileName = (name: string): string => {
   // Keep only base name and trim weird whitespace.
   const base = path.basename(name).trim();
   // Avoid empty names.
-  return base || `SearchT-UI-update-${Date.now()}`;
+  return base || `SearchT-update-${Date.now()}`;
 };
 
 const ensureUniquePath = (target: string): string => {

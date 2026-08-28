@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2026 SearchT-UI Contributors (Apache-2.0)
+ * Copyright 2026 SearchT Contributors (Apache-2.0)
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -15,9 +15,9 @@ import {
 
 describe('rebrandLegacyText', () => {
   it('renames the butler across known locale variants', () => {
-    expect(rebrandLegacyText('AionUi管家')).toBe('SearchT-UI 管家');
-    expect(rebrandLegacyText('AionUi Butler')).toBe('SearchT-UI Butler');
-    expect(rebrandLegacyText('Дворецкий AionUi')).toBe('Дворецкий SearchT-UI');
+    expect(rebrandLegacyText('AionUi管家')).toBe('SearchT 管家');
+    expect(rebrandLegacyText('AionUi Butler')).toBe('SearchT Butler');
+    expect(rebrandLegacyText('Дворецкий AionUi')).toBe('Дворецкий SearchT');
   });
 
   it('renames the built-in CLI agent and upstream binary name', () => {
@@ -28,8 +28,8 @@ describe('rebrandLegacyText', () => {
   });
 
   it('rebrands prose mentions and lowercase skill cross-references', () => {
-    expect(rebrandLegacyText('reach AionUi from your phone')).toBe('reach SearchT-UI from your phone');
-    expect(rebrandLegacyText('Configure Aion UI itself')).toBe('Configure SearchT-UI itself');
+    expect(rebrandLegacyText('reach AionUi from your phone')).toBe('reach SearchT from your phone');
+    expect(rebrandLegacyText('Configure Aion UI itself')).toBe('Configure SearchT itself');
     expect(rebrandLegacyText('Distinct from aionui-webui-setup (covers LAN)')).toBe(
       'Distinct from searcht-webui-setup (covers LAN)'
     );
@@ -92,7 +92,7 @@ describe('rebrandManagedAgent', () => {
     expect(agent.icon?.startsWith('data:image/svg+xml')).toBe(true);
     expect(agent.last_check_guidance).not.toMatch(/aion/i);
     expect(agent.available_commands[0].name).toBe('agent-reach');
-    expect(agent.available_commands[0].description).toBe('route through the SearchT-UI browser');
+    expect(agent.available_commands[0].description).toBe('route through the SearchT browser');
     // Functional discriminants and real paths survive verbatim.
     expect(agent.agent_type).toBe('aionrs');
     expect(agent.id).toBe('bare:632f31d2');
@@ -115,7 +115,7 @@ describe('rebrandManagedAgent', () => {
     expect(butler.agent_id).toBe('aionui-agent-1');
     expect(butler.conversation_id).toBe('aionui-conv');
     expect(butler.nested.user_id).toBe('aionui-user');
-    expect(butler.name).toBe('SearchT-UI 管家');
+    expect(butler.name).toBe('SearchT 管家');
     expect(butler.nested.label).toBe('searcht-config skill');
   });
 });

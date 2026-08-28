@@ -1,12 +1,12 @@
 /**
- * Local-machine functional E2E for the new SearchT-UI features, run against a
+ * Local-machine functional E2E for the new SearchT features, run against a
  * COPY of the real dev databases via the Electron runtime (so the
  * Electron-built better-sqlite3 native module loads).
  *
  *   ELECTRON_RUN_AS_NODE=1 electron.exe node_modules/tsx/dist/cli.mjs scripts/e2e/local-machine-e2e.ts
  *
  * Covers: schema v12→v13 migration on real data, group invite codes,
- * SearchT-UI one-shot import + rollback with a fabricated upstream install,
+ * SearchT one-shot import + rollback with a fabricated upstream install,
  * and cloud sync end-to-end encryption on the real personal catalog.
  */
 
@@ -27,7 +27,7 @@ async function load<T>(id: string): Promise<T> {
 }
 
 const appData = process.env.APPDATA!;
-const devDataRoot = path.join(appData, 'SearchT-UI-Dev');
+const devDataRoot = path.join(appData, 'SearchT-Dev');
 // SEARCHT_E2E_PERSONAL_DIR points at a personal-core directory to copy and
 // exercise (defaults to the dev profile; the installed release profile can be
 // passed to validate production data as well).
@@ -91,7 +91,7 @@ async function main(): Promise<void> {
   }
   report('member removal + missing-id guard', collaboration.listMembers('e2e-team').length === 0 && removalGuardHeld);
 
-  // --- 3. SearchT-UI import + rollback with fabricated upstream install ----------
+  // --- 3. SearchT import + rollback with fabricated upstream install ----------
   const legacyRoot = path.join(work, 'legacy-roaming');
   const legacyData = path.join(legacyRoot, 'AionUi', 'aionui');
   const legacyConfig = path.join(legacyRoot, 'AionUi', 'config');

@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 SearchT-UI Contributors (Apache-2.0)
+ * Copyright 2025 SearchT Contributors (Apache-2.0)
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -75,7 +75,7 @@ describe('MarkdownView local file links', () => {
 
     render(
       <MarkdownView onLocalFileLink={onLocalFileLink}>
-        {'[report.xlsx](/C:/Users/Administrator/AppData/Roaming/SearchT-UI/report.xlsx)'}
+        {'[report.xlsx](/C:/Users/Administrator/AppData/Roaming/SearchT/report.xlsx)'}
       </MarkdownView>
     );
 
@@ -83,14 +83,14 @@ describe('MarkdownView local file links', () => {
 
     fireEvent.click(screen.getByRole('button', { name: 'report.xlsx' }));
     expect(onLocalFileLink).toHaveBeenCalledWith(
-      'C:/Users/Administrator/AppData/Roaming/SearchT-UI/report.xlsx',
+      'C:/Users/Administrator/AppData/Roaming/SearchT/report.xlsx',
       expect.objectContaining({
-        filePath: 'C:/Users/Administrator/AppData/Roaming/SearchT-UI/report.xlsx',
+        filePath: 'C:/Users/Administrator/AppData/Roaming/SearchT/report.xlsx',
       })
     );
 
     fireEvent.click(screen.getByRole('button', { name: 'Copy' }));
-    expect(copyTextMock).toHaveBeenCalledWith('C:/Users/Administrator/AppData/Roaming/SearchT-UI/report.xlsx');
+    expect(copyTextMock).toHaveBeenCalledWith('C:/Users/Administrator/AppData/Roaming/SearchT/report.xlsx');
   });
 
   it('renders line references as file chips and copies the full reference', () => {
@@ -98,7 +98,7 @@ describe('MarkdownView local file links', () => {
 
     render(
       <MarkdownView onLocalFileLink={onLocalFileLink}>
-        {'[2026-06-19.log](C:/Users/Administrator/AppData/Roaming/SearchT-UI/logs/2026-06-19.log:1421)'}
+        {'[2026-06-19.log](C:/Users/Administrator/AppData/Roaming/SearchT/logs/2026-06-19.log:1421)'}
       </MarkdownView>
     );
 
@@ -106,17 +106,17 @@ describe('MarkdownView local file links', () => {
     fireEvent.click(fileButton);
 
     expect(onLocalFileLink).toHaveBeenCalledWith(
-      'C:/Users/Administrator/AppData/Roaming/SearchT-UI/logs/2026-06-19.log',
+      'C:/Users/Administrator/AppData/Roaming/SearchT/logs/2026-06-19.log',
       expect.objectContaining({
-        filePath: 'C:/Users/Administrator/AppData/Roaming/SearchT-UI/logs/2026-06-19.log',
-        rawReference: 'C:/Users/Administrator/AppData/Roaming/SearchT-UI/logs/2026-06-19.log:1421',
+        filePath: 'C:/Users/Administrator/AppData/Roaming/SearchT/logs/2026-06-19.log',
+        rawReference: 'C:/Users/Administrator/AppData/Roaming/SearchT/logs/2026-06-19.log:1421',
         line: 1421,
       })
     );
 
     fireEvent.click(screen.getByRole('button', { name: 'Copy' }));
     expect(copyTextMock).toHaveBeenCalledWith(
-      'C:/Users/Administrator/AppData/Roaming/SearchT-UI/logs/2026-06-19.log:1421'
+      'C:/Users/Administrator/AppData/Roaming/SearchT/logs/2026-06-19.log:1421'
     );
   });
 
@@ -125,7 +125,7 @@ describe('MarkdownView local file links', () => {
 
     render(
       <MarkdownView onLocalFileLink={onLocalFileLink}>
-        {'[app.log](C:/Users/Administrator/AppData/Roaming/SearchT-UI/logs/app.log:1421:7)'}
+        {'[app.log](C:/Users/Administrator/AppData/Roaming/SearchT/logs/app.log:1421:7)'}
       </MarkdownView>
     );
 
@@ -133,17 +133,17 @@ describe('MarkdownView local file links', () => {
     fireEvent.click(fileButton);
 
     expect(onLocalFileLink).toHaveBeenCalledWith(
-      'C:/Users/Administrator/AppData/Roaming/SearchT-UI/logs/app.log',
+      'C:/Users/Administrator/AppData/Roaming/SearchT/logs/app.log',
       expect.objectContaining({
-        filePath: 'C:/Users/Administrator/AppData/Roaming/SearchT-UI/logs/app.log',
-        rawReference: 'C:/Users/Administrator/AppData/Roaming/SearchT-UI/logs/app.log:1421:7',
+        filePath: 'C:/Users/Administrator/AppData/Roaming/SearchT/logs/app.log',
+        rawReference: 'C:/Users/Administrator/AppData/Roaming/SearchT/logs/app.log:1421:7',
         line: 1421,
         column: 7,
       })
     );
 
     fireEvent.click(screen.getByRole('button', { name: 'Copy' }));
-    expect(copyTextMock).toHaveBeenCalledWith('C:/Users/Administrator/AppData/Roaming/SearchT-UI/logs/app.log:1421:7');
+    expect(copyTextMock).toHaveBeenCalledWith('C:/Users/Administrator/AppData/Roaming/SearchT/logs/app.log:1421:7');
   });
 
   it('renders hash range references as file chips and copies normalized local references', () => {
@@ -176,28 +176,28 @@ describe('MarkdownView local file links', () => {
 
   it('does not render a no-op open button when no local file handler is provided', () => {
     render(
-      <MarkdownView>{'[report.xlsx](/C:/Users/Administrator/AppData/Roaming/SearchT-UI/report.xlsx)'}</MarkdownView>
+      <MarkdownView>{'[report.xlsx](/C:/Users/Administrator/AppData/Roaming/SearchT/report.xlsx)'}</MarkdownView>
     );
 
     expect(screen.queryByRole('link')).not.toBeInTheDocument();
     expect(screen.queryByRole('button', { name: 'report.xlsx' })).not.toBeInTheDocument();
 
     fireEvent.click(screen.getByRole('button', { name: 'Copy' }));
-    expect(copyTextMock).toHaveBeenCalledWith('C:/Users/Administrator/AppData/Roaming/SearchT-UI/report.xlsx');
+    expect(copyTextMock).toHaveBeenCalledWith('C:/Users/Administrator/AppData/Roaming/SearchT/report.xlsx');
   });
 
   it('keeps ordinary http links as browser anchors', () => {
-    render(<MarkdownView>{'[docs](https://github.com/searcht-ui/SearchT-UI/docs)'}</MarkdownView>);
+    render(<MarkdownView>{'[docs](https://github.com/searcht-ui/SearchT/docs)'}</MarkdownView>);
 
     const link = screen.getByRole('link', { name: 'docs' });
-    expect(link).toHaveAttribute('href', 'https://github.com/searcht-ui/SearchT-UI/docs');
+    expect(link).toHaveAttribute('href', 'https://github.com/searcht-ui/SearchT/docs');
   });
 
   it('keeps http hash links as browser anchors', () => {
-    render(<MarkdownView>{'[docs](https://github.com/searcht-ui/SearchT-UI/docs#L10)'}</MarkdownView>);
+    render(<MarkdownView>{'[docs](https://github.com/searcht-ui/SearchT/docs#L10)'}</MarkdownView>);
 
     const link = screen.getByRole('link', { name: 'docs' });
-    expect(link).toHaveAttribute('href', 'https://github.com/searcht-ui/SearchT-UI/docs#L10');
+    expect(link).toHaveAttribute('href', 'https://github.com/searcht-ui/SearchT/docs#L10');
   });
 
   it('adds empty alt text to external raw HTML images without alt text', () => {

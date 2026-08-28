@@ -3,8 +3,8 @@
   "name": "hello-world",
   "displayName": "Hello World Extension",
   "version": "1.0.0",
-  "description": "A complete demo extension showcasing all SearchT-UI extension capabilities — themes, skills, assistants, agents, ACP adapters (stdio/http), MCP servers, and settings",
-  "author": "SearchT-UI Contributors",
+  "description": "A complete demo extension showcasing all SearchT extension capabilities — themes, skills, assistants, agents, ACP adapters (stdio/http), MCP servers, and settings",
+  "author": "SearchT Contributors",
   "icon": "assets/ocean-breeze-cover.svg",
   "i18n": {
     "localesDir": "i18n",

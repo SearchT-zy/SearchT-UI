@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2026 SearchT-UI Contributors (Apache-2.0)
+ * Copyright 2026 SearchT Contributors (Apache-2.0)
  * SPDX-License-Identifier: Apache-2.0
  *
  * File-level coverage for the data scrubber: corpus SKILL.md rewrites,
@@ -156,7 +156,7 @@ describe('runBackendBrandScrub (files)', () => {
       .prepare('INSERT INTO conversations (id, extra) VALUES (?, ?)')
       .run('c2', '{"preset_rules":"# AionUi Butler\\nUse the aionui-config skill"}');
     const ins = db2.prepare("SELECT extra FROM conversations WHERE id='c2'").get() as { extra: string };
-    expect(ins.extra).toContain('SearchT-UI Butler');
+    expect(ins.extra).toContain('SearchT Butler');
     expect(ins.extra).toContain('searcht-config');
     expect(ins.extra).not.toMatch(/aionui/i);
 
@@ -167,7 +167,7 @@ describe('runBackendBrandScrub (files)', () => {
     const snap = db2
       .prepare("SELECT rules_content FROM conversation_assistant_snapshots WHERE conversation_id='c2'")
       .get() as { rules_content: string };
-    expect(snap.rules_content).toContain('SearchT-UI 管家');
+    expect(snap.rules_content).toContain('SearchT 管家');
     expect(snap.rules_content).toContain('searcht-troubleshooting');
 
     // Clean rows pass through byte-identical; NULL survives.

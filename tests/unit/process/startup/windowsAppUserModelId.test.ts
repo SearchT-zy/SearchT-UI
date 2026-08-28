@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 SearchT-UI Contributors (Apache-2.0)
+ * Copyright 2025 SearchT Contributors (Apache-2.0)
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -17,7 +17,7 @@ const makeApp = (isPackaged: boolean) => ({
 describe('registerWindowsAppUserModelId', () => {
   it('registers the electron-builder appId on packaged win32 builds', () => {
     const app = makeApp(true);
-    registerWindowsAppUserModelId({ app, platform: 'win32', execPath: 'C:\\app\\SearchT-UI.exe' });
+    registerWindowsAppUserModelId({ app, platform: 'win32', execPath: 'C:\\app\\SearchT.exe' });
     expect(app.setAppUserModelId).toHaveBeenCalledTimes(1);
     expect(app.setAppUserModelId).toHaveBeenCalledWith('cn.searcht.desktop');
     expect(WINDOWS_APP_USER_MODEL_ID).toBe('cn.searcht.desktop');

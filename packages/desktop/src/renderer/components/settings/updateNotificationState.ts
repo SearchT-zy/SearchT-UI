@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2026 SearchT-UI Contributors
+ * Copyright 2026 SearchT Contributors
  * SPDX-License-Identifier: Apache-2.0
  */
 

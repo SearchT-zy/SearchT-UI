@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2026 SearchT-UI Contributors
+ * Copyright 2026 SearchT Contributors
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -85,13 +85,13 @@ afterAll(() => {
 
 const SAMPLE_YML = `version: 2.1.45
 files:
-  - url: SearchT-UI-2.1.45-mac-arm64.zip
+  - url: SearchT-2.1.45-mac-arm64.zip
     sha512: abc==
     size: 474779381
-  - url: SearchT-UI-2.1.45-mac-arm64.dmg
+  - url: SearchT-2.1.45-mac-arm64.dmg
     sha512: def==
     size: 469685641
-path: SearchT-UI-2.1.45-mac-arm64.zip
+path: SearchT-2.1.45-mac-arm64.zip
 sha512: abc==
 releaseDate: '2026-07-31T14:45:19.381Z'
 `;
@@ -115,7 +115,7 @@ describe('parseCdnManifest', () => {
     expect(manifest).not.toBeNull();
     expect(manifest?.version).toBe('2.1.45');
     expect(manifest?.files).toHaveLength(2);
-    expect(manifest?.files[0]).toMatchObject({ url: 'SearchT-UI-2.1.45-mac-arm64.zip', size: 474779381 });
+    expect(manifest?.files[0]).toMatchObject({ url: 'SearchT-2.1.45-mac-arm64.zip', size: 474779381 });
     expect(manifest?.releaseDate).toBe('2026-07-31T14:45:19.381Z');
   });
 
@@ -130,7 +130,7 @@ describe('mapCdnManifestToRelease', () => {
   it('maps files to CDN-primary assets with GitHub fallback URLs', () => {
     const manifest = parseCdnManifest(SAMPLE_YML);
     if (!manifest) throw new Error('manifest should parse');
-    const release = mapCdnManifestToRelease(manifest, 'searcht-ui/SearchT-UI');
+    const release = mapCdnManifestToRelease(manifest, 'searcht-ui/SearchT');
     expect(release).not.toBeNull();
     expect(release?.version).toBe('2.1.45');
     expect(release?.tagName).toBe('v2.1.45');
@@ -138,10 +138,10 @@ describe('mapCdnManifestToRelease', () => {
     expect(release?.publishedAt).toBe('2026-07-31T14:45:19.381Z');
     const dmg = release?.assets.find((a) => a.name.endsWith('.dmg'));
     expect(dmg?.url).toBe(
-      'https://github.com/searcht-ui/SearchT-UI/releases/download/2.1.45/SearchT-UI-2.1.45-mac-arm64.dmg'
+      'https://github.com/searcht-ui/SearchT/releases/download/2.1.45/SearchT-2.1.45-mac-arm64.dmg'
     );
     expect(dmg?.fallbackUrl).toBe(
-      'https://github.com/searcht-ui/SearchT-UI/releases/download/v2.1.45/SearchT-UI-2.1.45-mac-arm64.dmg'
+      'https://github.com/searcht-ui/SearchT/releases/download/v2.1.45/SearchT-2.1.45-mac-arm64.dmg'
     );
     expect(dmg?.size).toBe(469685641);
     expect(release?.recommendedAsset).toBeDefined();
@@ -150,7 +150,7 @@ describe('mapCdnManifestToRelease', () => {
   it('returns null when version is not valid semver', () => {
     const release = mapCdnManifestToRelease(
       { version: 'not-a-version', files: [{ url: 'a.dmg' }] },
-      'searcht-ui/SearchT-UI'
+      'searcht-ui/SearchT'
     );
     expect(release).toBeNull();
   });

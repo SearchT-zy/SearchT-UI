@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 SearchT-UI Contributors (Apache-2.0)
+ * Copyright 2025 SearchT Contributors (Apache-2.0)
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -24,12 +24,12 @@ const makeRuntimeOptions = (): ProviderRuntimeOptions => ({
 });
 
 describe('CDN update feed options', () => {
-  it('does not configure an upstream update feed for the SearchT-UI fork', () => {
+  it('does not configure an upstream update feed for the SearchT fork', () => {
     expect(isSearchtUpdateServiceConfigured()).toBe(false);
     expect(buildCdnFeedOptions()).toBeNull();
   });
 
-  it('accepts an explicitly configured SearchT-UI HTTPS release endpoint', () => {
+  it('accepts an explicitly configured SearchT HTTPS release endpoint', () => {
     process.env.SEARCHT_UPDATE_BASE_URL = 'https://updates.searcht.example/releases';
 
     const options = buildCdnFeedOptions();
@@ -39,9 +39,9 @@ describe('CDN update feed options', () => {
     expect(options?.updateProvider).toBe(CdnGenericProvider);
   });
 
-  it('rejects the upstream SearchT-UI endpoint', () => {
+  it('rejects the upstream SearchT endpoint', () => {
     process.env.SEARCHT_UPDATE_BASE_URL = 'https://static.aionui.com/releases';
-    expect(() => buildCdnFeedOptions()).toThrow('SearchT-UI update service cannot use an SearchT-UI endpoint');
+    expect(() => buildCdnFeedOptions()).toThrow('SearchT update service cannot use an SearchT endpoint');
   });
 });
 
@@ -60,15 +60,15 @@ describe('CdnGenericProvider', () => {
       version: '2.1.14',
       files: [
         {
-          url: 'SearchT-UI-2.1.14-mac-arm64.dmg',
+          url: 'SearchT-2.1.14-mac-arm64.dmg',
           sha512: 'sha512-value',
         },
       ],
-      path: 'SearchT-UI-2.1.14-mac-arm64.dmg',
+      path: 'SearchT-2.1.14-mac-arm64.dmg',
       sha512: 'sha512-value',
       releaseDate: '2026-06-08T00:00:00.000Z',
     } satisfies UpdateInfo);
 
-    expect(files[0]?.url.href).toBe('https://static.aionui.com/releases/2.1.14/SearchT-UI-2.1.14-mac-arm64.dmg');
+    expect(files[0]?.url.href).toBe('https://static.aionui.com/releases/2.1.14/SearchT-2.1.14-mac-arm64.dmg');
   });
 });

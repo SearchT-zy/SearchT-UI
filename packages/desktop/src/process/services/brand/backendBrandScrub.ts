@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2026 SearchT-UI Contributors (Apache-2.0)
+ * Copyright 2026 SearchT Contributors (Apache-2.0)
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -369,14 +369,15 @@ const TRIGGER_TARGETS: Array<{ table: string; column: string }> = [
 ];
 
 const TRIGGER_WHEN = (column: string) =>
-  `WHEN NEW.${column} IS NOT NULL AND (NEW.${column} LIKE '%AionUi%' OR NEW.${column} LIKE '%Aionui%' OR NEW.${column} LIKE '%Aion UI%' OR NEW.${column} LIKE '%Aion CLI%' OR NEW.${column} LIKE '%aioncore%' OR NEW.${column} LIKE '%aionui-%')`;
+  `WHEN NEW.${column} IS NOT NULL AND (NEW.${column} LIKE '%SearchT-UI%' OR NEW.${column} LIKE '%AionUi%' OR NEW.${column} LIKE '%Aionui%' OR NEW.${column} LIKE '%Aion UI%' OR NEW.${column} LIKE '%Aion CLI%' OR NEW.${column} LIKE '%aioncore%' OR NEW.${column} LIKE '%aionui-%')`;
 
 const TRIGGER_SET = (column: string) =>
-  `UPDATE ${'{table}'} SET ${column} = replace(replace(replace(replace(replace(replace(replace(NEW.${column},
-    'AionUi管家', 'SearchT-UI 管家'),
-    'AionUi Butler', 'SearchT-UI Butler'),
-    'Aion UI', 'SearchT-UI'),
-    'AionUi', 'SearchT-UI'),
+  `UPDATE ${'{table}'} SET ${column} = replace(replace(replace(replace(replace(replace(replace(replace(NEW.${column},
+    'SearchT-UI', 'SearchT'),
+    'AionUi管家', 'SearchT 管家'),
+    'AionUi Butler', 'SearchT Butler'),
+    'Aion UI', 'SearchT'),
+    'AionUi', 'SearchT'),
     'Aion CLI', 'SearchT CLI'),
     'aioncore', 'searcht-backend'),
     'aionui-', 'searcht-')
@@ -387,7 +388,14 @@ function ensureBrandScrubTriggers(db: { prepare(sql: string): { run(): unknown }
   for (const { table, column } of TRIGGER_TARGETS) {
     for (const timing of ['INSERT', 'UPDATE'] as const) {
       const name = `searcht_brand_scrub_${table}_${timing.toLowerCase()}`;
-      const sql = `CREATE TRIGGER IF NOT EXISTS ${name}
+      // Rebuild on every boot: CREATE ... IF NOT EXISTS would keep a stale
+      // trigger body (older replacement chains) installed forever.
+      try {
+        db.prepare(`DROP TRIGGER IF EXISTS ${name}`).run();
+      } catch {
+        // nothing installed yet
+      }
+      const sql = `CREATE TRIGGER ${name}
 AFTER ${timing} ON ${table}
 ${TRIGGER_WHEN(column)}
 BEGIN
@@ -468,7 +476,7 @@ async function scrubDatabase(dbPath: string): Promise<number> {
             updateStmt.run(...next, row.__rid as number);
             rows += 1;
           } catch (error) {
-            console.error(`[SearchT-UI] Brand scrub row update failed (${table}):`, error);
+            console.error(`[SearchT] Brand scrub row update failed (${table}):`, error);
           }
         }
       }
@@ -491,10 +499,10 @@ export async function runBackendBrandScrub(getDataDir: () => string): Promise<Sc
     rowsChanged = await scrubDatabase(path.join(dataDir, 'aionui-backend.db'));
   } catch (error) {
     // Backend owns the DB; a busy/locked window just defers to the next boot.
-    console.error('[SearchT-UI] Backend brand scrub DB pass failed:', error);
+    console.error('[SearchT] Backend brand scrub DB pass failed:', error);
   }
   if (filesChanged > 0 || rowsChanged > 0) {
-    console.info(`[SearchT-UI] Backend brand scrub: ${filesChanged} skill file(s), ${rowsChanged} row(s) updated`);
+    console.info(`[SearchT] Backend brand scrub: ${filesChanged} skill file(s), ${rowsChanged} row(s) updated`);
   }
   return { filesChanged, rowsChanged };
 }

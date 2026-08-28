@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2026 SearchT-UI Contributors (Apache-2.0)
+ * Copyright 2026 SearchT Contributors (Apache-2.0)
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -19,10 +19,13 @@
 
 /** Ordered longest-first so "AionUi管家" wins over the bare "AionUi" pass. */
 const TEXT_REPLACEMENTS: Array<[RegExp, string]> = [
-  [/AionUi管家/g, 'SearchT-UI 管家'],
-  [/AionUi Butler/g, 'SearchT-UI Butler'],
-  [/Aion\s?UI/g, 'SearchT-UI'],
-  [/AionUi/g, 'SearchT-UI'],
+  // Normalize the previous product name ("SearchT-UI" → "SearchT") — scrubbed
+  // data and triggers use this pass to converge existing rows on the rename.
+  [/SearchT-UI/g, 'SearchT'],
+  [/AionUi管家/g, 'SearchT 管家'],
+  [/AionUi Butler/g, 'SearchT Butler'],
+  [/Aion\s?UI/g, 'SearchT'],
+  [/AionUi/g, 'SearchT'],
   [/Aion CLI/g, 'SearchT CLI'],
   // Upstream backend/binary name ("aioncore config CLI" in skill copy).
   [/aioncore/gi, 'searcht-backend'],

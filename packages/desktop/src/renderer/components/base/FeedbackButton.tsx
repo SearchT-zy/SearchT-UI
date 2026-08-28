@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 SearchT-UI Contributors (Apache-2.0)
+ * Copyright 2025 SearchT Contributors (Apache-2.0)
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -23,7 +23,7 @@ type FeedbackButtonProps = {
 
 /**
  * Inline feedback chip shown near error messages — styled as a compact pill
- * consistent with SearchT-UI's existing Mention/Agent pill patterns. Click
+ * consistent with SearchT's existing Mention/Agent pill patterns. Click
  * auto-captures the current window and opens the feedback modal with the
  * relevant module preselected; the user only needs to describe the issue.
  */

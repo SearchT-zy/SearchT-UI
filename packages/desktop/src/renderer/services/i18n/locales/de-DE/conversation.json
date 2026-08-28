@@ -12,10 +12,10 @@
     "clearWorkspace": "Ordner entfernen",
     "openFolder": "Ordner öffnen",
     "none": "Keiner",
-    "quickActionsTitle": "Was kann SearchT-UI?",
+    "quickActionsTitle": "Was kann SearchT?",
     "quickActionFeedback": "Feedback oder Vorschläge?",
-    "quickActionStar": "Gefällt dir SearchT-UI? Gib uns einen Stern!",
-    "skillsMarket": "SearchT-UI Skills-Markt",
+    "quickActionStar": "Gefällt dir SearchT? Gib uns einen Stern!",
+    "skillsMarket": "SearchT Skills-Markt",
     "skillsMarketDesc": "Community-Skills auf Abruf suchen und aktivieren. Einmal konfigurieren, für alle Agenten verfügbar.",
     "skillsMarketDetails": "Mehr anzeigen >>"
   },
@@ -306,7 +306,7 @@
       },
       "MCP_HTTP_RESPONSE_READ_FAILED": {
         "title": "Failed to read the team helper response",
-        "body": "SearchT-UI could not read the local team helper response. Retry once, and if it keeps happening, restart the app."
+        "body": "SearchT could not read the local team helper response. Retry once, and if it keeps happening, restart the app."
       },
       "MCP_TOOL_REMOTE_ERROR": {
         "title": "The local team helper rejected the request",
@@ -314,11 +314,11 @@
       },
       "MCP_TOOL_RESPONSE_UNEXPECTED": {
         "title": "The team helper returned an unexpected response",
-        "body": "SearchT-UI received an unexpected response from the local team helper. Retry once, and report it if the problem persists."
+        "body": "SearchT received an unexpected response from the local team helper. Retry once, and report it if the problem persists."
       },
       "MCP_TCP_READ_FAILED": {
         "title": "Failed to read from the local team helper",
-        "body": "SearchT-UI could not read the local team helper TCP response. Retry once, and restart the app if it keeps failing."
+        "body": "SearchT could not read the local team helper TCP response. Retry once, and restart the app if it keeps failing."
       },
       "TEAM_SERVICE_UNAVAILABLE": {
         "title": "Team service is not ready yet",
@@ -594,13 +594,13 @@
         "body": "{{count}} Schritt(e) sind fehlgeschlagen und wurden NICHT ausgeführt. agy schließt solche Durchläufe trotzdem als erfolgreich ab – prüfe daher das tatsächliche Ergebnis statt der Antwort."
       },
       "CLI_VERSION_OLDER": {
-        "body": "Das installierte {{cli}} ist älter als die von SearchT-UI verifizierte Version; einige Funktionen fehlen möglicherweise. Ein Upgrade von {{cli}} wird empfohlen. (installiert: {{reported}} / von SearchT-UI verifiziert: {{verified}})"
+        "body": "Das installierte {{cli}} ist älter als die von SearchT verifizierte Version; einige Funktionen fehlen möglicherweise. Ein Upgrade von {{cli}} wird empfohlen. (installiert: {{reported}} / von SearchT verifiziert: {{verified}})"
       },
       "CLI_VERSION_NEWER": {
-        "body": "Das installierte {{cli}} ist neuer als die von SearchT-UI verifizierte Version. Es sollte weiterhin funktionieren; melden Sie ungewöhnliches Verhalten. (installiert: {{reported}} / von SearchT-UI verifiziert: {{verified}})"
+        "body": "Das installierte {{cli}} ist neuer als die von SearchT verifizierte Version. Es sollte weiterhin funktionieren; melden Sie ungewöhnliches Verhalten. (installiert: {{reported}} / von SearchT verifiziert: {{verified}})"
       },
       "CODEX_RETRYING": {
-        "body": "{{detail}} (Versuch {{attempts}}, bisher {{elapsed}} – der Anbieter des Agents bricht die Verbindung wiederholt ab; SearchT-UI wartet ab.)"
+        "body": "{{detail}} (Versuch {{attempts}}, bisher {{elapsed}} – der Anbieter des Agents bricht die Verbindung wiederholt ab; SearchT wartet ab.)"
       }
     }
   },
@@ -672,7 +672,7 @@
         "conflicted": "!",
         "unknown": "?"
       },
-      "conflictedHint": "Lösen Sie diesen Konflikt zuerst außerhalb von SearchT-UI",
+      "conflictedHint": "Lösen Sie diesen Konflikt zuerst außerhalb von SearchT",
       "opaqueHint": "Dieser Status kommt von einem neueren Backend — nur lesend angezeigt",
       "degraded": "Die Aktualisierung läuft langsamer, weil der git-Index nicht geschrieben werden kann",
       "truncated": "Zu viele Änderungen — nur der erste Teil wird angezeigt",
@@ -691,7 +691,7 @@
         "discard": "Änderungen verwerfen",
         "stageAll": "Alle vormerken",
         "unstageAll": "Alle Vormerkungen aufheben",
-        "blockedHint": "Lösen Sie den Konflikt außerhalb von SearchT-UI, bevor Sie vormerken oder verwerfen",
+        "blockedHint": "Lösen Sie den Konflikt außerhalb von SearchT, bevor Sie vormerken oder verwerfen",
         "confirmDiscardTitle": "Änderungen verwerfen?",
         "confirmDiscardTracked": "Die Änderungen an {{count}} Dateien gehen verloren. Das kann nicht rückgängig gemacht werden.",
         "confirmDiscardUntracked": "{{count}} neue Dateien werden in den Papierkorb verschoben.",

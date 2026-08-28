@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 SearchT-UI Contributors (Apache-2.0)
+ * Copyright 2025 SearchT Contributors (Apache-2.0)
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -19,10 +19,10 @@ function readConfiguredUpdateUrl(): string | null {
 
   const url = new URL(value);
   if (url.protocol !== 'https:') {
-    throw new Error('SearchT-UI update service must use HTTPS');
+    throw new Error('SearchT update service must use HTTPS');
   }
   if (url.hostname === 'aionui.com' || url.hostname.endsWith('.aionui.com')) {
-    throw new Error('SearchT-UI update service cannot use an SearchT-UI endpoint');
+    throw new Error('SearchT update service cannot use an SearchT endpoint');
   }
   return value.replace(/\/$/, '');
 }

@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2026 SearchT-UI Contributors (Apache-2.0)
+ * Copyright 2026 SearchT Contributors (Apache-2.0)
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -313,7 +313,7 @@ const BrowserPage: React.FC = () => {
             />
           ) : (
             <div className='flex h-full items-center justify-center p-24px text-center text-13px text-t-secondary'>
-              {t('personal.browser.desktopOnly', { defaultValue: '内置浏览器仅在SearchT-UI桌面版中可用。' })}
+              {t('personal.browser.desktopOnly', { defaultValue: '内置浏览器仅在SearchT桌面版中可用。' })}
             </div>
           )}
           {activeTab?.loading ? (

@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2026 SearchT-UI Contributors (Apache-2.0)
+ * Copyright 2026 SearchT Contributors (Apache-2.0)
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -77,6 +77,6 @@ describe('UpdateMigrationDialog', () => {
     openDialog();
     await waitFor(() => expect(screen.getByText('update.migration.letter.downloadNew')).toBeTruthy());
     fireEvent.click(screen.getByText('update.migration.letter.downloadNew'));
-    expect(mocks.openExternalUrl).toHaveBeenCalledWith('https://github.com/searcht-ui/SearchT-UI/');
+    expect(mocks.openExternalUrl).toHaveBeenCalledWith('https://github.com/searcht-ui/SearchT/');
   });
 });

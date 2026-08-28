@@ -62,7 +62,7 @@ return path.join(getDataPath(), 'aionui.db');
 
 **userData directory** (`src/process/utils/configureChromium.ts:18-26`):
 
-- Dev mode: `~/Library/Application Support/SearchT-UI-Dev/` (macOS)
+- Dev mode: `~/Library/Application Support/SearchT-Dev/` (macOS)
 - Database: `{userData}/config/aionui.db`
 - Shared by all E2E tests
 
@@ -129,11 +129,11 @@ SEARCHT_CDP_PORT: '0';
 2. Modify `getDevAppName()` to return worker-specific name:
    ```typescript
    const workerId = process.env.SEARCHT_E2E_TEST_WORKER_ID || '0';
-   return `SearchT-UI-E2E-Worker-${workerId}`;
+   return `SearchT-E2E-Worker-${workerId}`;
    ```
 3. Each worker gets isolated:
-   - `~/Library/Application Support/SearchT-UI-E2E-Worker-0/config/aionui.db`
-   - `~/Library/Application Support/SearchT-UI-E2E-Worker-1/config/aionui.db`
+   - `~/Library/Application Support/SearchT-E2E-Worker-0/config/aionui.db`
+   - `~/Library/Application Support/SearchT-E2E-Worker-1/config/aionui.db`
 4. Update `playwright.config.ts`:
    ```typescript
    workers: 2,  // or process.env.CI ? 1 : 2

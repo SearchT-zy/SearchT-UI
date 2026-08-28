@@ -18,7 +18,7 @@ const { verifyBundledBackendResources } = require('../packages/shared-scripts/sr
 function resolveResourcesDir(electronPlatformName, appOutDir, packager) {
   if (electronPlatformName !== 'darwin') return path.join(appOutDir, 'resources');
 
-  const appName = packager?.appInfo?.productFilename || 'SearchT-UI';
+  const appName = packager?.appInfo?.productFilename || 'SearchT';
   return path.join(appOutDir, `${appName}.app`, 'Contents', 'Resources');
 }
 

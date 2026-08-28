@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 SearchT-UI Contributors (Apache-2.0)
+ * Copyright 2025 SearchT Contributors (Apache-2.0)
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -29,7 +29,7 @@ export class StartupArchitectureMismatchError extends Error {
   readonly details: StartupArchitectureMismatchDetails;
 
   constructor(details: StartupArchitectureMismatchDetails) {
-    super('SearchT-UI package architecture does not match this Mac. Please download the matching package.');
+    super('SearchT package architecture does not match this Mac. Please download the matching package.');
     this.name = 'StartupArchitectureMismatchError';
     this.details = details;
   }

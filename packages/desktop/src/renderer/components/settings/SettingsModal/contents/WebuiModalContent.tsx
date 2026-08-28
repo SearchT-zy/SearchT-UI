@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 SearchT-UI Contributors (Apache-2.0)
+ * Copyright 2025 SearchT Contributors (Apache-2.0)
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -668,7 +668,7 @@ const WebuiModalContent: React.FC = () => {
                     void talkToButler({
                       prompt: t('settings.talkToButler.prompt.setupRemote', {
                         defaultValue:
-                          'Help me set up remote access so I can open SearchT-UI from my phone or over the internet.',
+                          'Help me set up remote access so I can open SearchT from my phone or over the internet.',
                       }),
                     })
                   }

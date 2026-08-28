@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 SearchT-UI Contributors (Apache-2.0)
+ * Copyright 2025 SearchT Contributors (Apache-2.0)
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -444,7 +444,7 @@ const Layout: React.FC<{
                     viewBox='0 0 80 80'
                     fill='none'
                   >
-                    {/* SearchT-UI: white circle with centered T */}
+                    {/* SearchT: white circle with centered T */}
                     <circle key='logo-circle' cx='40' cy='40' r='22' stroke='#ffffff' strokeWidth='4.5' fill='none' />
                     <path
                       key='logo-path-t'

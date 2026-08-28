@@ -8,7 +8,7 @@ const path = require('path');
 
 async function main() {
   // Launch the app with CDP
-  const child = spawn('D:/SearchT-UI/SearchT-UI.exe', ['--remote-debugging-port=9222'], {
+  const child = spawn('D:/SearchT/SearchT.exe', ['--remote-debugging-port=9222'], {
     detached: true,
     stdio: 'ignore',
   });

@@ -19,7 +19,7 @@ const report = (name, ok, detail = '') => {
 };
 
 async function main() {
-  const child = spawn('D:/searcht/SearchT-UI.exe', ['--remote-debugging-port=9222'], {
+  const child = spawn('D:/searcht/SearchT.exe', ['--remote-debugging-port=9222'], {
     detached: true,
     stdio: 'ignore',
     env: { ...process.env, NODE_TLS_REJECT_UNAUTHORIZED: '0' },
@@ -83,7 +83,7 @@ async function main() {
     const saved = await page.getByTestId('browser-save-inbox').textContent();
     report('page content saved to Inbox', /已存入收件箱|Saved/.test(saved ?? ''), (saved ?? '').trim());
     await shot('53-browser-saved');
-    const db = path.join(process.env.APPDATA, 'SearchT-UI', 'searcht', 'personal-core', 'searcht-personal.db');
+    const db = path.join(process.env.APPDATA, 'SearchT', 'searcht', 'personal-core', 'searcht-personal.db');
     // read-only check via sqlite3 CLI is unavailable; verify via inbox page UI instead.
     await page.evaluate(() => {
       window.location.hash = '#/inbox';
@@ -105,7 +105,7 @@ async function main() {
   });
   await page.waitForTimeout(2000);
   const address2 = page.getByTestId('browser-address');
-  await address2.fill('SearchT-UI 笔记');
+  await address2.fill('SearchT 笔记');
   await address2.press('Enter');
   await page.waitForTimeout(10000);
   const afterSearch = await address2.inputValue();

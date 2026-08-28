@@ -34,14 +34,14 @@ git pull --rebase origin main
 
 Fails → Stop: "Failed to pull latest code. Please resolve conflicts or network issues first."
 
-### Step 3: Determine SearchT-UI Target Version
+### Step 3: Determine SearchT Target Version
 
 Read `package.json` → extract `version` field.
 
 - **Argument provided** → use as-is
 - **No argument** → parse `major.minor.patch`, increment `patch` by 1
 
-Display: "Bumping SearchT-UI: {current} → {target}"
+Display: "Bumping SearchT: {current} → {target}"
 
 ### Step 4: Query AionCore Latest Release
 
@@ -260,7 +260,7 @@ Display: "Tag v{target} created and pushed. Release build triggered! Action: {ru
 ```
  1. Must be on clean main
  2. git pull --rebase
- 3. Determine SearchT-UI target version (patch+1 or explicit)
+ 3. Determine SearchT target version (patch+1 or explicit)
  4. Query AionCore latest release (or --core / --skip-core)
  5. Verify AionCore artifacts (7 files)
  6. Edit package.json (version + aioncoreVersion)

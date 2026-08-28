@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 SearchT-UI Contributors (Apache-2.0)
+ * Copyright 2025 SearchT Contributors (Apache-2.0)
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -15,7 +15,7 @@ const RDC = 'common.backendStartup.recoverableDatabaseCorruption';
 const COPY: Record<string, string> = {
   [`${RDC}.title`]: 'Local data is corrupted',
   [`${RDC}.description`]:
-    'SearchT-UI detected that the local database is corrupted and cannot continue startup. After confirmation, SearchT-UI will back up the old database and create a new local database to continue startup. Past conversations will no longer be shown, and the old database will be kept as a backup file.',
+    'SearchT detected that the local database is corrupted and cannot continue startup. After confirmation, SearchT will back up the old database and create a new local database to continue startup. Past conversations will no longer be shown, and the old database will be kept as a backup file.',
   [`${RDC}.confirmRebuild`]: 'Back up old DB and rebuild new DB',
   [`${RDC}.sendDiagnostics`]: 'Send diagnostics',
   [`${RDC}.diagnosticsSent`]: 'Diagnostics sent',

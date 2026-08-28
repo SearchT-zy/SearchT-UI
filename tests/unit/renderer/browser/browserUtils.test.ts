@@ -15,10 +15,10 @@ describe('resolveAddressInput', () => {
   });
 
   it('routes free text to the search engine', () => {
-    const result = resolveAddressInput('SearchT-UI 笔记 教程');
+    const result = resolveAddressInput('SearchT 笔记 教程');
     expect(result.kind).toBe('search');
     if (result.kind === 'search') {
-      expect(result.query).toBe('SearchT-UI 笔记 教程');
+      expect(result.query).toBe('SearchT 笔记 教程');
       expect(result.url).toContain('https://www.bing.com/search?q=');
     }
   });

@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 SearchT-UI Contributors (Apache-2.0)
+ * Copyright 2025 SearchT Contributors (Apache-2.0)
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -113,8 +113,8 @@ describe('AutoUpdaterService', () => {
       isUpdateAvailable: true,
       updateInfo: {
         version: '2.1.14',
-        files: [{ url: 'SearchT-UI-2.1.14-mac-arm64.dmg', sha512: 'sha512-value' }],
-        path: 'SearchT-UI-2.1.14-mac-arm64.dmg',
+        files: [{ url: 'SearchT-2.1.14-mac-arm64.dmg', sha512: 'sha512-value' }],
+        path: 'SearchT-2.1.14-mac-arm64.dmg',
         sha512: 'sha512-value',
         releaseDate: '2026-06-08T00:00:00.000Z',
       },
@@ -131,7 +131,7 @@ describe('AutoUpdaterService', () => {
     expect(autoUpdaterMock.checkForUpdates).not.toHaveBeenCalled();
   });
 
-  it('configures only the explicit SearchT-UI update feed', async () => {
+  it('configures only the explicit SearchT update feed', async () => {
     const { autoUpdaterService } = await import('@/process/services/autoUpdaterService');
     const { CdnGenericProvider } = await import('@/process/services/cdnGenericProvider');
 
@@ -144,14 +144,14 @@ describe('AutoUpdaterService', () => {
     });
   });
 
-  it('does not make a network request when the SearchT-UI update service is not configured', async () => {
+  it('does not make a network request when the SearchT update service is not configured', async () => {
     delete process.env.SEARCHT_UPDATE_BASE_URL;
     const { autoUpdaterService } = await import('@/process/services/autoUpdaterService');
 
     autoUpdaterService.initialize();
     const result = await autoUpdaterService.checkForUpdates();
 
-    expect(result).toEqual({ success: false, error: 'SearchT-UI update service is not configured' });
+    expect(result).toEqual({ success: false, error: 'SearchT update service is not configured' });
     expect(autoUpdaterMock.checkForUpdates).not.toHaveBeenCalled();
   });
 
@@ -318,16 +318,16 @@ describe('AutoUpdaterService', () => {
   it('restores a completed cached auto-update when the downloaded package validates', async () => {
     const updateInfo = {
       version: '2.1.14',
-      files: [{ url: 'SearchT-UI-2.1.14-mac.zip', sha512: 'sha512-value' }],
-      path: 'SearchT-UI-2.1.14-mac.zip',
+      files: [{ url: 'SearchT-2.1.14-mac.zip', sha512: 'sha512-value' }],
+      path: 'SearchT-2.1.14-mac.zip',
       sha512: 'sha512-value',
       releaseDate: '2026-06-08T00:00:00.000Z',
     };
     const fileInfo = {
-      url: new URL('https://static.aionui.com/releases/2.1.14/SearchT-UI-2.1.14-mac.zip'),
-      info: { url: 'SearchT-UI-2.1.14-mac.zip', sha512: 'sha512-value' },
+      url: new URL('https://static.aionui.com/releases/2.1.14/SearchT-2.1.14-mac.zip'),
+      info: { url: 'SearchT-2.1.14-mac.zip', sha512: 'sha512-value' },
     };
-    const cachedUpdatePath = path.join('/cache/pending', 'SearchT-UI-2.1.14-mac.zip');
+    const cachedUpdatePath = path.join('/cache/pending', 'SearchT-2.1.14-mac.zip');
     const validateDownloadedPath = vi.fn().mockResolvedValue(cachedUpdatePath);
 
     autoUpdaterMock.checkForUpdates.mockImplementation(async () => {
@@ -362,14 +362,14 @@ describe('AutoUpdaterService', () => {
   it('does not restore a cached auto-update when the downloaded package is missing or invalid', async () => {
     const updateInfo = {
       version: '2.1.14',
-      files: [{ url: 'SearchT-UI-2.1.14-mac.zip', sha512: 'sha512-value' }],
-      path: 'SearchT-UI-2.1.14-mac.zip',
+      files: [{ url: 'SearchT-2.1.14-mac.zip', sha512: 'sha512-value' }],
+      path: 'SearchT-2.1.14-mac.zip',
       sha512: 'sha512-value',
       releaseDate: '2026-06-08T00:00:00.000Z',
     };
     const fileInfo = {
-      url: new URL('https://static.aionui.com/releases/2.1.14/SearchT-UI-2.1.14-mac.zip'),
-      info: { url: 'SearchT-UI-2.1.14-mac.zip', sha512: 'sha512-value' },
+      url: new URL('https://static.aionui.com/releases/2.1.14/SearchT-2.1.14-mac.zip'),
+      info: { url: 'SearchT-2.1.14-mac.zip', sha512: 'sha512-value' },
     };
     const validateDownloadedPath = vi.fn().mockResolvedValue(null);
 

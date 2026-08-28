@@ -1,1 +1,1 @@
-export const SEARCHT_DISPLAY_NAME = 'SearchT-UI';
+export const SEARCHT_DISPLAY_NAME = 'SearchT';

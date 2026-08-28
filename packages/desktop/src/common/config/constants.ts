@@ -1,11 +1,11 @@
 /**
  * @license
- * Copyright 2025 SearchT-UI Contributors (Apache-2.0)
+ * Copyright 2025 SearchT Contributors (Apache-2.0)
  * SPDX-License-Identifier: Apache-2.0
  */
 
 /**
- * SearchT-UI 应用程序共用常量
+ * SearchT 应用程序共用常量
  */
 
 // ===== 应用内浏览器 / In-app browser =====

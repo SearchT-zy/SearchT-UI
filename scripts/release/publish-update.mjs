@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Stage a SearchT-UI release for the generic (electron-updater CDN) update feed.
+ * Stage a SearchT release for the generic (electron-updater CDN) update feed.
  *
  * Generates/refreshes latest.yml next to the staged installer so the feed
  * directory can be uploaded to any static host and pointed at via

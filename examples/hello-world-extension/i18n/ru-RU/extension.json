@@ -1,6 +1,6 @@
 {
   "displayName": "Расширение «Привет, мир»",
-  "description": "Полная демонстрация возможностей расширений SearchT-UI",
+  "description": "Полная демонстрация возможностей расширений SearchT",
   "settingsTabs": {
     "hello-settings": {
       "name": "Настройки приветствия"

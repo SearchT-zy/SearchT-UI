@@ -314,7 +314,7 @@ const PersonalWorkspaceSettings: React.FC<PersonalWorkspaceSettingsProps> = ({
       <SettingsPageHeader
         title={t('personal.settings.title', { defaultValue: '个人工作台' })}
         description={t('personal.settings.description', {
-          defaultValue: '决定SearchT-UI显示什么，以及打开应用时先去哪里。',
+          defaultValue: '决定SearchT显示什么，以及打开应用时先去哪里。',
         })}
         actions={
           <Button size='small' onClick={() => void navigate('/onboarding')}>
@@ -414,7 +414,7 @@ const PersonalWorkspaceSettings: React.FC<PersonalWorkspaceSettingsProps> = ({
           </div>
           <div className='flex items-center justify-between gap-16px'>
             <span className='text-t-secondary'>
-              {t('personal.settings.import', { defaultValue: 'SearchT-UI 数据' })}
+              {t('personal.settings.import', { defaultValue: 'SearchT 数据' })}
             </span>
             <span className='text-t-primary'>
               {importDiscovery?.available
@@ -430,13 +430,13 @@ const PersonalWorkspaceSettings: React.FC<PersonalWorkspaceSettingsProps> = ({
               <div className='mb-8px flex items-center gap-8px'>
                 <DatabaseDownload />
                 <span className='text-14px font-500 text-t-primary'>
-                  {t('personal.import.title', { defaultValue: '一键导入旧版 SearchT-UI 数据' })}
+                  {t('personal.import.title', { defaultValue: '一键导入旧版 SearchT 数据' })}
                 </span>
               </div>
               <p className='mt-0 mb-10px text-12px leading-18px text-t-secondary'>
                 {t('personal.import.description', {
                   defaultValue:
-                    '将模型配置、助手、技能、MCP、会话、工作区与主题一次性复制到SearchT-UI。原 SearchT-UI 数据不会被修改，导入后可回滚。',
+                    '将模型配置、助手、技能、MCP、会话、工作区与主题一次性复制到SearchT。原 SearchT 数据不会被修改，导入后可回滚。',
                 })}
               </p>
               {importPlan && importPlan.categories.length > 0 ? (

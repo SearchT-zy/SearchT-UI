@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 SearchT-UI Contributors (Apache-2.0)
+ * Copyright 2025 SearchT Contributors (Apache-2.0)
  * SPDX-License-Identifier: Apache-2.0
  *
  * Verifies MessageTips only renders the FeedbackButton on error tips and
@@ -554,7 +554,7 @@ describe('agent error locale copy', () => {
       const locale = JSON.parse(readFileSync(path.join(localeDir, localeName, 'conversation.json'), 'utf8'));
       const agentError = locale.agentError;
 
-      expect(agentError.ownership.searcht, localeName).not.toMatch(/AionUi|SearchT-UI/);
+      expect(agentError.ownership.searcht, localeName).not.toMatch(/AionUi|SearchT/);
 
       for (const [code, copy] of Object.entries<Record<string, string>>(agentError.codes)) {
         if (!code.startsWith('SEARCHT_')) continue;

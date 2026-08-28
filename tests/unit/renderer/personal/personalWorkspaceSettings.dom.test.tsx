@@ -94,7 +94,7 @@ describe('PersonalWorkspaceSettings', () => {
     expect(navigate).toHaveBeenCalledWith('/onboarding');
   });
 
-  it('runs a one-click SearchT-UI import and shows the per-category report', async () => {
+  it('runs a one-click SearchT import and shows the per-category report', async () => {
     const report = {
       id: 'import-1',
       startedAt: 1,
@@ -114,13 +114,13 @@ describe('PersonalWorkspaceSettings', () => {
         importAvailable
         discoverImport={vi.fn(async () => ({
           available: true,
-          dataDirectory: 'C:\\Roaming\\SearchT-UI\\aionui',
-          databasePath: 'C:\\Roaming\\SearchT-UI\\aionui\\aionui.db',
-          configDirectory: 'C:\\Roaming\\SearchT-UI\\config',
+          dataDirectory: 'C:\\Roaming\\SearchT\\aionui',
+          databasePath: 'C:\\Roaming\\SearchT\\aionui\\aionui.db',
+          configDirectory: 'C:\\Roaming\\SearchT\\config',
         }))}
         planImport={vi.fn(async () => ({
-          databasePath: 'C:\\Roaming\\SearchT-UI\\aionui\\aionui.db',
-          configDirectory: 'C:\\Roaming\\SearchT-UI\\config',
+          databasePath: 'C:\\Roaming\\SearchT\\aionui\\aionui.db',
+          configDirectory: 'C:\\Roaming\\SearchT\\config',
           categories: [
             { category: 'conversations' as const, planned: 3 },
             { category: 'models' as const, planned: 1 },
@@ -158,12 +158,12 @@ describe('PersonalWorkspaceSettings', () => {
         importAvailable
         discoverImport={vi.fn(async () => ({
           available: true,
-          dataDirectory: 'C:\\Roaming\\SearchT-UI\\aionui',
-          databasePath: 'C:\\Roaming\\SearchT-UI\\aionui\\aionui.db',
+          dataDirectory: 'C:\\Roaming\\SearchT\\aionui',
+          databasePath: 'C:\\Roaming\\SearchT\\aionui\\aionui.db',
           configDirectory: null,
         }))}
         planImport={vi.fn(async () => ({
-          databasePath: 'C:\\Roaming\\SearchT-UI\\aionui\\aionui.db',
+          databasePath: 'C:\\Roaming\\SearchT\\aionui\\aionui.db',
           configDirectory: null,
           categories: [{ category: 'workspaces' as const, planned: 1 }],
         }))}

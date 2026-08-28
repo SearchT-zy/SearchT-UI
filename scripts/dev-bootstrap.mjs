@@ -68,13 +68,13 @@ function listLikelyConflictingProcesses() {
   try {
     if (isWindows()) {
       const output = run(
-        "powershell -NoProfile -Command \"Get-Process | Where-Object { $_.ProcessName -in @('electron','SearchT-UI','node','bun') } | Select-Object ProcessName,Id | ConvertTo-Json -Compress\""
+        "powershell -NoProfile -Command \"Get-Process | Where-Object { $_.ProcessName -in @('electron','SearchT','node','bun') } | Select-Object ProcessName,Id | ConvertTo-Json -Compress\""
       );
       const parsed = output ? JSON.parse(output) : [];
       return Array.isArray(parsed) ? parsed : [parsed];
     }
 
-    const output = run(`ps -A -o pid=,comm= | egrep "electron|SearchT-UI|node|bun" || true`);
+    const output = run(`ps -A -o pid=,comm= | egrep "electron|SearchT|node|bun" || true`);
     return output
       .split(/\r?\n/)
       .filter(Boolean)

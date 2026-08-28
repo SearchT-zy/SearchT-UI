@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Minimal static file server for SearchT-UI update feeds and staged installers.
+ * Minimal static file server for SearchT update feeds and staged installers.
  *
  * Serves one directory over HTTP with correct Content-Type for the
  * electron-updater feed files (latest.yml, .exe, .blockmap). Intended for

@@ -2,7 +2,7 @@
   "name": "@searcht/web-cli",
   "version": "1.9.26",
   "private": true,
-  "description": "SearchT-UI WebUI CLI - standalone web runtime (no Electron)",
+  "description": "SearchT WebUI CLI - standalone web runtime (no Electron)",
   "bin": {
     "searcht-web": "./bin/searcht-web.js"
   },

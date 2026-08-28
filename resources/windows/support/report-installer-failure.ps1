@@ -65,13 +65,13 @@ function Write-InstallerLog([string]$event, [hashtable]$properties = @{}) {
   Add-Content -LiteralPath $log -Encoding UTF8 -Value ($payload | ConvertTo-Json -Compress -Depth 8)
 }
 
-function Read-SearchT-UIAnalyticsId {
+function Read-SearchTAnalyticsId {
   $candidates = @()
   if ($env:APPDATA) {
-    $candidates += (Join-Path $env:APPDATA 'SearchT-UI\analytics.json')
+    $candidates += (Join-Path $env:APPDATA 'SearchT\analytics.json')
   }
   if ($env:LOCALAPPDATA) {
-    $candidates += (Join-Path $env:LOCALAPPDATA 'SearchT-UI\analytics.json')
+    $candidates += (Join-Path $env:LOCALAPPDATA 'SearchT\analytics.json')
   }
 
   foreach ($candidate in $candidates) {
@@ -100,7 +100,7 @@ function Show-ReportMessage([string]$text, [string]$icon) {
   $messageIcon = [System.Windows.Forms.MessageBoxIcon]::$icon
   [System.Windows.Forms.MessageBox]::Show(
     $text,
-    'SearchT-UI installer report',
+    'SearchT installer report',
     [System.Windows.Forms.MessageBoxButtons]::OK,
     $messageIcon
   ) | Out-Null
@@ -258,7 +258,7 @@ function New-ReportDetailsText(
 ) {
   $lines = New-Object System.Collections.Generic.List[string]
   $lines.Add('--------------------------------')
-  $lines.Add('SearchT-UI installer failure ' + $code)
+  $lines.Add('SearchT installer failure ' + $code)
   $lines.Add('--------------------------------')
   $lines.Add('')
   if ($eventId) {
@@ -289,7 +289,7 @@ function New-ReportDetailsText(
     $lines.Add('')
   }
   $lines.Add('---------------------------')
-  $lines.Add('To SearchT-UI Team')
+  $lines.Add('To SearchT Team')
   $lines.Add('---------------------------')
   return ($lines -join [Environment]::NewLine)
 }
@@ -324,7 +324,7 @@ try {
   $endpoint = $uri.Scheme + '://' + $uri.Authority + '/api/' + $projectId + '/envelope/'
   $logText = if (Test-Path -LiteralPath $log) { Get-Content -LiteralPath $log -Raw } else { '' }
   $eventId = [guid]::NewGuid().ToString('N')
-  $userId = Read-SearchT-UIAnalyticsId
+  $userId = Read-SearchTAnalyticsId
   $eventPayload = @{
     message = ('installer-failure ' + $Code)
     level = 'error'
@@ -389,7 +389,7 @@ try {
   })
   Write-InstallerLog 'report-sent' @{ code = $Code; wrapperCode = $wrapperCode; eventId = $eventId; statusPath = $statusPath; search = $search; issueSearch = $issueSearch; userId = $userId }
   $reportDetails = New-ReportDetailsText $Code $eventId $issueSearch $userId $Session $blockingDiagnostics
-  Show-ReportMessage ('SearchT-UI installer report sent.' + [Environment]::NewLine + [Environment]::NewLine + 'Tip: If you can get in touch with the SearchT-UI team, press [ Ctrl + C ] in this dialog to copy details, then send them to us via social media, email, or a GitHub issue:' + [Environment]::NewLine + 'https://github.com/searcht-ui/SearchT-UI/issues' + [Environment]::NewLine + [Environment]::NewLine + $reportDetails) 'Information'
+  Show-ReportMessage ('SearchT installer report sent.' + [Environment]::NewLine + [Environment]::NewLine + 'Tip: If you can get in touch with the SearchT team, press [ Ctrl + C ] in this dialog to copy details, then send them to us via social media, email, or a GitHub issue:' + [Environment]::NewLine + 'https://github.com/searcht-ui/SearchT/issues' + [Environment]::NewLine + [Environment]::NewLine + $reportDetails) 'Information'
 } catch {
   $errorText = $_.Exception.GetType().FullName + ': ' + $_.Exception.Message
   Write-StatusFile ([ordered]@{
@@ -408,5 +408,5 @@ try {
     at = (Get-Date -Format o)
   })
   Write-InstallerLog 'report-failed' @{ code = $Code; wrapperCode = $wrapperCode; statusPath = $statusPath; error = $errorText }
-  Show-ReportMessage ('SearchT-UI installer report failed.' + [Environment]::NewLine + [Environment]::NewLine + 'Status: ' + $statusPath + [Environment]::NewLine + 'Log: ' + $log) 'Exclamation'
+  Show-ReportMessage ('SearchT installer report failed.' + [Environment]::NewLine + [Environment]::NewLine + 'Status: ' + $statusPath + [Environment]::NewLine + 'Log: ' + $log) 'Exclamation'
 }

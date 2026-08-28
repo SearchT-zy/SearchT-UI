@@ -25,7 +25,7 @@ export function buildMemoryMcpServerConfig(
   };
   return {
     name: BUILTIN_MEMORY_MCP_NAME,
-    description: 'Built-in SearchT-UI memory candidate and scoped retrieval tools.',
+    description: 'Built-in SearchT memory candidate and scoped retrieval tools.',
     enabled: true,
     builtin: true,
     transport: { type: 'stdio', ...serverConfig },

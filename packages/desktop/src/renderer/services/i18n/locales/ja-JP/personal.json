@@ -339,7 +339,7 @@
   },
   "memory": {
     "title": "Memory",
-    "description": "Review and manage what SearchT-UI remembers for you.",
+    "description": "Review and manage what SearchT remembers for you.",
     "add": "Add memory",
     "retry": "Retry",
     "loadFailed": "Unable to load memory",
@@ -501,7 +501,7 @@
   },
   "settings": {
     "title": "パーソナルワークスペース",
-    "description": "SearchT-UIに表示する内容と起動時の画面を選びます。",
+    "description": "SearchTに表示する内容と起動時の画面を選びます。",
     "modules": "表示するモジュール",
     "startPage": "起動時に開く画面",
     "scenePack": "ワークスタイル",
@@ -510,7 +510,7 @@
     "backup": "バックアップを作成",
     "backupDone": "バックアップを作成しました",
     "backupFailed": "バックアップを作成できませんでした",
-    "import": "SearchT-UI データ",
+    "import": "SearchT データ",
     "saveFailed": "保存できなかったため、以前の設定に戻しました"
   },
   "scene": {
@@ -527,8 +527,8 @@
   },
   "connectors": {
     "title": "接続",
-    "description": "選択したフォルダーの新規または更新されたファイルをSearchT-UIが自動で受け取ります。",
-    "desktopOnly": "ローカルフォルダー接続はSearchT-UIデスクトップ版でのみ利用できます。",
+    "description": "選択したフォルダーの新規または更新されたファイルをSearchTが自動で受け取ります。",
+    "desktopOnly": "ローカルフォルダー接続はSearchTデスクトップ版でのみ利用できます。",
     "addFolder": "フォルダーを追加",
     "includeSubfolders": "サブフォルダーを含める",
     "includeSubfoldersHint": "追加時にサブフォルダー内のファイルも受け取る",
@@ -554,7 +554,7 @@
     "loadFailed": "接続を読み込めませんでした",
     "actionFailed": "操作を完了できませんでした",
     "folderUnavailable": "このフォルダーが見つかりません。利用可能か確認してください。",
-    "desktopOnlyAll": "Connections are managed in the SearchT-UI desktop app.",
+    "desktopOnlyAll": "Connections are managed in the SearchT desktop app.",
     "emptyAllTitle": "No connections yet",
     "emptyAllDescription": "Connect email or a local folder to automatically bring new material into Inbox.",
     "addEmail": "Connect email",
@@ -807,7 +807,7 @@
     "reload": "Reload",
     "home": "Home",
     "loadFailed": "Failed to load the page.",
-    "desktopOnly": "The embedded browser is only available in the SearchT-UI desktop app.",
+    "desktopOnly": "The embedded browser is only available in the SearchT desktop app.",
     "recognize": "Recognize page content",
     "recognizeHint": "Extract the title, body text, and link count of the current page; save it to Inbox in one click.",
     "read": "Read page content",

@@ -1,19 +1,19 @@
-# SearchT-UI
+# SearchT
 
 [English](README.en.md) | **简体中文**
 
 <p align="center">
-  <img src="docs/assets/banner.svg" alt="SearchT-UI — 本地优先的 AI 个人工作台" width="880">
+  <img src="docs/assets/banner.svg" alt="SearchT — 本地优先的 AI 个人工作台" width="880">
 </p>
 
-**A local-first AI personal workspace.** SearchT-UI 把日程、待办、笔记、知识库、收件箱、长期记忆、技能沉淀、工作流和本机 Agent 协作放进一个可离线使用的桌面应用——你的数据保存在本机，AI 在你身边工作。
+**A local-first AI personal workspace.** SearchT 把日程、待办、笔记、知识库、收件箱、长期记忆、技能沉淀、工作流和本机 Agent 协作放进一个可离线使用的桌面应用——你的数据保存在本机，AI 在你身边工作。
 
 ![License](https://img.shields.io/badge/license-Apache--2.0-blue)
-![Release](https://img.shields.io/github/v/release/SearchT-zy/SearchT-UI)
+![Release](https://img.shields.io/github/v/release/SearchT-zy/SearchT)
 
 ## 下载安装
 
-从 [Releases](https://github.com/SearchT-zy/SearchT-UI/releases/latest) 获取最新版本：
+从 [Releases](https://github.com/SearchT-zy/SearchT/releases/latest) 获取最新版本：
 
 | 文件 | 平台 |
 | --- | --- |
@@ -73,9 +73,9 @@ npm run dist:win      # 构建 Windows 安装包（dist:mac / dist:linux 同理�
 
 | 平台    | 路径                                                                |
 | ------- | ------------------------------------------------------------------- |
-| Windows | `%APPDATA%\SearchT-UI\searcht\`（个人数据库 `searcht-personal.db`） |
-| macOS   | `~/Library/Application Support/SearchT-UI/searcht/`                 |
-| Linux   | `~/.config/SearchT-UI/searcht/`                                     |
+| Windows | `%APPDATA%\SearchT\searcht\`（个人数据库 `searcht-personal.db`） |
+| macOS   | `~/Library/Application Support/SearchT/searcht/`                 |
+| Linux   | `~/.config/SearchT/searcht/`                                     |
 
 自动更新默认关闭；运维方可通过 `SEARCHT_UPDATE_BASE_URL` 指向自建 HTTPS 更新源（见 `docs/release/searcht-release-runbook.md`）。
 
@@ -88,4 +88,4 @@ npm run dist:win      # 构建 Windows 安装包（dist:mac / dist:linux 同理�
 
 ## 许可
 
-Apache-2.0。SearchT-UI 衍生自 AionUi（Apache-2.0）并做了深度改造；按 Apache-2.0 第 4 条要求，再分发时请保留上游版权声明（各源文件头部 SPDX 标识）。
+Apache-2.0。SearchT 衍生自 AionUi（Apache-2.0）并做了深度改造；按 Apache-2.0 第 4 条要求，再分发时请保留上游版权声明（各源文件头部 SPDX 标识）。

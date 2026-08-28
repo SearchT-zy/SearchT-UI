@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 SearchT-UI Contributors (Apache-2.0)
+ * Copyright 2025 SearchT Contributors (Apache-2.0)
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -76,8 +76,8 @@ export class ClientFactory {
           baseURL: base_url,
           timeout: options.timeout,
           defaultHeaders: {
-            'HTTP-Referer': 'https://github.com/searcht-ui/SearchT-UI',
-            'X-Title': 'SearchT-UI',
+            'HTTP-Referer': 'https://github.com/searcht-ui/SearchT',
+            'X-Title': 'SearchT',
           },
           ...(options.baseConfig as OpenAIClientConfig),
         };
@@ -127,8 +127,8 @@ export class ClientFactory {
           baseURL: base_url,
           timeout: options.timeout,
           defaultHeaders: {
-            'HTTP-Referer': 'https://github.com/searcht-ui/SearchT-UI',
-            'X-Title': 'SearchT-UI',
+            'HTTP-Referer': 'https://github.com/searcht-ui/SearchT',
+            'X-Title': 'SearchT',
           },
           ...(options.baseConfig as OpenAIClientConfig),
         };

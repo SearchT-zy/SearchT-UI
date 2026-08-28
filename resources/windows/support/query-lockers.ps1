@@ -43,7 +43,7 @@ function Test-SamePath([string]$left, [string]$right) {
 }
 
 function New-SelfLockProcess([int]$processId) {
-  return [pscustomobject]@{ name = 'SearchT-UI installer'; pid = $processId }
+  return [pscustomobject]@{ name = 'SearchT installer'; pid = $processId }
 }
 
 function Write-LockersAndExit($lockers, [string]$fallbackReason, [string]$message, [int]$exitCode, [int]$resources, [int]$count) {
@@ -78,8 +78,8 @@ try {
   } elseif ($targetPathFull -and (Test-Path -LiteralPath $targetPathFull -PathType Container)) {
     $topLevel = @(Get-ChildItem -LiteralPath $targetPathFull -Force -File -ErrorAction SilentlyContinue | ForEach-Object { $_.FullName })
     $knownRelative = @(
-      'SearchT-UI.exe',
-      'Uninstall SearchT-UI.exe',
+      'SearchT.exe',
+      'Uninstall SearchT.exe',
       'resources\app.asar',
       'resources\app-update.yml',
       'resources\bundled-backend\win32-x64\searcht-backend.exe'
@@ -122,7 +122,7 @@ using System;
 using System.Text;
 using System.Runtime.InteropServices;
 
-namespace SearchT-UI.RestartManager {
+namespace SearchT.RestartManager {
   public enum RM_APP_TYPE {
     RmUnknownApp = 0,
     RmMainWindow = 1,
@@ -169,7 +169,7 @@ namespace SearchT-UI.RestartManager {
 
   $sessionHandle = [uint32]0
   $key = New-Object System.Text.StringBuilder 64
-  $result = [SearchT-UI.RestartManager.Native]::RmStartSession([ref]$sessionHandle, 0, $key)
+  $result = [SearchT.RestartManager.Native]::RmStartSession([ref]$sessionHandle, 0, $key)
   if ($result -ne 0) {
     throw "RmStartSession=$result"
   }
@@ -178,7 +178,7 @@ namespace SearchT-UI.RestartManager {
     for ($i = 0; $i -lt $resources.Count; $i += 256) {
       $end = [Math]::Min($i + 255, $resources.Count - 1)
       $chunk = [string[]]$resources[$i..$end]
-      $result = [SearchT-UI.RestartManager.Native]::RmRegisterResources($sessionHandle, [uint32]$chunk.Count, $chunk, 0, [IntPtr]::Zero, 0, $null)
+      $result = [SearchT.RestartManager.Native]::RmRegisterResources($sessionHandle, [uint32]$chunk.Count, $chunk, 0, [IntPtr]::Zero, 0, $null)
       if ($result -ne 0) {
         throw "RmRegisterResources=$result"
       }
@@ -197,7 +197,7 @@ namespace SearchT-UI.RestartManager {
       $needed = [uint32]0
       $count = [uint32]0
       $reasons = [uint32]0
-      $result = [SearchT-UI.RestartManager.Native]::RmGetList($sessionHandle, [ref]$needed, [ref]$count, $null, [ref]$reasons)
+      $result = [SearchT.RestartManager.Native]::RmGetList($sessionHandle, [ref]$needed, [ref]$count, $null, [ref]$reasons)
       if ($result -ne $ERROR_ACCESS_DENIED) {
         break
       }
@@ -214,8 +214,8 @@ namespace SearchT-UI.RestartManager {
           Start-Sleep -Milliseconds (50 * $attempt)
         }
         $count = $needed
-        $apps = New-Object 'SearchT-UI.RestartManager.RM_PROCESS_INFO[]' $count
-        $result = [SearchT-UI.RestartManager.Native]::RmGetList($sessionHandle, [ref]$needed, [ref]$count, $apps, [ref]$reasons)
+        $apps = New-Object 'SearchT.RestartManager.RM_PROCESS_INFO[]' $count
+        $result = [SearchT.RestartManager.Native]::RmGetList($sessionHandle, [ref]$needed, [ref]$count, $apps, [ref]$reasons)
         if ($result -ne $ERROR_ACCESS_DENIED -and $result -ne $ERROR_MORE_DATA) {
           break
         }
@@ -267,7 +267,7 @@ namespace SearchT-UI.RestartManager {
 
     Write-LockersAndExit $lockers '' '' 0 $resources.Count $needed
   } finally {
-    [void][SearchT-UI.RestartManager.Native]::RmEndSession($sessionHandle)
+    [void][SearchT.RestartManager.Native]::RmEndSession($sessionHandle)
   }
 } catch {
   Write-InstallerJson 'rm-error' @{

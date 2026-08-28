@@ -5,7 +5,7 @@ describe('built-in Memory MCP config', () => {
   it('registers an enabled built-in server with a trusted Personal Core data path', () => {
     expect(buildMemoryMcpServerConfig('C:\\app\\builtin-mcp-memory.js', 'C:\\data\\searcht')).toEqual({
       name: 'searcht-memory',
-      description: 'Built-in SearchT-UI memory candidate and scoped retrieval tools.',
+      description: 'Built-in SearchT memory candidate and scoped retrieval tools.',
       enabled: true,
       builtin: true,
       transport: {

@@ -81,7 +81,7 @@ export function startPersonalReminderScheduler(notify: (title: string, body: str
     }
     const block = repository.findBlock(reminder.ownerId);
     if (!block || block.deletedAt !== null) return;
-    await notify('SearchT-UI', block.taskId);
+    await notify('SearchT', block.taskId);
     repository.insertAudit(
       crypto.randomUUID(),
       'schedule_block_reminder_delivered',

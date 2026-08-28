@@ -9,9 +9,9 @@ import type {
 } from '@/common/types/searcht/workspace';
 
 /**
- * One-shot, non-destructive importer from a legacy SearchT-UI installation.
+ * One-shot, non-destructive importer from a legacy SearchT installation.
  *
- * The source tree is only ever read from; all writes go to the SearchT-UI data
+ * The source tree is only ever read from; all writes go to the SearchT data
  * directory. Every mutation is journaled so `rollback` can undo an import
  * without touching the source.
  */

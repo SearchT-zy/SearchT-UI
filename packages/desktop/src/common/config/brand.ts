@@ -1,12 +1,12 @@
 import path from 'path';
 import { SEARCHT_DISPLAY_NAME } from './brandIdentity';
 
-/** Product identifiers owned by the SearchT-UI hard fork. */
+/** Product identifiers owned by the SearchT hard fork. */
 export const SEARCHT_BRAND = {
   appId: 'cn.searcht.desktop',
-  appName: 'SearchT-UI',
+  appName: 'SearchT',
   displayName: SEARCHT_DISPLAY_NAME,
-  executableName: 'SearchT-UI',
+  executableName: 'SearchT',
   protocol: 'searcht',
   dataDirectoryName: 'searcht',
   cliDataDirectoryName: '.searcht',

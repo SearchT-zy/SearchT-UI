@@ -83,7 +83,7 @@ function main() {
   const installDir = path.join(root, 'install-dir');
   mkdirSync(installDir, { recursive: true });
   const lockedFile = path.join(installDir, 'locked-by-smoke.txt');
-  writeFileSync(lockedFile, 'SearchT-UI Restart Manager UI smoke lock\n', 'utf8');
+  writeFileSync(lockedFile, 'SearchT Restart Manager UI smoke lock\n', 'utf8');
 
   let locker = null;
   const nsiPath = path.join(root, 'searcht-rstrtmgr-ui-smoke.nsi');
@@ -97,52 +97,52 @@ function main() {
 
   const nsi = `
 Unicode true
-Name "SearchT-UI Restart Manager UI Smoke"
+Name "SearchT Restart Manager UI Smoke"
 OutFile "${nsisQuote(exePath)}"
 RequestExecutionLevel user
 SilentInstall normal
 !define SEARCHT_FALLBACK_LOG "searcht-installer-smoke-fallback.log"
 !define VERSION "rstrtmgr-ui-smoke"
 !define SEARCHT_TARGET_ARCH "x64"
-!define SEARCHT_APP_EXECUTABLE_FILENAME "SearchT-UI.exe"
-!define UNINSTALL_FILENAME "Uninstall SearchT-UI.exe"
+!define SEARCHT_APP_EXECUTABLE_FILENAME "SearchT.exe"
+!define UNINSTALL_FILENAME "Uninstall SearchT.exe"
 !define PROJECT_DIR "${nsisQuote(repoRoot)}"
 !include LogicLib.nsh
 !include "${nsisQuote(messagesPath)}"
 !include "${nsisQuote(processControlPath)}"
 
-Var SearchT-UISessionLogPath
-Var SearchT-UISessionId
-Var SearchT-UIIsUpdated
+Var SearchTSessionLogPath
+Var SearchTSessionId
+Var SearchTIsUpdated
 
 Section
   StrCpy $INSTDIR "${nsisQuote(installDir)}"
-  StrCpy $SearchT-UISessionLogPath "${nsisQuote(logPath)}"
-  StrCpy $SearchT-UISessionId "rstrtmgrui"
-  StrCpy $SearchT-UIIsUpdated "1"
+  StrCpy $SearchTSessionLogPath "${nsisQuote(logPath)}"
+  StrCpy $SearchTSessionId "rstrtmgrui"
+  StrCpy $SearchTIsUpdated "1"
   InitPluginsDir
   BringToFront
 
   searcht_query_lockers:
-    !insertmacro SEARCHT_QUERY_LOCKERS "${nsisQuote(lockedFile)}" $SearchT-UILockerResult
-    StrCpy $SearchT-UILockerList ""
+    !insertmacro SEARCHT_QUERY_LOCKERS "${nsisQuote(lockedFile)}" $SearchTLockerResult
+    StrCpy $SearchTLockerList ""
     ClearErrors
     SetDetailsPrint none
-    FileOpen $SearchT-UILockerListFile "$PLUGINSDIR\\searcht-rm-lockers.txt" r
+    FileOpen $SearchTLockerListFile "$PLUGINSDIR\\searcht-rm-lockers.txt" r
     \${IfNot} \${Errors}
-      FileRead $SearchT-UILockerListFile $SearchT-UILockerList
-      FileClose $SearchT-UILockerListFile
+      FileRead $SearchTLockerListFile $SearchTLockerList
+      FileClose $SearchTLockerListFile
     \${EndIf}
     SetDetailsPrint lastused
-    \${If} $SearchT-UILockerList == ""
-      StrCpy $SearchT-UILockerList "\${SEARCHT_MSG_UNKNOWN_PROCESS_EN}"
-      StrCpy $SearchT-UILockerListZh "\${SEARCHT_MSG_UNKNOWN_PROCESS_ZH}"
-      StrCpy $SearchT-UILockerListEn "\${SEARCHT_MSG_UNKNOWN_PROCESS_EN}"
+    \${If} $SearchTLockerList == ""
+      StrCpy $SearchTLockerList "\${SEARCHT_MSG_UNKNOWN_PROCESS_EN}"
+      StrCpy $SearchTLockerListZh "\${SEARCHT_MSG_UNKNOWN_PROCESS_ZH}"
+      StrCpy $SearchTLockerListEn "\${SEARCHT_MSG_UNKNOWN_PROCESS_EN}"
     \${Else}
-      StrCpy $SearchT-UILockerListZh "$SearchT-UILockerList"
-      StrCpy $SearchT-UILockerListEn "$SearchT-UILockerList"
+      StrCpy $SearchTLockerListZh "$SearchTLockerList"
+      StrCpy $SearchTLockerListEn "$SearchTLockerList"
     \${EndIf}
-    MessageBox MB_RETRYCANCEL|MB_ICONEXCLAMATION "\${SEARCHT_MSG_FILE_OR_FOLDER_IN_USE_ZH}$\\r$\\n${nsisQuote(lockedFile)}$\\r$\\n$\\r$\\n\${SEARCHT_MSG_APPLICATION_USING_IT_ZH}$\\r$\\n$SearchT-UILockerListZh$\\r$\\n$\\r$\\n\${SEARCHT_MSG_CLOSE_LISTED_RETRY_ZH}$\\r$\\n$\\r$\\n\${SEARCHT_MSG_INSTALLER_LOG_ZH}:$\\r$\\n$SearchT-UISessionLogPath$\\r$\\n$\\r$\\n\${SEARCHT_MSG_BLOCK_SEPARATOR}$\\r$\\n$\\r$\\n\${SEARCHT_MSG_FILE_OR_FOLDER_IN_USE_EN}$\\r$\\n${nsisQuote(lockedFile)}$\\r$\\n$\\r$\\n\${SEARCHT_MSG_APPLICATION_USING_IT_EN}$\\r$\\n$SearchT-UILockerListEn$\\r$\\n$\\r$\\n\${SEARCHT_MSG_CLOSE_LISTED_RETRY_EN}$\\r$\\n$\\r$\\n\${SEARCHT_MSG_INSTALLER_LOG_EN}:$\\r$\\n$SearchT-UISessionLogPath" /SD IDCANCEL IDRETRY searcht_query_lockers
+    MessageBox MB_RETRYCANCEL|MB_ICONEXCLAMATION "\${SEARCHT_MSG_FILE_OR_FOLDER_IN_USE_ZH}$\\r$\\n${nsisQuote(lockedFile)}$\\r$\\n$\\r$\\n\${SEARCHT_MSG_APPLICATION_USING_IT_ZH}$\\r$\\n$SearchTLockerListZh$\\r$\\n$\\r$\\n\${SEARCHT_MSG_CLOSE_LISTED_RETRY_ZH}$\\r$\\n$\\r$\\n\${SEARCHT_MSG_INSTALLER_LOG_ZH}:$\\r$\\n$SearchTSessionLogPath$\\r$\\n$\\r$\\n\${SEARCHT_MSG_BLOCK_SEPARATOR}$\\r$\\n$\\r$\\n\${SEARCHT_MSG_FILE_OR_FOLDER_IN_USE_EN}$\\r$\\n${nsisQuote(lockedFile)}$\\r$\\n$\\r$\\n\${SEARCHT_MSG_APPLICATION_USING_IT_EN}$\\r$\\n$SearchTLockerListEn$\\r$\\n$\\r$\\n\${SEARCHT_MSG_CLOSE_LISTED_RETRY_EN}$\\r$\\n$\\r$\\n\${SEARCHT_MSG_INSTALLER_LOG_EN}:$\\r$\\n$SearchTSessionLogPath" /SD IDCANCEL IDRETRY searcht_query_lockers
 SectionEnd
 `;
 

@@ -63,10 +63,10 @@
   "more": "더보기",
   "refresh": "새로고침",
   "readOnly": "읽기 전용",
-  "tray.showWindow": "SearchT-UI 표시",
+  "tray.showWindow": "SearchT 표시",
   "tray.newChat": "새 채팅",
   "tray.closeToTray": "트레이에 숨기기",
-  "tray.about": "SearchT-UI 소개",
+  "tray.about": "SearchT 소개",
   "tray.restart": "앱 재시작",
   "tray.quit": "종료",
   "tray.runningTasks": "실행 중인 작업",
@@ -74,31 +74,31 @@
   "tray.checkUpdate": "업데이트 확인",
   "tray.recentChats": "최근 채팅",
   "tray.untitled": "제목 없음",
-  "tray.hiddenHintTitle": "SearchT-UI가 계속 실행 중입니다",
+  "tray.hiddenHintTitle": "SearchT가 계속 실행 중입니다",
   "tray.hiddenHintBody": "창이 시스템 트레이로 최소화되었습니다. 트레이 아이콘을 클릭하면 다시 열 수 있습니다.",
   "backendStartup": {
     "incompatibleRuntime": {
       "title": "이 시스템은 번들 백엔드를 지원하지 않습니다",
-      "description": "SearchT-UI는 열렸지만 로컬 AionCore 백엔드를 이 Linux 버전에서 실행할 수 없습니다. 지원되는 Linux 배포판으로 업그레이드한 뒤 SearchT-UI를 다시 시작하세요.",
+      "description": "SearchT는 열렸지만 로컬 AionCore 백엔드를 이 Linux 버전에서 실행할 수 없습니다. 지원되는 Linux 배포판으로 업그레이드한 뒤 SearchT를 다시 시작하세요.",
       "requiredVersions": "필요한 런타임 심볼: {{versions}}"
     },
     "incompleteInstallation": {
-      "title": "SearchT-UI 설치가 불완전합니다",
-      "description": "현재 설치에 필요한 로컬 리소스가 없어 AionCore를 시작할 수 없습니다. 최신 SearchT-UI를 다운로드하여 다시 설치하세요. 다시 설치한 후에도 문제가 반복되면 보안 또는 바이러스 백신 소프트웨어가 AionCore를 격리했는지 확인하세요.",
+      "title": "SearchT 설치가 불완전합니다",
+      "description": "현재 설치에 필요한 로컬 리소스가 없어 AionCore를 시작할 수 없습니다. 최신 SearchT를 다운로드하여 다시 설치하세요. 다시 설치한 후에도 문제가 반복되면 보안 또는 바이러스 백신 소프트웨어가 AionCore를 격리했는지 확인하세요.",
       "downloadLatest": "최신 버전 다운로드",
       "sendDiagnostics": "진단 보고서 보내기",
       "diagnosticsSent": "진단 보고서를 보냈습니다",
       "diagnosticsReportSuccess": "진단 보고서를 보냈습니다",
       "diagnosticsReportFailed": "진단 보고서를 보내지 못했습니다",
-      "runtimeComponentDescription": "현재 설치에 필요한 내장 런타임 구성 요소가 없어 {{resource}}을(를) 시작할 수 없습니다. 최신 SearchT-UI 패키지를 다시 설치하세요. 다시 설치한 후에도 문제가 계속되면 보안 또는 백신 소프트웨어가 SearchT-UI 구성 요소를 격리했는지 확인하세요."
+      "runtimeComponentDescription": "현재 설치에 필요한 내장 런타임 구성 요소가 없어 {{resource}}을(를) 시작할 수 없습니다. 최신 SearchT 패키지를 다시 설치하세요. 다시 설치한 후에도 문제가 계속되면 보안 또는 백신 소프트웨어가 SearchT 구성 요소를 격리했는지 확인하세요."
     },
     "packageArchitectureMismatch": {
-      "title": "SearchT-UI package architecture mismatch",
-      "description": "This SearchT-UI package is for {{packageArch}}, but this Mac is {{deviceArch}}. You may have downloaded the wrong package. Please download and install the {{expectedArch}} package."
+      "title": "SearchT package architecture mismatch",
+      "description": "This SearchT package is for {{packageArch}}, but this Mac is {{deviceArch}}. You may have downloaded the wrong package. Please download and install the {{expectedArch}} package."
     },
     "dataMigration": {
       "title": "Local data migration failed",
-      "description": "SearchT-UI opened, but AionCore stopped while initializing local data. Reinstalling SearchT-UI may not fix this. Send a diagnostics report or contact support so the local database migration can be inspected.",
+      "description": "SearchT opened, but AionCore stopped while initializing local data. Reinstalling SearchT may not fix this. Send a diagnostics report or contact support so the local database migration can be inspected.",
       "sendDiagnostics": "Send diagnostics",
       "diagnosticsSent": "Diagnostics sent",
       "diagnosticsReportSuccess": "Diagnostics report sent",
@@ -106,7 +106,7 @@
     },
     "localDataRepair": {
       "title": "Local data repair failed",
-      "description": "SearchT-UI는 열렸지만 AionCore가 assistant 또는 에이전트 레코드 같은 로컬 시작 데이터를 준비하는 동안 중지되었습니다. SearchT-UI를 다시 설치해도 문제가 해결되지 않을 수 있습니다. 로컬 데이터베이스를 검사할 수 있도록 진단 보고서를 보내거나 지원팀에 문의하세요.",
+      "description": "SearchT는 열렸지만 AionCore가 assistant 또는 에이전트 레코드 같은 로컬 시작 데이터를 준비하는 동안 중지되었습니다. SearchT를 다시 설치해도 문제가 해결되지 않을 수 있습니다. 로컬 데이터베이스를 검사할 수 있도록 진단 보고서를 보내거나 지원팀에 문의하세요.",
       "sendDiagnostics": "Send diagnostics",
       "diagnosticsSent": "Diagnostics sent",
       "diagnosticsReportSuccess": "Diagnostics report sent",
@@ -114,7 +114,7 @@
     },
     "startupDirectory": {
       "title": "Startup directory is unavailable",
-      "description": "SearchT-UI opened, but AionCore could not start because the configured work or log directory is missing, unavailable, or blocked by permissions. Check that the configured directories exist and are writable, then restart SearchT-UI.",
+      "description": "SearchT opened, but AionCore could not start because the configured work or log directory is missing, unavailable, or blocked by permissions. Check that the configured directories exist and are writable, then restart SearchT.",
       "sendDiagnostics": "Send diagnostics",
       "diagnosticsSent": "Diagnostics sent",
       "diagnosticsReportSuccess": "Diagnostics report sent",
@@ -122,7 +122,7 @@
     },
     "recoverableDatabaseCorruption": {
       "title": "로컬 데이터가 손상되었습니다",
-      "description": "로컬 데이터베이스 손상이 감지되어 SearchT-UI가 시작을 계속할 수 없습니다. 확인하면 이전 데이터베이스를 백업하고 새 로컬 데이터베이스를 만들어 시작을 계속합니다. 기존 대화는 더 이상 표시되지 않으며 이전 데이터베이스는 백업 파일로 보관됩니다.",
+      "description": "로컬 데이터베이스 손상이 감지되어 SearchT가 시작을 계속할 수 없습니다. 확인하면 이전 데이터베이스를 백업하고 새 로컬 데이터베이스를 만들어 시작을 계속합니다. 기존 대화는 더 이상 표시되지 않으며 이전 데이터베이스는 백업 파일로 보관됩니다.",
       "confirmRebuild": "이전 DB 백업 후 새 DB 재생성",
       "sendDiagnostics": "진단 보고서 보내기",
       "diagnosticsHint": "진단 보고서를 보내도 로컬 데이터베이스는 수정되지 않습니다.",
@@ -138,8 +138,8 @@
       }
     },
     "transientConcurrentStartup": {
-      "title": "SearchT-UI를 시작하는 중입니다",
-      "description": "이 창이 열릴 때 다른 SearchT-UI 시작 프로세스가 아직 로컬 데이터를 사용하고 있었습니다. 이는 일시적인 현상이며 데이터는 안전합니다. 다시 설치할 필요가 없습니다. 잠시 기다린 후 다시 시도하거나 SearchT-UI를 다시 시작하세요.",
+      "title": "SearchT를 시작하는 중입니다",
+      "description": "이 창이 열릴 때 다른 SearchT 시작 프로세스가 아직 로컬 데이터를 사용하고 있었습니다. 이는 일시적인 현상이며 데이터는 안전합니다. 다시 설치할 필요가 없습니다. 잠시 기다린 후 다시 시도하거나 SearchT를 다시 시작하세요.",
       "sendDiagnostics": "Send diagnostics",
       "diagnosticsSent": "Diagnostics sent",
       "diagnosticsReportSuccess": "Diagnostics report sent",

@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2026 SearchT-UI Contributors (Apache-2.0)
+ * Copyright 2026 SearchT Contributors (Apache-2.0)
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -16,9 +16,9 @@ import { useTranslation } from 'react-i18next';
 // running any version detection.
 export const OPEN_MIGRATION_DIALOG_EVENT = 'searcht-open-migration-dialog';
 
-// Official website users are guided to for the SearchT-UI Pro download. Kept as a
+// Official website users are guided to for the SearchT Pro download. Kept as a
 // module constant (not i18n) — it is a URL, not translatable copy.
-const SEARCHT_WEBSITE_URL = 'https://github.com/searcht-ui/SearchT-UI/';
+const SEARCHT_WEBSITE_URL = 'https://github.com/searcht-ui/SearchT/';
 
 // localStorage flag remembering that the migration invite already auto-opened
 // once on this machine. First launch of the discontinued build pops the card
@@ -97,7 +97,7 @@ const UpdateMigrationDialog: React.FC = () => {
 
   const gotoWebsite = () => {
     void openExternalUrl(SEARCHT_WEBSITE_URL).catch((error) => {
-      console.error('Failed to open SearchT-UI Pro website:', error);
+      console.error('Failed to open SearchT Pro website:', error);
     });
     close();
   };

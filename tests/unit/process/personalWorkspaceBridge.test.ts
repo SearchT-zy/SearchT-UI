@@ -28,7 +28,7 @@ describe('personalWorkspaceBridge', () => {
     const repository = {
       get: vi.fn(),
       set: vi.fn(() => {
-        throw new Error('Invalid SearchT-UI start page');
+        throw new Error('Invalid SearchT start page');
       }),
     };
     const database = {
@@ -45,11 +45,11 @@ describe('personalWorkspaceBridge', () => {
 
     await expect(
       handlers.setPreferences({ ...DEFAULT_WORKSPACE_PREFERENCES, startPage: 'bad' as 'today' })
-    ).rejects.toThrow('Invalid SearchT-UI start page');
+    ).rejects.toThrow('Invalid SearchT start page');
     await expect(handlers.createBackup()).rejects.toThrow('backup unavailable');
   });
 
-  it('returns the backup path and read-only SearchT-UI discovery result', async () => {
+  it('returns the backup path and read-only SearchT discovery result', async () => {
     const repository = { get: vi.fn(), set: vi.fn() };
     const database = {
       health: vi.fn(),
@@ -57,8 +57,8 @@ describe('personalWorkspaceBridge', () => {
     };
     const discovery = {
       available: true as const,
-      dataDirectory: 'C:\\Users\\me\\AppData\\Roaming\\SearchT-UI\\aionui',
-      databasePath: 'C:\\Users\\me\\AppData\\Roaming\\SearchT-UI\\aionui\\aionui.db',
+      dataDirectory: 'C:\\Users\\me\\AppData\\Roaming\\SearchT\\aionui',
+      databasePath: 'C:\\Users\\me\\AppData\\Roaming\\SearchT\\aionui\\aionui.db',
     };
     const handlers = initPersonalWorkspaceBridge({
       repository,

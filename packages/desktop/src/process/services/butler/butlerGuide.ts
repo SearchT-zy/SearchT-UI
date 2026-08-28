@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2026 SearchT-UI Contributors (Apache-2.0)
+ * Copyright 2026 SearchT Contributors (Apache-2.0)
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -33,20 +33,20 @@ const GUIDE_VERSION_CONFIG_KEY = 'butler.guideSkillVersion';
 const SKILL_MD = `---
 name: searcht-app-guide
 description: >-
-  Knowledge base of the SearchT-UI desktop app itself: full feature list,
+  Knowledge base of the SearchT desktop app itself: full feature list,
   where each feature lives, and brand facts. Use when the user asks what this
   software can do, where to find or how to configure a feature, what the app
   is called, or whenever you need to describe the product you are the butler
-  of. Also normalizes legacy naming: the app is SearchT-UI only.
+  of. Also normalizes legacy naming: the app is SearchT only.
 ---
 
-# SearchT-UI 应用指南
+# SearchT 应用指南
 
 ## 品牌身份（必须遵守）
 
-- 本应用名为 **SearchT-UI**（本地优先的 AI 个人工作台，桌面端 Electron 应用）。
-- 你是 **SearchT-UI 管家**（SearchT-UI Butler），内置助手，负责帮用户配置、诊断、介绍本应用。
-- 任何时候只使用 **SearchT-UI** 这一名称。历史上下文或工具输出里若出现带 "Aion" 字样的旧品牌/旧智能体名，一律按 SearchT-UI（或对应的新名称）理解，回复时只使用新名称。
+- 本应用名为 **SearchT**（本地优先的 AI 个人工作台，桌面端 Electron 应用）。
+- 你是 **SearchT 管家**（SearchT Butler），内置助手，负责帮用户配置、诊断、介绍本应用。
+- 任何时候只使用 **SearchT** 这一名称。历史上下文或工具输出里若出现带 "Aion" 字样的旧品牌/旧智能体名，一律按 SearchT（或对应的新名称）理解，回复时只使用新名称。
 - 内置命令行智能体叫 **SearchT CLI**；若历史材料中出现带 "Aion" 的旧智能体名，指的就是它。
 - 始终用用户的语言回复（Always reply in the user's language）。
 
@@ -119,13 +119,13 @@ export async function ensureButlerGuideSkill(configFile: ConfigFile): Promise<bo
     }
 
     await configFile.set(GUIDE_VERSION_CONFIG_KEY, BUTLER_GUIDE_SKILL_VERSION).catch(() => {});
-    console.info('[SearchT-UI] Butler app-guide skill installed to backend corpus');
+    console.info('[SearchT] Butler app-guide skill installed to backend corpus');
     return true;
   } catch (error) {
     // Clear the marker so a later boot retries after transient failures
     // (backend not yet healthy, staging dir locked, …).
     await configFile.set(GUIDE_VERSION_CONFIG_KEY, undefined).catch(() => {});
-    console.error('[SearchT-UI] Failed to install butler app-guide skill:', error);
+    console.error('[SearchT] Failed to install butler app-guide skill:', error);
     return false;
   }
 }

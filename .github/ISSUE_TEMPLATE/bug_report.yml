@@ -1,5 +1,5 @@
 name: 🐛 Bug Report
-description: Report a bug or unexpected behavior in SearchT-UI
+description: Report a bug or unexpected behavior in SearchT
 title: '[Bug]: '
 labels: ['bug']
 body:
@@ -43,8 +43,8 @@ body:
   - type: input
     id: version
     attributes:
-      label: SearchT-UI Version
-      description: What version of SearchT-UI are you using?
+      label: SearchT Version
+      description: What version of SearchT are you using?
       placeholder: e.g., 1.2.2
     validations:
       required: true

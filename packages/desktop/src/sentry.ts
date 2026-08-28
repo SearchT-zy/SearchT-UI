@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 SearchT-UI Contributors (Apache-2.0)
+ * Copyright 2025 SearchT Contributors (Apache-2.0)
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -207,12 +207,14 @@ function getInstallPathKind(resourcesPath: unknown): string | undefined {
   if (!pathValue) return undefined;
 
   const normalized = pathValue.replace(/\//g, '\\').toLowerCase();
-  if (normalized.includes('\\appdata\\local\\programs\\searcht-ui\\resources')) {
+  // Match both the current product name ("searcht") and the legacy one
+  // ("searcht-ui") — installs from before the rename live in the old folder.
+  if (normalized.includes('\\appdata\\local\\programs\\searcht') && normalized.endsWith('\\resources')) {
     return 'user_local_programs';
   }
   if (
-    normalized.includes('\\program files\\searcht-ui\\resources') ||
-    normalized.includes('\\program files (x86)\\searcht-ui\\resources')
+    (normalized.includes('\\program files\\searcht') || normalized.includes('\\program files (x86)\\searcht')) &&
+    normalized.endsWith('\\resources')
   ) {
     return 'program_files';
   }

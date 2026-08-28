@@ -11,7 +11,7 @@ The diagnostic attachment should add a small, privacy-safe database snapshot to 
 
 ## Ownership
 
-SearchT-UI owns only feedback orchestration:
+SearchT owns only feedback orchestration:
 
 - capture `route_at_open` and `route_at_submit`
 - send the user-selected module
@@ -28,7 +28,7 @@ aionCore owns all diagnostic logic:
 - redaction and field allowlisting
 - response schema
 
-SearchT-UI main process must not read SQLite or expose `feedback:collect-db-diagnostics`.
+SearchT main process must not read SQLite or expose `feedback:collect-db-diagnostics`.
 
 ## Profile Resolution
 

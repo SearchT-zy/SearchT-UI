@@ -1,5 +1,5 @@
 /**
- * Postinstall script for SearchT-UI
+ * Postinstall script for SearchT
  * Handles native module installation for different environments
  */
 

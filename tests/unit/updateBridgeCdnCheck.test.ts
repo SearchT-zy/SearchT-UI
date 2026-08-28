@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2026 SearchT-UI Contributors
+ * Copyright 2026 SearchT Contributors
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -89,11 +89,11 @@ afterAll(() => {
 
 const CDN_YML = `version: 2.1.45
 files:
-  - url: SearchT-UI-2.1.45-mac-arm64.zip
+  - url: SearchT-2.1.45-mac-arm64.zip
     size: 100
-  - url: SearchT-UI-2.1.45-mac-arm64.dmg
+  - url: SearchT-2.1.45-mac-arm64.dmg
     size: 200
-path: SearchT-UI-2.1.45-mac-arm64.zip
+path: SearchT-2.1.45-mac-arm64.zip
 releaseDate: '2026-07-31T14:45:19.381Z'
 `;
 
@@ -102,7 +102,7 @@ const GITHUB_RELEASES = [
     tag_name: 'v2.1.45',
     name: 'v2.1.45',
     body: 'changelog body',
-    html_url: 'https://github.com/searcht-ui/SearchT-UI/releases/tag/v2.1.45',
+    html_url: 'https://github.com/searcht-ui/SearchT/releases/tag/v2.1.45',
     prerelease: false,
     draft: false,
     assets: [],
@@ -128,7 +128,7 @@ type FetchScenario = {
 const stubFetch = (scenario: FetchScenario) => {
   const fetchMock = vi.fn(async (input: RequestInfo | URL) => {
     const url = String(input);
-    if (url.startsWith('https://github.com/searcht-ui/SearchT-UI/releases/download/latest')) {
+    if (url.startsWith('https://github.com/searcht-ui/SearchT/releases/download/latest')) {
       if (!scenario.cdn) throw new Error('unexpected CDN request');
       return scenario.cdn();
     }
@@ -162,9 +162,9 @@ describe('update.check CDN-first', () => {
     expect(res.data?.updateAvailable).toBe(true);
     expect(res.data?.latest?.version).toBe('2.1.45');
     expect(res.data?.latest?.body).toBe('changelog body');
-    expect(res.data?.latest?.htmlUrl).toBe('https://github.com/searcht-ui/SearchT-UI/releases/tag/v2.1.45');
+    expect(res.data?.latest?.htmlUrl).toBe('https://github.com/searcht-ui/SearchT/releases/tag/v2.1.45');
     expect(res.data?.latest?.recommendedAsset?.url).toBe(
-      'https://github.com/searcht-ui/SearchT-UI/releases/download/2.1.45/SearchT-UI-2.1.45-mac-arm64.dmg'
+      'https://github.com/searcht-ui/SearchT/releases/download/2.1.45/SearchT-2.1.45-mac-arm64.dmg'
     );
   });
 

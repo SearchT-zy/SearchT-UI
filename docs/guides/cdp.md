@@ -1,10 +1,10 @@
 # CDP (Chrome DevTools Protocol) for MCP Development
 
-SearchT-UI supports CDP for external debugging tools integration. In development mode (`just dev`), CDP is enabled by default on port 9230.
+SearchT supports CDP for external debugging tools integration. In development mode (`just dev`), CDP is enabled by default on port 9230.
 
 ## Enable CDP in Production
 
-1. Open SearchT-UI Settings → System → Developer Debug
+1. Open SearchT Settings → System → Developer Debug
 2. Enable "Enable Remote Debugging (CDP)"
 3. Restart the app
 
@@ -32,7 +32,7 @@ Add this to your IDE's MCP configuration. The configuration file location depend
 
 ## Other AI-Friendly Development Tools
 
-SearchT-UI can integrate with other MCP tools for enhanced development experience:
+SearchT can integrate with other MCP tools for enhanced development experience:
 
 | Tool               | Purpose                                             | Config                                    |
 | ------------------ | --------------------------------------------------- | ----------------------------------------- |
@@ -45,9 +45,9 @@ See [MCP Servers](https://github.com/modelcontextprotocol/servers) for more tool
 
 ## Usage with MCP
 
-Once configured, you can use MCP tools to interact with SearchT-UI:
+Once configured, you can use MCP tools to interact with SearchT:
 
-- `list_pages` — List all open pages in SearchT-UI
+- `list_pages` — List all open pages in SearchT
 - `take_snapshot` — Get accessibility tree snapshot of current page
 - `click`, `fill`, `hover` — Interact with UI elements
 - `navigate_page` — Navigate to URLs
@@ -62,11 +62,11 @@ Once configured, you can use MCP tools to interact with SearchT-UI:
 
 # CDP (Chrome DevTools Protocol) MCP 开发
 
-SearchT-UI 支持 CDP 用于外部调试工具集成。在开发模式 (`just dev`) 下，CDP 默认在端口 9230 启用。
+SearchT 支持 CDP 用于外部调试工具集成。在开发模式 (`just dev`) 下，CDP 默认在端口 9230 启用。
 
 ## 在生产环境启用 CDP
 
-1. 打开 SearchT-UI 设置 → 系统 → 开发者调试
+1. 打开 SearchT 设置 → 系统 → 开发者调试
 2. 启用"启用远程调试 (CDP)"
 3. 重启应用
 
@@ -94,7 +94,7 @@ SearchT-UI 支持 CDP 用于外部调试工具集成。在开发模式 (`just de
 
 ## 其他 AI 友好的开发工具
 
-SearchT-UI 可以集成其他 MCP 工具来增强开发体验：
+SearchT 可以集成其他 MCP 工具来增强开发体验：
 
 | 工具               | 用途                                     | 配置                                      |
 | ------------------ | ---------------------------------------- | ----------------------------------------- |
@@ -107,9 +107,9 @@ SearchT-UI 可以集成其他 MCP 工具来增强开发体验：
 
 ## MCP 使用方式
 
-配置完成后，可以使用 MCP 工具与 SearchT-UI 交互：
+配置完成后，可以使用 MCP 工具与 SearchT 交互：
 
-- `list_pages` — 列出 SearchT-UI 中所有打开的页面
+- `list_pages` — 列出 SearchT 中所有打开的页面
 - `take_snapshot` — 获取当前页面的可访问性树快照
 - `click`, `fill`, `hover` — 与 UI 元素交互
 - `navigate_page` — 导航到 URL

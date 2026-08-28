@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 SearchT-UI Contributors (Apache-2.0)
+ * Copyright 2025 SearchT Contributors (Apache-2.0)
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -52,7 +52,7 @@ describe('startBackendOrExit', () => {
     });
 
     expect(result).toEqual({ ok: false });
-    expect(logError).toHaveBeenCalledWith('[SearchT-UI] Failed to start searcht-backend:', error);
+    expect(logError).toHaveBeenCalledWith('[SearchT] Failed to start searcht-backend:', error);
     expect(captureFailure).toHaveBeenCalledWith(error);
     expect(exitApp).toHaveBeenCalledWith(1);
     expect(calls).toEqual(['capture-start', 'capture-end', 'exit']);
@@ -78,7 +78,7 @@ describe('startBackendOrExit', () => {
     });
 
     expect(result).toEqual({ ok: false });
-    expect(logError).toHaveBeenCalledWith('[SearchT-UI] Failed to start searcht-backend:', error);
+    expect(logError).toHaveBeenCalledWith('[SearchT] Failed to start searcht-backend:', error);
     expect(captureFailure).toHaveBeenCalledWith(error);
     expect(exitApp).not.toHaveBeenCalled();
     expect(onStarted).not.toHaveBeenCalled();

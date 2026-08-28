@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 SearchT-UI Contributors (Apache-2.0)
+ * Copyright 2025 SearchT Contributors (Apache-2.0)
  * SPDX-License-Identifier: Apache-2.0
  *
  * Route → feedback-module mapping used by the titlebar report button. Every
@@ -60,7 +60,7 @@ describe('resolveFeedbackModule', () => {
     // pre-auth surfaces where the user picks the module themselves).
     // The personal-workspace pages (today/inbox/calendar/tasks/notes/knowledge/
     // workflows/onboarding) and the embedded browser page were added by the
-    // SearchT-UI fork without a dedicated feedback module, so the user picks
+    // SearchT fork without a dedicated feedback module, so the user picks
     // the module themselves when reporting from there.
     const moduleLess = new Set([
       '/guid',

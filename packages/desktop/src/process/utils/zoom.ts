@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 SearchT-UI Contributors (Apache-2.0)
+ * Copyright 2025 SearchT Contributors (Apache-2.0)
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -95,7 +95,7 @@ export const setupZoomForWindow = (win: BrowserWindow): void => {
         const { ProcessConfig } = await import('./initStorage');
         await ProcessConfig.set('ui.zoomFactor', factor);
       } catch (error) {
-        console.error('[SearchT-UI] Failed to persist zoom factor from keyboard shortcut:', error);
+        console.error('[SearchT] Failed to persist zoom factor from keyboard shortcut:', error);
       }
     })();
     trackPersistedWrite(op);

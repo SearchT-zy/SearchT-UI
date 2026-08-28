@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 SearchT-UI Contributors (Apache-2.0)
+ * Copyright 2025 SearchT Contributors (Apache-2.0)
  * SPDX-License-Identifier: Apache-2.0
  *
  * Main-window bounds persistence: restore the last-known size and position
@@ -102,7 +102,7 @@ export const attachWindowBoundsPersistence = (
     // boot-time snapshot.
     cachedBounds = bounds;
     const op = Promise.resolve(persist(bounds)).catch((error) => {
-      console.error('[SearchT-UI] Failed to persist window bounds:', error);
+      console.error('[SearchT] Failed to persist window bounds:', error);
     });
     trackPersistedWrite(op);
   };

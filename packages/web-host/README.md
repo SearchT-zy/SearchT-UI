@@ -1,6 +1,6 @@
 # @aionui/web-host
 
-WebUI host package for SearchT-UI - zero Electron dependency.
+WebUI host package for SearchT - zero Electron dependency.
 
 ## Responsibilities
 

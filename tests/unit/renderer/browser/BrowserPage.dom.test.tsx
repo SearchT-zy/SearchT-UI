@@ -36,7 +36,7 @@ describe('BrowserPage (web fallback surface)', () => {
     expect(screen.getByRole('button', { name: '后退' })).toBeDisabled();
     expect(screen.getByRole('button', { name: '前进' })).toBeDisabled();
     expect(screen.queryByTestId('browser-webview')).not.toBeInTheDocument();
-    expect(screen.getByText('内置浏览器仅在SearchT-UI桌面版中可用。')).toBeInTheDocument();
+    expect(screen.getByText('内置浏览器仅在SearchT桌面版中可用。')).toBeInTheDocument();
   });
 
   it('keeps recognition and operation actions disabled until a page is loaded', () => {

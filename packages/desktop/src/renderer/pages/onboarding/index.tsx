@@ -65,8 +65,8 @@ const STEP_COPY = [
   { title: '工作台', description: '选择打开应用时先看到的页面，以及你常用的模块。' },
   { title: '模型与隐私', description: '决定内容在哪里处理。选择云端意味着内容会离开本机，需要你的确认。' },
   { title: '连接服务', description: '选择你想连接的服务，稍后在设置中输入账号完成连接。' },
-  { title: '权限确认', description: '了解SearchT-UI的默认权限边界，然后开始使用。' },
-  { title: '本机 Agent', description: 'SearchT-UI会读取本机已安装的 Agent；检测失败不会影响使用。' },
+  { title: '权限确认', description: '了解SearchT的默认权限边界，然后开始使用。' },
+  { title: '本机 Agent', description: 'SearchT会读取本机已安装的 Agent；检测失败不会影响使用。' },
 ];
 
 const destinationFor = (startPage: WorkspacePreferences['startPage']) =>
@@ -158,7 +158,7 @@ const OnboardingPage: React.FC = () => {
       <div className='box-border mx-auto flex min-h-full w-full max-w-960px flex-col px-20px py-28px md:px-48px md:py-48px'>
         <header className='mb-28px flex items-start justify-between gap-16px'>
           <div>
-            <p className='mb-8px text-12px font-600 tracking-[0.08em] text-primary-6'>SearchT-UI · SEARCHT</p>
+            <p className='mb-8px text-12px font-600 tracking-[0.08em] text-primary-6'>SearchT · SEARCHT</p>
             <h1 className='m-0 text-26px font-600 leading-34px'>
               {t('personal.onboarding.title', { defaultValue: '设置你的工作台' })}
             </h1>

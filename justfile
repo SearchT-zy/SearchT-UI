@@ -1,4 +1,4 @@
-# SearchT-UI Development Justfile
+# SearchT Development Justfile
 # Usage: just <recipe>
 
 # On Windows, simple recipes (no shebang) use PowerShell
@@ -43,7 +43,7 @@ preflight:
     $ErrorActionPreference = 'Continue'
     $failed = $false
     Write-Host "=========================================="
-    Write-Host "  SearchT-UI Build Preflight Check"
+    Write-Host "  SearchT Build Preflight Check"
     Write-Host "=========================================="
     Write-Host ""
     Write-Host "[1/6] Node.js..."
@@ -90,7 +90,7 @@ preflight:
 # Show current build environment info
 info:
     #!/usr/bin/env bash
-    echo "SearchT-UI Build Environment"
+    echo "SearchT Build Environment"
     echo "========================"
     echo "Node:     $(node --version)"
     echo "bun:      $(bun --version)"
@@ -232,7 +232,7 @@ build-win-arm64: preflight
 build-win: preflight
     #!/usr/bin/env pwsh
     Write-Host "Cleaning output directory..."
-    Get-Process -Name "SearchT-UI","electron" -ErrorAction SilentlyContinue | Stop-Process -Force -ErrorAction SilentlyContinue
+    Get-Process -Name "SearchT","electron" -ErrorAction SilentlyContinue | Stop-Process -Force -ErrorAction SilentlyContinue
     if (Test-Path "out") { Remove-Item -Recurse -Force "out" -ErrorAction SilentlyContinue }
     npm install
     npm run postinstall; if ($LASTEXITCODE -ne 0) { Write-Host "postinstall failed (continuing)"; $LASTEXITCODE = 0 }

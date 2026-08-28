@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 SearchT-UI Contributors (Apache-2.0)
+ * Copyright 2025 SearchT Contributors (Apache-2.0)
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -40,7 +40,7 @@ async function runWithTimeout(
   const timeout = new Promise<void>((resolve) => {
     timeoutId = setTimeout(() => {
       timedOut = true;
-      logWarn('[SearchT-UI] Cleanup timed out after 10s, forcing quit');
+      logWarn('[SearchT] Cleanup timed out after 10s, forcing quit');
       resolve();
     }, timeoutMs);
   });
@@ -52,7 +52,7 @@ async function runWithTimeout(
 }
 
 async function runQuitCleanup(deps: QuitCleanupDeps): Promise<void> {
-  deps.logInfo('[SearchT-UI] before-quit');
+  deps.logInfo('[SearchT] before-quit');
   deps.setIsQuitting(true);
   deps.markExplicitQuit();
   deps.destroyTray();

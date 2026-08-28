@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 SearchT-UI Contributors (Apache-2.0)
+ * Copyright 2025 SearchT Contributors (Apache-2.0)
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -144,7 +144,7 @@ childProcess.execSync = function mockedExecSync(command) {
     expect(queryScript).toContain("'installer-self-lock'");
     expect(queryScript).toContain('outerInstallerPid');
     expect(queryScript).toContain('currentOutDir');
-    expect(queryScript).toContain("name = 'SearchT-UI installer'");
+    expect(queryScript).toContain("name = 'SearchT installer'");
   });
 
   it('continues with the bundled uninstaller when installed-uninstaller repair remains locked', () => {
@@ -362,9 +362,9 @@ childProcess.execSync = function mockedExecSync(command) {
 
       if (args.includes('--win')) {
         const installUtil = readFileSync(resolveAppBuilderInstallUtil(), 'utf8');
-        expect(installUtil).toContain('SearchT-UI-bundled-uninstaller override source');
-        expect(installUtil).toContain('$PLUGINSDIR\\SearchT-UI-fixed-uninstaller.exe');
-        expect(installUtil.match(/SearchT-UI-bundled-uninstaller override source/g)).toHaveLength(1);
+        expect(installUtil).toContain('SearchT-bundled-uninstaller override source');
+        expect(installUtil).toContain('$PLUGINSDIR\\SearchT-fixed-uninstaller.exe');
+        expect(installUtil.match(/SearchT-bundled-uninstaller override source/g)).toHaveLength(1);
       }
 
       const calls = JSON.parse(readFileSync(callsPath, 'utf8')) as Array<{ arch?: string } | null>;

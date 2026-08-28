@@ -5,7 +5,7 @@
   "keywords": [],
   "license": "Apache-2.0",
   "author": {
-    "name": "SearchT-UI",
+    "name": "SearchT",
     "email": "service@searcht.local"
   },
   "workspaces": [
@@ -272,5 +272,5 @@
   "electronRebuild": {
     "electronVersion": "^37.3.1"
   },
-  "productName": "SearchT-UI"
+  "productName": "SearchT"
 }

@@ -1,4 +1,4 @@
-# Pre-commit configuration for SearchT-UI
+# Pre-commit configuration for SearchT
 # Ensures local checks match CI checks (TypeScript, Oxlint, Oxfmt)
 #
 # Installation:

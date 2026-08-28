@@ -58,4 +58,4 @@
 
 <!-- Commits and PR titles must NOT contain AI signatures (Co-Authored-By, "Generated with", etc.). -->
 
-**Thank you for contributing to SearchT-UI! 🎉**
+**Thank you for contributing to SearchT! 🎉**

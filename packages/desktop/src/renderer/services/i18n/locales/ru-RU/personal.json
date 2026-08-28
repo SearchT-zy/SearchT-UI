@@ -339,7 +339,7 @@
   },
   "memory": {
     "title": "Memory",
-    "description": "Review and manage what SearchT-UI remembers for you.",
+    "description": "Review and manage what SearchT remembers for you.",
     "add": "Add memory",
     "retry": "Retry",
     "loadFailed": "Unable to load memory",
@@ -501,7 +501,7 @@
   },
   "settings": {
     "title": "Personal workspace",
-    "description": "Choose what SearchT-UI shows and where it opens.",
+    "description": "Choose what SearchT shows and where it opens.",
     "modules": "Visible modules",
     "startPage": "Open the app to",
     "scenePack": "Working style",
@@ -510,7 +510,7 @@
     "backup": "Create backup",
     "backupDone": "Backup created",
     "backupFailed": "Could not create backup",
-    "import": "SearchT-UI data",
+    "import": "SearchT data",
     "saveFailed": "Could not save; the previous setting was restored"
   },
   "scene": {
@@ -527,8 +527,8 @@
   },
   "connectors": {
     "title": "Подключения",
-    "description": "SearchT-UI автоматически получает новые и изменённые файлы из выбранных папок.",
-    "desktopOnly": "Подключение локальных папок доступно только в настольном приложении SearchT-UI.",
+    "description": "SearchT автоматически получает новые и изменённые файлы из выбранных папок.",
+    "desktopOnly": "Подключение локальных папок доступно только в настольном приложении SearchT.",
     "addFolder": "Добавить папку",
     "includeSubfolders": "Включить подпапки",
     "includeSubfoldersHint": "При добавлении получать также файлы из подпапок",
@@ -554,7 +554,7 @@
     "loadFailed": "Не удалось загрузить подключения",
     "actionFailed": "Не удалось выполнить действие",
     "folderUnavailable": "Эта папка не найдена. Убедитесь, что она по-прежнему доступна.",
-    "desktopOnlyAll": "Connections are managed in the SearchT-UI desktop app.",
+    "desktopOnlyAll": "Connections are managed in the SearchT desktop app.",
     "emptyAllTitle": "No connections yet",
     "emptyAllDescription": "Connect email or a local folder to automatically bring new material into Inbox.",
     "addEmail": "Connect email",
@@ -807,7 +807,7 @@
     "reload": "Reload",
     "home": "Home",
     "loadFailed": "Failed to load the page.",
-    "desktopOnly": "The embedded browser is only available in the SearchT-UI desktop app.",
+    "desktopOnly": "The embedded browser is only available in the SearchT desktop app.",
     "recognize": "Recognize page content",
     "recognizeHint": "Extract the title, body text, and link count of the current page; save it to Inbox in one click.",
     "read": "Read page content",

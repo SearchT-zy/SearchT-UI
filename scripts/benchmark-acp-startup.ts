@@ -87,7 +87,7 @@ function agentPillByBackend(backend: string) {
 function getLogFilePath(): string {
   const today = new Date().toISOString().slice(0, 10);
   // Dev mode uses "AionUi-Dev", production uses "AionUi"
-  const devPath = path.join(os.homedir(), 'Library', 'Logs', 'SearchT-UI-Dev', `${today}.log`);
+  const devPath = path.join(os.homedir(), 'Library', 'Logs', 'SearchT-Dev', `${today}.log`);
   const prodPath = path.join(os.homedir(), 'Library', 'Logs', 'AionUi', `${today}.log`);
   return fs.existsSync(devPath) ? devPath : prodPath;
 }

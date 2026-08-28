@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 SearchT-UI Contributors (Apache-2.0)
+ * Copyright 2025 SearchT Contributors (Apache-2.0)
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -26,7 +26,7 @@ import {
 } from './autoUpdateDiagnostics';
 import { buildCdnFeedOptions, isSearchtUpdateServiceConfigured } from './updateFeed';
 
-const SEARCHT_UPDATE_NOT_CONFIGURED = 'SearchT-UI update service is not configured';
+const SEARCHT_UPDATE_NOT_CONFIGURED = 'SearchT update service is not configured';
 
 const FORCE_DEV_AUTO_UPDATE_ENV = 'SEARCHT_FORCE_DEV_AUTO_UPDATE';
 const DEBUG_AUTO_UPDATE_CURRENT_VERSION_ENV = 'SEARCHT_DEBUG_AUTO_UPDATE_CURRENT_VERSION';

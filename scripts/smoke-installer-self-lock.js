@@ -88,39 +88,39 @@ function main() {
 
   const nsi = `
 Unicode true
-Name "SearchT-UI Installer Self Lock Smoke"
+Name "SearchT Installer Self Lock Smoke"
 OutFile "${nsisQuote(exePath)}"
 RequestExecutionLevel user
 SilentInstall silent
 !define VERSION "self-lock-smoke"
 !define SEARCHT_TARGET_ARCH "x64"
 !define SEARCHT_FALLBACK_LOG "searcht-installer-self-lock-fallback.log"
-!define SEARCHT_APP_EXECUTABLE_FILENAME "SearchT-UI.exe"
-!define UNINSTALL_FILENAME "Uninstall SearchT-UI.exe"
+!define SEARCHT_APP_EXECUTABLE_FILENAME "SearchT.exe"
+!define UNINSTALL_FILENAME "Uninstall SearchT.exe"
 !define PROJECT_DIR "${nsisQuote(repoRoot)}"
 !include LogicLib.nsh
 !include "${nsisQuote(processControlPath)}"
 
-Var SearchT-UISessionId
-Var SearchT-UIIsUpdated
-Var SearchT-UISessionLogPath
+Var SearchTSessionId
+Var SearchTIsUpdated
+Var SearchTSessionLogPath
 Var ResultFile
 
 Section
   StrCpy $INSTDIR "${nsisQuote(installDir)}"
-  StrCpy $SearchT-UISessionId "selflock"
-  StrCpy $SearchT-UIIsUpdated "1"
-  StrCpy $SearchT-UISessionLogPath "${nsisQuote(logPath)}"
+  StrCpy $SearchTSessionId "selflock"
+  StrCpy $SearchTIsUpdated "1"
+  StrCpy $SearchTSessionLogPath "${nsisQuote(logPath)}"
   StrCpy $ResultFile "${nsisQuote(resultPath)}"
   InitPluginsDir
   SetOutPath $INSTDIR
-  StrCpy $SearchT-UICurrentOutDir "$INSTDIR"
-  !insertmacro SEARCHT_QUERY_LOCKERS "$INSTDIR" $SearchT-UILockerResult
+  StrCpy $SearchTCurrentOutDir "$INSTDIR"
+  !insertmacro SEARCHT_QUERY_LOCKERS "$INSTDIR" $SearchTLockerResult
   FileOpen $0 "$ResultFile" w
-  FileWrite $0 "$SearchT-UILockerResult"
-  FileWrite $0 "|$SearchT-UICurrentOutDir|$SearchT-UISessionLogPath"
+  FileWrite $0 "$SearchTLockerResult"
+  FileWrite $0 "|$SearchTCurrentOutDir|$SearchTSessionLogPath"
   FileClose $0
-  \${If} $SearchT-UILockerResult != 0
+  \${If} $SearchTLockerResult != 0
     SetErrorLevel 10
     Quit
   \${EndIf}
@@ -159,8 +159,8 @@ SectionEnd
       throw new Error(`expected currentOutDir ${installDir}, got ${lockers.currentOutDir}`);
     }
     const blocking = lockers.blockingProcesses || [];
-    if (!blocking.some((process) => process.name === 'SearchT-UI installer' && Number(process.pid) > 0)) {
-      throw new Error(`expected SearchT-UI installer blocker, got ${JSON.stringify(blocking)}`);
+    if (!blocking.some((process) => process.name === 'SearchT installer' && Number(process.pid) > 0)) {
+      throw new Error(`expected SearchT installer blocker, got ${JSON.stringify(blocking)}`);
     }
 
     console.log(`[self-lock] ok: ${logPath}`);

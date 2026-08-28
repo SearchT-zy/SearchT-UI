@@ -58,7 +58,7 @@ describe('WorkspacePreferenceRepository', () => {
 
     expect(() =>
       repository.set({ ...DEFAULT_WORKSPACE_PREFERENCES, startPage: 'invalid' as WorkspacePreferences['startPage'] })
-    ).toThrow('Invalid SearchT-UI start page');
+    ).toThrow('Invalid SearchT start page');
     expect(repository.get()).toEqual(previous);
   });
 

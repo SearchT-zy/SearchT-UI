@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 SearchT-UI Contributors (Apache-2.0)
+ * Copyright 2025 SearchT Contributors (Apache-2.0)
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -8,7 +8,7 @@
 // when the built-in MCP server boots in a standalone stdio process.
 export const BUILTIN_IMAGE_GEN_ID = 'builtin-image-gen';
 export const BUILTIN_IMAGE_GEN_NAME = 'searcht-image-generation';
-export const BUILTIN_IMAGE_GEN_LEGACY_NAMES = ['SearchT-UI Image Generation', BUILTIN_IMAGE_GEN_ID] as const;
+export const BUILTIN_IMAGE_GEN_LEGACY_NAMES = ['SearchT Image Generation', BUILTIN_IMAGE_GEN_ID] as const;
 
 export function isBuiltinImageGenName(name?: string | null): boolean {
   if (!name) return false;

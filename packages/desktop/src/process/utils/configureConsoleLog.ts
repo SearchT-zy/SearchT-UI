@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 SearchT-UI Contributors (Apache-2.0)
+ * Copyright 2025 SearchT Contributors (Apache-2.0)
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -10,9 +10,9 @@
  * daily log files on disk.
  *
  * Log file location (managed by electron-log):
- *   - macOS:   ~/Library/Logs/SearchT-UI/YYYY/MM/DD/YYYY-MM-DD.log
- *   - Windows: %USERPROFILE%\AppData\Roaming\SearchT-UI\logs\YYYY\MM\DD\YYYY-MM-DD.log
- *   - Linux:   ~/.config/SearchT-UI/logs/YYYY/MM/DD/YYYY-MM-DD.log
+ *   - macOS:   ~/Library/Logs/SearchT/YYYY/MM/DD/YYYY-MM-DD.log
+ *   - Windows: %USERPROFILE%\AppData\Roaming\SearchT\logs\YYYY\MM\DD\YYYY-MM-DD.log
+ *   - Linux:   ~/.config/SearchT/logs/YYYY/MM/DD/YYYY-MM-DD.log
  *
  * Users can share the relevant date's file for debugging (#1157).
  *

@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 SearchT-UI Contributors (Apache-2.0)
+ * Copyright 2025 SearchT Contributors (Apache-2.0)
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -187,7 +187,7 @@ function buildBuiltinBrowserServer(): McpImportServer {
   return {
     name: BUILTIN_BROWSER_MCP_NAME,
     description:
-      "Control SearchT-UI's built-in browser (the side preview panel): open pages, click, type and read content. " +
+      "Control SearchT's built-in browser (the side preview panel): open pages, click, type and read content. " +
       'Sign-in state is shared across tabs and preserved between sessions.',
     // 默认开启：用户装好即可用，无需任何配置
     // Enabled by default: works out of the box with zero configuration.
@@ -495,7 +495,7 @@ const MIGRATION_STEPS: Array<{
     },
   },
   {
-    // Installs/refreshes the desktop-managed SearchT-UI feature guide that the
+    // Installs/refreshes the desktop-managed SearchT feature guide that the
     // built-in butler answers from (its upstream aionui-* skills are locked).
     name: 'ensureButlerGuideSkill',
     run: async (configFile) => {
@@ -531,7 +531,7 @@ async function syncBuiltinMcpConfig(configFile: ConfigFile): Promise<void> {
 
   await httpRequest<void>('PUT', '/api/settings/client', { 'mcp.config': mergedMcpConfig });
   console.info(
-    '[SearchT-UI] Synced builtin MCP config to backend settings (%d builtin servers)',
+    '[SearchT] Synced builtin MCP config to backend settings (%d builtin servers)',
     localBuiltinServers.length
   );
 }
@@ -542,9 +542,9 @@ export async function runBackendMigrations(configFile: ConfigFile): Promise<void
     const start = Date.now();
     try {
       await step.run();
-      console.info(`[SearchT-UI] Backend migration step completed: ${step.name} (${Date.now() - start}ms)`);
+      console.info(`[SearchT] Backend migration step completed: ${step.name} (${Date.now() - start}ms)`);
     } catch (error) {
-      console.error(`[SearchT-UI] Backend migration step failed: ${step.name} (${Date.now() - start}ms)`, error);
+      console.error(`[SearchT] Backend migration step failed: ${step.name} (${Date.now() - start}ms)`, error);
     }
   }, Promise.resolve());
 
@@ -555,23 +555,23 @@ export async function runBackendMigrations(configFile: ConfigFile): Promise<void
       const completed = await step.run(configFile);
       const elapsed = Date.now() - start;
       if (!completed) {
-        console.warn(`[SearchT-UI] Backend migration step incomplete: ${step.name} (${elapsed}ms)`);
+        console.warn(`[SearchT] Backend migration step incomplete: ${step.name} (${elapsed}ms)`);
         return;
       }
-      console.info(`[SearchT-UI] Backend migration step completed: ${step.name} (${elapsed}ms)`);
+      console.info(`[SearchT] Backend migration step completed: ${step.name} (${elapsed}ms)`);
     } catch (error) {
       const elapsed = Date.now() - start;
-      console.error(`[SearchT-UI] Backend migration step failed: ${step.name} (${elapsed}ms)`, error);
+      console.error(`[SearchT] Backend migration step failed: ${step.name} (${elapsed}ms)`, error);
     }
   }, Promise.resolve());
 
   const syncStart = Date.now();
   try {
     await syncBuiltinMcpConfig(configFile);
-    console.info(`[SearchT-UI] Backend migration step completed: syncBuiltinMcpConfig (${Date.now() - syncStart}ms)`);
+    console.info(`[SearchT] Backend migration step completed: syncBuiltinMcpConfig (${Date.now() - syncStart}ms)`);
   } catch (error) {
     console.error(
-      `[SearchT-UI] Backend migration step failed: syncBuiltinMcpConfig (${Date.now() - syncStart}ms)`,
+      `[SearchT] Backend migration step failed: syncBuiltinMcpConfig (${Date.now() - syncStart}ms)`,
       error
     );
   }

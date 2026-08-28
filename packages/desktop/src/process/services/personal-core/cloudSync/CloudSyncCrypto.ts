@@ -1,7 +1,7 @@
 import { createCipheriv, createDecipheriv, randomBytes, scryptSync, timingSafeEqual, createHash } from 'node:crypto';
 
 /**
- * Encrypted bundle format for SearchT-UI cloud sync:
+ * Encrypted bundle format for SearchT cloud sync:
  *   ZXSYNC1 | salt(16) | iv(12) | tag(16) | ciphertext
  *
  * The AES-256-GCM master key is derived from the user passphrase with scrypt

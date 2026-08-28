@@ -12,13 +12,13 @@ import {
 describe('cloud sync crypto', () => {
   it('round-trips plaintext through the encrypted bundle format', () => {
     const masterKey = deriveMasterKey('correct horse battery', newMasterSalt());
-    const plaintext = Buffer.from('SearchT-UI cloud sync payload', 'utf8');
+    const plaintext = Buffer.from('SearchT cloud sync payload', 'utf8');
 
     const bundle = encryptBundle(plaintext, masterKey);
 
     expect(bundle.subarray(0, 7).toString('utf8')).toBe('ZXSYNC1');
-    expect(bundle.toString('utf8')).not.toContain('SearchT-UI');
-    expect(decryptBundle(bundle, masterKey).toString('utf8')).toBe('SearchT-UI cloud sync payload');
+    expect(bundle.toString('utf8')).not.toContain('SearchT');
+    expect(decryptBundle(bundle, masterKey).toString('utf8')).toBe('SearchT cloud sync payload');
   });
 
   it('rejects tampered ciphertext and wrong keys', () => {

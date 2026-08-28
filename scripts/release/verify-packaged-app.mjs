@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Verify the packaged (unpacked or installed) SearchT-UI desktop app:
+ * Verify the packaged (unpacked or installed) SearchT desktop app:
  *  - main executable exists
  *  - bundled backend binary + manifest exist for the target platform/arch
  *  - electron-builder.yml extraResources mapping is honored
@@ -33,7 +33,7 @@ function check(name, condition, detail = '') {
   checks.push({ name, ok: Boolean(condition), detail });
 }
 
-const exeName = process.platform === 'win32' ? 'SearchT-UI.exe' : 'SearchT-UI';
+const exeName = process.platform === 'win32' ? 'SearchT.exe' : 'SearchT';
 const mainExe = path.join(targetDir, exeName);
 check('main executable', existsSync(mainExe), mainExe);
 

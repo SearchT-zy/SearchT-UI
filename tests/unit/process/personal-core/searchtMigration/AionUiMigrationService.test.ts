@@ -44,7 +44,7 @@ beforeEach(() => {
   directory = mkdtempSync(path.join(os.tmpdir(), 'searcht-searcht-import-'));
   personal = PersonalDatabase.open(directory);
   // The legacy install keeps the pre-migration baseline catalog, while the
-  // SearchT-UI engine runs the fully migrated v26 schema. The importer must copy
+  // SearchT engine runs the fully migrated v26 schema. The importer must copy
   // the intersecting columns without touching the newer-only ones.
   sourceDriver = new BetterSqlite3Driver(path.join(directory, 'source-aionui.db'));
   initSchema(sourceDriver);

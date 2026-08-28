@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 SearchT-UI Contributors (Apache-2.0)
+ * Copyright 2025 SearchT Contributors (Apache-2.0)
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -363,7 +363,7 @@ export async function verifyDirectoryFiles(dir1: string, dir2: string): Promise<
 
     return true;
   } catch (error) {
-    console.warn('[SearchT-UI] Error verifying directory files:', error);
+    console.warn('[SearchT] Error verifying directory files:', error);
     return false;
   }
 }
@@ -388,8 +388,8 @@ export const copyFilesToDirectory = async (
     try {
       await fs.access(absoluteFilePath);
     } catch (error) {
-      console.warn(`[SearchT-UI] Source file does not exist, skipping: ${absoluteFilePath}`);
-      console.warn(`[SearchT-UI] Original path: ${file}`);
+      console.warn(`[SearchT] Source file does not exist, skipping: ${absoluteFilePath}`);
+      console.warn(`[SearchT] Original path: ${file}`);
       // 跳过不存在的文件，而不是抛出错误
       continue;
     }
@@ -420,7 +420,7 @@ export const copyFilesToDirectory = async (
       await fs.copyFile(absoluteFilePath, destPath);
       copiedFiles.push(destPath);
     } catch (error) {
-      console.error(`[SearchT-UI] Failed to copy file from ${absoluteFilePath} to ${destPath}:`, error);
+      console.error(`[SearchT] Failed to copy file from ${absoluteFilePath} to ${destPath}:`, error);
       // 继续处理其他文件，而不是完全失败
     }
 
