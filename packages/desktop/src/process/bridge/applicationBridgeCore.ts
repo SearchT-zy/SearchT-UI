@@ -35,7 +35,7 @@ export function initApplicationBridgeCore(): void {
     if (oldDir.cacheDir !== safeCacheDir) {
       await copyDirectoryRecursively(oldDir.cacheDir, safeCacheDir);
     }
-    await ProcessEnv.set('searcht-ui.dir', { cacheDir: safeCacheDir, workDir: safeWorkDir, logDir: safeLogDir });
+    await ProcessEnv.set('searcht.dir', { cacheDir: safeCacheDir, workDir: safeWorkDir, logDir: safeLogDir });
   });
 
   ipcBridge.application.getPath.provider(({ name }) => {

@@ -187,17 +187,17 @@ describe('MarkdownView local file links', () => {
   });
 
   it('keeps ordinary http links as browser anchors', () => {
-    render(<MarkdownView>{'[docs](https://github.com/searcht-ui/SearchT/docs)'}</MarkdownView>);
+    render(<MarkdownView>{'[docs](https://github.com/SearchT-zy/SearchT/docs)'}</MarkdownView>);
 
     const link = screen.getByRole('link', { name: 'docs' });
-    expect(link).toHaveAttribute('href', 'https://github.com/searcht-ui/SearchT/docs');
+    expect(link).toHaveAttribute('href', 'https://github.com/SearchT-zy/SearchT/docs');
   });
 
   it('keeps http hash links as browser anchors', () => {
-    render(<MarkdownView>{'[docs](https://github.com/searcht-ui/SearchT/docs#L10)'}</MarkdownView>);
+    render(<MarkdownView>{'[docs](https://github.com/SearchT-zy/SearchT/docs#L10)'}</MarkdownView>);
 
     const link = screen.getByRole('link', { name: 'docs' });
-    expect(link).toHaveAttribute('href', 'https://github.com/searcht-ui/SearchT/docs#L10');
+    expect(link).toHaveAttribute('href', 'https://github.com/SearchT-zy/SearchT/docs#L10');
   });
 
   it('adds empty alt text to external raw HTML images without alt text', () => {

@@ -29,7 +29,7 @@ const _pkg = (() => {
       version?: string;
     };
   } catch {
-    return { name: 'searcht-ui', version: '0.0.0' };
+    return { name: 'searcht', version: '0.0.0' };
   }
 })();
 
@@ -42,7 +42,7 @@ export class NodePlatformServices implements IPlatformServices {
     getAppPath: (): string | null => process.cwd(),
     isPackaged: () => process.env.IS_PACKAGED === 'true',
     getSystemPath: (_name: 'desktop' | 'home' | 'downloads'): string | null => null,
-    getName: () => _pkg.name ?? 'searcht-ui',
+    getName: () => _pkg.name ?? 'searcht',
     getVersion: () => _pkg.version ?? '0.0.0',
     needsCliSafeSymlinks: () => false,
   };

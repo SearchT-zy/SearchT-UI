@@ -13,7 +13,7 @@
 #
 # 用法：
 #   # 建議先下載並檢查腳本後再執行（避免直接 pipe to bash）：
-#   curl -fsSL -o install-searcht-ui.sh https://raw.githubusercontent.com/searcht-ui/SearchT/main/scripts/install-ubuntu.sh
+#   curl -fsSL -o install-searcht-ui.sh https://raw.githubusercontent.com/SearchT-zy/SearchT/main/scripts/install-ubuntu.sh
 #   less install-searcht-ui.sh   # 檢查內容
 #   bash install-searcht-ui.sh
 #   # 或指定版本：
@@ -96,10 +96,10 @@ resolve_version() {
         info "正在查詢最新版本..."
         # 透過 GitHub API 取得 latest release tag
         if command -v curl &>/dev/null; then
-            VERSION=$(curl -fsSL "https://api.github.com/repos/searcht-ui/SearchT/releases/latest" \
+            VERSION=$(curl -fsSL "https://api.github.com/repos/SearchT-zy/SearchT/releases/latest" \
                 | grep '"tag_name"' | head -1 | sed 's/.*"v\([^"]*\)".*/\1/')
         elif command -v wget &>/dev/null; then
-            VERSION=$(wget -qO- "https://api.github.com/repos/searcht-ui/SearchT/releases/latest" \
+            VERSION=$(wget -qO- "https://api.github.com/repos/SearchT-zy/SearchT/releases/latest" \
                 | grep '"tag_name"' | head -1 | sed 's/.*"v\([^"]*\)".*/\1/')
         else
             die "需要 curl 或 wget 來下載，請先安裝: sudo apt-get install -y curl"
@@ -112,7 +112,7 @@ resolve_version() {
     fi
 
     DEB_FILENAME="SearchT-${VERSION}-linux-${DEB_ARCH}.deb"
-    DOWNLOAD_URL="https://github.com/searcht-ui/SearchT/releases/download/v${VERSION}/${DEB_FILENAME}"
+    DOWNLOAD_URL="https://github.com/SearchT-zy/SearchT/releases/download/v${VERSION}/${DEB_FILENAME}"
 }
 
 # ─── 下載 .deb 套件 ──────────────────────────────────────────────────────────
@@ -304,7 +304,7 @@ create_systemd_service() {
     $SUDO tee "$service_path" > /dev/null << 'SERVICE_EOF'
 [Unit]
 Description=SearchT AI Agent Desktop App (WebUI Mode)
-Documentation=https://github.com/searcht-ui/SearchT
+Documentation=https://github.com/SearchT-zy/SearchT
 After=network-online.target
 Wants=network-online.target
 
@@ -396,8 +396,8 @@ print_summary() {
         echo ""
     fi
 
-    echo -e "  ${BOLD}📖 文件:${NC}  https://github.com/searcht-ui/SearchT"
-    echo -e "  ${BOLD}🐛 回報:${NC}  https://github.com/searcht-ui/SearchT/issues"
+    echo -e "  ${BOLD}📖 文件:${NC}  https://github.com/SearchT-zy/SearchT"
+    echo -e "  ${BOLD}🐛 回報:${NC}  https://github.com/SearchT-zy/SearchT/issues"
     echo ""
 
     if [[ "${MODE}" == "headless" ]]; then

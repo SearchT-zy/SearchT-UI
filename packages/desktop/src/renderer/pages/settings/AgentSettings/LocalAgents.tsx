@@ -35,7 +35,7 @@ import {
   type InstalledAgentCheckProgress,
 } from './agentFilters';
 
-const LOCAL_AGENT_SETUP_GUIDE_URL = 'https://github.com/searcht-ui/SearchT/wiki/ACP-Setup';
+const LOCAL_AGENT_SETUP_GUIDE_URL = 'https://github.com/SearchT-zy/SearchT/wiki/ACP-Setup';
 
 const LocalAgents: React.FC = () => {
   const { t, i18n } = useTranslation();

@@ -15,7 +15,7 @@
 2. 页面顶部居中显示应用名 "SearchT"（h3 标题）
 3. 下方显示应用描述（通过 i18n 系统，随语言设置变化）
 4. 显示当前版本号 badge（格式 `v{x.y.z}`），版本号来自打包时的 `package.json`
-5. 版本号旁有 GitHub 图标，点击在系统浏览器中打开项目仓库 `https://github.com/searcht-ui/SearchT`
+5. 版本号旁有 GitHub 图标，点击在系统浏览器中打开项目仓库 `https://github.com/SearchT-zy/SearchT`
 
 **异常情况**：
 
@@ -383,12 +383,12 @@
 
 | 序号 | 标题     | 行为               | 目标                                                |
 | ---- | -------- | ------------------ | --------------------------------------------------- |
-| 1    | 帮助文档 | 打开外部链接       | `https://github.com/searcht-ui/SearchT/wiki`     |
-| 2    | 更新日志 | 打开外部链接       | `https://github.com/searcht-ui/SearchT/releases` |
-| 3    | 意见反馈 | 打开外部链接       | `https://github.com/searcht-ui/SearchT/issues`   |
+| 1    | 帮助文档 | 打开外部链接       | `https://github.com/SearchT-zy/SearchT/wiki`     |
+| 2    | 更新日志 | 打开外部链接       | `https://github.com/SearchT-zy/SearchT/releases` |
+| 3    | 意见反馈 | 打开外部链接       | `https://github.com/SearchT-zy/SearchT/issues`   |
 | 4    | 问题报告 | **打开应用内弹窗** | FeedbackReportModal（见 F-ABOUT-11）                |
 | 5    | 联系我   | 打开外部链接       | `https://x.com/WailiVery`                           |
-| 6    | 官网     | 打开外部链接       | `https://github.com/searcht-ui/SearchT`          |
+| 6    | 官网     | 打开外部链接       | `https://github.com/SearchT-zy/SearchT`          |
 
 **打开机制**：
 

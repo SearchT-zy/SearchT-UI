@@ -468,7 +468,7 @@ describe('LocalAgents', () => {
 
     fireEvent.click(screen.getByText('settings.agentManagement.localAgentsSetupLink'));
 
-    expect(openExternalUrl).toHaveBeenCalledWith('https://github.com/searcht-ui/SearchT/wiki/ACP-Setup');
+    expect(openExternalUrl).toHaveBeenCalledWith('https://github.com/SearchT-zy/SearchT/wiki/ACP-Setup');
   });
 
   it('binds assistants to managed agents by agent_id instead of runtime backend', () => {

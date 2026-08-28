@@ -60,7 +60,7 @@ interface AutoUpdateCheckParams {
   includePrerelease?: boolean;
 }
 
-const DEFAULT_REPO = 'searcht-ui/SearchT';
+const DEFAULT_REPO = 'SearchT-zy/SearchT';
 const DEFAULT_USER_AGENT = 'SearchT';
 const ALLOWED_ASSET_EXTS = new Set(['.exe', '.msi', '.dmg', '.zip', '.deb', '.rpm']);
 // SearchT ships no first-party CDN: release assets resolve against the

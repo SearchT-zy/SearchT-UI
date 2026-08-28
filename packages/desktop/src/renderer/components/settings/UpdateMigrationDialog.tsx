@@ -18,7 +18,7 @@ export const OPEN_MIGRATION_DIALOG_EVENT = 'searcht-open-migration-dialog';
 
 // Official website users are guided to for the SearchT Pro download. Kept as a
 // module constant (not i18n) — it is a URL, not translatable copy.
-const SEARCHT_WEBSITE_URL = 'https://github.com/searcht-ui/SearchT/';
+const SEARCHT_WEBSITE_URL = 'https://github.com/SearchT-zy/SearchT/';
 
 // localStorage flag remembering that the migration invite already auto-opened
 // once on this machine. First launch of the discontinued build pops the card

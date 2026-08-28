@@ -112,8 +112,8 @@ describe('updateBridge manual download dedupe', () => {
   it('reuses the active manual download for the same URL, fallback URL, and file name', async () => {
     const handler = await getDownloadHandler();
     const request = {
-      url: 'https://github.com/searcht-ui/SearchT/releases/download/2.2.0/SearchT-2.2.0-mac-arm64.dmg',
-      fallbackUrl: 'https://github.com/searcht-ui/SearchT/releases/download/v2.2.0/SearchT-2.2.0-mac-arm64.dmg',
+      url: 'https://github.com/SearchT-zy/SearchT/releases/download/2.2.0/SearchT-2.2.0-mac-arm64.dmg',
+      fallbackUrl: 'https://github.com/SearchT-zy/SearchT/releases/download/v2.2.0/SearchT-2.2.0-mac-arm64.dmg',
       file_name: 'SearchT-2.2.0-mac-arm64.dmg',
     };
 
@@ -149,8 +149,8 @@ describe('updateBridge manual download dedupe', () => {
 
     const handler = await getDownloadHandler();
     const request = {
-      url: 'https://github.com/searcht-ui/SearchT/releases/download/2.2.0/SearchT-2.2.0-mac-arm64.dmg',
-      fallbackUrl: 'https://github.com/searcht-ui/SearchT/releases/download/v2.2.0/SearchT-2.2.0-mac-arm64.dmg',
+      url: 'https://github.com/SearchT-zy/SearchT/releases/download/2.2.0/SearchT-2.2.0-mac-arm64.dmg',
+      fallbackUrl: 'https://github.com/SearchT-zy/SearchT/releases/download/v2.2.0/SearchT-2.2.0-mac-arm64.dmg',
       file_name: 'SearchT-2.2.0-mac-arm64.dmg',
     };
 
@@ -193,8 +193,8 @@ describe('updateBridge manual download dedupe', () => {
 
     const { download, cancel, ipcBridge } = await getDownloadHandlers();
     const request = {
-      url: 'https://github.com/searcht-ui/SearchT/releases/download/2.2.0/SearchT-2.2.0-mac-arm64.dmg',
-      fallbackUrl: 'https://github.com/searcht-ui/SearchT/releases/download/v2.2.0/SearchT-2.2.0-mac-arm64.dmg',
+      url: 'https://github.com/SearchT-zy/SearchT/releases/download/2.2.0/SearchT-2.2.0-mac-arm64.dmg',
+      fallbackUrl: 'https://github.com/SearchT-zy/SearchT/releases/download/v2.2.0/SearchT-2.2.0-mac-arm64.dmg',
       file_name: 'SearchT-2.2.0-mac-arm64.dmg',
     };
 

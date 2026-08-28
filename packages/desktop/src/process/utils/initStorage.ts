@@ -260,7 +260,8 @@ const envFile = JsonFileBuilder<IEnvStorageRefer>(path.join(getHomePage(), STORA
 
 // Prefer the rebranded key; fall back to the legacy 'aionui.dir' entry so
 // users who customized system directories before the fork keep their setup.
-const dirConfig = envFile.getSync('searcht-ui.dir') ?? envFile.getSync('aionui.dir');
+const dirConfig =
+  envFile.getSync('searcht.dir') ?? envFile.getSync('searcht-ui.dir') ?? envFile.getSync('aionui.dir');
 
 const cacheDir = dirConfig?.cacheDir || getHomePage();
 

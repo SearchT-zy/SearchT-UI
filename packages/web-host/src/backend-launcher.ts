@@ -219,7 +219,7 @@ export function buildSpawnArgs(config: SpawnConfig): string[] {
  * Backend reads SEARCHT_{CACHE,WORK,LOG}_DIR env vars to report system dirs
  * (see the backend repo's crates/searcht-system/src/sysinfo.rs). Inject them so the
  * backend's `/api/system/info` matches what Electron main persists in
- * ProcessEnv('searcht-ui.dir').
+ * ProcessEnv('searcht.dir') (legacy key 'searcht-ui.dir' still read as fallback).
  */
 export function buildSpawnEnv(dirs: BackendDirConfig): NodeJS.ProcessEnv {
   return {

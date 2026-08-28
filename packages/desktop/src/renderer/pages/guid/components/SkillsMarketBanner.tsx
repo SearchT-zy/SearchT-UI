@@ -11,8 +11,8 @@ import { Message, Switch, Tooltip } from '@arco-design/web-react';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-const SKILLS_MARKET_DETAILS_ZH = 'https://github.com/searcht-ui/SearchT/discussions/1326';
-const SKILLS_MARKET_DETAILS_EN = 'https://github.com/searcht-ui/SearchT/discussions/1325';
+const SKILLS_MARKET_DETAILS_ZH = 'https://github.com/SearchT-zy/SearchT/discussions/1326';
+const SKILLS_MARKET_DETAILS_EN = 'https://github.com/SearchT-zy/SearchT/discussions/1325';
 
 const SkillsMarketBanner: React.FC = () => {
   const { t, i18n } = useTranslation();

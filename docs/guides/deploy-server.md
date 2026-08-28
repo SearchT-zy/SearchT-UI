@@ -21,7 +21,7 @@ Deploy SearchT WebUI on headless Linux servers — cloud VMs, Kubernetes Pods, a
 
 - Linux x86_64 (Ubuntu 20.04+ / Debian 11+ recommended)
 - At least 2GB RAM
-- SearchT `.deb` package from [Releases](https://github.com/searcht-ui/SearchT/releases)
+- SearchT `.deb` package from [Releases](https://github.com/SearchT-zy/SearchT/releases)
 
 ---
 
@@ -29,7 +29,7 @@ Deploy SearchT WebUI on headless Linux servers — cloud VMs, Kubernetes Pods, a
 
 ```bash
 # Download the latest .deb package
-wget https://github.com/searcht-ui/SearchT/releases/latest/download/SearchT-linux-amd64.deb
+wget https://github.com/SearchT-zy/SearchT/releases/latest/download/SearchT-linux-amd64.deb
 
 # Install
 sudo dpkg -i SearchT-linux-amd64.deb
@@ -324,13 +324,13 @@ For Gemini API calls, configure the proxy inside SearchT WebUI:
 
 - Linux x86_64（推荐 Ubuntu 20.04+ / Debian 11+）
 - 至少 2GB 内存
-- SearchT `.deb` 安装包（[下载地址](https://github.com/searcht-ui/SearchT/releases)）
+- SearchT `.deb` 安装包（[下载地址](https://github.com/SearchT-zy/SearchT/releases)）
 
 ## 安装
 
 ```bash
 # 下载最新 .deb 包
-wget https://github.com/searcht-ui/SearchT/releases/latest/download/SearchT-linux-amd64.deb
+wget https://github.com/SearchT-zy/SearchT/releases/latest/download/SearchT-linux-amd64.deb
 
 # 安装
 sudo dpkg -i SearchT-linux-amd64.deb

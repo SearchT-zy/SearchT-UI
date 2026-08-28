@@ -72,7 +72,7 @@ jobs:
                   '3. Submit your PR referencing this issue (`Fixes #' + issue_number + '`)',
                   '',
                   '📋 Full rules: https://x.com/SearchT/status/2079493379914961069',
-                  '🙋 Claim your reward: https://github.com/searcht-ui/SearchT/discussions/3640',
+                  '🙋 Claim your reward: https://github.com/SearchT-zy/SearchT/discussions/3640',
                 ].join('\n'),
               });
               core.info('Claim invitation posted.');

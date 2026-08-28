@@ -76,7 +76,7 @@ export class ClientFactory {
           baseURL: base_url,
           timeout: options.timeout,
           defaultHeaders: {
-            'HTTP-Referer': 'https://github.com/searcht-ui/SearchT',
+            'HTTP-Referer': 'https://github.com/SearchT-zy/SearchT',
             'X-Title': 'SearchT',
           },
           ...(options.baseConfig as OpenAIClientConfig),
@@ -127,7 +127,7 @@ export class ClientFactory {
           baseURL: base_url,
           timeout: options.timeout,
           defaultHeaders: {
-            'HTTP-Referer': 'https://github.com/searcht-ui/SearchT',
+            'HTTP-Referer': 'https://github.com/SearchT-zy/SearchT',
             'X-Title': 'SearchT',
           },
           ...(options.baseConfig as OpenAIClientConfig),

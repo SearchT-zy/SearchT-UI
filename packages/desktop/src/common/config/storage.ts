@@ -114,6 +114,12 @@ export interface IEnvStorageRefer {
     cacheDir: string;
     logDir?: string;
   };
+  'searcht.dir'?: {
+    cacheDir?: string;
+    workDir?: string;
+    logDir?: string;
+  };
+  /** @deprecated legacy key name from the SearchT-UI era, still read as fallback */
   'searcht-ui.dir'?: {
     workDir: string;
     cacheDir: string;
@@ -125,7 +131,7 @@ export interface IEnvStorageRefer {
  * Conversation source type - identifies where the conversation was created
  * 会话来源类型 - 标识会话创建的来源
  */
-export type ConversationSource = 'searcht-ui' | 'telegram' | 'lark' | 'dingtalk' | 'weixin' | 'wecom' | (string & {});
+export type ConversationSource = 'searcht' | 'telegram' | 'lark' | 'dingtalk' | 'weixin' | 'wecom' | (string & {});
 
 export type TChatConversationStatus = 'pending' | 'running' | 'finished';
 export type TConversationRuntimeStateKind = 'idle' | 'starting' | 'running' | 'cancelling' | 'waiting_confirmation';
@@ -159,7 +165,7 @@ interface IChatConversation<T, Extra> {
   model: TProviderWithModel;
   status?: TChatConversationStatus | undefined;
   runtime?: TConversationRuntimeSummary;
-  /** 会话来源，默认为 searcht-ui / Conversation source, defaults to searcht-ui */
+  /** 会话来源，默认为 searcht / Conversation source, defaults to searcht */
   source?: ConversationSource;
   /** Channel chat isolation ID (e.g. user:xxx, group:xxx) */
   channel_chat_id?: string;

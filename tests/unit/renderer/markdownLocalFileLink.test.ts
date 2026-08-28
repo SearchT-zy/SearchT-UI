@@ -133,14 +133,14 @@ describe('resolveLocalFileLinkPath', () => {
     expect(resolveLocalFileLinkReference('./user.ts')).toBeNull();
     expect(resolveLocalFileLinkReference('../user.ts')).toBeNull();
     expect(resolveLocalFileLinkReference('/settings')).toBeNull();
-    expect(resolveLocalFileLinkReference('https://github.com/searcht-ui/SearchT/docs#L10')).toBeNull();
+    expect(resolveLocalFileLinkReference('https://github.com/SearchT-zy/SearchT/docs#L10')).toBeNull();
     expect(resolveLocalFileLinkReference('https://github.com/org/repo/blob/main/file.ts#L10')).toBeNull();
     expect(resolveLocalFileLinkReference('/Users/demo/file.ts#l10')).toBeNull();
     expect(resolveLocalFileLinkReference('/Users/demo/file.ts#L10-l20')).toBeNull();
   });
 
   it('does not treat normal web links or app routes as local files', () => {
-    expect(resolveLocalFileLinkPath('https://github.com/searcht-ui/SearchT/docs')).toBeNull();
+    expect(resolveLocalFileLinkPath('https://github.com/SearchT-zy/SearchT/docs')).toBeNull();
     expect(resolveLocalFileLinkPath('/settings')).toBeNull();
   });
 

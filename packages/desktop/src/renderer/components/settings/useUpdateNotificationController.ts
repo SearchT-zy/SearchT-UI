@@ -70,7 +70,7 @@ const reduceNotificationState = (
   event: UpdateNotificationEvent
 ): UpdateNotificationState => updateNotificationReducer(current, event).state;
 
-const RELEASES_PAGE_URL = 'https://github.com/searcht-ui/SearchT/releases';
+const RELEASES_PAGE_URL = 'https://github.com/SearchT-zy/SearchT/releases';
 
 const getVersionLabelFromState = (state: UpdateNotificationState): string =>
   state.updateInfo?.version || state.autoUpdateInfo?.version || '';
